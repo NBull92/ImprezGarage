@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="ImprezGarage.Modules.PerformChecks.Views.SelectMaintenanceType"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:ImprezGarage.Modules.PerformChecks.ViewModels"
+             mc:Ignorable="d"        
+             Width="370"
+             Height="100"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DataContext="{d:DesignInstance Type=vm:SelectMaintenanceTypeViewModel}"   >
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="MaintenanceCheckTypes" Source="{Binding Path=MaintenanceCheckTypes}" />
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="Please select which type of maintenace check you which to perform." Margin="5"/>
+        <ComboBox Grid.Row="1" Margin="5" Height="22"
+                  SelectedItem="{Binding SelectedMaintenanceCheckType}" Width="360">
+            <ComboBox.ItemsSource>
+                <CompositeCollection>
+                    <ComboBoxItem IsEnabled="False" Foreground="Black">Select a Maintenance Check Type</ComboBoxItem>
+                    <CollectionContainer Collection="{Binding Source={StaticResource MaintenanceCheckTypes}}" />
+                </CompositeCollection>                
+            </ComboBox.ItemsSource>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Type}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Okay" Margin="5" Width="175" Command="{Binding OkayCommand}"/>
+            <Button Grid.Column="1" Content="Cancel" Margin="5" Width="175" Command="{Binding CancelCommand}"/>
+        </Grid>
+    </Grid>
+</UserControl>

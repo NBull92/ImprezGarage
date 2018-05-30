@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ImprezGarageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MaintenanceChecks">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DatePerformed" Type="datetime" />
+    <Property Name="MaintenanceCheckType" Type="int" />
+    <Property Name="PerformedBy" Type="nvarchar" MaxLength="50" />
+    <Property Name="CheckedAirFilter" Type="bit" />
+    <Property Name="ReplacedAirFilter" Type="bit" />
+    <Property Name="CheckCoolantLevels" Type="bit" />
+    <Property Name="FlushedSystemAndChangeCoolant" Type="bit" />
+    <Property Name="ChangeFanBelt" Type="bit" />
+    <Property Name="CheckedBattery" Type="bit" />
+    <Property Name="CheckedOilLevels" Type="bit" />
+    <Property Name="ReplacedOilFilter" Type="bit" />
+    <Property Name="CheckAutoTransmissionFluid" Type="bit" />
+    <Property Name="AddedAutoTransmissionFluid" Type="bit" />
+    <Property Name="CheckPowerSteeringFluidLevels" Type="bit" />
+    <Property Name="AirFilterNotes" Type="nvarchar" MaxLength="120" />
+    <Property Name="CoolantNotes" Type="nvarchar" MaxLength="120" />
+    <Property Name="BatteryNotes" Type="nvarchar" MaxLength="120" />
+    <Property Name="OilLevelNotes" Type="nvarchar" MaxLength="120" />
+    <Property Name="AutoTransmissionFluidNotes" Type="nvarchar" MaxLength="120" />
+    <Property Name="PowerSteeringNotes" Type="nvarchar" MaxLength="120" />
+    <Property Name="VehicleId" Type="int" />
+  </EntityType>
+  <EntityType Name="MaintenanceCheckType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
+    <Property Name="OccurenceMonthly" Type="int" />
+    <Property Name="OccurenceMiles" Type="int" />
+  </EntityType>
+  <EntityType Name="PartsReplacementRecord">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IsWiring" Type="bit" />
+    <Property Name="WiringDate" Type="datetime" />
+    <Property Name="IsHoses" Type="bit" />
+    <Property Name="HosesDate" Type="datetime" />
+    <Property Name="HosesDetails" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsTires" Type="bit" />
+    <Property Name="TiresDate" Type="datetime" />
+    <Property Name="TiresDetails" Type="nvarchar" MaxLength="50" />
+    <Property Name="Other" Type="bit" />
+    <Property Name="OtherDate" Type="datetime" />
+    <Property Name="OtherDetails" Type="nvarchar" MaxLength="50" />
+    <Property Name="WiringDetails" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PetrolExpense">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="DateEntered" Type="datetime" />
+    <Property Name="VehicleId" Type="int" />
+  </EntityType>
+  <EntityType Name="Vehicles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+    <Property Name="VehicleType" Type="int" Nullable="false" />
+    <Property Name="Registration" Type="nvarchar" MaxLength="50" />
+    <Property Name="TaxExpiryDate" Type="datetime" />
+    <Property Name="InsuranceRenewalDate" Type="datetime" />
+    <Property Name="FriendlyName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Model" Type="nvarchar" MaxLength="50" />
+    <Property Name="Make" Type="nvarchar" MaxLength="50" />
+    <Property Name="HasInsurance" Type="bit" />
+    <Property Name="HasValidTax" Type="bit" />
+    <Property Name="IsManual" Type="bit" />
+    <Property Name="CurrentMilage" Type="int" />
+    <Property Name="MilageOnPurchase" Type="int" />
+  </EntityType>
+  <EntityType Name="VehicleType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_MaintenanceChecks_MaintenanceCheckType">
+    <End Role="MaintenanceCheckType" Type="Self.MaintenanceCheckType" Multiplicity="0..1" />
+    <End Role="MaintenanceChecks" Type="Self.MaintenanceChecks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaintenanceCheckType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MaintenanceChecks">
+        <PropertyRef Name="MaintenanceCheckType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vehicles_VehicleType">
+    <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="1" />
+    <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VehicleType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vehicles">
+        <PropertyRef Name="VehicleType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ImprezGarageModelStoreContainer">
+    <EntitySet Name="MaintenanceChecks" EntityType="Self.MaintenanceChecks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MaintenanceCheckType" EntityType="Self.MaintenanceCheckType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PartsReplacementRecord" EntityType="Self.PartsReplacementRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PetrolExpense" EntityType="Self.PetrolExpense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_MaintenanceChecks_MaintenanceCheckType" Association="Self.FK_MaintenanceChecks_MaintenanceCheckType">
+      <End Role="MaintenanceCheckType" EntitySet="MaintenanceCheckType" />
+      <End Role="MaintenanceChecks" EntitySet="MaintenanceChecks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vehicles_VehicleType" Association="Self.FK_Vehicles_VehicleType">
+      <End Role="VehicleType" EntitySet="VehicleType" />
+      <End Role="Vehicles" EntitySet="Vehicles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

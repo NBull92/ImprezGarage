@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ImprezGarageModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MaintenanceChecks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatePerformed" Type="datetime" />
+          <Property Name="MaintenanceCheckType" Type="int" />
+          <Property Name="PerformedBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckedAirFilter" Type="bit" />
+          <Property Name="ReplacedAirFilter" Type="bit" />
+          <Property Name="CheckCoolantLevels" Type="bit" />
+          <Property Name="FlushedSystemAndChangeCoolant" Type="bit" />
+          <Property Name="ChangeFanBelt" Type="bit" />
+          <Property Name="CheckedBattery" Type="bit" />
+          <Property Name="CheckedOilLevels" Type="bit" />
+          <Property Name="ReplacedOilFilter" Type="bit" />
+          <Property Name="CheckAutoTransmissionFluid" Type="bit" />
+          <Property Name="AddedAutoTransmissionFluid" Type="bit" />
+          <Property Name="CheckPowerSteeringFluidLevels" Type="bit" />
+          <Property Name="AirFilterNotes" Type="nvarchar" MaxLength="120" />
+          <Property Name="CoolantNotes" Type="nvarchar" MaxLength="120" />
+          <Property Name="BatteryNotes" Type="nvarchar" MaxLength="120" />
+          <Property Name="OilLevelNotes" Type="nvarchar" MaxLength="120" />
+          <Property Name="AutoTransmissionFluidNotes" Type="nvarchar" MaxLength="120" />
+          <Property Name="PowerSteeringNotes" Type="nvarchar" MaxLength="120" />
+          <Property Name="VehicleId" Type="int" />
+        </EntityType>
+        <EntityType Name="MaintenanceCheckType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="OccurenceMonthly" Type="int" />
+          <Property Name="OccurenceMiles" Type="int" />
+        </EntityType>
+        <EntityType Name="PartsReplacementRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IsWiring" Type="bit" />
+          <Property Name="WiringDate" Type="datetime" />
+          <Property Name="IsHoses" Type="bit" />
+          <Property Name="HosesDate" Type="datetime" />
+          <Property Name="HosesDetails" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsTires" Type="bit" />
+          <Property Name="TiresDate" Type="datetime" />
+          <Property Name="TiresDetails" Type="nvarchar" MaxLength="50" />
+          <Property Name="Other" Type="bit" />
+          <Property Name="OtherDate" Type="datetime" />
+          <Property Name="OtherDetails" Type="nvarchar" MaxLength="50" />
+          <Property Name="WiringDetails" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PetrolExpense">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="DateEntered" Type="datetime" />
+          <Property Name="VehicleId" Type="int" />
+        </EntityType>
+        <EntityType Name="Vehicles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="VehicleType" Type="int" Nullable="false" />
+          <Property Name="Registration" Type="nvarchar" MaxLength="50" />
+          <Property Name="TaxExpiryDate" Type="datetime" />
+          <Property Name="InsuranceRenewalDate" Type="datetime" />
+          <Property Name="FriendlyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Model" Type="nvarchar" MaxLength="50" />
+          <Property Name="Make" Type="nvarchar" MaxLength="50" />
+          <Property Name="HasInsurance" Type="bit" />
+          <Property Name="HasValidTax" Type="bit" />
+          <Property Name="IsManual" Type="bit" />
+          <Property Name="CurrentMilage" Type="int" />
+          <Property Name="MilageOnPurchase" Type="int" />
+        </EntityType>
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_MaintenanceChecks_MaintenanceCheckType">
+          <End Role="MaintenanceCheckType" Type="Self.MaintenanceCheckType" Multiplicity="0..1" />
+          <End Role="MaintenanceChecks" Type="Self.MaintenanceChecks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceCheckType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceChecks">
+              <PropertyRef Name="MaintenanceCheckType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehicles_VehicleType">
+          <End Role="VehicleType" Type="Self.VehicleType" Multiplicity="1" />
+          <End Role="Vehicles" Type="Self.Vehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicles">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ImprezGarageModelStoreContainer">
+          <EntitySet Name="MaintenanceChecks" EntityType="Self.MaintenanceChecks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaintenanceCheckType" EntityType="Self.MaintenanceCheckType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartsReplacementRecord" EntityType="Self.PartsReplacementRecord" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PetrolExpense" EntityType="Self.PetrolExpense" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicles" EntityType="Self.Vehicles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleType" EntityType="Self.VehicleType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MaintenanceChecks_MaintenanceCheckType" Association="Self.FK_MaintenanceChecks_MaintenanceCheckType">
+            <End Role="MaintenanceCheckType" EntitySet="MaintenanceCheckType" />
+            <End Role="MaintenanceChecks" EntitySet="MaintenanceChecks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehicles_VehicleType" Association="Self.FK_Vehicles_VehicleType">
+            <End Role="VehicleType" EntitySet="VehicleType" />
+            <End Role="Vehicles" EntitySet="Vehicles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ImprezGarageModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="VehicleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Vehicles" Relationship="ImprezGarageModel.FK_Vehicles_VehicleType" FromRole="VehicleType" ToRole="Vehicle" />
+        </EntityType>
+        <EntityContainer Name="ImprezGarageEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="VehicleTypes" EntityType="Self.VehicleType" />
+          <EntitySet Name="Vehicles" EntityType="ImprezGarageModel.Vehicle" />
+          <AssociationSet Name="FK_Vehicles_VehicleType" Association="ImprezGarageModel.FK_Vehicles_VehicleType">
+            <End Role="VehicleType" EntitySet="VehicleTypes" />
+            <End Role="Vehicle" EntitySet="Vehicles" />
+          </AssociationSet>
+          <EntitySet Name="MaintenanceChecks" EntityType="ImprezGarageModel.MaintenanceCheck" />
+          <EntitySet Name="MaintenanceCheckTypes" EntityType="ImprezGarageModel.MaintenanceCheckType" />
+          <AssociationSet Name="FK_MaintenanceChecks_MaintenanceCheckType" Association="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType">
+            <End Role="MaintenanceCheckType" EntitySet="MaintenanceCheckTypes" />
+            <End Role="MaintenanceCheck" EntitySet="MaintenanceChecks" />
+          </AssociationSet>
+          <EntitySet Name="PartsReplacementRecords" EntityType="ImprezGarageModel.PartsReplacementRecord" />
+          <EntitySet Name="PetrolExpenses" EntityType="ImprezGarageModel.PetrolExpense" />
+        </EntityContainer>
+        <EntityType Name="Vehicle">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VehicleType" Type="Int32" Nullable="false" />
+          <Property Name="Registration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TaxExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="InsuranceRenewalDate" Type="DateTime" Precision="3" />
+          <Property Name="FriendlyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VehicleType1" Relationship="ImprezGarageModel.FK_Vehicles_VehicleType" FromRole="Vehicle" ToRole="VehicleType" />
+          <Property Name="Model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Make" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasInsurance" Type="Boolean" />
+          <Property Name="HasValidTax" Type="Boolean" />
+          <Property Name="IsManual" Type="Boolean" />
+          <Property Name="CurrentMilage" Type="Int32" />
+          <Property Name="MilageOnPurchase" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Vehicles_VehicleType">
+          <End Type="ImprezGarageModel.VehicleType" Role="VehicleType" Multiplicity="1" />
+          <End Type="ImprezGarageModel.Vehicle" Role="Vehicle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Vehicle">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MaintenanceCheck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatePerformed" Type="DateTime" Precision="3" />
+          <Property Name="MaintenanceCheckType" Type="Int32" />
+          <NavigationProperty Name="MaintenanceCheckType1" Relationship="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType" FromRole="MaintenanceCheck" ToRole="MaintenanceCheckType" />
+          <Property Name="PerformedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedAirFilter" Type="Boolean" />
+          <Property Name="ReplacedAirFilter" Type="Boolean" />
+          <Property Name="CheckCoolantLevels" Type="Boolean" />
+          <Property Name="FlushedSystemAndChangeCoolant" Type="Boolean" />
+          <Property Name="ChangeFanBelt" Type="Boolean" />
+          <Property Name="CheckedBattery" Type="Boolean" />
+          <Property Name="CheckedOilLevels" Type="Boolean" />
+          <Property Name="ReplacedOilFilter" Type="Boolean" />
+          <Property Name="CheckAutoTransmissionFluid" Type="Boolean" />
+          <Property Name="AddedAutoTransmissionFluid" Type="Boolean" />
+          <Property Name="CheckPowerSteeringFluidLevels" Type="Boolean" />
+          <Property Name="AirFilterNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="CoolantNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="BatteryNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="OilLevelNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="AutoTransmissionFluidNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="PowerSteeringNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MaintenanceCheckType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MaintenanceChecks" Relationship="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType" FromRole="MaintenanceCheckType" ToRole="MaintenanceCheck" />
+          <Property Name="OccurenceMonthly" Type="Int32" />
+          <Property Name="OccurenceMiles" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_MaintenanceChecks_MaintenanceCheckType">
+          <End Type="ImprezGarageModel.MaintenanceCheckType" Role="MaintenanceCheckType" Multiplicity="0..1" />
+          <End Type="ImprezGarageModel.MaintenanceCheck" Role="MaintenanceCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceCheckType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceCheck">
+              <PropertyRef Name="MaintenanceCheckType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PartsReplacementRecord">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IsWiring" Type="Boolean" />
+          <Property Name="WiringDate" Type="DateTime" Precision="3" />
+          <Property Name="WiringDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsHoses" Type="Boolean" />
+          <Property Name="HosesDate" Type="DateTime" Precision="3" />
+          <Property Name="HosesDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsTires" Type="Boolean" />
+          <Property Name="TiresDate" Type="DateTime" Precision="3" />
+          <Property Name="TiresDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Other" Type="Boolean" />
+          <Property Name="OtherDate" Type="DateTime" Precision="3" />
+          <Property Name="OtherDetails" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PetrolExpense">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="DateEntered" Type="DateTime" Precision="3" />
+          <Property Name="VehicleId" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ImprezGarageModelStoreContainer" CdmEntityContainer="ImprezGarageEntities">
+          <EntitySetMapping Name="VehicleTypes">
+            <EntityTypeMapping TypeName="ImprezGarageModel.VehicleType">
+              <MappingFragment StoreEntitySet="VehicleType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicles">
+            <EntityTypeMapping TypeName="ImprezGarageModel.Vehicle">
+              <MappingFragment StoreEntitySet="Vehicles">
+                <ScalarProperty Name="MilageOnPurchase" ColumnName="MilageOnPurchase" />
+                <ScalarProperty Name="CurrentMilage" ColumnName="CurrentMilage" />
+                <ScalarProperty Name="IsManual" ColumnName="IsManual" />
+                <ScalarProperty Name="HasValidTax" ColumnName="HasValidTax" />
+                <ScalarProperty Name="HasInsurance" ColumnName="HasInsurance" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="FriendlyName" ColumnName="FriendlyName" />
+                <ScalarProperty Name="InsuranceRenewalDate" ColumnName="InsuranceRenewalDate" />
+                <ScalarProperty Name="TaxExpiryDate" ColumnName="TaxExpiryDate" />
+                <ScalarProperty Name="Registration" ColumnName="Registration" />
+                <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceChecks">
+            <EntityTypeMapping TypeName="ImprezGarageModel.MaintenanceCheck">
+              <MappingFragment StoreEntitySet="MaintenanceChecks">
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="PowerSteeringNotes" ColumnName="PowerSteeringNotes" />
+                <ScalarProperty Name="AutoTransmissionFluidNotes" ColumnName="AutoTransmissionFluidNotes" />
+                <ScalarProperty Name="OilLevelNotes" ColumnName="OilLevelNotes" />
+                <ScalarProperty Name="BatteryNotes" ColumnName="BatteryNotes" />
+                <ScalarProperty Name="CoolantNotes" ColumnName="CoolantNotes" />
+                <ScalarProperty Name="AirFilterNotes" ColumnName="AirFilterNotes" />
+                <ScalarProperty Name="CheckPowerSteeringFluidLevels" ColumnName="CheckPowerSteeringFluidLevels" />
+                <ScalarProperty Name="AddedAutoTransmissionFluid" ColumnName="AddedAutoTransmissionFluid" />
+                <ScalarProperty Name="CheckAutoTransmissionFluid" ColumnName="CheckAutoTransmissionFluid" />
+                <ScalarProperty Name="ReplacedOilFilter" ColumnName="ReplacedOilFilter" />
+                <ScalarProperty Name="CheckedOilLevels" ColumnName="CheckedOilLevels" />
+                <ScalarProperty Name="CheckedBattery" ColumnName="CheckedBattery" />
+                <ScalarProperty Name="ChangeFanBelt" ColumnName="ChangeFanBelt" />
+                <ScalarProperty Name="FlushedSystemAndChangeCoolant" ColumnName="FlushedSystemAndChangeCoolant" />
+                <ScalarProperty Name="CheckCoolantLevels" ColumnName="CheckCoolantLevels" />
+                <ScalarProperty Name="ReplacedAirFilter" ColumnName="ReplacedAirFilter" />
+                <ScalarProperty Name="CheckedAirFilter" ColumnName="CheckedAirFilter" />
+                <ScalarProperty Name="PerformedBy" ColumnName="PerformedBy" />
+                <ScalarProperty Name="MaintenanceCheckType" ColumnName="MaintenanceCheckType" />
+                <ScalarProperty Name="DatePerformed" ColumnName="DatePerformed" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceCheckTypes">
+            <EntityTypeMapping TypeName="ImprezGarageModel.MaintenanceCheckType">
+              <MappingFragment StoreEntitySet="MaintenanceCheckType">
+                <ScalarProperty Name="OccurenceMiles" ColumnName="OccurenceMiles" />
+                <ScalarProperty Name="OccurenceMonthly" ColumnName="OccurenceMonthly" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartsReplacementRecords">
+            <EntityTypeMapping TypeName="ImprezGarageModel.PartsReplacementRecord">
+              <MappingFragment StoreEntitySet="PartsReplacementRecord">
+                <ScalarProperty Name="OtherDetails" ColumnName="OtherDetails" />
+                <ScalarProperty Name="OtherDate" ColumnName="OtherDate" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
+                <ScalarProperty Name="TiresDetails" ColumnName="TiresDetails" />
+                <ScalarProperty Name="TiresDate" ColumnName="TiresDate" />
+                <ScalarProperty Name="IsTires" ColumnName="IsTires" />
+                <ScalarProperty Name="HosesDetails" ColumnName="HosesDetails" />
+                <ScalarProperty Name="HosesDate" ColumnName="HosesDate" />
+                <ScalarProperty Name="IsHoses" ColumnName="IsHoses" />
+                <ScalarProperty Name="WiringDetails" ColumnName="WiringDetails" />
+                <ScalarProperty Name="WiringDate" ColumnName="WiringDate" />
+                <ScalarProperty Name="IsWiring" ColumnName="IsWiring" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PetrolExpenses">
+            <EntityTypeMapping TypeName="ImprezGarageModel.PetrolExpense">
+              <MappingFragment StoreEntitySet="PetrolExpense">
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
