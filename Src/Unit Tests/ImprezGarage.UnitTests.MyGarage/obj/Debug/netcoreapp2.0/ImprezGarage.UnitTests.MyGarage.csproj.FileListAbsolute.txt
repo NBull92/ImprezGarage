@@ -17,30 +17,3 @@ D:\Visual Studio Projects\ImprezGarage\ImprezGarage.UnitTests.MyGarage\obj\Debug
 D:\Visual Studio Projects\ImprezGarage\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.dll
 D:\Visual Studio Projects\ImprezGarage\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.pdb
 D:\Visual Studio Projects\ImprezGarage\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.dll.config
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.dll.config
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.deps.json
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.runtimeconfig.json
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.runtimeconfig.dev.json
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.pdb
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.Infrastructure.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\Prism.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\EntityFramework.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.Infrastructure.pdb
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ImprezGarage.Infrastructure.dll.config
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\Prism.xml
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.csprojResolveAssemblyReference.cache
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.csproj.CoreCompileInputs.cache
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.AssemblyInfoInputs.cache
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.AssemblyInfo.cs
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\obj\Debug\netcoreapp2.0\ImprezGarage.UnitTests.MyGarage.pdb
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\MahApps.Metro.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ControlzEx.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\System.Windows.Interactivity.dll
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\MahApps.Metro.pdb
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\MahApps.Metro.xml
-D:\Visual Studio Projects\ImprezGarage\Src\Unit Tests\ImprezGarage.UnitTests.MyGarage\bin\Debug\netcoreapp2.0\ControlzEx.pdb
