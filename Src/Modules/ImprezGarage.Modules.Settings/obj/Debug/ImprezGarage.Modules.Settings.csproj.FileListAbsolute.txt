@@ -9,6 +9,7 @@ D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings\obj\Debug\ImprezGarage.Modules.Settings.csprojResolveAssemblyReference.cache
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings\obj\Debug\Views\ViewA.g.cs
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings\obj\Debug\ImprezGarage.Modules.Settings_MarkupCompile.cache
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Settings\obj\Debug\ImprezGarage.Modules.Settings_MarkupCompile.lref

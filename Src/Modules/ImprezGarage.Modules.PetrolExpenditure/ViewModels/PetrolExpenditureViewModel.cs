@@ -9,8 +9,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     using ImprezGarage.Infrastructure.Model;
     using ImprezGarage.Infrastructure.ViewModels;
     using Microsoft.Practices.ServiceLocation;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
+    using System;
     using System.Collections.ObjectModel;
 
     public class PetrolExpenditureViewModel : BindableBase
@@ -22,6 +24,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
 
         public VehicleViewModel SelectedVehicle;
+
+        public DelegateCommand AddExpenditureCommand { get;set; }
         #endregion
 
         #region Properties
@@ -39,7 +43,17 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _eventAggregator = eventAggregator;
 
             _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+
+            AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
         }
+
+        #region Command Handlers
+
+        private void AddExpenditureExecute()
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {

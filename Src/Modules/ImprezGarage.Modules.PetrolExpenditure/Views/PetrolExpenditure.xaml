@@ -11,7 +11,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              Height="255">
     <StackPanel>
-        <Button Content="Add" Width="34" Height="27" HorizontalAlignment="Right"/>
+        <Button Content="Add" Command="{Binding AddExpenditureCommand}" Width="34" Height="27" HorizontalAlignment="Right"/>
         <!--Style="{DynamicResource MetroCircleButtonStyle}"-->
 
         <ListBox Grid.Row="1" ItemsSource="{Binding Expenses}" Height="228" Margin="0,5,0,0">
