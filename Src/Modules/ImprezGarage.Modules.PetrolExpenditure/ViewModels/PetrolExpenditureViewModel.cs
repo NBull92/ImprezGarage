@@ -8,12 +8,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     using ImprezGarage.Infrastructure;
     using ImprezGarage.Infrastructure.Model;
     using ImprezGarage.Infrastructure.ViewModels;
+    using ImprezGarage.Modules.PetrolExpenditure.Views;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
-    using System;
     using System.Collections.ObjectModel;
+    using System.Linq;
 
     public class PetrolExpenditureViewModel : BindableBase
     {
@@ -51,7 +52,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         private void AddExpenditureExecute()
         {
-            throw new NotImplementedException();
+            var addExpense = new AddPetrolExpenditure();
+            var vm = addExpense.DataContext as AddPetrolExpenditureViewModel;
+            vm.VehicleId = SelectedVehicle.Vehicle.Id;
+            addExpense.ShowDialog();
         }
         #endregion
 
@@ -84,6 +88,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                         viewModel.LoadInstance(expense);
                         Expenses.Add(viewModel);
                     }
+
+                    Expenses = new ObservableCollection<PetrolExpenseViewModel>(Expenses.OrderByDescending(o => o.DateEntered));
                 }, SelectedVehicle.Vehicle.Id);
             }
         }

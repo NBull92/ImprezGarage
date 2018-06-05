@@ -81,6 +81,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 {
 
                 }
+
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }, Id);
         }

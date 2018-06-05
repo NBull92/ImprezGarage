@@ -294,6 +294,27 @@ namespace ImprezGarage.Infrastructure.Model
             }
         }
 
+        public void AddPetrolExpenditure(Action<Exception> callback, double amount, int vehicleId)
+        {
+            try
+            {
+                using (var model = new ImprezGarageEntities())
+                {
+                    model.PetrolExpenses.Add(new PetrolExpense
+                    {
+                        Amount = amount,
+                        DateEntered = DateTime.Now,
+                        VehicleId = vehicleId
+                    });
+                    model.SaveChanges();
+                    callback(null);
+                }
+            }
+            catch (Exception ex)
+            {
+                callback(ex);
+            }
+        }
         #endregion
 
         #region Deletes

@@ -49,7 +49,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set
             {
                 SetProperty(ref _minDate, value);
-                FilterExpenses();
             }
         }
 
@@ -94,11 +93,12 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _dataService = dataService;
             _eventAggregator = eventAggregator;
+            
+            OnChartDisplayChangeCommand = new DelegateCommand<string>(OnChartDisplayChangeExecute);
+
+            ResetParameters();
 
             _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
-
-            OnChartDisplayChangeCommand = new DelegateCommand<string>(OnChartDisplayChangeExecute);
-            ResetParameters();
         }
 
         private void ResetParameters()
@@ -110,7 +110,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             IsLineChart = true;
             ChartStyleContent = "Line";
             MinDate = DateTime.Now.AddDays(-7).ToShortDateString();
-            MaxDate = DateTime.Now.ToShortDateString();
+            MaxDate = DateTime.Now.AddDays(1).ToShortDateString();
         }
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
@@ -153,7 +153,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                     }
 
                     FilterExpenses();
-
                 }, SelectedVehicle.Vehicle.Id);
             }
         }
@@ -188,6 +187,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                     MinDate = "01/01/01";
                     break;
             }
+
+            FilterExpenses();
         }
         #endregion
         #endregion

@@ -26,6 +26,7 @@ namespace ImprezGarage.Infrastructure.Model
         #region Adds
         void AddNewVehicle(Action<Exception> callback, Vehicle vehicle);
         void SubmitMaintenanceCheck(Action<Exception> callback, MaintenanceCheck maintenanceCheck);
+        void AddPetrolExpenditure(Action<Exception> callback, double amount, int vehicleId);
         #endregion
 
         #region Deletes

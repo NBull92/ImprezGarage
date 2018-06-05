@@ -1,7 +1,8 @@
-﻿using System.Windows;
-
-namespace ImprezGarage.Modules.PetrolExpenditure.Views
+﻿namespace ImprezGarage.Modules.PetrolExpenditure.Views
 {
+    using ImprezGarage.Modules.PetrolExpenditure.ViewModels;
+    using System.Windows;
+    
     /// <summary>
     /// Interaction logic for AddPetrolExpenditure.xaml
     /// </summary>
@@ -10,6 +11,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.Views
         public AddPetrolExpenditure()
         {
             InitializeComponent();
+            var viewModel = DataContext as AddPetrolExpenditureViewModel;
+            viewModel.ClosingRequest += (sender, e) => Close();
         }
     }
 }
