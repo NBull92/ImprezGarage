@@ -108,10 +108,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         /// </summary>
         private void Close()
         {
-            if (this.ClosingRequest != null)
-            {
-                this.ClosingRequest(this, EventArgs.Empty);
-            }
+            ClosingRequest?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

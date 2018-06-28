@@ -99,11 +99,11 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             {
                 if(error != null)
                 {
-                    _notificationService.Alert(WindowButton.Ok, EXPENSE_FAILED);
+                    _notificationService.Alert(EXPENSE_FAILED);
                     return;
                 }
 
-                _notificationService.Alert(WindowButton.Ok, EXPENSE_ADDED);
+                _notificationService.Alert(EXPENSE_ADDED);
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }, Convert.ToDouble(Amount), VehicleId);
             Close();
@@ -115,10 +115,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         /// </summary>
         private void Close()
         {
-            if (this.ClosingRequest != null)
-            {
-                this.ClosingRequest(this, EventArgs.Empty);
-            }
+            ClosingRequest?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

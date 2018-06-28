@@ -111,7 +111,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// </summary>
         private void DeleteVehicleExecute()
         {
-            if (!_notificationsService.Confirm(WindowButton.Ok, CONFIRM_VEHICLE_DELETE))
+            if (!_notificationsService.Confirm(CONFIRM_VEHICLE_DELETE))
                 return;
 
             _dataService.DeleteVehicle((error) =>
@@ -121,7 +121,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
                     return;
                 }
 
-                _notificationsService.Alert(WindowButton.Ok,VEHICLE_DELETED, NOTIFICATION_HEADER);
+                _notificationsService.Alert(VEHICLE_DELETED, NOTIFICATION_HEADER);
 
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
                 _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(null);
@@ -143,7 +143,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
             {
                 if (error != null)
                 {
-                    _notificationsService.Alert(WindowButton.Ok, "An error occured during the retrival of the selected vehicle.");
+                    _notificationsService.Alert("An error occured during the retrival of the selected vehicle.");
                 }
 
                 LoadInstance(vehicle);

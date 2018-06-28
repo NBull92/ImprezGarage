@@ -6,13 +6,12 @@
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Dialogs;
     using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
     using ImprezGarage.Modules.PerformChecks.Views;
     using Prism.Commands;
     using Prism.Events;
-    using Prism.Interactivity.InteractionRequest;
     using Prism.Mvvm;
     using Prism.Regions;
     using System.Collections.ObjectModel;
@@ -21,7 +20,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     {
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IDialogService _dialogService;
+        private readonly INotificationsService _notificationsService;
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
@@ -45,8 +44,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             set => SetProperty(ref _vehicleMaintenanceChecksPerformed, value);
         }
 
-        public InteractionRequest<INotification> NotificationRequest { get; set; }
-
         #region Command
         public DelegateCommand PerformNewCheckCommand { get; private set; }
         #endregion
@@ -54,15 +51,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #endregion
 
         #region Methods
-        public MainViewModel(IDataService dataService, IDialogService dialogService, IRegionManager regionManager
-            , IEventAggregator eventAggregator)
+        public MainViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService , IEventAggregator eventAggregator)
         {
             _dataService = dataService;
-            _dialogService = dialogService;
             _regionManager = regionManager;
+            _notificationsService = notificationsService;
             _eventAggregator = eventAggregator;
-
-            NotificationRequest = new InteractionRequest<INotification>();
 
             PerformNewCheckCommand = new DelegateCommand(PerformNewCheckExecute);
 
@@ -110,34 +104,27 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         /// </summary>
         private void PerformNewCheckExecute()
         {
-            _dialogService.ShowWindow((viewModel, error) =>
+            var selectType = new SelectMaintenanceType();
+            var viewModel = selectType.DataContext as SelectMaintenanceTypeViewModel;
+            selectType.ShowDialog();
+
+            if (viewModel.DialogResult)
             {
-                if (error != null)
+                if (viewModel.SelectedMaintenanceCheckType != null)
                 {
-                    return;
+                    var parameters = new NavigationParameters
+                    {
+                        { "SelectedTypeId", viewModel.SelectedMaintenanceCheckType.Id },
+                        { "SelectedVehicleId", SelectedVehicle.Vehicle.Id}
+                    };
+
+                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(PerformNewCheck).FullName + parameters);
                 }
-
-                if (viewModel == null)
-                    return;
-
-                if (((SelectMaintenanceTypeViewModel)viewModel).DialogResult)
+                else
                 {
-                    if (((SelectMaintenanceTypeViewModel)viewModel).SelectedMaintenanceCheckType != null)
-                    {
-                        var parameters = new NavigationParameters
-                        {
-                            { "SelectedTypeId", ((SelectMaintenanceTypeViewModel)viewModel).SelectedMaintenanceCheckType.Id },
-                            { "SelectedVehicleId", SelectedVehicle.Vehicle.Id}
-                        };
-
-                        _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(PerformNewCheck).FullName + parameters);
-                    }
-                    else
-                    {
-                        NotificationRequest.Raise(new Notification { Title = NOTIFICATION_HEADER, Content = START_MAINTENANCE_CHECK_ERROR });
-                    }
+                    _notificationsService.Alert(START_MAINTENANCE_CHECK_ERROR, NOTIFICATION_HEADER);
                 }
-            }, new SelectMaintenanceType(), 402, 137);
+            }
         }
         #endregion
 

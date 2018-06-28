@@ -3,21 +3,21 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Modules.PetrolExpenditure.Views
+namespace ImprezGarage.Modules.Notifications.Views
 {
-    using ImprezGarage.Modules.PetrolExpenditure.ViewModels;
+    using ImprezGarage.Modules.Notifications.ViewModels;
     using MahApps.Metro.Controls;
 
     /// <summary>
-    /// Interaction logic for AddPetrolExpenditure.xaml
+    /// Interaction logic for ViewA.xaml
     /// </summary>
-    public partial class AddPetrolExpenditure : MetroWindow
+    public partial class Alert : MetroWindow
     {
-        public AddPetrolExpenditure()
+        public Alert()
         {
             InitializeComponent();
-            var viewModel = DataContext as AddPetrolExpenditureViewModel;
+            var viewModel = DataContext as AlertViewModel;
             viewModel.ClosingRequest += (sender, e) => Close();
         }
     }
-}   //ImprezGarage.Modules.PetrolExpenditure.Views namespace 
+}   //ImprezGarage.Modules.Notifications.Views namespace 

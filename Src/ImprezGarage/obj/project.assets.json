@@ -187,6 +187,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -433,6 +434,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -679,6 +681,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -925,6 +928,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -1348,5 +1352,20 @@
         "#import": []
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Detected package downgrade: MahApps.Metro from 1.6.5 to 1.6.1. Reference the package directly from the project to select a different version. \r\n ImprezGarage -> ImprezGarage.Modules.Notifications -> MahApps.Metro (>= 1.6.5) \r\n ImprezGarage -> MahApps.Metro (>= 1.6.1)",
+      "libraryId": "MahApps.Metro",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.6.1",
+        ".NETFramework,Version=v4.6.1/win",
+        ".NETFramework,Version=v4.6.1/win-x64",
+        ".NETFramework,Version=v4.6.1/win-x86"
+      ]
+    }
+  ]
 }

@@ -6,8 +6,8 @@
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Dialogs;
     using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
     using ImprezGarage.Modules.PerformChecks.Views;
     using Prism.Commands;
@@ -22,7 +22,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #region Attributes
         private readonly IDataService _dataService;
         private readonly IRegionManager _regionManager;
-        private readonly IDialogService _dialogService;
+        private readonly INotificationsService _notificationsService;
         private readonly IEventAggregator _eventAggregator;
 
         private const string DELETE_MAINTENANCE_CHECK = "Are you sure you wish to delete this maintenance check?";
@@ -67,12 +67,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #endregion
         
         #region Methods
-        public MaintenanceCheckViewModel(IDataService dataService, IRegionManager regionManager, IDialogService dialogService,
+        public MaintenanceCheckViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService,
             IEventAggregator eventAggregator)
         {
             _dataService = dataService;
             _regionManager = regionManager;
-            _dialogService = dialogService;
+            _notificationsService = notificationsService;
             _eventAggregator = eventAggregator;
 
             OpenMaintenanceCheck = new DelegateCommand<MouseButtonEventArgs>(OpenMaintenanceCheckExecute);
@@ -84,7 +84,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #region Command Handlers
         private void DeleteMaintenanceCheckExecute()
         {
-            if (!_dialogService.Confirm(DELETE_MAINTENANCE_CHECK))
+            if (!_notificationsService.Confirm(DELETE_MAINTENANCE_CHECK))
                 return;
 
             _dataService.DeleteMaintenanceCheck((error) => 
@@ -94,7 +94,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
                 }
 
-                _dialogService.Alert(DELETED_SUCCESSFULLY);
+                _notificationsService.Alert(DELETED_SUCCESSFULLY);
                 _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
             }, Id);
         }

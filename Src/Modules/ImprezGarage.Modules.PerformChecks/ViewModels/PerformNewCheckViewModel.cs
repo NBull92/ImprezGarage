@@ -6,11 +6,10 @@
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Dialogs;
     using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Modules.PerformChecks.Views;
     using Prism.Commands;
-    using Prism.Interactivity.InteractionRequest;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
@@ -19,8 +18,8 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     {
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IDialogService _dialogService;
         private readonly IRegionManager _regionManager;
+        private readonly INotificationsService _notificationsService;
         private static int _selectedVehicleId;
         private MaintenanceCheck _maintenanceCheck;
         private const string CHECK_COMPLETED = "Maintenance check completed!";
@@ -234,8 +233,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             set => SetProperty(ref _powerSteeringNotes, value);
         }
         #endregion
-        
-        public InteractionRequest<INotification> NotificationRequest { get; set; }
 
         #region Commands
         public DelegateCommand CancelCommand { get; set; }
@@ -244,13 +241,11 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #endregion
         
         #region Methods
-        public PerformNewCheckViewModel(IDataService dataService, IDialogService dialogService, IRegionManager regionManager)
+        public PerformNewCheckViewModel(IDataService dataService, INotificationsService notificationsService, IRegionManager regionManager)
         {
             _dataService = dataService;
-            _dialogService = dialogService;
+            _notificationsService = notificationsService;
             _regionManager = regionManager;
-
-            NotificationRequest = new InteractionRequest<INotification>();
 
             SubmitText = "Submit";
             SubmitCommand = new DelegateCommand(SubmitExecute, CanSubmit);
@@ -327,7 +322,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
                     }
 
-                    NotificationRequest.Raise(new Notification { Title = NOTIFICATION_HEADER, Content = CHECK_UPDATED });
+                    _notificationsService.Alert(CHECK_UPDATED, NOTIFICATION_HEADER);
                     _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
                 }, _maintenanceCheck);
             }
@@ -341,7 +336,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
                     }
 
-                    NotificationRequest.Raise(new Notification { Title = NOTIFICATION_HEADER, Content = CHECK_COMPLETED });
+                    _notificationsService.Alert(CHECK_UPDATED, NOTIFICATION_HEADER);
                     _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
                 }, _maintenanceCheck);
             }

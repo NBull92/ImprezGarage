@@ -5,7 +5,6 @@
 
 namespace ImprezGarage
 {
-    using ImprezGarage.Infrastructure.Dialogs;
     using ImprezGarage.Infrastructure.Model;
     using ImprezGarage.Views;
     using Microsoft.Practices.Unity;
@@ -29,7 +28,6 @@ namespace ImprezGarage
         {
             //register the interface to the container
             Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
-            Container.RegisterType<IDialogService, DialogService>(new ContainerControlledLifetimeManager());
             base.ConfigureContainer();
         }
 

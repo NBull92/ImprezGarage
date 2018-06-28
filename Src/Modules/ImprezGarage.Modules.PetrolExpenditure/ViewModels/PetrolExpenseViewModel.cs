@@ -6,8 +6,8 @@
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Dialogs;
     using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -17,7 +17,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 	{
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IDialogService _dialogService;
+        private readonly INotificationsService _notificationsService;
         private readonly IEventAggregator _eventAggregator;
         private const string CONFIRM_EXPENSE_DELETE = "Are you sure you wish to delete this petrol expense?";
         private int _id;
@@ -58,10 +58,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         #region Methods
 
-        public PetrolExpenseViewModel(IDataService dataService, IDialogService dialogService, IEventAggregator eventAggregator)
+        public PetrolExpenseViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator)
         {
             _dataService = dataService;
-            _dialogService = dialogService;
+            _notificationsService = notificationsService;
             _eventAggregator = eventAggregator;
 
             DeleteExpenseCommand = new DelegateCommand(OnExpenseDeleted);
@@ -78,7 +78,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Command Handler
         private void OnExpenseDeleted()
         {
-            if (!_dialogService.Confirm(CONFIRM_EXPENSE_DELETE))
+            if (!_notificationsService.Confirm(CONFIRM_EXPENSE_DELETE))
                 return;
 
             _dataService.DeletePetrolExpense((error) =>

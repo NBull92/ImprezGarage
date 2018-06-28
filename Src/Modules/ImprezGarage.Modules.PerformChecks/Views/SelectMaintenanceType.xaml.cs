@@ -6,13 +6,13 @@
 namespace ImprezGarage.Modules.PerformChecks.Views
 {
     using ImprezGarage.Modules.PerformChecks.ViewModels;
+    using MahApps.Metro.Controls;
     using System.Windows;
-    using System.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for SelectMaintenanceType
     /// </summary>
-    public partial class SelectMaintenanceType : UserControl
+    public partial class SelectMaintenanceType : MetroWindow
     {
         public SelectMaintenanceType()
         {

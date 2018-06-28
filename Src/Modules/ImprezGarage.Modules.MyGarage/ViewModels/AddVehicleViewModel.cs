@@ -197,7 +197,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             if (IsEdit)
             {
-                if (_notificationsService.Confirm(WindowButton.YesNo, "Are you sure you wish to save these changes?"))
+                if (_notificationsService.Confirm("Are you sure you wish to save these changes?"))
                 {
                     bool proceed = false;
 
@@ -210,11 +210,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                             var carCreate = ((CarCreationViewModel)VehicleCreationViewModel);
                             if (carCreate.HasValidTax && carCreate.TaxExpiryDate.Date <= DateTime.Today)
                             {
-                                proceed = _notificationsService.Confirm(WindowButton.YesNo, TAX_RENEWAL_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(TAX_RENEWAL_DATE_WARNING, "Warning!");
                             }
                             else if (carCreate.HasInsurance && carCreate.InsuranceRenewalDate.Date <= DateTime.Today)
                             {
-                                proceed = _notificationsService.Confirm(WindowButton.YesNo, INSURANCE_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(INSURANCE_DATE_WARNING, "Warning!");
                             }
                             break;
                         case "Bicycle":
@@ -223,11 +223,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                             var motorbikeCreate = ((MotorbikeCreationViewModel)VehicleCreationViewModel);
                             if (motorbikeCreate.HasValidTax && motorbikeCreate.TaxExpiryDate.Date <= DateTime.Today)
                             {
-                                proceed = _notificationsService.Confirm(WindowButton.YesNo, TAX_RENEWAL_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(TAX_RENEWAL_DATE_WARNING, "Warning!");
                             }
                             else if (motorbikeCreate.HasInsurance && motorbikeCreate.InsuranceRenewalDate.Date <= DateTime.Today)
                             {
-                                proceed = _notificationsService.Confirm(WindowButton.YesNo, INSURANCE_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(INSURANCE_DATE_WARNING, "Warning!");
                             }
                             break;
                     }
@@ -297,11 +297,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     {
                         if (error != null)
                         {
-                            _notificationsService.Alert(WindowButton.Ok, ERROR_OCCURED_DURING_SAVE, NOTIFICATION_HEADER);
+                            _notificationsService.Alert(ERROR_OCCURED_DURING_SAVE, NOTIFICATION_HEADER);
                         }
                         else
                         {
-                            _notificationsService.Alert(WindowButton.Ok, VEHICLE_UPDATED, NOTIFICATION_HEADER);
+                            _notificationsService.Alert(VEHICLE_UPDATED, NOTIFICATION_HEADER);
                             Close();
                         }
                     }, EditVehicle);
@@ -377,7 +377,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     return;
                 }
                                 
-                _notificationsService.Alert(WindowButton.Ok, VEHICLE_ADDED, NOTIFICATION_HEADER);
+                _notificationsService.Alert(VEHICLE_ADDED, NOTIFICATION_HEADER);
                 Close();
             }, newVehicle);
         }
@@ -452,10 +452,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private void Close()
         {
-            if (this.ClosingRequest != null)
-            {
-                this.ClosingRequest(this, EventArgs.Empty);
-            }
+            ClosingRequest?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }
