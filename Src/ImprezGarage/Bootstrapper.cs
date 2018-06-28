@@ -36,9 +36,13 @@ namespace ImprezGarage
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
+            moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
+            moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
             moduleCatalog.AddModule(typeof(Modules.StatusBar.StatusBarModule));
             moduleCatalog.AddModule(typeof(Modules.PerformChecks.PerformChecksModule));
             moduleCatalog.AddModule(typeof(Modules.PetrolExpenditure.PetrolExpenditureModule));
+
+            //MyGarage needs to be last as it is the one that loads the vehicles initially.
             moduleCatalog.AddModule(typeof(Modules.MyGarage.MyGarageModule));
         }
     }

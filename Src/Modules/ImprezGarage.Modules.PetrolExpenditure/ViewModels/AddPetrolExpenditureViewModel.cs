@@ -5,22 +5,22 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using System;
-    using System.Windows.Controls;
-    using System.Windows.Input;
-    using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Dialogs;
-    using ImprezGarage.Infrastructure.Model;
+    using Infrastructure;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
+    using System;
+    using System.Windows.Controls;
+    using System.Windows.Input;
 
     public class AddPetrolExpenditureViewModel : BindableBase
     {
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IDialogService _dialogService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly INotificationsService _notificationService;
 
         private const string EXPENSE_ADDED = "Expense added successfully!";
         private const string EXPENSE_FAILED = "An error occured during the adding of the petrol expense. \nPlease try again.";
@@ -41,6 +41,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             get => _addEnabled;
             set => SetProperty(ref _addEnabled, value);
         }
+
         public int VehicleId { get; internal set; }
 
         #region Commands
@@ -52,11 +53,11 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #endregion
 
         #region Methods
-        public AddPetrolExpenditureViewModel(IDataService dataService, IDialogService dialogService, IEventAggregator eventAggregator)
+        public AddPetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, INotificationsService notificationService)
         {
             _dataService = dataService;
-            _dialogService = dialogService;
             _eventAggregator = eventAggregator;
+            _notificationService = notificationService;
 
             AddCommand = new DelegateCommand(AddExecute);
             CancelCommand = new DelegateCommand(Close);
@@ -98,11 +99,11 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             {
                 if(error != null)
                 {
-                    _dialogService.Alert(EXPENSE_FAILED);                    
+                    _notificationService.Alert(WindowButton.Ok, EXPENSE_FAILED);
                     return;
                 }
 
-                _dialogService.Alert(EXPENSE_ADDED);
+                _notificationService.Alert(WindowButton.Ok, EXPENSE_ADDED);
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }, Convert.ToDouble(Amount), VehicleId);
             Close();

@@ -16,24 +16,31 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
     public class ChecksPerformedViewModel : BindableBase
     {
+        #region Attributes
         private readonly IEventAggregator _eventAggregator;
         private readonly IDataService _dataService;
         private readonly IUnityContainer _container;
 
         private VehicleViewModel _selectedVehicle;
+        private ObservableCollection<MaintenanceCheckViewModel> _maintainanceChecks;
+        #endregion
+
+        #region Properties
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
         }
 
-        private ObservableCollection<MaintenanceCheckViewModel> _maintainanceChecks;
         public ObservableCollection<MaintenanceCheckViewModel> MaintainanceChecks
         {
             get => _maintainanceChecks;
             set => SetProperty(ref _maintainanceChecks, value);
         }
 
+        #endregion
+
+        #region Methods
         public ChecksPerformedViewModel(IEventAggregator eventAggregator, IDataService dataService, IUnityContainer container)
         {
             _eventAggregator = eventAggregator;
@@ -43,11 +50,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
         }
 
+        #region Event Handler
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
             SelectedVehicle = vehicleViewModel;
             GetSelectedVehicleMaintainanceChecks();
         }
+        #endregion
 
         private void GetSelectedVehicleMaintainanceChecks()
         {
@@ -81,5 +90,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 }, SelectedVehicle.Vehicle.Id);
             }
         }
+        #endregion
     }
 }   //ImprezGarage.Modules.PerformChecks.ViewModels namespace 

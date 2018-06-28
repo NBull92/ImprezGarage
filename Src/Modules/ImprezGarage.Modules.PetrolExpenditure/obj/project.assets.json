@@ -675,11 +675,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj",
+      "projectUniqueName": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj",
       "projectName": "ImprezGarage.Modules.PetrolExpenditure",
-      "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj",
+      "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj",
       "packagesPath": "C:\\Users\\nickb\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\obj\\",
+      "outputPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -700,8 +700,8 @@
       "frameworks": {
         "net461": {
           "projectReferences": {
-            "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
-              "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
             }
           }
         }

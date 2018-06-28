@@ -5,173 +5,159 @@
 
 namespace ImprezGarage.Infrastructure.ViewModels
 {
-    using ImprezGarage.Infrastructure.Dialogs;
+    using ImprezGarage.Infrastructure.Services;
     using Infrastructure.Model;
     using Prism.Commands;
+    using Prism.Events;
     using Prism.Mvvm;
     using System;
 
     public class VehicleViewModel : BindableBase
     {
-        public IDialogService DialogService;
-        public IDataService DataService;
+        #region Attributes
+        private Vehicle _vehicle;
+        private VehicleType _vehicleType;
+        private DateTime _dateCreated;
+        private DateTime _dateModified;
+        private string _make;
+        private string _model;
+        private string _registration;
+        private DateTime? _taxExpiryDate;
+        private DateTime? _insuranceRenewalDate;
+        private const string NOTIFICATION_HEADER = "Alert!";
+        private const string VEHICLE_DELETED = "Vehicle deleted sucessfully!";
+        private const string CONFIRM_VEHICLE_DELETE = "Are you sure you wish to delete this vehicle?";
+        private readonly IEventAggregator _eventAggregator;
+        public IDataService _dataService { get; private set; }
+        public INotificationsService _notificationsService { get; private set; }
+        #endregion
 
-        internal Vehicle _vehicle;
+        #region Properties
+
         public Vehicle Vehicle
         {
-            get
-            {
-                return _vehicle;
-            }
-            set
-            {
-                if (value == _vehicle)
-                    return;
-
-                SetProperty(ref _vehicle, value);
-            }
+            get => _vehicle;
+            set => SetProperty(ref _vehicle, value);
         }
-        
-        private VehicleType _vehicleType;
+
         public VehicleType VehicleType
         {
             get => _vehicleType;
-            set
-            {
-                if (value == _vehicleType)
-                    return;
-
-                SetProperty(ref _vehicleType, value);
-            }
+            set => SetProperty(ref _vehicleType, value);
         }
 
-        private DateTime _dateCreated;
         public DateTime DateCreated
         {
             get => _dateCreated;
-            set
-            {
-                if (value == _dateCreated)
-                    return;
-
-                SetProperty(ref _dateCreated, value);
-            }
+            set => SetProperty(ref _dateCreated, value);
         }
 
-        private DateTime _dateModified;
         public DateTime DateModified
         {
             get => _dateModified;
-            set
-            {
-                if (value == _dateModified)
-                    return;
-
-                _dateModified = value;
-                RaisePropertyChanged("DateModified");
-            }
+            set => SetProperty(ref _dateModified, value);
         }
 
-        private string _make;
         public string Make
         {
-            get { return _make; }
-            set
-            {
-                if (value == _make)
-                    return;
-
-                _make = value;
-                RaisePropertyChanged("Make");
-            }
+            get => _make;
+            set => SetProperty(ref _make, value);
         }
 
-        private string _model;
         public string Model
         {
-            get { return _model; }
-            set
-            {
-                if (value == _model)
-                    return;
-
-                _model = value;
-                RaisePropertyChanged("Model");
-            }
+            get => _model;
+            set => SetProperty(ref _model, value);
         }
 
-        private string _registration;
         public string Registration
         {
-            get { return _registration; }
-            set
-            {
-                if (value == _registration)
-                    return;
-
-                _registration = value;
-                RaisePropertyChanged("Registration");
-            }
+            get => _registration;
+            set => SetProperty(ref _registration, value);
         }
 
-        private DateTime? _taxExpiryDate;
         public DateTime? TaxExpiryDate
         {
-            get { return _taxExpiryDate; }
-            set
-            {
-                if (value == _taxExpiryDate)
-                    return;
-
-                _taxExpiryDate = value;
-                RaisePropertyChanged("TaxExpiryDate");
-            }
+            get => _taxExpiryDate;
+            set => SetProperty(ref _taxExpiryDate, value);
         }
 
-        private DateTime? _insuranceRenewalDate;
         public DateTime? InsuranceRenewalDate
         {
-            get { return _insuranceRenewalDate; }
-            set
-            {
-                if (value == _insuranceRenewalDate)
-                    return;
-
-                _insuranceRenewalDate = value;
-                RaisePropertyChanged("InsuranceRenewalDate");
-            }
+            get => _insuranceRenewalDate;
+            set => SetProperty(ref _insuranceRenewalDate, value);
         }
 
+        #region Commands
         public virtual DelegateCommand EditVehicleCommand { get; set; }
         public virtual DelegateCommand DeleteVehicleCommand { get; set; }
+        #endregion
+        #endregion
 
-        public VehicleViewModel(IDialogService dialogService, IDataService dataService)
+        #region Methods
+        public VehicleViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator)
         {
-            DialogService = dialogService;
-            DataService = dataService;
+            _dataService = dataService;
+            _notificationsService = notificationsService;
+            _eventAggregator = eventAggregator;
+
+            EditVehicleCommand = new DelegateCommand(EditVehicleExecute);
+            DeleteVehicleCommand = new DelegateCommand(DeleteVehicleExecute);
         }
+
+        #region Command Handlers
+        /// <summary>
+        /// Deletes this vehicle in the database.
+        /// </summary>
+        private void DeleteVehicleExecute()
+        {
+            if (!_notificationsService.Confirm(WindowButton.Ok, CONFIRM_VEHICLE_DELETE))
+                return;
+
+            _dataService.DeleteVehicle((error) =>
+            {
+                if (error != null)
+                {
+                    return;
+                }
+
+                _notificationsService.Alert(WindowButton.Ok,VEHICLE_DELETED, NOTIFICATION_HEADER);
+
+                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
+                _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(null);
+            }, Vehicle);
+        }
+
+        /// <summary>
+        /// Take the current selected vechiel and open a window to edit it.
+        /// </summary>
+        public void EditVehicleExecute()
+        {
+            _eventAggregator.GetEvent<Events.EditVehicleEvent>().Publish(this);
+        }
+        #endregion
 
         public void LoadInstanceViaId(int selectedVehicleId)
         {
-            DataService.GetVehicleByItsId((vehicle,error) => 
+            _dataService.GetVehicleByItsId((vehicle, error) =>
             {
-                if(error != null)
+                if (error != null)
                 {
-
+                    _notificationsService.Alert(WindowButton.Ok, "An error occured during the retrival of the selected vehicle.");
                 }
 
                 LoadInstance(vehicle);
-            },selectedVehicleId);
+            }, selectedVehicleId);
         }
 
         /// <summary>
         /// Calls load instance to happen again but refresh the data from the vehicle in this view model.
         /// </summary>
-        public virtual void Refresh()
+        public void Refresh()
         {
             LoadInstance();
         }
-        
+
         /// <summary>
         /// Loads the data from the vehicle passed through are the one already assigned to this viewmodel.
         /// </summary>
@@ -188,9 +174,9 @@ namespace ImprezGarage.Infrastructure.ViewModels
             Make = Vehicle.Make;
             Model = Vehicle.Model;
 
-            DataService.GetVehicleType((type,error) => 
+            _dataService.GetVehicleType((type, error) =>
             {
-                if(error != null)
+                if (error != null)
                 {
                     return;
                 }
@@ -214,5 +200,6 @@ namespace ImprezGarage.Infrastructure.ViewModels
                 }
             }, Vehicle.VehicleType);
         }
+        #endregion
     }
 }   //ImprezGarage.Infrastructure.ViewModels namespace 

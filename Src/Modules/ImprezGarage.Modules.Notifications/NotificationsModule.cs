@@ -5,9 +5,9 @@
 
 namespace ImprezGarage.Modules.Notifications
 {
+    using ImprezGarage.Infrastructure.Services;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
-    using Prism.Regions;
 
     public class NotificationsModule : IModule
     {

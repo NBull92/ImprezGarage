@@ -25,15 +25,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private ObservableCollection<ChartData> _filteredExpenses;
         private string _minDate;
         private string _maxDate;
-        private double _minCost;
         private double _maxCost;
         private bool _isLineChart;
-
-        public VehicleViewModel SelectedVehicle;
-
-        #region Commands
-        public DelegateCommand<string> OnChartDisplayChangeCommand { get; set; }
-        #endregion
+        private string _chartStyleContent;
+        private VehicleViewModel _selectedVehicle;
         #endregion
 
         #region Properties
@@ -46,10 +41,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         public string MinDate
         {
             get => _minDate;
-            set
-            {
-                SetProperty(ref _minDate, value);
-            }
+            set => SetProperty(ref _minDate, value);
         }
 
         public string MaxDate
@@ -57,13 +49,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             get => _maxDate;
             set => SetProperty(ref _maxDate, value);
         }
-
-        public double MinCost
-        {
-            get => _minCost;
-            set => SetProperty(ref _minCost, value);
-        }
-
+        
         public double MaxCost
         {
             get => _maxCost;
@@ -80,12 +66,15 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             }
         }
 
-        public string _chartStyleContent;
         public string ChartStyleContent
         {
             get => _chartStyleContent;
             set => SetProperty(ref _chartStyleContent, value);
         }
+
+        #region Commands
+        public DelegateCommand<string> OnChartDisplayChangeCommand { get; set; }
+        #endregion
         #endregion
 
         #region Methods
@@ -103,10 +92,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         private void ResetParameters()
         {
-            FilteredExpenses = new ObservableCollection<ChartData>();
             _expenses = new ObservableCollection<ChartData>();
-            MaxCost = 1;
-            MinCost = 1;
+            MaxCost = 0;
             IsLineChart = true;
             ChartStyleContent = "Line";
             MinDate = DateTime.Now.AddDays(-7).ToShortDateString();
@@ -116,13 +103,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
             ResetParameters();
-            SelectedVehicle = vehicleViewModel;
+            _selectedVehicle = vehicleViewModel;
             GetSelectedVehiclePetrolExpenses();
         }
 
         private void GetSelectedVehiclePetrolExpenses()
         {
-            if (SelectedVehicle == null)
+            if (_selectedVehicle == null)
             {
                 _expenses = null;
                 FilteredExpenses = null;
@@ -153,7 +140,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                     }
 
                     FilterExpenses();
-                }, SelectedVehicle.Vehicle.Id);
+                }, _selectedVehicle.Vehicle.Id);
             }
         }
 
@@ -169,7 +156,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Command Handlers
         private void OnChartDisplayChangeExecute(string chartDisplay)
         {
-            switch(chartDisplay)
+            switch (chartDisplay)
             {
                 case "Week":
                     MinDate = DateTime.Now.AddDays(-7).ToShortDateString();

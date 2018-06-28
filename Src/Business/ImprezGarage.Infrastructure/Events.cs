@@ -12,6 +12,7 @@ namespace ImprezGarage.Infrastructure
     {
         public class SelectVehicleEvent : PubSubEvent<VehicleViewModel> { }
         public class StatusUpdateEvent : PubSubEvent<string> { }
+        public class EditVehicleEvent : PubSubEvent<VehicleViewModel> { }
         public class RefreshDataEvent : PubSubEvent { }
     }
 }   //ImprezGarage.Infrastructure namespace 

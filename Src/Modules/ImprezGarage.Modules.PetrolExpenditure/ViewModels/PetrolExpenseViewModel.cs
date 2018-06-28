@@ -24,8 +24,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private int _vehicleId;
         private double _amount;
         private DateTime _dateEntered;
-
-        public DelegateCommand DeleteExpenseCommand { get; set; }
         #endregion
 
         #region Properties
@@ -34,21 +32,28 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             get => _id;
             set => SetProperty(ref _id, value);
         }
+
         public int VehicleId
         {
             get => _vehicleId;
             set => SetProperty(ref _vehicleId, value);
         }
+
         public double Amount
         {
             get => _amount;
             set => SetProperty(ref _amount, value);
         }
+
         public DateTime DateEntered
         {
             get => _dateEntered;
             set => SetProperty(ref _dateEntered, value);
         }
+
+        #region Command
+        public DelegateCommand DeleteExpenseCommand { get; set; }
+        #endregion
         #endregion
 
         #region Methods
@@ -70,14 +75,15 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             DateEntered = Convert.ToDateTime(petrolExpense.DateEntered);
         }
 
+        #region Command Handler
         private void OnExpenseDeleted()
         {
             if (!_dialogService.Confirm(CONFIRM_EXPENSE_DELETE))
                 return;
 
-            _dataService.DeletePetrolExpense((error) => 
+            _dataService.DeletePetrolExpense((error) =>
             {
-                if(error != null)
+                if (error != null)
                 {
 
                 }
@@ -85,7 +91,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }, Id);
         }
-
+        #endregion
         #endregion
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

@@ -8,6 +8,7 @@
              xmlns:vm="clr-namespace:ImprezGarage.Modules.MyGarage.ViewModels"
              xmlns:views="clr-namespace:ImprezGarage.Modules.MyGarage.Views"
              xmlns:conv="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
+             xmlns:infrvm="clr-namespace:ImprezGarage.Infrastructure.ViewModels;assembly=ImprezGarage.Infrastructure"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
@@ -49,7 +50,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type vm:VehicleViewModel}">
+                <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -57,25 +58,24 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding Registration}" 
-                                   Visibility="{Binding VehicleType, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Car}" 
+                                   Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Car}" 
                                    VerticalAlignment="Center" Margin="5" Width="255"/>
                         <TextBlock Grid.Column="0" Text="{Binding Registration}" 
-                                   Visibility="{Binding VehicleType, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Motorbike}" 
+                                   Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Motorbike}" 
                                    VerticalAlignment="Center" Margin="5" Width="255"/>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="5" Width="255" 
-                                   Visibility="{Binding VehicleType, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Bicycle}">
+                                   Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Bicycle}">
                                 <Run Text="{Binding Make}"/>
                                 <Run Text=" - "/>
                                 <Run Text="{Binding Model}"/>
                         </TextBlock>
-                        <Button Grid.Column="1" Content="Edit" Command="{Binding EditVehicleCommand}" d:DataContext="{d:DesignInstance Type=vm:VehicleViewModel}"
-                        VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
-                        <Button Grid.Column="2" Content="Delete" Command="{Binding DeleteVehicleCommand}" d:DataContext="{d:DesignInstance Type=vm:VehicleViewModel}"
-                        VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
+                        <Button Grid.Column="1" Content="Edit" Command="{Binding EditVehicleCommand}"
+                            VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
+                        <Button Grid.Column="2" Content="Delete" Command="{Binding DeleteVehicleCommand}"
+                            VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-
     </Grid>
 </UserControl>

@@ -1,16 +1,16 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿//------------------------------------------------------------------------------
+// Copyright of Nicholas Andrew Bull 2018
+// This code is for portfolio use only.
+//------------------------------------------------------------------------------
 
 namespace ImprezGarage.Modules.Logger.ViewModels
 {
+    using Prism.Mvvm;
+
     public class ViewAViewModel : BindableBase
     {
         private string _message;
+
         public string Message
         {
             get { return _message; }
@@ -22,4 +22,4 @@ namespace ImprezGarage.Modules.Logger.ViewModels
             Message = "View A from your Prism Module";
         }
     }
-}
+}   //ImprezGarage.Modules.Logger.ViewModels namespace 

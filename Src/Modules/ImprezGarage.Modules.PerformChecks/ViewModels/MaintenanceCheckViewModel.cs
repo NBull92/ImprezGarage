@@ -19,50 +19,54 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
     public class MaintenanceCheckViewModel : BindableBase
     {
-        private const string DELETE_MAINTENANCE_CHECK = "Are you sure you wish to delete this maintenance check?";
-        private const string DELETED_SUCCESSFULLY = "Maintenance check deleted successfuly!";
-
+        #region Attributes
         private readonly IDataService _dataService;
         private readonly IRegionManager _regionManager;
         private readonly IDialogService _dialogService;
         private readonly IEventAggregator _eventAggregator;
 
+        private const string DELETE_MAINTENANCE_CHECK = "Are you sure you wish to delete this maintenance check?";
+        private const string DELETED_SUCCESSFULLY = "Maintenance check deleted successfuly!";
+
         private int _id;
+        private VehicleViewModel _selectedVehicle;
+        private MaintenanceCheckType _maintenanceCheckType;
+        private DateTime _datePerformed;
+        #endregion
+
+        #region Properties
         public int Id
         {
-            get { return _id; }
-            set { _id = value; }
+            get => _id;
+            set => SetProperty(ref _id, value);
         }
-        
-        private VehicleViewModel _selectedVehicle;
+
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
-            set
-            {
-                _selectedVehicle = value;
-                RaisePropertyChanged("SelectedVehicle");
-            }
+            set => SetProperty(ref _selectedVehicle, value);
         }
 
-        private MaintenanceCheckType _maintenanceCheckType;
         public MaintenanceCheckType MaintenanceCheckType
         {
             get => _maintenanceCheckType;
-            set { SetProperty(ref _maintenanceCheckType, value); }
+            set => SetProperty(ref _maintenanceCheckType, value);
         }
-        
-        private DateTime _datePerformed;
+
         public DateTime DatePerformed
         {
             get => _datePerformed;
-            set { SetProperty(ref _datePerformed, value); }
+            set => SetProperty(ref _datePerformed, value);
         }
 
+        #region Commands
         public DelegateCommand<MouseButtonEventArgs> OpenMaintenanceCheck { get; set; }
         public DelegateCommand EditMaintenanceCheckCommand { get; set; }
         public DelegateCommand DeleteMaintenanceCheckCommand { get; set; }
+        #endregion
+        #endregion
         
+        #region Methods
         public MaintenanceCheckViewModel(IDataService dataService, IRegionManager regionManager, IDialogService dialogService,
             IEventAggregator eventAggregator)
         {
@@ -76,7 +80,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             DeleteMaintenanceCheckCommand = new DelegateCommand(DeleteMaintenanceCheckExecute);
         }
 
-        #region Methods
+
         #region Command Handlers
         private void DeleteMaintenanceCheckExecute()
         {

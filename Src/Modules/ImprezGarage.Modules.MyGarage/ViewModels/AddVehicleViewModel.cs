@@ -5,11 +5,10 @@
 
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
-    using ImprezGarage.Infrastructure.Dialogs;
+    using Infrastructure.Services;
     using Infrastructure.Model;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
-    using Prism.Interactivity.InteractionRequest;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
@@ -19,11 +18,17 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
     public class AddVehicleViewModel : BindableBase
     {
-        #region private vars
+        #region Attributes
         private readonly IDataService _dataService;
-        private readonly IDialogService _dialogService;
         private readonly IRegionManager _regionManager;
         private readonly IUnityContainer _container;
+        private readonly INotificationsService _notificationsService;
+
+        private ObservableCollection<VehicleType> _vehicleTypes;
+        private VehicleType _selectedVehicleType;
+        private VehicleCreationViewModel _vehicleCreationViewModel;
+        private bool _dialogResult;
+        private string _saveContent;
 
         private const string INSURANCE_DATE_WARNING = "You have selected to add the vehicles insurance date, however the data entered is in the past. \n\nIs this intended?";
         private const string TAX_RENEWAL_DATE_WARNING = "You have selected to add the vehicles tax renewal date, however the data entered is in the past. \n\nIs this intended?";
@@ -31,41 +36,29 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private const string ERROR_OCCURED_DURING_SAVE = "An error occured during the save. \n\nPlease check all the data provided is correct and try again. If this issue persists, then contact support.";
         private const string VEHICLE_UPDATED = "Vehicle updated successfully.";
         private const string VEHICLE_ADDED = "Vehicle added successfully!";
+
+        public bool IsEdit;
+        public event EventHandler ClosingRequest;
         #endregion
 
-        #region public vars
-        public bool IsEdit;
-        #endregion
-        
-        private ObservableCollection<VehicleType> _vehicleTypes;
+        #region Parameters
         public ObservableCollection<VehicleType> VehicleTypes
         {
             get => _vehicleTypes;
-            set
-            {
-                if (value == _vehicleTypes)
-                    return;
-
-                _vehicleTypes = value;
-                RaisePropertyChanged("VehicleTypes");
-            }
+            set => SetProperty(ref _vehicleTypes, value);
         }
-        
-        private VehicleType _selectedVehicleType;
+
         public VehicleType SelectedVehicleType
         {
             get => _selectedVehicleType;
             set
             {
-                if (value == _selectedVehicleType)
-                    return;
-
-                _selectedVehicleType = value;
+                SetProperty(ref _selectedVehicleType, value);
 
                 if (_selectedVehicleType != null)
                 {
                     switch (_selectedVehicleType.Name)
-                    {                        
+                    {
                         case "Car":
                             VehicleCreationViewModel = _container.Resolve<CarCreationViewModel>();
                             VehicleCreationViewModel.VehicleType = VehicleTypes.FirstOrDefault(o => o.Name == "Car");
@@ -91,53 +84,32 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     VehicleCreationViewModel = null;
                     VehicleCreationViewModel.CleanUp();
                 }
-                
-                RaisePropertyChanged("SelectedVehicleType");
             }
         }
 
-        private VehicleCreationViewModel _vehicleCreationViewModel;
         public VehicleCreationViewModel VehicleCreationViewModel
         {
             get => _vehicleCreationViewModel;
             set
-            {
-                if (value == _vehicleCreationViewModel)
-                    return;
-
-                _vehicleCreationViewModel = value;
+            {                
+                SetProperty(ref _vehicleCreationViewModel, value);
                 _vehicleCreationViewModel.PropertyChanged += VehicleCreationViewModel_PropertyChanged;
                 RaisePropertyChanged("VehicleCreationViewModel");
             }
         }
 
-        private bool _dialogResult;
         public bool DialogResult
         {
             get => _dialogResult;
-            set
-            {
-                _dialogResult = value;
-                RaisePropertyChanged("DialogResult");
-            }
+            set => SetProperty(ref _dialogResult, value);
         }
 
         // Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
-        private string _saveContent;
         public string SaveContent
         {
             get => _saveContent;
-            set
-            {
-                if (value == _saveContent)
-                    return;
-
-                _saveContent = value;
-                RaisePropertyChanged("SaveContent");
-            }
+            set => SetProperty(ref _saveContent, value);
         }
-
-        public InteractionRequest<INotification> NotificationRequest { get; set; }
 
         #region Commands
         public DelegateCommand SaveCommand { get; private set; }
@@ -145,17 +117,16 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         public Vehicle EditVehicle { get; internal set; }
         #endregion
 
-        public event EventHandler ClosingRequest;
+        #endregion
 
-        public AddVehicleViewModel(IDataService dataService, IDialogService dialogService, IRegionManager regionManager, IUnityContainer container)
+        #region Methods
+        public AddVehicleViewModel(IDataService dataService, IRegionManager regionManager, IUnityContainer container, INotificationsService notificationsService)
         {
             _dataService = dataService;
-            _dialogService = dialogService;
             _regionManager = regionManager;
             _container = container;
+            _notificationsService = notificationsService;
 
-            NotificationRequest = new InteractionRequest<INotification>();
-            
             SaveCommand = new DelegateCommand(SaveExecute, CanSave);
             CancelCommand = new DelegateCommand<object>(CancelExecute);
 
@@ -224,9 +195,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private void SaveExecute()
         {
-            if(IsEdit)
+            if (IsEdit)
             {
-                if(_dialogService.Confirm("Are you sure you wish to save these changes?"))
+                if (_notificationsService.Confirm(WindowButton.YesNo, "Are you sure you wish to save these changes?"))
                 {
                     bool proceed = false;
 
@@ -239,11 +210,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                             var carCreate = ((CarCreationViewModel)VehicleCreationViewModel);
                             if (carCreate.HasValidTax && carCreate.TaxExpiryDate.Date <= DateTime.Today)
                             {
-                                proceed = _dialogService.Confirm(TAX_RENEWAL_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(WindowButton.YesNo, TAX_RENEWAL_DATE_WARNING, "Warning!");
                             }
                             else if (carCreate.HasInsurance && carCreate.InsuranceRenewalDate.Date <= DateTime.Today)
                             {
-                                proceed = _dialogService.Confirm(INSURANCE_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(WindowButton.YesNo, INSURANCE_DATE_WARNING, "Warning!");
                             }
                             break;
                         case "Bicycle":
@@ -252,11 +223,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                             var motorbikeCreate = ((MotorbikeCreationViewModel)VehicleCreationViewModel);
                             if (motorbikeCreate.HasValidTax && motorbikeCreate.TaxExpiryDate.Date <= DateTime.Today)
                             {
-                                proceed = _dialogService.Confirm(TAX_RENEWAL_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(WindowButton.YesNo, TAX_RENEWAL_DATE_WARNING, "Warning!");
                             }
                             else if (motorbikeCreate.HasInsurance && motorbikeCreate.InsuranceRenewalDate.Date <= DateTime.Today)
                             {
-                                proceed = _dialogService.Confirm(INSURANCE_DATE_WARNING, "Warning!");
+                                proceed = _notificationsService.Confirm(WindowButton.YesNo, INSURANCE_DATE_WARNING, "Warning!");
                             }
                             break;
                     }
@@ -273,7 +244,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                             EditVehicle.HasInsurance = ((CarCreationViewModel)VehicleCreationViewModel).HasInsurance;
                             EditVehicle.HasValidTax = ((CarCreationViewModel)VehicleCreationViewModel).HasValidTax;
 
-                            if(((CarCreationViewModel)VehicleCreationViewModel).HasValidTax)
+                            if (((CarCreationViewModel)VehicleCreationViewModel).HasValidTax)
                             {
                                 EditVehicle.InsuranceRenewalDate = ((CarCreationViewModel)VehicleCreationViewModel).InsuranceRenewalDate;
                             }
@@ -282,7 +253,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                                 EditVehicle.InsuranceRenewalDate = null;
                             }
 
-                            if(((CarCreationViewModel)VehicleCreationViewModel).HasValidTax)
+                            if (((CarCreationViewModel)VehicleCreationViewModel).HasValidTax)
                             {
                                 EditVehicle.TaxExpiryDate = ((CarCreationViewModel)VehicleCreationViewModel).TaxExpiryDate;
                             }
@@ -322,18 +293,18 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
                     DialogResult = true;
 
-                    _dataService.UpdateVehicle((error) => 
+                    _dataService.UpdateVehicle((error) =>
                     {
-                        if(error != null)
+                        if (error != null)
                         {
-                            NotificationRequest.Raise(new Notification { Title = NOTIFICATION_HEADER, Content = ERROR_OCCURED_DURING_SAVE });
+                            _notificationsService.Alert(WindowButton.Ok, ERROR_OCCURED_DURING_SAVE, NOTIFICATION_HEADER);
                         }
                         else
                         {
-                            NotificationRequest.Raise(new Notification { Title = NOTIFICATION_HEADER, Content = VEHICLE_UPDATED });
+                            _notificationsService.Alert(WindowButton.Ok, VEHICLE_UPDATED, NOTIFICATION_HEADER);
                             Close();
                         }
-                    },EditVehicle);
+                    }, EditVehicle);
                 }
             }
             else
@@ -399,16 +370,16 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 }
             }
 
-            _dataService.AddNewVehicle((error) => 
+            _dataService.AddNewVehicle((error) =>
             {
-                if(error != null)
+                if (error != null)
                 {
                     return;
                 }
-
-                NotificationRequest.Raise(new Notification { Title = NOTIFICATION_HEADER, Content = VEHICLE_ADDED });
+                                
+                _notificationsService.Alert(WindowButton.Ok, VEHICLE_ADDED, NOTIFICATION_HEADER);
                 Close();
-            },newVehicle);
+            }, newVehicle);
         }
         #endregion
 
@@ -486,5 +457,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 this.ClosingRequest(this, EventArgs.Empty);
             }
         }
+        #endregion
     }
 }   //ImprezGarage.Modules.MyGarage.ViewModels namespace 

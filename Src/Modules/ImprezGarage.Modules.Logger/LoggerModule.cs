@@ -5,6 +5,7 @@
 
 namespace ImprezGarage.Modules.Logger
 {
+    using ImprezGarage.Infrastructure.Services;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
 

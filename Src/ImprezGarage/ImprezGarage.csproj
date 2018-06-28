@@ -110,9 +110,17 @@
       <Project>{4703d4d1-0c8c-4ab2-9058-f8dc87d60c61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\ImprezGarage.Modules.Logger\ImprezGarage.Modules.Logger.csproj">
+      <Project>{6f89c592-b58e-409b-9211-3f93542688ad}</Project>
+      <Name>ImprezGarage.Modules.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\ImprezGarage.Modules.MyGarage\ImprezGarage.Modules.MyGarage.csproj">
       <Project>{137fbf70-8858-4658-9111-423ad53483e2}</Project>
       <Name>ImprezGarage.Modules.MyGarage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\ImprezGarage.Modules.Notifications\ImprezGarage.Modules.Notifications.csproj">
+      <Project>{105530c0-3baa-40d3-9763-979707cb0c65}</Project>
+      <Name>ImprezGarage.Modules.Notifications</Name>
     </ProjectReference>
     <ProjectReference Include="..\Modules\ImprezGarage.Modules.PerformChecks\ImprezGarage.Modules.PerformChecks.csproj">
       <Project>{7700386c-9eec-4958-9b4b-676d51f017c4}</Project>

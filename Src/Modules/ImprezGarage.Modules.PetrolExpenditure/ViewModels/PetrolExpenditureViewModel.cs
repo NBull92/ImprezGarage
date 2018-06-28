@@ -21,12 +21,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Attributes
         private readonly IDataService _dataService;
         private readonly IEventAggregator _eventAggregator;
-
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
-
-        public VehicleViewModel SelectedVehicle;
-
-        public DelegateCommand AddExpenditureCommand { get;set; }
+        private VehicleViewModel _selectedVehicle;
         #endregion
 
         #region Properties
@@ -35,6 +31,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             get => _expenses;
             set => SetProperty(ref _expenses, value);
         }
+
+        public DelegateCommand AddExpenditureCommand { get;set; }
         #endregion
 
         #region Methods
@@ -54,20 +52,20 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             var addExpense = new AddPetrolExpenditure();
             var vm = addExpense.DataContext as AddPetrolExpenditureViewModel;
-            vm.VehicleId = SelectedVehicle.Vehicle.Id;
+            vm.VehicleId = _selectedVehicle.Vehicle.Id;
             addExpense.ShowDialog();
         }
         #endregion
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
-            SelectedVehicle = vehicleViewModel;
+            _selectedVehicle = vehicleViewModel;
             GetSelectedVehiclePetrolExpenses();
         }
 
         private void GetSelectedVehiclePetrolExpenses()
         {
-            if (SelectedVehicle == null)
+            if (_selectedVehicle == null)
             {
                 Expenses = null;
             }
@@ -90,7 +88,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                     }
 
                     Expenses = new ObservableCollection<PetrolExpenseViewModel>(Expenses.OrderByDescending(o => o.DateEntered));
-                }, SelectedVehicle.Vehicle.Id);
+                }, _selectedVehicle.Vehicle.Id);
             }
         }
         #endregion

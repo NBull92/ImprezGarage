@@ -149,6 +149,20 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.MyGarage/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -166,6 +180,21 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Modules.MyGarage.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Notifications/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
         }
       },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
@@ -366,6 +395,20 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.MyGarage/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -383,6 +426,21 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Modules.MyGarage.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Notifications/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
         }
       },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
@@ -583,6 +641,20 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.MyGarage/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -600,6 +672,21 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Modules.MyGarage.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Notifications/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
         }
       },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
@@ -800,6 +887,20 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.MyGarage/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -817,6 +918,21 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Modules.MyGarage.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Notifications/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Notifications.dll": {}
         }
       },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
@@ -1101,10 +1217,20 @@
       "path": "../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj",
       "msbuildProject": "../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj"
     },
+    "ImprezGarage.Modules.Logger/1.0.0": {
+      "type": "project",
+      "path": "../Modules/ImprezGarage.Modules.Logger/ImprezGarage.Modules.Logger.csproj",
+      "msbuildProject": "../Modules/ImprezGarage.Modules.Logger/ImprezGarage.Modules.Logger.csproj"
+    },
     "ImprezGarage.Modules.MyGarage/1.0.0": {
       "type": "project",
       "path": "../Modules/ImprezGarage.Modules.MyGarage/ImprezGarage.Modules.MyGarage.csproj",
       "msbuildProject": "../Modules/ImprezGarage.Modules.MyGarage/ImprezGarage.Modules.MyGarage.csproj"
+    },
+    "ImprezGarage.Modules.Notifications/1.0.0": {
+      "type": "project",
+      "path": "../Modules/ImprezGarage.Modules.Notifications/ImprezGarage.Modules.Notifications.csproj",
+      "msbuildProject": "../Modules/ImprezGarage.Modules.Notifications/ImprezGarage.Modules.Notifications.csproj"
     },
     "ImprezGarage.Modules.PerformChecks/1.0.0": {
       "type": "project",
@@ -1126,7 +1252,9 @@
     ".NETFramework,Version=v4.6.1": [
       "EntityFramework >= 6.2.0",
       "ImprezGarage.Infrastructure >= 1.0.0",
+      "ImprezGarage.Modules.Logger >= 1.0.0",
       "ImprezGarage.Modules.MyGarage >= 1.0.0",
+      "ImprezGarage.Modules.Notifications >= 1.0.0",
       "ImprezGarage.Modules.PerformChecks >= 1.0.0",
       "ImprezGarage.Modules.PetrolExpenditure >= 1.0.0",
       "ImprezGarage.Modules.StatusBar >= 1.0.0",
@@ -1141,11 +1269,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\ImprezGarage\\ImprezGarage.csproj",
+      "projectUniqueName": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\ImprezGarage\\ImprezGarage.csproj",
       "projectName": "ImprezGarage",
-      "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\ImprezGarage\\ImprezGarage.csproj",
+      "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\ImprezGarage\\ImprezGarage.csproj",
       "packagesPath": "C:\\Users\\nickb\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\ImprezGarage\\obj\\",
+      "outputPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\ImprezGarage\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -1166,20 +1294,26 @@
       "frameworks": {
         "net461": {
           "projectReferences": {
-            "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
-              "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
             },
-            "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.MyGarage\\ImprezGarage.Modules.MyGarage.csproj": {
-              "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.MyGarage\\ImprezGarage.Modules.MyGarage.csproj"
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.MyGarage\\ImprezGarage.Modules.MyGarage.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.MyGarage\\ImprezGarage.Modules.MyGarage.csproj"
             },
-            "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PerformChecks\\ImprezGarage.Modules.PerformChecks.csproj": {
-              "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PerformChecks\\ImprezGarage.Modules.PerformChecks.csproj"
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PerformChecks\\ImprezGarage.Modules.PerformChecks.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PerformChecks\\ImprezGarage.Modules.PerformChecks.csproj"
             },
-            "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj": {
-              "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj"
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj"
             },
-            "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj": {
-              "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj"
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj"
+            },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj"
+            },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Notifications\\ImprezGarage.Modules.Notifications.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Notifications\\ImprezGarage.Modules.Notifications.csproj"
             }
           }
         }

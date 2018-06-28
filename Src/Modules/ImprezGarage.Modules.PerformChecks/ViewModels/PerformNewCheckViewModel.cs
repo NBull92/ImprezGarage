@@ -17,7 +17,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
     public class PerformNewCheckViewModel : BindableBase, INavigationAware
     {
-        #region private vars
+        #region Attributes
         private readonly IDataService _dataService;
         private readonly IDialogService _dialogService;
         private readonly IRegionManager _regionManager;
@@ -26,258 +26,224 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private const string CHECK_COMPLETED = "Maintenance check completed!";
         private const string CHECK_UPDATED = "Maintenance check updated!";
         private const string NOTIFICATION_HEADER = "Alert!";
-        #endregion
-
         private MaintenanceCheckType _selectedMaintenanceCheckType;
-        public MaintenanceCheckType SelectedMaintenanceCheckType
-        {
-            get => _selectedMaintenanceCheckType;
-            set
-            {
-                _selectedMaintenanceCheckType = value;
-                RaisePropertyChanged("SelectedMaintenanceCheckType");
-            }
-        }
+        private bool _isEditMode;
+        private string _submitText;
 
         #region Check box variables
         private bool _checkedAirFilter;
+        private bool _replacedAirFilter;
+        private bool _checkCoolantLevels;
+        private bool _flushedSystemAndChangeCoolant;
+        private bool _changeFanBelt;
+        private bool _checkedBattery;
+        private bool _checkedOilLevels;
+        private bool _changedOil;
+        private bool _replacedOilFilter;
+        private bool _checkAutoTransmissionFluid;
+        private bool _addedAutoTransmissionFluid;
+        private bool _checkPowerSteeringFluidLevels;
+        #endregion
+
+        #region Notes variables
+        private string _airFilterNotes;
+        private string _coolantNotes;
+        private string _batteryNotes;
+        private string _oilLevelNotes;
+        private string _autoTransmissionFluidNotes;
+        private string _powerSteeringNotes;
+        #endregion
+
+        #endregion
+
+        #region Properties
+        public MaintenanceCheckType SelectedMaintenanceCheckType
+        {
+            get => _selectedMaintenanceCheckType;
+            set => SetProperty(ref _selectedMaintenanceCheckType, value);
+        }
+
+        public bool IsEditMode
+        {
+            get => _isEditMode;
+            set => SetProperty(ref _isEditMode, value);
+        }
+
+        public string SubmitText
+        {
+            get => _submitText;
+            set => SetProperty(ref _submitText, value);
+        }
+
+        #region Check box variables
         public bool CheckedAirFilter
         {
             get => _checkedAirFilter;
             set
             {
-                _checkedAirFilter = value;
-                RaisePropertyChanged("CheckedAirFilter");
+                SetProperty(ref _checkedAirFilter, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _replacedAirFilter;
         public bool ReplacedAirFilter
         {
             get => _replacedAirFilter;
             set
             {
-                _replacedAirFilter = value;
-                RaisePropertyChanged("ReplacedAirFilter");
+                SetProperty(ref _replacedAirFilter, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _checkCoolantLevels;
         public bool CheckCoolantLevels
         {
             get => _checkCoolantLevels;
             set
             {
-                _checkCoolantLevels = value;
-                RaisePropertyChanged("CheckCoolantLevels");
+                SetProperty(ref _checkCoolantLevels, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _flushedSystemAndChangeCoolant;
         public bool FlushedSystemAndChangeCoolant
         {
             get => _flushedSystemAndChangeCoolant;
             set
             {
-                _flushedSystemAndChangeCoolant = value;
-                RaisePropertyChanged("FlushedSystemAndChangeCoolant");
+                SetProperty(ref _flushedSystemAndChangeCoolant, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _changeFanBelt;
         public bool ChangeFanBelt
         {
             get => _changeFanBelt;
             set
             {
-                _changeFanBelt = value;
-                RaisePropertyChanged("ChangeFanBelt");
+                SetProperty(ref _changeFanBelt, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _checkedBattery;
         public bool CheckedBattery
         {
             get => _checkedBattery;
             set
             {
-                _checkedBattery = value;
-                RaisePropertyChanged("CheckedBattery");
+                SetProperty(ref _checkedBattery, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _checkedOilLevels;
         public bool CheckedOilLevels
         {
             get => _checkedOilLevels;
             set
             {
-                _checkedOilLevels = value;
-                RaisePropertyChanged("CheckedOilLevels");
+                SetProperty(ref _checkedOilLevels, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _changedOil;
         public bool ChangedOil
         {
             get => _changedOil;
             set
             {
-                _changedOil = value;
-                RaisePropertyChanged("ChangedOil");
+                SetProperty(ref _changedOil, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _replacedOilFilter;
         public bool ReplacedOilFilter
         {
             get => _replacedOilFilter;
             set
             {
-                _replacedOilFilter = value;
-                RaisePropertyChanged("ReplacedOilFilter");
+                SetProperty(ref _replacedOilFilter, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _checkAutoTransmissionFluid;
         public bool CheckAutoTransmissionFluid
         {
             get => _checkAutoTransmissionFluid;
             set
             {
-                _checkAutoTransmissionFluid = value;
-                RaisePropertyChanged("CheckAutoTransmissionFluid");
+                SetProperty(ref _checkAutoTransmissionFluid, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _addedAutoTransmissionFluid;
         public bool AddedAutoTransmissionFluid
         {
             get => _addedAutoTransmissionFluid;
             set
             {
-                _addedAutoTransmissionFluid = value;
-                RaisePropertyChanged("AddedAutoTransmissionFluid");
+                SetProperty(ref _addedAutoTransmissionFluid, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private bool _checkPowerSteeringFluidLevels;
         public bool CheckPowerSteeringFluidLevels
         {
             get => _checkPowerSteeringFluidLevels;
             set
-            {
-                _checkPowerSteeringFluidLevels = value;
-                RaisePropertyChanged("CheckPowerSteeringFluidLevels");
+            {               
+                SetProperty(ref _checkPowerSteeringFluidLevels, value);
                 SubmitCommand.RaiseCanExecuteChanged();
             }
         }
         #endregion
 
         #region Notes variables
-        private string _airFilterNotes;
         public string AirFilterNotes
         {
             get => _airFilterNotes;
-            set
-            {
-                _airFilterNotes = value;
-                RaisePropertyChanged("AirFilterNotes");
-            }
+            set => SetProperty(ref _airFilterNotes, value);
         }
 
-        private string _coolantNotes;
         public string CoolantNotes
         {
             get => _coolantNotes;
-            set
-            {
-                _coolantNotes = value;
-                RaisePropertyChanged("CoolantNotes");
-            }
+            set => SetProperty(ref _coolantNotes, value);
         }
 
-        private string _batteryNotes;
         public string BatteryNotes
         {
             get => _batteryNotes;
-            set
-            {
-                _batteryNotes = value;
-                RaisePropertyChanged("BatteryNotes");
-            }
+            set => SetProperty(ref _batteryNotes, value);
         }
 
-        private string _oilLevelNotes;
         public string OilLevelNotes
         {
             get => _oilLevelNotes;
-            set
-            {
-                _oilLevelNotes = value;
-                RaisePropertyChanged("OilLevelNotes");
-            }
+            set => SetProperty(ref _oilLevelNotes, value);
         }
 
-        private string _autoTransmissionFluidNotes;
         public string AutoTransmissionFluidNotes
         {
             get => _autoTransmissionFluidNotes;
-            set
-            {
-                _autoTransmissionFluidNotes = value;
-                RaisePropertyChanged("AutoTransmissionFluidNotes");
-            }
+            set => SetProperty(ref _autoTransmissionFluidNotes, value);
         }
 
-        private string _powerSteeringNotes;
         public string PowerSteeringNotes
         {
             get => _powerSteeringNotes;
-            set
-            {
-                _powerSteeringNotes = value;
-                RaisePropertyChanged("PowerSteeringNotes");
-            }
+            set => SetProperty(ref _powerSteeringNotes, value);
         }
         #endregion
-
-        private bool _isEditMode;
-        public bool IsEditMode
-        {
-            get => _isEditMode; 
-            set
-            {
-                SetProperty(ref _isEditMode, value);
-            }
-        }
-
-        private string _submitText;
-        public string SubmitText
-        {
-            get => _submitText;
-            set
-            {
-                SetProperty(ref _submitText, value);
-            }
-        }
-
+        
         public InteractionRequest<INotification> NotificationRequest { get; set; }
 
+        #region Commands
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SubmitCommand { get; set; }
-
+        #endregion
+        #endregion
+        
+        #region Methods
         public PerformNewCheckViewModel(IDataService dataService, IDialogService dialogService, IRegionManager regionManager)
         {
             _dataService = dataService;
@@ -556,5 +522,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 SelectedMaintenanceCheckType = SelectedMaintenanceCheckType = type;
             }, maintenanceCheckTypeId);
         }
+        #endregion
     }
 }   //ImprezGarage.Modules.PerformChecks.ViewModels namespace

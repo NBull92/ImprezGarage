@@ -5,108 +5,75 @@
 
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
-    using Prism.Commands;
+    using Infrastructure.Model;
     using Prism.Mvvm;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using Infrastructure.Model;
     using System.ComponentModel;
 
     public class VehicleCreationViewModel : BindableBase, IDataErrorInfo
     {
+        #region Attributes
+        private string _make;
+        private string _model;
+        private VehicleType _vehicleType;
+        private DateTime _dateCreated;
+        private DateTime _dateModified;
+        #endregion
+
+        #region Properties
         internal AddVehicleViewModel AddVehicleVm { get; set; }
 
         public int Id { get; set; }
 
-        private string _make;
         public string Make
         {
             get => _make;
-            set
-            {
-                if (value == _make)
-                    return;
-
-                _make = value;
-                RaisePropertyChanged("Make");
-            }
+            set => SetProperty(ref _make, value);
         }
 
-        private string _model { get; set; }
         public string Model
         {
             get => _model;
-            set
-            {
-                if (value == _model)
-                    return;
-
-                _model = value;
-                RaisePropertyChanged("Model");
-            }
+            set => SetProperty(ref _model, value);
         }
 
-        private VehicleType _vehicleType { get; set; }
         public VehicleType VehicleType
         {
             get => _vehicleType;
-            set
-            {
-                if (value == _vehicleType)
-                    return;
-
-                _vehicleType = value;
-                RaisePropertyChanged("VehicleType");
-            }
+            set => SetProperty(ref _vehicleType, value);
         }
 
-        private DateTime _dateCreated { get; set; }
         public DateTime DateCreated
         {
             get => _dateCreated;
-            set
-            {
-                if (value == _dateCreated)
-                    return;
-
-                _dateCreated = value;
-                RaisePropertyChanged("DateCreated");
-            }
+            set => SetProperty(ref _dateCreated, value);
         }
 
-        private DateTime _dateModified;
         public DateTime DateModified
         {
             get => _dateModified;
-            set
-            {
-                if (value == _dateModified)
-                    return;
-
-                _dateModified = value;
-                RaisePropertyChanged("DateModified");
-            }
+            set => SetProperty(ref _dateModified, value);
         }
 
+        #region IDataErrorInfo
         public string Error => throw new NotImplementedException();
-        
+
         public virtual string this[string columnName]
         {
             get
             {
                 string error = null;
 
-                switch(columnName)
+                switch (columnName)
                 {
                     case "VehicleType":
-                        if(_vehicleType == null)
+                        if (_vehicleType == null)
                         {
                             error = "There is no associated vechile type selected.";
                         }
                         break;
                     case "Model":
-                        if(string.IsNullOrEmpty(_model))
+                        if (string.IsNullOrEmpty(_model))
                         {
                             error = "Please indicate the model of this vehicle.";
                         }
@@ -122,10 +89,13 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 return (error);
             }
         }
-        
+        #endregion
+        #endregion
+
+        #region Methods
         public VehicleCreationViewModel()
         {
-        } 
+        }
 
         internal virtual void CleanUp()
         {
@@ -135,5 +105,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             DateCreated = new DateTime();
             DateModified = new DateTime();
         }
+        #endregion
     }
 }   //ImprezGarage.Modules.MyGarage.ViewModels namespace 

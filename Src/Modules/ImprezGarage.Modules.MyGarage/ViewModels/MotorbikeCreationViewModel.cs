@@ -9,73 +9,49 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
     public class MotorbikeCreationViewModel : VehicleCreationViewModel
     {
+        #region Attributes
         private string _registration;
+        private bool _hasValidTax;
+        private DateTime _taxExpiryDate;
+        private bool _hasInsurance;
+        private DateTime _insuranceRenewalDate;
+        #endregion
+
+        #region Parameters
         public string Registration
         {
             get => _registration;
-            set
-            {
-                if (value == _registration)
-                    return;
-
-                _registration = value;
-                RaisePropertyChanged("Registration");
-            }
+            set => SetProperty(ref _registration, value);
         }
 
-        private bool _hasValidTax;
         public bool HasValidTax
         {
             get => _hasValidTax;
-            set
-            {
-                SetProperty(ref _hasValidTax, value);
-            }
+            set => SetProperty(ref _hasValidTax, value);
         }
 
-        private DateTime _taxExpiryDate;
         public DateTime TaxExpiryDate
         {
             get => _taxExpiryDate;
-            set
-            {
-                if (value == _taxExpiryDate)
-                    return;
-
-                _taxExpiryDate = value;
-                RaisePropertyChanged("TaxExpiryDate");
-            }
+            set => SetProperty(ref _taxExpiryDate, value);
         }
 
-        private bool _hasInsurance;
         public bool HasInsurance
         {
             get => _hasInsurance;
-            set
-            {
-                SetProperty(ref _hasInsurance, value);
-                RaisePropertyChanged("HasInsurance");
-            }
+            set => SetProperty(ref _hasInsurance, value);
         }
 
-        private DateTime _insuranceRenewalDate;
         public DateTime InsuranceRenewalDate
         {
             get => _insuranceRenewalDate;
-            set
-            {
-                if (value == _insuranceRenewalDate)
-                    return;
-
-                _insuranceRenewalDate = value;
-                RaisePropertyChanged("InsuranceRenewalDate");
-            }
+            set => SetProperty(ref _insuranceRenewalDate, value);
         }
-
+        #endregion
+        
         public MotorbikeCreationViewModel()
         {
         }
-
 
         public override string this[string columnName]
         {

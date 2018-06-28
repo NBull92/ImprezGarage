@@ -14,45 +14,41 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     public class SelectMaintenanceTypeViewModel : BindableBase
     {
         private IDataService _dataService;
+        private MaintenanceCheckType _selectedMaintenanceCheckType;
+        private ObservableCollection<MaintenanceCheckType> _maintenanceCheckTypes;
+        private bool _dialogResult;
         public event EventHandler ClosingRequest;
 
-        private MaintenanceCheckType _selectedMaintenanceCheckType;
+        #region Properties
         public MaintenanceCheckType SelectedMaintenanceCheckType
         {
             get => _selectedMaintenanceCheckType; 
             set
             {
-                _selectedMaintenanceCheckType = value;
-                RaisePropertyChanged("SelectedMaintenanceCheckType");
+                SetProperty(ref _selectedMaintenanceCheckType, value);
                 OkayCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private ObservableCollection<MaintenanceCheckType> _maintenanceCheckTypes;
         public ObservableCollection<MaintenanceCheckType> MaintenanceCheckTypes
         {
             get => _maintenanceCheckTypes; 
-            set
-            {
-                _maintenanceCheckTypes = value;
-                RaisePropertyChanged("MaintenanceCheckTypes");
-            }
+            set => SetProperty(ref _maintenanceCheckTypes, value);
         }
 
-        private bool _dialogResult;
         public bool DialogResult
         {
             get => _dialogResult; 
-            set
-            {
-                _dialogResult = value;
-                RaisePropertyChanged("DialogResult");
-            }
+            set => SetProperty(ref _dialogResult, value);
         }
 
+        #region Commands
         public DelegateCommand CancelCommand { get; private set; }
         public DelegateCommand OkayCommand { get; private set; }
-        
+        #endregion
+        #endregion
+
+        #region Methods
         public SelectMaintenanceTypeViewModel(IDataService dataService)
         {
             _dataService = dataService;
@@ -117,5 +113,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 this.ClosingRequest(this, EventArgs.Empty);
             }
         }
+        #endregion
     }
 }   //ImprezGarage.Modules.PerformChecks.ViewModels namespace 

@@ -5719,11 +5719,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Unit Tests\\ImprezGarage.UnitTests.MyGarage\\ImprezGarage.UnitTests.MyGarage.csproj",
+      "projectUniqueName": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Unit Tests\\ImprezGarage.UnitTests.MyGarage\\ImprezGarage.UnitTests.MyGarage.csproj",
       "projectName": "ImprezGarage.UnitTests.MyGarage",
-      "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Unit Tests\\ImprezGarage.UnitTests.MyGarage\\ImprezGarage.UnitTests.MyGarage.csproj",
+      "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Unit Tests\\ImprezGarage.UnitTests.MyGarage\\ImprezGarage.UnitTests.MyGarage.csproj",
       "packagesPath": "C:\\Users\\nickb\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Unit Tests\\ImprezGarage.UnitTests.MyGarage\\obj\\",
+      "outputPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Unit Tests\\ImprezGarage.UnitTests.MyGarage\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
@@ -5744,8 +5744,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
-              "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
             }
           }
         }

@@ -5,66 +5,59 @@
 
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
-    using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Dialogs;
-    using ImprezGarage.Infrastructure.Model;
-    using ImprezGarage.Modules.MyGarage.Views;
+    using Infrastructure;
+    using Infrastructure.Model;
+    using Infrastructure.ViewModels;
     using Microsoft.Practices.ServiceLocation;
+    using Modules.MyGarage.Views;
     using Prism.Commands;
     using Prism.Events;
-    using Prism.Interactivity.InteractionRequest;
     using Prism.Mvvm;
     using Prism.Regions;
-    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Controls;
 
     public class MainViewModel : BindableBase
     {
+        #region Attributes
         private readonly IDataService _dataService;
-        private readonly IDialogService _dialogService;
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
-
         private ObservableCollection<VehicleViewModel> _vehicles;
+        private VehicleViewModel _selectedVehicle;
+        #endregion
+
+        #region Properties
         public ObservableCollection<VehicleViewModel> Vehicles
         {
             get => _vehicles;
-            set
-            {
-                SetProperty(ref _vehicles, value);
-            }
+            set => SetProperty(ref _vehicles, value);
         }
 
-        private VehicleViewModel _selectedVehicle;
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
-            set
-            {
-                SetProperty(ref _selectedVehicle, value);
-            }
+            set => SetProperty(ref _selectedVehicle, value);
         }
 
-        public InteractionRequest<INotification> NotificationRequest { get; set; }
-
+        #region Commands
         public DelegateCommand<object> AddNewVehicleCommand { get; set; }
         public DelegateCommand<SelectionChangedEventArgs> SelectedVehicleChanged { get; set; }
-
-        public MainViewModel(IDataService dataService, IDialogService dialogService, IRegionManager regionManager
-            , IEventAggregator eventAggregator)
+        #endregion
+        #endregion
+        
+        #region Methods
+        public MainViewModel(IDataService dataService, IRegionManager regionManager, IEventAggregator eventAggregator)
         {
             _dataService = dataService;
-            _dialogService = dialogService;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
-
-            NotificationRequest = new InteractionRequest<INotification>();
 
             AddNewVehicleCommand = new DelegateCommand<object>(AddNewVehicleExecute);
             SelectedVehicleChanged = new DelegateCommand<SelectionChangedEventArgs>(SelectedVehicleChangedExecute);
             _eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
+            _eventAggregator.GetEvent<Events.EditVehicleEvent>().Subscribe(OnEditVehicle);
 
             LoadVehicles();
         }
@@ -81,21 +74,18 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private void AddNewVehicleExecute(object navigationPath)
         {
-            _dialogService.ShowWindow((viewModel, error) =>
-            {
-                if (error != null)
-                {
-                    return;
-                }
+            var view = new AddVehicle();
+            var viewModel = view.DataContext as AddVehicleViewModel;
+            view.ShowDialog();
 
-                if (((AddVehicleViewModel)viewModel).DialogResult)
-                {
-                    LoadVehicles();
-                }
-            }, new AddVehicle(), 382, 407);
+            if (viewModel.DialogResult)
+            {
+                LoadVehicles();
+            }            
         }
         #endregion
 
+        #region Event Handlers
         private void OnRefresh()
         {
             var currentlySelectedVehicle = SelectedVehicle;
@@ -110,6 +100,17 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
         }
 
+        private void OnEditVehicle(VehicleViewModel vehicle)
+        {
+            var view = new AddVehicle();
+            var viewModel = view.DataContext as AddVehicleViewModel;
+            viewModel.IsEdit = true;
+            viewModel.Edit(vehicle.Vehicle);
+            view.ShowDialog();
+            OnRefresh();
+        }
+        #endregion
+
         /// <summary>
         /// Retrieves all of the vehicles saved to the database and create a view model for each one.
         /// </summary>
@@ -121,6 +122,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 if (error != null)
                 {
+                    
                     return;
                 }
 
@@ -133,7 +135,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 }
             }, true);
         }
-        
+
         /// <summary>
         /// This function will request that the main view of the petrol expenditure module is navigated to in the 'PetrolRegion'.
         /// It will also pass through the selected vehicle to that view also.
@@ -152,6 +154,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             _regionManager.RequestNavigate(RegionNames.PetrolRegion, typeof(PetrolExpenditure.Views.Main).FullName + parameters);
         }
-
+        #endregion
     }
 }   //ImprezGarage.Modules.Dashboard.ViewModels namespace 

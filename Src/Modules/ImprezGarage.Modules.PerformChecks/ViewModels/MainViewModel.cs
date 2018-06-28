@@ -19,40 +19,41 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
     public class MainViewModel : BindableBase, INavigationAware
     {
-        private const string START_MAINTENANCE_CHECK_ERROR = "An error occured when attempting to start a maintenance check.";
-        private const string NOTIFICATION_HEADER = "Alert!";
-
+        #region Attributes
         private readonly IDataService _dataService;
         private readonly IDialogService _dialogService;
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
+        private const string START_MAINTENANCE_CHECK_ERROR = "An error occured when attempting to start a maintenance check.";
+        private const string NOTIFICATION_HEADER = "Alert!";
+
         private VehicleViewModel _selectedVehicle;
+        private ObservableCollection<MaintenanceCheck> _vehicleMaintenanceChecksPerformed;
+        #endregion
+
+        #region Properties
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
-            set
-            {
-                _selectedVehicle = value;
-                RaisePropertyChanged("SelectedVehicle");
-            }
+            set => SetProperty(ref _selectedVehicle, value);
         }
 
-        private ObservableCollection<MaintenanceCheck> _vehicleMaintenanceChecksPerformed;
         public ObservableCollection<MaintenanceCheck> VehicleMaintenanceChecksPerformed
         {
             get => _vehicleMaintenanceChecksPerformed;
-            set
-            {
-                _vehicleMaintenanceChecksPerformed = value;
-                RaisePropertyChanged("VehicleMaintenanceChecksPerformed");
-            }
+            set => SetProperty(ref _vehicleMaintenanceChecksPerformed, value);
         }
 
         public InteractionRequest<INotification> NotificationRequest { get; set; }
 
+        #region Command
         public DelegateCommand PerformNewCheckCommand { get; private set; }
+        #endregion
 
+        #endregion
+
+        #region Methods
         public MainViewModel(IDataService dataService, IDialogService dialogService, IRegionManager regionManager
             , IEventAggregator eventAggregator)
         {
@@ -68,12 +69,40 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
         }
 
+        /// <summary>
+        /// This function get any maintenance checks performed on the selected vehicle.
+        /// </summary>
+        private void GetSelectedVehicleMaintenanceChecks()
+        {
+            if (SelectedVehicle == null)
+            {
+                VehicleMaintenanceChecksPerformed = null;
+            }
+            else
+            {
+                _dataService.GetMaintenanceChecksForVehicleByVehicleId((checks, error) =>
+                {
+                    if (error != null)
+                    {
+
+                    }
+
+                    if (checks == null)
+                        return;
+
+                    VehicleMaintenanceChecksPerformed = new ObservableCollection<MaintenanceCheck>(checks);
+                }, SelectedVehicle.Vehicle.Id);
+            }
+        }
+
+        #region Event Handlers
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
             SelectedVehicle = vehicleViewModel;
             //get any maintenance checks performed on this vehicle.
             GetSelectedVehicleMaintenanceChecks();
         }
+        #endregion
 
         #region Command Handlers
         /// <summary>
@@ -126,31 +155,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         {
         }
         #endregion
-
-        /// <summary>
-        /// This function get any maintenance checks performed on the selected vehicle.
-        /// </summary>
-        private void GetSelectedVehicleMaintenanceChecks()
-        {
-            if (SelectedVehicle == null)
-            {
-                VehicleMaintenanceChecksPerformed = null;
-            }
-            else
-            {
-                _dataService.GetMaintenanceChecksForVehicleByVehicleId((checks, error) =>
-                {
-                    if (error != null)
-                    {
-
-                    }
-
-                    if (checks == null)
-                        return;
-
-                    VehicleMaintenanceChecksPerformed = new ObservableCollection<MaintenanceCheck>(checks);
-                }, SelectedVehicle.Vehicle.Id);
-            }
-        }
+        #endregion
     }
 }   //ImprezGarage.Modules.PerformChecks.ViewModels namespace 

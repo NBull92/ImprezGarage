@@ -5,7 +5,6 @@
 
 namespace ImprezGarage.ViewModels
 {
-    using System;
     using ImprezGarage.Infrastructure;
     using Prism.Commands;
     using Prism.Events;
@@ -13,17 +12,24 @@ namespace ImprezGarage.ViewModels
 
     public class MainWindowViewModel : BindableBase
     {
+        #region Attibute
         private readonly IEventAggregator _eventAggregator;
-
         private string _title = "Imprez Garage";
+        #endregion
+
+        #region Properties
         public string Title
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get => _title; 
+            set => SetProperty(ref _title, value); 
         }
 
+        #region Command
         public DelegateCommand RefreshCommand { get; set; }
+        #endregion
+        #endregion
 
+        #region Methods
         public MainWindowViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
@@ -35,5 +41,6 @@ namespace ImprezGarage.ViewModels
         {
             _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
         }
+        #endregion
     }
 }   //ImprezGarage.ViewModels namespace 

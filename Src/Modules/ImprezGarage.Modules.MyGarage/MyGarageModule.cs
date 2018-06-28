@@ -6,7 +6,6 @@
 namespace ImprezGarage.Modules.MyGarage
 {
     using ImprezGarage.Infrastructure;
-    using Microsoft.Practices.Unity;
     using Prism.Modularity;
     using Prism.Regions;
     using Views;
@@ -14,11 +13,9 @@ namespace ImprezGarage.Modules.MyGarage
     public class MyGarageModule : IModule
     {
         private readonly IRegionManager _regionManager;
-        private readonly IUnityContainer _container;
 
-        public MyGarageModule(IUnityContainer container, IRegionManager regionManager)
+        public MyGarageModule(IRegionManager regionManager)
         {
-            _container = container;
             _regionManager = regionManager;
         }
 

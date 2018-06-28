@@ -6,19 +6,18 @@
 namespace ImprezGarage.Modules.MyGarage.Views
 {
     using ImprezGarage.Modules.MyGarage.ViewModels;
-    using System.Windows;
-    using System.Windows.Controls;
+    using MahApps.Metro.Controls;
 
     /// <summary>
     /// Interaction logic for AddVehicle
     /// </summary>
-    public partial class AddVehicle : UserControl
+    public partial class AddVehicle : MetroWindow
     {
         public AddVehicle()
         {
             InitializeComponent();
             var viewModel = DataContext as AddVehicleViewModel;
-            viewModel.ClosingRequest += (sender, e) => ((Window)Parent).Close();
+            viewModel.ClosingRequest += (sender, e) => Close();
         }
     }
 }   //ImprezGarage.Modules.MyGarage.Views namespace 

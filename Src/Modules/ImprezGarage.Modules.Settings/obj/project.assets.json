@@ -384,11 +384,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj",
+      "projectUniqueName": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj",
       "projectName": "ImprezGarage.Modules.Settings",
-      "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj",
+      "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj",
       "packagesPath": "C:\\Users\\nickb\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\obj\\",
+      "outputPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [

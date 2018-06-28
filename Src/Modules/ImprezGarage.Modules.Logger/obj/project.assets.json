@@ -64,6 +64,15 @@
           "lib/net45/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/net45/Microsoft.Practices.Unity.dll": {}
         }
+      },
+      "ImprezGarage.Infrastructure/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.6.1/win": {
@@ -128,6 +137,15 @@
           "lib/net45/Microsoft.Practices.Unity.Configuration.dll": {},
           "lib/net45/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/net45/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "ImprezGarage.Infrastructure/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       }
     },
@@ -194,6 +212,15 @@
           "lib/net45/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/net45/Microsoft.Practices.Unity.dll": {}
         }
+      },
+      "ImprezGarage.Infrastructure/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.6.1/win-x86": {
@@ -258,6 +285,15 @@
           "lib/net45/Microsoft.Practices.Unity.Configuration.dll": {},
           "lib/net45/Microsoft.Practices.Unity.RegistrationByConvention.dll": {},
           "lib/net45/Microsoft.Practices.Unity.dll": {}
+        }
+      },
+      "ImprezGarage.Infrastructure/1.0.0": {
+        "type": "project",
+        "compile": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       }
     }
@@ -352,10 +388,16 @@
         "unity.4.0.1.nupkg.sha512",
         "unity.nuspec"
       ]
+    },
+    "ImprezGarage.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj",
+      "msbuildProject": "../../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.6.1": [
+      "ImprezGarage.Infrastructure >= 1.0.0",
       "Prism.Unity >= 6.3.0"
     ]
   },
@@ -366,11 +408,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj",
+      "projectUniqueName": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj",
       "projectName": "ImprezGarage.Modules.Logger",
-      "projectPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj",
+      "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj",
       "packagesPath": "C:\\Users\\nickb\\.nuget\\packages\\",
-      "outputPath": "D:\\Visual Studio Projects\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\obj\\",
+      "outputPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -390,7 +432,11 @@
       },
       "frameworks": {
         "net461": {
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
+            }
+          }
         }
       }
     },

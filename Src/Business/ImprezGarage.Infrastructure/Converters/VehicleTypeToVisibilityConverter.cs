@@ -15,7 +15,7 @@ namespace ImprezGarage.Infrastructure.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            switch(((VehicleType)value).Id)
+            switch(value)
             {
                 case 1:
                     return (parameter?.ToString() == "Car") ? Visibility.Visible : Visibility.Collapsed;
@@ -30,7 +30,7 @@ namespace ImprezGarage.Infrastructure.Converters
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return Visibility.Visible;
         }
     }
 }   //ImprezGarage.Infrastructure.Converters namespace 

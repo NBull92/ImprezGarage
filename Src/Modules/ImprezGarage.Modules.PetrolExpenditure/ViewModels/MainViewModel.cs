@@ -12,28 +12,28 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
     public class MainViewModel : BindableBase
     {
-        private readonly IEventAggregator _eventAggregator;
-
+        #region Attributes
         private VehicleViewModel _selectedVehicle;
+        #endregion
+
+        #region Properties
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
-            set
-            {
-                _selectedVehicle = value;
-                RaisePropertyChanged("SelectedVehicle");
-            }
+            set => SetProperty(ref _selectedVehicle, value);
         }
-        
+        #endregion
+
+        #region Methods
         public MainViewModel(IEventAggregator eventAggregator)
         {
-            _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
         }
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
             SelectedVehicle = vehicleViewModel;
         }
+        #endregion
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 
