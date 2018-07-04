@@ -8,6 +8,7 @@ namespace ImprezGarage.Modules.Notifications
     using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Modules.Notifications.ViewModels;
     using ImprezGarage.Modules.Notifications.Views;
+    using System;
 
     internal class NotificationsService : INotificationsService
     {
@@ -29,6 +30,21 @@ namespace ImprezGarage.Modules.Notifications
             confirm.ShowDialog();
 
             return viewModel.DialogResult;
+        }
+
+        public void Toast(Action<bool> callback, string message, string header = "ImprezGarage Alert", string buttonContent = null)
+        {
+            var toast = new Toast();
+            var viewModel = toast.DataContext as ToastViewModel;
+            viewModel.Header = header;
+            viewModel.Message = message;
+            viewModel.ButtonContent = buttonContent;
+            toast.Closed += (s, a) => 
+            {
+               callback(viewModel.DialogResult);
+            };
+            toast.Show();
+            toast.BringIntoView();
         }
     }
 }   //ImprezGarage.Modules.Notifications namespace

@@ -1301,8 +1301,14 @@
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
             },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj"
+            },
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.MyGarage\\ImprezGarage.Modules.MyGarage.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.MyGarage\\ImprezGarage.Modules.MyGarage.csproj"
+            },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Notifications\\ImprezGarage.Modules.Notifications.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Notifications\\ImprezGarage.Modules.Notifications.csproj"
             },
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PerformChecks\\ImprezGarage.Modules.PerformChecks.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PerformChecks\\ImprezGarage.Modules.PerformChecks.csproj"
@@ -1312,12 +1318,6 @@
             },
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj"
-            },
-            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj": {
-              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj"
-            },
-            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Notifications\\ImprezGarage.Modules.Notifications.csproj": {
-              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Notifications\\ImprezGarage.Modules.Notifications.csproj"
             }
           }
         }

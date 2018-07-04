@@ -23,9 +23,15 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
         private VehicleViewModel _selectedVehicle;
+        private string _label;
         #endregion
 
         #region Properties
+        public string Label
+        {
+            get => _label;
+            set => SetProperty(ref _label, value);
+        }
         public ObservableCollection<PetrolExpenseViewModel> Expenses
         {
             get => _expenses;
@@ -60,6 +66,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
             _selectedVehicle = vehicleViewModel;
+            Label = _selectedVehicle.Make + " " + _selectedVehicle.Model;
             GetSelectedVehiclePetrolExpenses();
         }
 

@@ -1,2 +1,5 @@
 
 *.lock
+.vs/ImprezGarage/v15/Server/sqlite3/storage.ide-wal
+.vs/ImprezGarage/v15/Server/sqlite3/storage.ide
+.vs/ImprezGarage/v15/Server/sqlite3/storage.ide-shm

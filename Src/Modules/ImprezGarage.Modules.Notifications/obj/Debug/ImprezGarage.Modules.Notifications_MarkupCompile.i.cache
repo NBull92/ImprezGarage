@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-21887739042
+31675288091
 
-131479453278
+151493219732
 77823882904
-Views\Alert.xaml;Views\Confirm.xaml;
+Views\Alert.xaml;Views\Confirm.xaml;Views\Toast.xaml;
 
 True
 

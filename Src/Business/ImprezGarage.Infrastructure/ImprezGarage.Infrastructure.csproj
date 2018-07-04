@@ -117,6 +117,7 @@
       <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="RegionNames.cs" />
+    <Compile Include="Services\IDataService.cs" />
     <Compile Include="Services\ILoggerService.cs" />
     <Compile Include="Services\INotificationsService.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
