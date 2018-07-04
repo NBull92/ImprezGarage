@@ -9,6 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure;
 using Prism.Interactivity;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;

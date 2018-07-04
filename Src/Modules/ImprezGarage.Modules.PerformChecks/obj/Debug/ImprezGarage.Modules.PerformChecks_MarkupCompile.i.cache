@@ -16,5 +16,5 @@ DEBUG;TRACE
 77-1916499502
 Views\ChecksPerformed.xaml;Views\Main.xaml;Views\PerformNewCheck.xaml;Views\SelectMaintenanceType.xaml;
 
-True
+False
 
