@@ -6,7 +6,7 @@
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
     using ImprezGarage.Modules.PetrolExpenditure.Views;
     using Microsoft.Practices.ServiceLocation;

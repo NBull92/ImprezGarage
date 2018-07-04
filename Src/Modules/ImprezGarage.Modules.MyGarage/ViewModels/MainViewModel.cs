@@ -6,7 +6,7 @@
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using Infrastructure;
-    using Infrastructure.Model;
+    using Infrastructure.Services;
     using Infrastructure.ViewModels;
     using Microsoft.Practices.ServiceLocation;
     using Modules.MyGarage.Views;

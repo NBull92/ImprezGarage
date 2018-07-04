@@ -8,7 +8,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using System.Linq;
     using System.Collections.ObjectModel;
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
     using Prism.Events;
     using Prism.Mvvm;

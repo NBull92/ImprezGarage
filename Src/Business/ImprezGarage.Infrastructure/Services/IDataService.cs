@@ -3,7 +3,7 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Infrastructure.Model
+namespace ImprezGarage.Infrastructure.Services
 {
     using System;
     using System.Collections.Generic;

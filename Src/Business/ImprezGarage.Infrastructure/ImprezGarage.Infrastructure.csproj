@@ -121,7 +121,7 @@
     <Compile Include="Services\INotificationsService.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="Model\DataService.cs" />
-    <Compile Include="Model\IDataService.cs" />
+    <Compile Include="Services\IDataService.cs" />
     <Compile Include="Model\ImprezGarageDatabase.Context.cs">
       <DependentUpon>ImprezGarageDatabase.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>

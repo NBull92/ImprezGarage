@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Infrastructure.Model
+namespace ImprezGarage.Infrastructure.Services
 {
     using System;
     using System.Data.Entity;

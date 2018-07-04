@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using Prism.Commands;
     using Prism.Mvvm;
     using System;

@@ -6,6 +6,7 @@
 namespace ImprezGarage
 {
     using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Views;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
