@@ -1396,11 +1396,11 @@
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.PetrolExpenditure\\ImprezGarage.Modules.PetrolExpenditure.csproj"
             },
-            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj": {
-              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj"
-            },
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj"
+            },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj"
             }
           }
         }

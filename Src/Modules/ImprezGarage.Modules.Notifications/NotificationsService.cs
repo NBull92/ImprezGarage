@@ -21,7 +21,7 @@ namespace ImprezGarage.Modules.Notifications
             alert.ShowDialog();
         }
 
-        public bool Confirm(string message, string header = "Confirm")
+        public bool Confirm(string message, string header = "Confirm", Action action = null)
         {
             var confirm = new Confirm();
             var viewModel = confirm.DataContext as ConfirmViewModel;
@@ -29,19 +29,29 @@ namespace ImprezGarage.Modules.Notifications
             viewModel.Message = message;
             confirm.ShowDialog();
 
+            // Check if the user clicked 'yes/okay' then perform the passed through function called action.
+            if(viewModel.DialogResult && action != null)
+            {
+                action();
+            }
+
             return viewModel.DialogResult;
         }
 
-        public void Toast(Action<bool> callback, string message, string header = "ImprezGarage Alert", string buttonContent = null)
+        public void Toast(string message, string header = "ImprezGarage Alert", string buttonContent = null, Action action = null)
         {
             var toast = new Toast();
             var viewModel = toast.DataContext as ToastViewModel;
             viewModel.Header = header;
             viewModel.Message = message;
             viewModel.ButtonContent = buttonContent;
-            toast.Closed += (s, a) => 
+            toast.Closed += (s, a) =>
             {
-               callback(viewModel.DialogResult);
+                // Check if the user clicked 'yes/okay' then perform the passed through function called action.
+                if (viewModel.DialogResult && action != null)
+                {
+                    action();
+                }
             };
             toast.Show();
             toast.BringIntoView();
