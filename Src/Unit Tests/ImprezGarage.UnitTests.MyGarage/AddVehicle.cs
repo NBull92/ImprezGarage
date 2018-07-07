@@ -6,6 +6,7 @@
 namespace ImprezGarage.UnitTests.MyGarage
 {
     using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.Services;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
 

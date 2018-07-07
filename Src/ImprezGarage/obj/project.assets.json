@@ -36,16 +36,16 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
-      "MahApps.Metro/1.6.1": {
+      "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "[3.0.2.4, 4.0.0)"
         },
         "compile": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         },
         "runtime": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         }
       },
       "Prism.Core/7.0.0.396": {
@@ -154,6 +154,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -170,7 +171,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "ImprezGarage.Modules.PerformChecks": "1.0.0",
           "ImprezGarage.Modules.PetrolExpenditure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "Unity": "5.6.1"
@@ -203,7 +204,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -219,7 +220,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "WPFToolkit.DataVisualization": "3.5.50211.1"
@@ -231,12 +232,28 @@
           "bin/placeholder/ImprezGarage.Modules.PetrolExpenditure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Settings/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        }
+      },
       "ImprezGarage.Modules.StatusBar/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -283,16 +300,16 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
-      "MahApps.Metro/1.6.1": {
+      "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "[3.0.2.4, 4.0.0)"
         },
         "compile": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         },
         "runtime": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         }
       },
       "Prism.Core/7.0.0.396": {
@@ -401,6 +418,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -417,7 +435,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "ImprezGarage.Modules.PerformChecks": "1.0.0",
           "ImprezGarage.Modules.PetrolExpenditure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "Unity": "5.6.1"
@@ -450,7 +468,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -466,7 +484,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "WPFToolkit.DataVisualization": "3.5.50211.1"
@@ -478,12 +496,28 @@
           "bin/placeholder/ImprezGarage.Modules.PetrolExpenditure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Settings/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        }
+      },
       "ImprezGarage.Modules.StatusBar/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -530,16 +564,16 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
-      "MahApps.Metro/1.6.1": {
+      "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "[3.0.2.4, 4.0.0)"
         },
         "compile": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         },
         "runtime": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         }
       },
       "Prism.Core/7.0.0.396": {
@@ -648,6 +682,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -664,7 +699,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "ImprezGarage.Modules.PerformChecks": "1.0.0",
           "ImprezGarage.Modules.PetrolExpenditure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "Unity": "5.6.1"
@@ -697,7 +732,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -713,7 +748,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "WPFToolkit.DataVisualization": "3.5.50211.1"
@@ -725,12 +760,28 @@
           "bin/placeholder/ImprezGarage.Modules.PetrolExpenditure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Settings/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        }
+      },
       "ImprezGarage.Modules.StatusBar/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -777,16 +828,16 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
-      "MahApps.Metro/1.6.1": {
+      "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
           "ControlzEx": "[3.0.2.4, 4.0.0)"
         },
         "compile": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         },
         "runtime": {
-          "lib/net45/MahApps.Metro.dll": {}
+          "lib/net46/MahApps.Metro.dll": {}
         }
       },
       "Prism.Core/7.0.0.396": {
@@ -895,6 +946,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -911,7 +963,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "ImprezGarage.Modules.PerformChecks": "1.0.0",
           "ImprezGarage.Modules.PetrolExpenditure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "Unity": "5.6.1"
@@ -944,7 +996,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -960,7 +1012,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0",
           "WPFToolkit.DataVisualization": "3.5.50211.1"
@@ -972,12 +1024,28 @@
           "bin/placeholder/ImprezGarage.Modules.PetrolExpenditure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Settings/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Settings.dll": {}
+        }
+      },
       "ImprezGarage.Modules.StatusBar/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
-          "MahApps.Metro": "1.6.1",
+          "MahApps.Metro": "1.6.5",
           "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
@@ -1048,18 +1116,24 @@
         "tools/migrate.exe"
       ]
     },
-    "MahApps.Metro/1.6.1": {
-      "sha512": "/hktc86YikNdSyqX//k4rLpbAxSRU0PmcttamNyFJ/O+oTy6RORaPmvDwgGV6NgfLKfg7z2jeTKsAZtNv61b0Q==",
+    "MahApps.Metro/1.6.5": {
+      "sha512": "XFxACnPbTAZ9qYcXMqFDLXXEpAbLj3BYaXqwH8NoY0sfSAYepEpE4C53Nd6AI4TnQ+nmDugtO8dwsAXPtt0SXQ==",
       "type": "package",
-      "path": "mahapps.metro/1.6.1",
+      "path": "mahapps.metro/1.6.5",
       "files": [
-        "lib/net40/MahApps.Metro.XML",
         "lib/net40/MahApps.Metro.dll",
         "lib/net40/MahApps.Metro.pdb",
-        "lib/net45/MahApps.Metro.XML",
+        "lib/net40/MahApps.Metro.xml",
         "lib/net45/MahApps.Metro.dll",
         "lib/net45/MahApps.Metro.pdb",
-        "mahapps.metro.1.6.1.nupkg.sha512",
+        "lib/net45/MahApps.Metro.xml",
+        "lib/net46/MahApps.Metro.dll",
+        "lib/net46/MahApps.Metro.pdb",
+        "lib/net46/MahApps.Metro.xml",
+        "lib/net47/MahApps.Metro.dll",
+        "lib/net47/MahApps.Metro.pdb",
+        "lib/net47/MahApps.Metro.xml",
+        "mahapps.metro.1.6.5.nupkg.sha512",
         "mahapps.metro.nuspec"
       ]
     },
@@ -1246,6 +1320,11 @@
       "path": "../Modules/ImprezGarage.Modules.PetrolExpenditure/ImprezGarage.Modules.PetrolExpenditure.csproj",
       "msbuildProject": "../Modules/ImprezGarage.Modules.PetrolExpenditure/ImprezGarage.Modules.PetrolExpenditure.csproj"
     },
+    "ImprezGarage.Modules.Settings/1.0.0": {
+      "type": "project",
+      "path": "../Modules/ImprezGarage.Modules.Settings/ImprezGarage.Modules.Settings.csproj",
+      "msbuildProject": "../Modules/ImprezGarage.Modules.Settings/ImprezGarage.Modules.Settings.csproj"
+    },
     "ImprezGarage.Modules.StatusBar/1.0.0": {
       "type": "project",
       "path": "../Modules/ImprezGarage.Modules.StatusBar/ImprezGarage.Modules.StatusBar.csproj",
@@ -1261,8 +1340,9 @@
       "ImprezGarage.Modules.Notifications >= 1.0.0",
       "ImprezGarage.Modules.PerformChecks >= 1.0.0",
       "ImprezGarage.Modules.PetrolExpenditure >= 1.0.0",
+      "ImprezGarage.Modules.Settings >= 1.0.0",
       "ImprezGarage.Modules.StatusBar >= 1.0.0",
-      "MahApps.Metro >= 1.6.1",
+      "MahApps.Metro >= 1.6.5",
       "Prism.Unity >= 6.3.0"
     ]
   },
@@ -1318,6 +1398,9 @@
             },
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.StatusBar\\ImprezGarage.Modules.StatusBar.csproj"
+            },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj"
             }
           }
         }
@@ -1332,7 +1415,7 @@
           },
           "MahApps.Metro": {
             "target": "Package",
-            "version": "[1.6.1, )"
+            "version": "[1.6.5, )"
           },
           "Prism.Unity": {
             "target": "Package",
@@ -1352,20 +1435,5 @@
         "#import": []
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Detected package downgrade: MahApps.Metro from 1.6.5 to 1.6.1. Reference the package directly from the project to select a different version. \r\n ImprezGarage -> ImprezGarage.Modules.Notifications -> MahApps.Metro (>= 1.6.5) \r\n ImprezGarage -> MahApps.Metro (>= 1.6.1)",
-      "libraryId": "MahApps.Metro",
-      "targetGraphs": [
-        ".NETFramework,Version=v4.6.1",
-        ".NETFramework,Version=v4.6.1/win",
-        ".NETFramework,Version=v4.6.1/win-x64",
-        ".NETFramework,Version=v4.6.1/win-x86"
-      ]
-    }
-  ]
+  }
 }

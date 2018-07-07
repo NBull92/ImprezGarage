@@ -9,9 +9,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure;
-using ImprezGarage.Infrastructure.Converters;
-using ImprezGarage.Modules.PerformChecks.ViewModels;
 using Prism.Interactivity;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;

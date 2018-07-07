@@ -5,14 +5,10 @@
 
 namespace ImprezGarage
 {
-    using Prism.Unity;
-    using System;
-    using System.Collections.Generic;
-    using System.Configuration;
-    using System.Data;
-    using System.Linq;
-    using System.Threading.Tasks;
+    using Microsoft.Practices.ServiceLocation;
+    using ImprezGarage.Infrastructure.Services;
     using System.Windows;
+    using System.Windows.Threading;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -25,6 +21,20 @@ namespace ImprezGarage
             
             var bootstrapper = new Bootstrapper();
             bootstrapper.Run();
+
+            Current.DispatcherUnhandledException += UnhandledException;
+        }
+
+        private void UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
+            settingsService.PrintConfigurationFile();
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
+            settingsService.PrintConfigurationFile();
         }
     }
 }   //ImprezGarage namespace 

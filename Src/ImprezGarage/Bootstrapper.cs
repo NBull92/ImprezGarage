@@ -36,6 +36,7 @@ namespace ImprezGarage
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
+            moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));
             moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
             moduleCatalog.AddModule(typeof(Modules.StatusBar.StatusBarModule));
             moduleCatalog.AddModule(typeof(Modules.PerformChecks.PerformChecksModule));
