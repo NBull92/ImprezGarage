@@ -65,7 +65,14 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
+            if (vehicleViewModel == null)
+            {
+                Expenses = null;
+                return;
+            }
+
             _selectedVehicle = vehicleViewModel;
+
             Label = _selectedVehicle.Make + " " + _selectedVehicle.Model;
             GetSelectedVehiclePetrolExpenses();
         }
@@ -78,24 +85,21 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             }
             else
             {
-                _dataService.GetPetrolExpensesByVehicleId((expenses, error) =>
+                Expenses = new ObservableCollection<PetrolExpenseViewModel>();
+
+                var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
+
+                if (expenses == null || expenses.Result == null)
+                    return;
+                
+                foreach (var expense in expenses.Result)
                 {
-                    if (error != null)
-                    {
+                    var viewModel = ServiceLocator.Current.GetInstance<PetrolExpenseViewModel>();
+                    viewModel.LoadInstance(expense);
+                    Expenses.Add(viewModel);
+                }
 
-                    }
-
-                    Expenses = new ObservableCollection<PetrolExpenseViewModel>();
-
-                    foreach (var expense in expenses)
-                    {
-                        var viewModel = ServiceLocator.Current.GetInstance<PetrolExpenseViewModel>();
-                        viewModel.LoadInstance(expense);
-                        Expenses.Add(viewModel);
-                    }
-
-                    Expenses = new ObservableCollection<PetrolExpenseViewModel>(Expenses.OrderByDescending(o => o.DateEntered));
-                }, _selectedVehicle.Vehicle.Id);
+                Expenses = new ObservableCollection<PetrolExpenseViewModel>(Expenses.OrderByDescending(o => o.DateEntered));
             }
         }
         #endregion

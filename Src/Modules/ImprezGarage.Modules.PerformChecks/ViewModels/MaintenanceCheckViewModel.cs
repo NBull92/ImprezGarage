@@ -133,18 +133,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
             DatePerformed = new DateTime(check.DatePerformed.Value.Year, check.DatePerformed.Value.Month, check.DatePerformed.Value.Day);
 
-            _dataService.GetMaintenanceCheckTypeById((type, error) =>
-            {
-                if (error != null)
-                {
+            var type = _dataService.GetMaintenanceCheckTypeById(Convert.ToInt32(check.MaintenanceCheckType));
+            
+            if (type == null || type.Result == null)
+                return;
 
-                }
-
-                if (type == null)
-                    return;
-
-                MaintenanceCheckType = type;
-            }, Convert.ToInt32(check.MaintenanceCheckType));
+            MaintenanceCheckType = type.Result;
         }
         #endregion
     }

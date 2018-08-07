@@ -10,244 +10,187 @@ namespace ImprezGarage.Infrastructure.Model
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class DataService : IDataService
     {
         #region Cached Data
-        private ObservableCollection<Vehicle> cachedVehicles;
-        private ObservableCollection<VehicleType> cachedVehicleTypes;
-        private List<MaintenanceCheckType> cachedMaintenanceTypes;
+        private DataStorage _dataStorage;
         #endregion
 
+        public DataService()
+        {
+            _dataStorage = new DataStorage();
+        }
+
         #region Gets
+        /// <summary>
+        /// Retrieve all of the saved vehicles
+        /// </summary>
+        /// <returns>An observable collection of all vehicles</returns>
+        public Task<ObservableCollection<Vehicle>> GetVehicles(bool refresh = false)
+        {
+            RetrieveVehicles(refresh);
+            return Task.Run(() => _dataStorage.GetVehicles());
+        }
+
+        public Task<Vehicle> GetVehicleByItsId(int vehicleId)
+        {
+            RetrieveVehicles();
+
+            if (_dataStorage.GetVehicles().Any(o => o.Id == vehicleId))
+            {
+                return Task.Run(() => _dataStorage.GetVehicles().First(o => o.Id == vehicleId));
+            }
+            return null;
+        }
+
+        private void RetrieveVehicles(bool refresh = false)
+        {
+            using (var model = new ImprezGarageEntities())
+            {
+                if (_dataStorage.GetVehicles() == null || refresh)
+                {
+                    _dataStorage.SetVehicles(model.Vehicles.ToList());
+                }
+            }
+        }
+
         /// <summary>
         /// This function returns a collection of all the vehicle types from teh database.
         /// </summary>
         /// <returns>An observable collection of all vehicle types</returns>
-        public void GetVehicleTypes(Action<ObservableCollection<VehicleType>, Exception> callback, bool refresh = false)
+        public Task<ObservableCollection<VehicleType>> GetVehicleTypes(bool refresh = false)
         {
-            try
-            {
-                using (var model = new ImprezGarageEntities())
-                {
-                    if (cachedVehicleTypes == null || refresh)
-                    {
-                        cachedVehicleTypes = new ObservableCollection<VehicleType>(model.VehicleTypes.OrderBy(o => o.Name));
-                    }
-
-                    callback(cachedVehicleTypes, null);
-                }
-            }
-            catch (Exception ex)
-            {
-                callback(null, ex);
-            }            
+            RetrieveVehicleTypes(refresh);
+            return Task.Run(() => _dataStorage.GetVehicleTypes());
         }
 
         /// <summary>
         /// This returns the appropriate vehicle type associated with the pass through Id.
         /// </summary>
-        public void GetVehicleType(Action<VehicleType, Exception> callback, int typeId)
+        public Task<VehicleType> GetVehicleType(int typeId)
         {
-            try
+            RetrieveVehicleTypes();
+
+            if (_dataStorage.GetVehicleTypes().Any(o => o.Id == typeId))
             {
-                using (var model = new ImprezGarageEntities())
-                {
-                    if (cachedVehicleTypes == null)
-                    {
-                        if (model.VehicleTypes.Any(o => o.Id == typeId))
-                        {
-                            callback(model.VehicleTypes.First(o => o.Id == typeId),null);
-                        }
-                        else
-                        {
-                            callback(null, null);
-                        }
-                    }
-                    else
-                    {
-                        if (cachedVehicleTypes.Any(o => o.Id == typeId))
-                        {
-                            callback(cachedVehicleTypes.First(o => o.Id == typeId), null);
-                        }
-                        else
-                        {
-                            callback(null, null);
-                        }
-                    }
-                }
+                return Task.Run(() => _dataStorage.GetVehicleTypes().First(o => o.Id == typeId));
             }
-            catch (Exception ex)
+            return null;
+        }
+
+        private void RetrieveVehicleTypes(bool refresh = false)
+        {
+            using (var model = new ImprezGarageEntities())
             {
-                callback(null, ex);
+                if (!_dataStorage.GetVehicleTypes().Any() || refresh)
+                {
+                    _dataStorage.SetVehicleTypes(model.VehicleTypes.OrderBy(o => o.Name).ToList());
+                }
             }
         }
 
         /// <summary>
         /// Retrieve all of the Maintenance Check Types from the database.
         /// </summary>
-        public void GetMaintenanceCheckTypes(Action<List<MaintenanceCheckType>, Exception> callback)
+        public Task<ObservableCollection<MaintenanceCheckType>> GetMaintenanceCheckTypes()
         {
-            try
-            {
-                using (var model = new ImprezGarageEntities())
-                {
-                    if(cachedMaintenanceTypes == null)
-                    {
-                        cachedMaintenanceTypes = model.MaintenanceCheckTypes.OrderBy(o => o.Type).ToList();
-                    }
-
-                    callback(cachedMaintenanceTypes, null);                   
-                }
-            }
-            catch (Exception ex)
-            {
-                callback(null, ex);
-            }
+            RetrieveMaintenanceTypes();
+            return Task.Run(() => _dataStorage.GetMaintenanceTypes());
         }
 
         /// <summary>
         /// Retrieve a specific Maintenance Check Type by it's Id.
         /// </summary>
-        public void GetMaintenanceCheckTypeById(Action<MaintenanceCheckType, Exception> callback, int typeId)
+        public Task<MaintenanceCheckType> GetMaintenanceCheckTypeById(int typeId)
         {
-            try
-            {
-                using (var model = new ImprezGarageEntities())
-                {
-                    if (cachedMaintenanceTypes == null)
-                    {
-                        cachedMaintenanceTypes = model.MaintenanceCheckTypes.OrderBy(o => o.Type).ToList();
-                    }
+            RetrieveMaintenanceTypes();
 
-                    if (cachedMaintenanceTypes.Any(o => o.Id == typeId))
-                    {
-                        callback(cachedMaintenanceTypes.First(o => o.Id == typeId), null);
-                    }
-                    else
-                    {
-                        callback(null, null);
-                    }
-                }
-            }
-            catch (Exception ex)
+            if (_dataStorage.GetMaintenanceTypes().Any(o => o.Id == typeId))
             {
-                callback(null, ex);
+                return Task.Run(() => _dataStorage.GetMaintenanceTypes().First(o => o.Id == typeId));
             }
+            return null;
         }
-        
-        /// <summary>
-        /// Retrieve all of the saved vehicles
-        /// </summary>
-        /// <returns>An observable collection of all vehicles</returns>
-        public void GetVehicles(Action<ObservableCollection<Vehicle>, Exception> callback, bool refresh = false)
-        {
-            try
-            {
-                using (var model = new ImprezGarageEntities())
-                {
-                    if (cachedVehicles == null || refresh)
-                    {
-                        cachedVehicles = new ObservableCollection<Vehicle>(model.Vehicles);
-                    }
 
-                    callback(cachedVehicles, null);
-                }
-            }
-            catch (Exception ex)
+        private void RetrieveMaintenanceTypes()
+        {
+            using (var model = new ImprezGarageEntities())
             {
-                callback(null, ex);
+                if (!_dataStorage.GetMaintenanceTypes().Any())
+                {
+                    _dataStorage.SetMaintenanceTypes(model.MaintenanceCheckTypes.OrderBy(o => o.Type).ToList());
+                }
             }
         }
 
         /// <summary>
         /// Retrieve all of the maintenance checks performed on a specific vehicle, based off of it's Id.
         /// </summary>
-        public void GetMaintenanceChecksForVehicleByVehicleId(Action<List<MaintenanceCheck>, Exception> callback, int vehicleId)
+        public Task<List<MaintenanceCheck>> GetMaintenanceChecksForVehicleByVehicleId(int vehicleId)
         {
-            try
+            using (var model = new ImprezGarageEntities())
             {
-                using (var model = new ImprezGarageEntities())
+                if (model.MaintenanceChecks.Any(o => o.VehicleId == vehicleId))
                 {
-                    if(model.MaintenanceChecks.Any(o => o.VehicleId == vehicleId))
-                    {
-                        var list = model.MaintenanceChecks.Where(o => o.VehicleId == vehicleId).ToList();
-                        callback(list, null);
-                    }
-                    else
-                    {
-                        callback(null, null);
-                    }
+                    var list = model.MaintenanceChecks.Where(o => o.VehicleId == vehicleId).ToList();
+                    return Task.Run(() => list);
                 }
-            }
-            catch (Exception ex)
-            {
-                callback(null, ex);
+                else
+                {
+                    return null;
+                }
             }
         }
 
         /// <summary>
         /// 
         /// </summary>
-        public void GetMaintenanceChecksById(Action<MaintenanceCheck, Exception> callback, int maintenanceCheckId)
+        public Task<MaintenanceCheck> GetMaintenanceChecksById(int maintenanceCheckId)
         {
-            try
+            using (var model = new ImprezGarageEntities())
             {
-                using (var model = new ImprezGarageEntities())
+                if (model.MaintenanceChecks.Any(o => o.Id == maintenanceCheckId))
                 {
-                    if (model.MaintenanceChecks.Any(o => o.Id == maintenanceCheckId))
+                    var maintenanceCheck = model.MaintenanceChecks.First(o => o.Id == maintenanceCheckId);
+                    return Task.Run(() => maintenanceCheck);
+                }
+                return null;
+            }
+        }
+
+        public Task<ObservableCollection<PetrolExpense>> GetPetrolExpensesByVehicleId(int vehicleId)
+        {
+            using (var model = new ImprezGarageEntities())
+            {
+                if (model.PetrolExpenses.Any(o => o.VehicleId == vehicleId))
+                {
+                    var expenses = new ObservableCollection<PetrolExpense>(model.PetrolExpenses.Where(o => o.VehicleId == vehicleId));
+                    return Task.Run(() => expenses);
+                }
+                return null;
+            }
+        }
+
+        public Task<DateTime?> GetLastMaintenanceCheckDateForVehicleByVehicleId(int vehicleId)
+        {
+            using (var model = new ImprezGarageEntities())
+            {
+                if (model.MaintenanceChecks.Any(o => o.VehicleId == vehicleId))
+                {
+                    if (model.MaintenanceChecks.Count(o => o.VehicleId == vehicleId) == 1)
                     {
-                        var maintenanceCheck = model.MaintenanceChecks.First(o => o.Id == maintenanceCheckId);
-                        callback(maintenanceCheck, null);
+                        var last = model.MaintenanceChecks.First(o => o.VehicleId == vehicleId);
+                        return Task.Run(() => last.DatePerformed);
                     }
                     else
                     {
-                        callback(null, null);
+                        var last = model.MaintenanceChecks.Last(o => o.VehicleId == vehicleId);
+                        return Task.Run(() => last.DatePerformed);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                callback(null, ex);
-            }
-        }
-
-        public void GetVehicleByItsId(Action<Vehicle, Exception> callback, int vehicleId)
-        {
-            try
-            {
-                using (var model = new ImprezGarageEntities())
-                {
-                    if(cachedVehicles.Any(o => o.Id == vehicleId))
-                    {
-                        callback(cachedVehicles.First(o => o.Id == vehicleId), null);                        
-                    }
-
-                    callback(null, null);
-                }
-            }
-            catch (Exception ex)
-            {
-                callback(null, ex);
-            }
-        }
-
-        public void GetPetrolExpensesByVehicleId(Action<ObservableCollection<PetrolExpense>, Exception> callback, int vehicleId)
-        {
-            try
-            {
-                using (var model = new ImprezGarageEntities())
-                {
-                    if (model.PetrolExpenses.Any(o => o.VehicleId == vehicleId))
-                    {
-                        var expenses = new ObservableCollection<PetrolExpense>(model.PetrolExpenses.Where(o => o.VehicleId == vehicleId));
-                        callback(expenses, null);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                callback(null, ex);
+                return null;
             }
         }
         #endregion
@@ -264,8 +207,9 @@ namespace ImprezGarage.Infrastructure.Model
                 {
                     model.Vehicles.Add(vehicle);
                     model.SaveChanges();
-                    callback(null);
+                    _dataStorage.AddNewVehicle(model.Vehicles.Last());
                 }
+                callback(null);
             }
             catch (Exception ex)
             {

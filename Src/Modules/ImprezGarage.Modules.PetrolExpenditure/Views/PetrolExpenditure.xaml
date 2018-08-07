@@ -12,7 +12,7 @@
              Height="255">
     <StackPanel>
         <DockPanel HorizontalAlignment="Right">
-            <TextBlock Text="{Binding Label}"/>
+            <!--<TextBlock Text="{Binding Label}"/>-->
             <Button DockPanel.Dock="Right" Content="Add" Command="{Binding AddExpenditureCommand}" Width="34" Height="27"/>
             <!--Style="{DynamicResource MetroCircleButtonStyle}"-->
         </DockPanel>

@@ -29,12 +29,14 @@ namespace ImprezGarage
         {
             //register the interface to the container
             Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
+
             base.ConfigureContainer();
         }
 
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
+            
             moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
             moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));
             moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));

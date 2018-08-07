@@ -5,10 +5,11 @@
 
 namespace ImprezGarage
 {
-    using Microsoft.Practices.ServiceLocation;
     using ImprezGarage.Infrastructure.Services;
+    using Microsoft.Practices.ServiceLocation;
+    using Microsoft.Win32;
+    using System;
     using System.Windows;
-    using System.Windows.Threading;
 
     /// <summary>
     /// Interaction logic for App.xaml
@@ -22,10 +23,17 @@ namespace ImprezGarage
             var bootstrapper = new Bootstrapper();
             bootstrapper.Run();
 
-            Current.DispatcherUnhandledException += UnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
+            SystemEvents.SessionEnding += SystemEventsOnSessionEnding;
         }
 
-        private void UnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        private void SystemEventsOnSessionEnding(object sender, SessionEndingEventArgs e)
+        {
+            var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
+            settingsService.PrintConfigurationFile();
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
             settingsService.PrintConfigurationFile();

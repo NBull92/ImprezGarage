@@ -92,15 +92,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         /// </summary>
         private void LoadMaintenaceCheckTypes()
         {
-            _dataService.GetMaintenanceCheckTypes((types, error) =>
-            {
-                if (error != null)
-                {
-                    return;
-                }
+            var types = _dataService.GetMaintenanceCheckTypes();
 
-                MaintenanceCheckTypes = new ObservableCollection<MaintenanceCheckType>(types);
-            });
+            if (types == null || types.Result == null)
+                return;
+
+            MaintenanceCheckTypes = new ObservableCollection<MaintenanceCheckType>(types.Result);            
         }
 
         /// <summary>

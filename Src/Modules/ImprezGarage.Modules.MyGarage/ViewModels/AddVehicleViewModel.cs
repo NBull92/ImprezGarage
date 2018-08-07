@@ -6,7 +6,6 @@
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using Infrastructure.Services;
-    using Infrastructure.Model;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
     using Prism.Mvvm;
@@ -388,15 +387,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private void GetVehicleTypes()
         {
-            _dataService.GetVehicleTypes((types, error) =>
-            {
-                if (error != null)
-                {
-                    return;
-                }
+            var types = _dataService.GetVehicleTypes();
 
-                VehicleTypes = new ObservableCollection<VehicleType>(types);
-            });
+            VehicleTypes = types == null && types.Result == null ? VehicleTypes = new ObservableCollection<VehicleType>() 
+                : VehicleTypes = new ObservableCollection<VehicleType>(types.Result);
         }
 
         /// <summary>

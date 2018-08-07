@@ -34,6 +34,29 @@
           "lib/net46/MahApps.Metro.dll": {}
         }
       },
+      "Microsoft.SDK.Expression.Blend/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        }
+      },
       "Prism.Core/7.0.0.396": {
         "type": "package",
         "frameworkAssemblies": [
@@ -160,6 +183,29 @@
         },
         "runtime": {
           "lib/net46/MahApps.Metro.dll": {}
+        }
+      },
+      "Microsoft.SDK.Expression.Blend/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
       "Prism.Core/7.0.0.396": {
@@ -290,6 +336,29 @@
           "lib/net46/MahApps.Metro.dll": {}
         }
       },
+      "Microsoft.SDK.Expression.Blend/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        }
+      },
       "Prism.Core/7.0.0.396": {
         "type": "package",
         "frameworkAssemblies": [
@@ -416,6 +485,29 @@
         },
         "runtime": {
           "lib/net46/MahApps.Metro.dll": {}
+        }
+      },
+      "Microsoft.SDK.Expression.Blend/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Expression.Controls.dll": {},
+          "lib/net45/Microsoft.Expression.Drawing.dll": {},
+          "lib/net45/Microsoft.Expression.Effects.dll": {},
+          "lib/net45/Microsoft.Expression.Interactions.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll": {},
+          "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll": {},
+          "lib/net45/Microsoft.SDK.Expression.Blend.dll": {},
+          "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
       "Prism.Core/7.0.0.396": {
@@ -566,6 +658,23 @@
         "mahapps.metro.nuspec"
       ]
     },
+    "Microsoft.SDK.Expression.Blend/1.0.0": {
+      "sha512": "SzhrOZ8Nn24+XuY69rT+0TvdZH6irbSvRbvY4Lwtnohn3nZfczq4O1uFQkfVIGD+0ReMkNnfHKR7T3DmGVz4zw==",
+      "type": "package",
+      "path": "microsoft.sdk.expression.blend/1.0.0",
+      "files": [
+        "lib/net45/Microsoft.Expression.Controls.dll",
+        "lib/net45/Microsoft.Expression.Drawing.dll",
+        "lib/net45/Microsoft.Expression.Effects.dll",
+        "lib/net45/Microsoft.Expression.Interactions.dll",
+        "lib/net45/Microsoft.Expression.Prototyping.Interactivity.dll",
+        "lib/net45/Microsoft.Expression.Prototyping.SketchControls.dll",
+        "lib/net45/Microsoft.SDK.Expression.Blend.dll",
+        "lib/net45/System.Windows.Interactivity.dll",
+        "microsoft.sdk.expression.blend.1.0.0.nupkg.sha512",
+        "microsoft.sdk.expression.blend.nuspec"
+      ]
+    },
     "Prism.Core/7.0.0.396": {
       "sha512": "XxPmXiA+v/D6zUeAUwSz7GgWNIbzyLLgkP32vDr6fGfv/YPg8CRkmkf+MkP+cxXKdUsqezxXgRRwMUcjWRqWMw==",
       "type": "package",
@@ -669,6 +778,7 @@
     ".NETFramework,Version=v4.6.1": [
       "ImprezGarage.Infrastructure >= 1.0.0",
       "MahApps.Metro >= 1.6.5",
+      "Microsoft.SDK.Expression.Blend >= 1.0.0",
       "Prism.Core >= 7.0.0.396",
       "Prism.Unity >= 6.3.0",
       "WPFToolkit.DataVisualization >= 3.5.50211.1"
@@ -719,6 +829,10 @@
           "MahApps.Metro": {
             "target": "Package",
             "version": "[1.6.5, )"
+          },
+          "Microsoft.SDK.Expression.Blend": {
+            "target": "Package",
+            "version": "[1.0.0, )"
           },
           "Prism.Core": {
             "target": "Package",

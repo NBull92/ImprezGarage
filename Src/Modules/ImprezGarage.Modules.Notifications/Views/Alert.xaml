@@ -20,7 +20,7 @@
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="{Binding Message}" VerticalAlignment="Center" Margin="5,0,0,0"/>
+        <TextBlock Grid.Row="0" Text="{Binding Message}" VerticalAlignment="Center" TextWrapping="Wrap" Width="379" MaxHeight="70"/>
 
         <Grid Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
             <Button Grid.Column="0" Content="Okay" Command="{Binding Okay}" Margin="0,5,0,5"  Width="175"/>

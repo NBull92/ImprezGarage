@@ -116,31 +116,25 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             }
             else
             {
-                _dataService.GetPetrolExpensesByVehicleId((expenses, error) =>
+                _expenses = new ObservableCollection<ChartData>();
+                FilteredExpenses = new ObservableCollection<ChartData>();
+
+                var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
+
+                if (expenses == null || expenses.Result == null)
+                    return;
+
+                foreach (var expense in expenses.Result)
                 {
-                    if (error != null)
+                    MaxCost = MaxCost < expense.Amount ? Convert.ToDouble(expense.Amount) : MaxCost;
+                    _expenses.Add(new ChartData()
                     {
+                        Cost = Convert.ToDouble(expense.Amount),
+                        Date = expense.DateEntered.Value.ToShortDateString()
+                    });
+                }
 
-                    }
-
-                    _expenses = new ObservableCollection<ChartData>();
-                    FilteredExpenses = new ObservableCollection<ChartData>();
-
-                    if (expenses == null)
-                        return;
-
-                    foreach (var expense in expenses)
-                    {
-                        MaxCost = MaxCost < expense.Amount ? Convert.ToDouble(expense.Amount) : MaxCost;
-                        _expenses.Add(new ChartData()
-                        {
-                            Cost = Convert.ToDouble(expense.Amount),
-                            Date = expense.DateEntered.Value.ToShortDateString()
-                        });
-                    }
-
-                    FilterExpenses();
-                }, _selectedVehicle.Vehicle.Id);
+                FilterExpenses();
             }
         }
 

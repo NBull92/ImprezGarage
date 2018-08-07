@@ -104,6 +104,7 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\VehicleTypeToVisibilityConverter.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="Model\DataStorage.cs" />
     <Compile Include="Model\LogDataModel\Log.cs" />
     <Compile Include="Model\LogDataModel\LogEntry.cs" />
     <Compile Include="Model\MaintenanceCheck.cs">

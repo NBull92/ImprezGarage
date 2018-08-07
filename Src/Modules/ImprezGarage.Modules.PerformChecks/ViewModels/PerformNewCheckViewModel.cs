@@ -384,20 +384,14 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 //check it is not null.
                 if (maintenanceCheckId != null)
                 {
-                    _dataService.GetMaintenanceChecksById((check, error) =>
-                    {
-                        if (error != null)
-                        {
+                    var check = _dataService.GetMaintenanceChecksById(Convert.ToInt32(maintenanceCheckId));
 
-                        }
+                    if (check == null || check.Result == null)
+                        return;
 
-                        if (check != null)
-                        {
-                            _maintenanceCheck = check;
-                            GetMaintenanceCheckType(Convert.ToInt32(_maintenanceCheck.MaintenanceCheckType));
-                            SetProperties();
-                        }
-                    }, Convert.ToInt32(maintenanceCheckId));
+                    _maintenanceCheck = check.Result;
+                    GetMaintenanceCheckType(Convert.ToInt32(_maintenanceCheck.MaintenanceCheckType));
+                    SetProperties();
                 }
             }
             else
@@ -503,19 +497,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
         private void GetMaintenanceCheckType(int maintenanceCheckTypeId)
         {
-            _dataService.GetMaintenanceCheckTypeById((type, error) =>
-            {
-                if (error != null)
-                {
+            var type = _dataService.GetMaintenanceCheckTypeById(maintenanceCheckTypeId);
 
-                }
+            if (type == null || type.Result == null)
+                return;
 
-                if (type == null)
-                    return;
-
-                //store it to the view model.
-                SelectedMaintenanceCheckType = SelectedMaintenanceCheckType = type;
-            }, maintenanceCheckTypeId);
+            SelectedMaintenanceCheckType = SelectedMaintenanceCheckType = type.Result;
         }
         #endregion
     }

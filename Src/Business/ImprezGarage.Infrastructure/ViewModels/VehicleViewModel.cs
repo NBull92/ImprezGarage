@@ -6,7 +6,6 @@
 namespace ImprezGarage.Infrastructure.ViewModels
 {
     using ImprezGarage.Infrastructure.Services;
-    using Infrastructure.Model;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -139,15 +138,12 @@ namespace ImprezGarage.Infrastructure.ViewModels
 
         public void LoadInstanceViaId(int selectedVehicleId)
         {
-            _dataService.GetVehicleByItsId((vehicle, error) =>
-            {
-                if (error != null)
-                {
-                    _notificationsService.Alert("An error occured during the retrival of the selected vehicle.");
-                }
+            var vehicle = _dataService.GetVehicleByItsId(selectedVehicleId);
 
-                LoadInstance(vehicle);
-            }, selectedVehicleId);
+            if (vehicle == null || vehicle.Result == null)
+                return;
+
+            LoadInstance(vehicle.Result);
         }
 
         /// <summary>
@@ -174,31 +170,28 @@ namespace ImprezGarage.Infrastructure.ViewModels
             Make = Vehicle.Make;
             Model = Vehicle.Model;
 
-            _dataService.GetVehicleType((type, error) =>
+            var type = _dataService.GetVehicleType(Vehicle.VehicleType);
+
+            if (type == null || type.Result == null)
+                return;
+
+            VehicleType = type.Result;
+
+            switch (VehicleType.Id)
             {
-                if (error != null)
-                {
-                    return;
-                }
-
-                VehicleType = type;
-
-                switch (VehicleType.Id)
-                {
-                    case 1:
-                        Registration = Vehicle.Registration;
-                        TaxExpiryDate = Vehicle.TaxExpiryDate;
-                        InsuranceRenewalDate = Vehicle.InsuranceRenewalDate;
-                        break;
-                    case 2:
-                        Registration = Vehicle.Registration;
-                        TaxExpiryDate = Vehicle.TaxExpiryDate;
-                        InsuranceRenewalDate = Vehicle.InsuranceRenewalDate;
-                        break;
-                    case 3:
-                        break;
-                }
-            }, Vehicle.VehicleType);
+                case 1:
+                    Registration = Vehicle.Registration;
+                    TaxExpiryDate = Vehicle.TaxExpiryDate;
+                    InsuranceRenewalDate = Vehicle.InsuranceRenewalDate;
+                    break;
+                case 2:
+                    Registration = Vehicle.Registration;
+                    TaxExpiryDate = Vehicle.TaxExpiryDate;
+                    InsuranceRenewalDate = Vehicle.InsuranceRenewalDate;
+                    break;
+                case 3:
+                    break;
+            }
         }
         #endregion
     }

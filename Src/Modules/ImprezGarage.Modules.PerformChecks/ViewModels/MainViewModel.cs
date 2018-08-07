@@ -6,7 +6,6 @@
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Model;
     using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
     using ImprezGarage.Modules.PerformChecks.Views;
@@ -74,18 +73,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             }
             else
             {
-                _dataService.GetMaintenanceChecksForVehicleByVehicleId((checks, error) =>
-                {
-                    if (error != null)
-                    {
+                var checks = _dataService.GetMaintenanceChecksForVehicleByVehicleId(SelectedVehicle.Vehicle.Id);
 
-                    }
+                if (checks == null || checks.Result == null)
+                    return;
 
-                    if (checks == null)
-                        return;
-
-                    VehicleMaintenanceChecksPerformed = new ObservableCollection<MaintenanceCheck>(checks);
-                }, SelectedVehicle.Vehicle.Id);
+                VehicleMaintenanceChecksPerformed = new ObservableCollection<MaintenanceCheck>(checks.Result);               
             }
         }
 

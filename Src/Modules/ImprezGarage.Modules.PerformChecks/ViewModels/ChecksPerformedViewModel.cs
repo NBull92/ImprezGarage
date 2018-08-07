@@ -66,28 +66,22 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             }
             else
             {
-                _dataService.GetMaintenanceChecksForVehicleByVehicleId((performedCheck, error) =>
+                var performedCheck = _dataService.GetMaintenanceChecksForVehicleByVehicleId(SelectedVehicle.Vehicle.Id);
+
+                if (performedCheck == null || performedCheck.Result == null)
                 {
-                    if (error != null)
-                    {
+                    MaintainanceChecks = null;
+                    return;
+                }
 
-                    }
+                MaintainanceChecks = new ObservableCollection<MaintenanceCheckViewModel>();
 
-                    if (performedCheck == null)
-                    {
-                        MaintainanceChecks = null;
-                        return;
-                    }
-
-                    MaintainanceChecks = new ObservableCollection<MaintenanceCheckViewModel>();
-
-                    foreach (var check in performedCheck.OrderByDescending(o => o.DatePerformed))
-                    {
-                        var checkVm = _container.Resolve<MaintenanceCheckViewModel>();
-                        checkVm.LoadInstance(check, SelectedVehicle);
-                        MaintainanceChecks.Add(checkVm);
-                    }
-                }, SelectedVehicle.Vehicle.Id);
+                foreach (var check in performedCheck.Result.OrderByDescending(o => o.DatePerformed))
+                {
+                    var checkVm = _container.Resolve<MaintenanceCheckViewModel>();
+                    checkVm.LoadInstance(check, SelectedVehicle);
+                    MaintainanceChecks.Add(checkVm);
+                }
             }
         }
         #endregion

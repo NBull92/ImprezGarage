@@ -8,19 +8,21 @@ namespace ImprezGarage.Infrastructure.Services
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
 
     public interface IDataService
     {
         #region Gets
-        void GetVehicleTypes(Action<ObservableCollection<VehicleType>, Exception> callback, bool refresh = false);
-        void GetVehicleType(Action<VehicleType, Exception> callback, int typeId);
-        void GetVehicles(Action<ObservableCollection<Vehicle>, Exception> callback, bool refresh = false);
-        void GetVehicleByItsId(Action<Vehicle,Exception> callback, int vehicleId);
-        void GetMaintenanceCheckTypes(Action<List<MaintenanceCheckType>, Exception> callback);
-        void GetMaintenanceCheckTypeById(Action<MaintenanceCheckType, Exception> callback, int typeId);
-        void GetMaintenanceChecksForVehicleByVehicleId(Action<List<MaintenanceCheck>, Exception> callback, int vehicleId);
-        void GetMaintenanceChecksById(Action<MaintenanceCheck, Exception> callback, int maintenanceCheckId);
-        void GetPetrolExpensesByVehicleId(Action<ObservableCollection<PetrolExpense>, Exception> callback, int vehicleId);
+        Task<ObservableCollection<Vehicle>> GetVehicles(bool refresh = false);
+        Task<Vehicle> GetVehicleByItsId(int vehicleId);
+        Task<ObservableCollection<VehicleType>> GetVehicleTypes(bool refresh = false);
+        Task<VehicleType> GetVehicleType(int typeId);
+        Task<ObservableCollection<MaintenanceCheckType>> GetMaintenanceCheckTypes();
+        Task<MaintenanceCheckType> GetMaintenanceCheckTypeById(int typeId);
+        Task<List<MaintenanceCheck>> GetMaintenanceChecksForVehicleByVehicleId(int vehicleId);
+        Task<MaintenanceCheck> GetMaintenanceChecksById(int maintenanceCheckId);
+        Task<ObservableCollection<PetrolExpense>> GetPetrolExpensesByVehicleId(int vehicleId);
+        Task<DateTime?> GetLastMaintenanceCheckDateForVehicleByVehicleId(int vehicleId);
         #endregion
 
         #region Adds

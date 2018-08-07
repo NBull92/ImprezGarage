@@ -14,18 +14,24 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
+    using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using System.Windows.Controls;
 
     public class MainViewModel : BindableBase
     {
         #region Attributes
+        private const int _daysAllowanceBeforeReminder = 30;
         private readonly IDataService _dataService;
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
+        private readonly INotificationsService _notificationsService;
         private ObservableCollection<VehicleViewModel> _vehicles;
         private VehicleViewModel _selectedVehicle;
+        private List<string> _reminders;
         #endregion
 
         #region Properties
@@ -48,16 +54,20 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
         
         #region Methods
-        public MainViewModel(IDataService dataService, IRegionManager regionManager, IEventAggregator eventAggregator)
+        public MainViewModel(IDataService dataService, IRegionManager regionManager, IEventAggregator eventAggregator, INotificationsService notificationsService)
         {
             _dataService = dataService;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
+            _notificationsService = notificationsService;
 
             AddNewVehicleCommand = new DelegateCommand<object>(AddNewVehicleExecute);
             SelectedVehicleChanged = new DelegateCommand<SelectionChangedEventArgs>(SelectedVehicleChangedExecute);
+
             _eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
             _eventAggregator.GetEvent<Events.EditVehicleEvent>().Subscribe(OnEditVehicle);
+
+            _reminders = new List<string>();
 
             LoadVehicles();
         }
@@ -118,22 +128,106 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             Vehicles = new ObservableCollection<VehicleViewModel>();
 
-            _dataService.GetVehicles((vehicles, error) =>
-            {
-                if (error != null)
-                {
-                    
-                    return;
-                }
+            var vehicles = _dataService.GetVehicles(true);
 
-                //TODO - do the query.Subscribe bit here Reactive
-                foreach (var vehicle in vehicles)
+            if (vehicles == null || vehicles.Result == null)
+                return;
+
+            //TODO - do the query.Subscribe bit here Reactive
+            foreach (var vehicle in vehicles.Result)
+            {
+                var viewModel = ServiceLocator.Current.GetInstance<VehicleViewModel>();
+                viewModel.LoadInstance(vehicle);
+                Vehicles.Add(viewModel);
+            }
+
+            CheckForVehicleReminders();
+        }
+
+        /// <summary>
+        /// Go through each vehicle and check for tax expiry dates, insurance renewal dates, MOT dates, service dates. Last time performed a maintainence check etc.
+        /// </summary>
+        private void CheckForVehicleReminders()
+        {
+            foreach (var vehicle in Vehicles)
+            {
+                //Check vehicle type
+                switch(vehicle.VehicleType.Id)
                 {
-                    var viewModel = ServiceLocator.Current.GetInstance<VehicleViewModel>();
-                    viewModel.LoadInstance(vehicle);
-                    Vehicles.Add(viewModel);
+                        // Motorbike
+                    case 2:
+                        CheckLastMaintainenceCheck(vehicle);
+                        CheckInsuranceRenewalDate(vehicle);
+                        CheckTaxDate(vehicle);
+                        // CheckLastServiceDate(vehicle);
+                        break;
+                    // Bicycle
+                    case 3:
+                        //CheckLastMaintainenceCheck(vehicle);
+                        // GetLastServiceDate(vehicle);
+                        break;
+                    // Car
+                    default:
+                        CheckLastMaintainenceCheck(vehicle);
+                        CheckInsuranceRenewalDate(vehicle);
+                        CheckTaxDate(vehicle);
+                        //CheckLastServiceDate(vehicle);
+                        break;
                 }
-            }, true);
+            }
+
+            // Go through all of the reminders and create toast notifications to inform the user.
+            foreach(var reminder in _reminders)
+            {
+                _notificationsService.Toast(reminder);
+            }
+        }
+
+        /// <summary>
+        /// Check the tax expiry date of the passed through vehicle and if it runs out in less than 30 days, inform the user.
+        /// </summary>
+        private void CheckTaxDate(VehicleViewModel vehicle)
+        {
+            if (vehicle.Vehicle.HasValidTax == false)
+                return;
+
+               var taxDate = Convert.ToDateTime(vehicle.TaxExpiryDate);
+            if ((taxDate - DateTime.Now).TotalDays < _daysAllowanceBeforeReminder)
+            {
+                _reminders.Add("The tax of vehicle:  " + vehicle.Registration + " runs out on the : " + taxDate.ToShortDateString());
+            }
+        }
+
+        /// <summary>
+        /// Check the insurance renewal date of the passed through vehicle and if it runs out in less than 30 days, inform the user.
+        /// </summary>
+        private void CheckInsuranceRenewalDate(VehicleViewModel vehicle)
+        {
+            if (vehicle.Vehicle.HasInsurance == false)
+                return;
+
+            var insuranceRenewalDate = Convert.ToDateTime(vehicle.InsuranceRenewalDate);
+            if ((insuranceRenewalDate - DateTime.Now).TotalDays < _daysAllowanceBeforeReminder)
+            {
+                _reminders.Add("The insurance of vehicle:  " + vehicle.Registration + " runs out on the : " + insuranceRenewalDate.ToShortDateString());
+            }
+        }
+
+        /// <summary>
+        /// Find the last maintainence check performed on the passed through vehicle and if it is more than 30 days old, then add this to the reminders;
+        /// </summary>
+        private void CheckLastMaintainenceCheck(VehicleViewModel vehicle)
+        {
+            var lastDate = _dataService.GetLastMaintenanceCheckDateForVehicleByVehicleId(vehicle.Vehicle.Id);
+
+            if (lastDate == null || lastDate.Result == null)
+                return;
+
+            var date = Convert.ToDateTime(lastDate.Result);
+            if ((date - DateTime.Now).TotalDays < _daysAllowanceBeforeReminder)
+            {
+                _reminders.Add("A maintainence check was last performed on vehicle " + vehicle.Registration + " on: " + date.ToShortDateString());
+            }
         }
 
         /// <summary>
