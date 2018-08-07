@@ -8,11 +8,21 @@
              xmlns:vm="clr-namespace:ImprezGarage.Modules.MyGarage.ViewModels"
              xmlns:views="clr-namespace:ImprezGarage.Modules.MyGarage.Views"
              xmlns:conv="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
-             xmlns:infrvm="clr-namespace:ImprezGarage.Infrastructure.ViewModels;assembly=ImprezGarage.Infrastructure"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
              Width="400">
+    <UserControl.Resources>
+        <conv:VehicleTypeToVisibilityConverter x:Key="VehicleTypeToVisibilityConverter"/>
+        <Style x:Key="HiddenButton" BasedOn="{StaticResource MahApps.Metro.Styles.MetroButton}" TargetType="{x:Type Button}">
+            <Setter Property="Visibility" Value="Hidden" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}},Path=IsSelected}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
             <prism:PopupWindowAction IsModal="True" WindowStartupLocation="CenterScreen">
@@ -28,9 +38,6 @@
     </i:Interaction.Triggers>
 
     <Grid>
-        <Grid.Resources>
-            <conv:VehicleTypeToVisibilityConverter x:Key="VehicleTypeToVisibilityConverter"/>
-        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
@@ -51,29 +58,42 @@
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Registration}" 
-                                   Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Car}" 
-                                   VerticalAlignment="Center" Margin="5" Width="255"/>
-                        <TextBlock Grid.Column="0" Text="{Binding Registration}" 
-                                   Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Motorbike}" 
-                                   VerticalAlignment="Center" Margin="5" Width="255"/>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Margin="5" Width="255" 
-                                   Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Bicycle}">
+                    <StackPanel Orientation="Horizontal" Margin="0">
+                        <StackPanel Margin="5,0,0,5" Width="198">
+                            <TextBlock Grid.Row="0" Text="{Binding Registration}" 
+                                       FontSize="24"
+                                       Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Car}" 
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Text="{Binding Registration}" 
+                                       FontSize="24"
+                                       Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Motorbike}" 
+                                       VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Text="{Binding Model}" 
+                                       FontSize="24"
+                                       Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Bicycle}"
+                                       VerticalAlignment="Center"/>
+
+                            <TextBlock Grid.Row="1" VerticalAlignment="Center" >
                                 <Run Text="{Binding Make}"/>
-                                <Run Text=" - "/>
+                                <Run Text=", "/>
                                 <Run Text="{Binding Model}"/>
-                        </TextBlock>
+                            </TextBlock>
+                        </StackPanel>
+
                         <Button Grid.Column="1" Content="Edit" Command="{Binding EditVehicleCommand}"
-                            VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
-                        <Button Grid.Column="2" Content="Delete" Command="{Binding DeleteVehicleCommand}"
-                            VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
-                    </Grid>
+                            VerticalAlignment="Center" Padding="5,2,5,2" Width="50" Margin="5"
+                                Style="{StaticResource HiddenButton}"/>
+
+                        <Button Grid.Column="2" Content="Report" Command="{Binding EditVehicleCommand}"
+                            VerticalAlignment="Center" Padding="5,2,5,2" Width="50" Margin="5"
+                                Style="{StaticResource HiddenButton}"/>
+
+
+                        <Button Grid.Column="3" Content="Delete" Command="{Binding DeleteVehicleCommand}"
+                            VerticalAlignment="Center" Padding="5,2,5,2" Width="50" Margin="5"
+                                Style="{StaticResource HiddenButton}"/>
+
+                    </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

@@ -18,7 +18,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading.Tasks;
     using System.Windows.Controls;
 
     public class MainViewModel : BindableBase
@@ -117,7 +116,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             viewModel.IsEdit = true;
             viewModel.Edit(vehicle.Vehicle);
             view.ShowDialog();
-            OnRefresh();
+
+            if(viewModel.DialogResult)
+                OnRefresh();
         }
         #endregion
 

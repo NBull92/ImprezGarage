@@ -112,7 +112,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
         #region Commands
         public DelegateCommand SaveCommand { get; private set; }
-        public DelegateCommand<object> CancelCommand { get; private set; }
+        public DelegateCommand CancelCommand { get; private set; }
         public Vehicle EditVehicle { get; internal set; }
         #endregion
 
@@ -127,7 +127,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             _notificationsService = notificationsService;
 
             SaveCommand = new DelegateCommand(SaveExecute, CanSave);
-            CancelCommand = new DelegateCommand<object>(CancelExecute);
+            CancelCommand = new DelegateCommand(CancelExecute);
 
             GetVehicleTypes();
             SaveContent = "Add";
@@ -137,8 +137,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Cancel the add or edit by closing the window
         /// </summary>
-        /// <param name="navigationPath"></param>
-        private void CancelExecute(object navigationPath)
+        private void CancelExecute()
         {
             DialogResult = false;
             Close();
@@ -198,7 +197,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 if (_notificationsService.Confirm("Are you sure you wish to save these changes?"))
                 {
-                    bool proceed = false;
+                    bool proceed = true;
 
                     // Check the insurance and tax are selected. 
                     // If so check the dates provided are not in the past. 
