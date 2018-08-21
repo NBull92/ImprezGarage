@@ -5,9 +5,12 @@
 
 namespace ImprezGarage.Infrastructure.Services
 {
+    using ImprezGarage.Modules.Settings.DataModel;
+
     public interface ISettingsService
     {
         void LoadConfigurationFile();
         void PrintConfigurationFile();
+        Configuration GetConfiguration();
     }
 }   //ImprezGarage.Infrastructure.Services namespace 

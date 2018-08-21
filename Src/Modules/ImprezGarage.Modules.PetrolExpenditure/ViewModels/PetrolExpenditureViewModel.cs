@@ -32,10 +32,17 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             get => _label;
             set => SetProperty(ref _label, value);
         }
+
         public ObservableCollection<PetrolExpenseViewModel> Expenses
         {
             get => _expenses;
             set => SetProperty(ref _expenses, value);
+        }
+
+        public VehicleViewModel SelectedVehicle
+        {
+            get => _selectedVehicle;
+            set => SetProperty(ref _selectedVehicle, value);
         }
 
         public DelegateCommand AddExpenditureCommand { get;set; }
@@ -46,7 +53,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _dataService = dataService;
             _eventAggregator = eventAggregator;
-
             _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
 
             AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
@@ -68,10 +74,11 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             if (vehicleViewModel == null)
             {
                 Expenses = null;
+                SelectedVehicle = null;
                 return;
             }
 
-            _selectedVehicle = vehicleViewModel;
+            SelectedVehicle = vehicleViewModel;
 
             Label = _selectedVehicle.Make + " " + _selectedVehicle.Model;
             GetSelectedVehiclePetrolExpenses();

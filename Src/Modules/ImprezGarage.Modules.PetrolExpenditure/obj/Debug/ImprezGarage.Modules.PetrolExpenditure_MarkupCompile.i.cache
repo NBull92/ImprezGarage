@@ -16,5 +16,5 @@ DEBUG;TRACE
 91-2137803416
 Views\AddPetrolExpenditure.xaml;Views\Main.xaml;Views\PetrolExpenditure.xaml;Views\PetrolUsageGraph.xaml;
 
-False
+True
 

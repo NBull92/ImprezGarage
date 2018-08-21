@@ -2,9 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:conv="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Width="530">
+             Width="410"
+             Height="685">
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
             <prism:PopupWindowAction IsModal="True" WindowStartupLocation="CenterScreen">
@@ -18,103 +23,105 @@
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="{Binding SelectedMaintenanceCheckType.Type, Mode=TwoWay}"/>
 
-        <!--Air Filter-->
-        <CheckBox Grid.Row="1" Grid.Column="0" Content="Check Air Filter:" Margin="5" Height="25"
+    <StackPanel>
+        <Border Background="#FF53CAFD"
+                BorderBrush="#FF41B1E1"
+                BorderThickness="2"
+                Margin="5"
+                Height="30"
+                CornerRadius="2.5"
+                Grid.ColumnSpan="2"
+                Width="400"
+                HorizontalAlignment="Left">
+            <TextBlock Text="{Binding SelectedMaintenanceCheckType.Type, Mode=TwoWay}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White" FontWeight="Bold" 
+                       FontSize="14"/>
+        </Border>
+        
+        <ScrollViewer Height="385">            
+            <StackPanel>
+                <!--Air Filter-->
+                <CheckBox Content="Check Air Filter:" Margin="5" Height="25"
                    VerticalContentAlignment="Center" IsChecked="{Binding CheckedAirFilter,Mode=TwoWay}"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Height="25" Text="{Binding AirFilterNotes, Mode=TwoWay}"/>
+                <TextBox Margin="5" Height="25" 
+                 Visibility="{Binding CheckedAirFilter, Converter={StaticResource BoolToVisibilityConverter}}"
+                 Text="{Binding AirFilterNotes, Mode=TwoWay}"/>
 
-        <!--Replaced Air Filter-->
-        <CheckBox Grid.Row="2" Grid.Column="0" Content="Replaced Air Filter:"
+                <!--Replaced Air Filter-->
+                <CheckBox Content="Replaced Air Filter:"
                    ToolTip="Perform every 20,000 miles." Margin="5" Height="25"
                    VerticalContentAlignment="Center" IsChecked="{Binding ReplacedAirFilter,Mode=TwoWay}"/>
 
-        <!--Check coolant levels-->
-        <CheckBox Grid.Row="3" Grid.Column="0" Content="Check Coolant Levels:" Margin="5" Height="25"
+                <!--Check coolant levels-->
+                <CheckBox Content="Check Coolant Levels:" Margin="5" Height="25"
                    VerticalContentAlignment="Center" IsChecked="{Binding CheckCoolantLevels,Mode=TwoWay}"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Height="25" Text="{Binding CoolantNotes, Mode=TwoWay}"/>
+                <TextBox Margin="5" Height="25" Text="{Binding CoolantNotes, Mode=TwoWay}"
+                         Visibility="{Binding CheckCoolantLevels, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-        <!--Flushed system and changed coolant-->
-        <CheckBox Grid.Row="4" Grid.Column="0" Content="Flushed System and Changed Coolant:"
+                <!--Flushed system and changed coolant-->
+                <CheckBox Content="Flushed System and Changed Coolant:"
                   ToolTip="Perform once a year." Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding FlushedSystemAndChangeCoolant,Mode=TwoWay}"/>
 
-        <!--Change fan belt or serpentine belt-->
-        <CheckBox Grid.Row="5" Grid.Column="0" Content="Change Fan Belt or Serpentine Belt:"
+                <!--Change fan belt or serpentine belt-->
+                <CheckBox Content="Change Fan Belt or Serpentine Belt:"
                   Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding ChangeFanBelt,Mode=TwoWay}"/>
 
-        <!--Checked battery-->
-        <CheckBox Grid.Row="6" Grid.Column="0" Content="Checked Battery:"
+                <!--Checked battery-->
+                <CheckBox Content="Checked Battery:"
                   ToolTip="Peform monthly." Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding CheckedBattery,Mode=TwoWay}"/>
-        <TextBox Grid.Row="6" Grid.Column="1"  Height="25" Text="{Binding BatteryNotes, Mode=TwoWay}"/>
+                <TextBox Margin="5" Height="25" Text="{Binding BatteryNotes, Mode=TwoWay}"
+                         Visibility="{Binding CheckedBattery, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-        <!--Replaced battery-->
-        <CheckBox Grid.Row="7" Grid.Column="0" Content="Replaced Battery:"
+                <!--Replaced battery-->
+                <CheckBox Content="Replaced Battery:"
                   ToolTip="Peform when needed." Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding ReplacedBattery,Mode=TwoWay}"/>
 
-        <!--Check oil levels-->
-        <CheckBox Grid.Row="8" Grid.Column="0" Content="Check Oil levels:"
+                <!--Check oil levels-->
+                <CheckBox Content="Check Oil levels:"
                   ToolTip="Peform monthly." Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding CheckedOilLevels,Mode=TwoWay}"/>
-        <TextBox Grid.Row="8" Grid.Column="1" Height="25" Text="{Binding OilLevelNotes, Mode=TwoWay}"/>
+                <TextBox Margin="5" Height="25" Text="{Binding OilLevelNotes, Mode=TwoWay}"
+                         Visibility="{Binding CheckedOilLevels, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-        <!--changed oil-->
-        <CheckBox Grid.Row="9" Grid.Column="0" Content="Changed Oil:" Height="25"
+                <!--changed oil-->
+                <CheckBox Content="Changed Oil:" Height="25"
                   ToolTip="Peform every six months or 5,000 miles." Margin="5"
                    VerticalContentAlignment="Center" IsChecked="{Binding ChangedOil,Mode=TwoWay}"/>
 
-        <!--replace oil filter-->
-        <CheckBox Grid.Row="10" Grid.Column="0" Content="Replace Oil Filter:"
+                <!--replace oil filter-->
+                <CheckBox Content="Replace Oil Filter:"
                   ToolTip="Peform every oil change." Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding ReplacedOilFilter,Mode=TwoWay}"/>
 
-        <!--Checked automatic transmission fluid level-->
-        <CheckBox Grid.Row="11" Grid.Column="0" Content="Checked Automatic Transmission Fluid level:"
+                <!--Checked automatic transmission fluid level-->
+                <CheckBox Content="Checked Automatic Transmission Fluid level:"
                   Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding CheckAutoTransmissionFluid,Mode=TwoWay}"/>
-        <TextBox Grid.Row="11" Grid.Column="1" Height="25"  Text="{Binding AutoTransmissionFluidNotes,Mode=TwoWay}"/>
+                <TextBox Margin="5" Height="25"  Text="{Binding AutoTransmissionFluidNotes,Mode=TwoWay}"
+                         Visibility="{Binding CheckAutoTransmissionFluid, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-        <!--Added automatic transmission fluid levels-->
-        <CheckBox Grid.Row="12" Grid.Column="0" Content="Added Automatic Transmission Ffluid levels:"
+                <!--Added automatic transmission fluid levels-->
+                <CheckBox Content="Added Automatic Transmission Ffluid levels:"
                    Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding AddedAutoTransmissionFluid,Mode=TwoWay}"/>
 
-        <!--Checked power steering fluid level-->
-        <CheckBox Grid.Row="13" Grid.Column="0" Content="Checked Power Steering Fluid level:"
+                <!--Checked power steering fluid level-->
+                <CheckBox Content="Checked Power Steering Fluid level:"
                   Margin="5" Height="25" VerticalContentAlignment="Center"
                   IsChecked="{Binding CheckPowerSteeringFluidLevels,Mode=TwoWay}"/>
-        <TextBox Grid.Row="13" Grid.Column="1" Height="25" Text="{Binding PowerSteeringNotes,Mode=TwoWay}" />
+                <TextBox Margin="5" Height="25" Text="{Binding PowerSteeringNotes,Mode=TwoWay}" 
+                         Visibility="{Binding CheckPowerSteeringFluidLevels, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </StackPanel>
+        </ScrollViewer>
 
-        <Grid Grid.Row="14" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -122,5 +129,5 @@
             <Button Grid.Column="0" Content="{Binding SubmitText}" Command="{Binding SubmitCommand}" Margin="5"  Width="175"/>
             <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}"  Margin="5"  Width="175"/>
         </Grid>
-    </Grid>
+    </StackPanel>
 </UserControl>

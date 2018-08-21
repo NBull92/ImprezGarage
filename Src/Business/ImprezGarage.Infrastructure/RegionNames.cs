@@ -16,6 +16,7 @@ namespace ImprezGarage.Infrastructure
         public static string ChecksPerformedRegion = "ChecksPerformedRegion";
         public static string PetrolEntriesRegion = "PetrolEntriesRegion";
         public static string PetrolHistoryRegion = "PetrolHistoryRegion";
+        public static string SettingsRegion = "SettingsRegion";
 
     }
 

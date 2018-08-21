@@ -7,7 +7,6 @@ namespace ImprezGarage.Modules.PerformChecks.Views
 {
     using ImprezGarage.Modules.PerformChecks.ViewModels;
     using MahApps.Metro.Controls;
-    using System.Windows;
 
     /// <summary>
     /// Interaction logic for SelectMaintenanceType
@@ -18,7 +17,7 @@ namespace ImprezGarage.Modules.PerformChecks.Views
         {
             InitializeComponent();
             var viewModel = DataContext as SelectMaintenanceTypeViewModel;
-            viewModel.ClosingRequest += (sender, e) => ((Window)Parent).Close();
+            viewModel.ClosingRequest += (sender, e) => Close();
         }
     }
 }   //ImprezGarage.Modules.PerformChecks.Views namespace 

@@ -119,6 +119,7 @@
     <Compile Include="Model\PetrolExpense.cs">
       <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SettingsDataModel\Configuration.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Services\ILoggerService.cs" />
     <Compile Include="Services\INotificationsService.cs" />
@@ -194,6 +195,8 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ImprezGarageDatabase.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icons8-close-window-24.png" />
+    <Resource Include="Resources\icons8-plus-math-24.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

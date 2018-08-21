@@ -37,17 +37,40 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-
-        <Button Grid.Row="0" Margin="5" HorizontalAlignment="Right" 
-                Content="Add" 
-                Command="{Binding AddNewVehicleCommand}" 
-                CommandParameter="{x:Type views:AddVehicle}"/>
-        <!--Style="{DynamicResource MetroCircleButtonStyle}"-->
+    <StackPanel>
+        <Border Background="#FF53CAFD"
+                BorderBrush="#FF41B1E1"
+                BorderThickness="2"
+                Margin="5"
+                Height="30"
+                CornerRadius="2.5"
+                Grid.ColumnSpan="2"
+                Width="390"
+                HorizontalAlignment="Left">
+            <Grid>
+                <TextBlock Text="Vehicle List"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Foreground="White" FontWeight="Bold" 
+                       FontSize="14"/>
+                <Button Grid.Row="0" 
+                        HorizontalAlignment="Right" 
+                        Background="{x:Null}" 
+                        BorderThickness="0" 
+                        Width="48" 
+                        Margin="0"
+                        Padding="0"
+                        ToolTip="Add a new vehicle"
+                        Command="{Binding AddNewVehicleCommand}" 
+                        CommandParameter="{x:Type views:AddVehicle}">
+                    <Button.Content>
+                        <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-plus-math-24.png"
+                       Width="20" Height="20"/>
+                    </Button.Content>
+                </Button>
+            </Grid>            
+        </Border>
+       
 
         <ListBox Grid.Row="1" Margin="5" ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}"
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden">
@@ -58,8 +81,8 @@
             </i:Interaction.Triggers>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0">
-                        <StackPanel Margin="5,0,0,5" Width="198">
+                    <DockPanel Margin="0">
+                        <StackPanel Margin="5,0,0,5" Width="284">
                             <TextBlock Grid.Row="0" Text="{Binding Registration}" 
                                        FontSize="24"
                                        Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Car}" 
@@ -80,22 +103,34 @@
                             </TextBlock>
                         </StackPanel>
 
-                        <Button Grid.Column="1" Content="Edit" Command="{Binding EditVehicleCommand}"
-                            VerticalAlignment="Center" Padding="5,2,5,2" Width="50" Margin="5"
-                                Style="{StaticResource HiddenButton}"/>
+                        <Button Command="{Binding EditVehicleCommand}"
+                                Style="{StaticResource HiddenButton}"
+                                Background="{x:Null}" 
+                                BorderThickness="0" 
+                                Width="48" 
+                                Margin="0"
+                                ToolTip="Manage">
+                            <Button.Content>
+                                <Image Source="pack://application:,,,/ImprezGarage.Modules.MyGarage;component/Resources/icons8-maintenance-24.png"
+                                    Width="24" Height="24"/>
+                            </Button.Content>
+                        </Button>
 
-                        <Button Grid.Column="2" Content="Report" Command="{Binding EditVehicleCommand}"
-                            VerticalAlignment="Center" Padding="5,2,5,2" Width="50" Margin="5"
-                                Style="{StaticResource HiddenButton}"/>
-
-
-                        <Button Grid.Column="3" Content="Delete" Command="{Binding DeleteVehicleCommand}"
-                            VerticalAlignment="Center" Padding="5,2,5,2" Width="50" Margin="5"
-                                Style="{StaticResource HiddenButton}"/>
-
-                    </StackPanel>
+                        <Button Command="{Binding DeleteVehicleCommand}"
+                                Style="{StaticResource HiddenButton}"
+                                Background="{x:Null}" 
+                                BorderThickness="0"
+                                Width="48" 
+                                Margin="0"
+                                ToolTip="Delete">
+                            <Button.Content>
+                                <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-close-window-24.png"
+                                    Width="24" Height="24"/>
+                            </Button.Content>
+                        </Button>
+                    </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </Grid>
+    </StackPanel>
 </UserControl>

@@ -10,7 +10,7 @@
     <mahApps:MetroWindow.RightWindowCommands>
         <mahApps:WindowCommands>
             <Button Content="Refresh" Command="{Binding RefreshCommand}"/>
-            <Button Content="Settings" />
+            <Button Content="Settings" Command="{Binding Settings}"/>
         </mahApps:WindowCommands>
     </mahApps:MetroWindow.RightWindowCommands>
     <Grid>
@@ -34,7 +34,7 @@
             </Border>
             
             <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.RowSpan="2" Grid.Column="1">
-                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolRegion}" />
+                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolRegion}"/>
             </Border>
 
             <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="1" Grid.Column="0">
@@ -43,5 +43,11 @@
         </Grid>
 
         <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.StatusBarRegion}" Grid.Row="2" />
+
+        <mahApps:FlyoutsControl Grid.RowSpan="2">
+            <mahApps:Flyout Header="Settings" Position="Right" Width="200" IsOpen="{Binding IsSettingsOpen}">
+                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.SettingsRegion}" Grid.RowSpan="2"/>
+            </mahApps:Flyout>
+        </mahApps:FlyoutsControl>
     </Grid>
 </mahApps:MetroWindow>

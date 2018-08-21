@@ -6,7 +6,6 @@
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Model;
     using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Modules.PerformChecks.Views;
     using Prism.Commands;
@@ -80,8 +79,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _checkedAirFilter;
             set
             {
-                SetProperty(ref _checkedAirFilter, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _checkedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -90,8 +88,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _replacedAirFilter;
             set
             {
-                SetProperty(ref _replacedAirFilter, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _replacedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -100,8 +97,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _checkCoolantLevels;
             set
             {
-                SetProperty(ref _checkCoolantLevels, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _checkCoolantLevels, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -110,8 +106,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _flushedSystemAndChangeCoolant;
             set
             {
-                SetProperty(ref _flushedSystemAndChangeCoolant, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _flushedSystemAndChangeCoolant, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -120,8 +115,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _changeFanBelt;
             set
             {
-                SetProperty(ref _changeFanBelt, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _changeFanBelt, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -130,8 +124,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _checkedBattery;
             set
             {
-                SetProperty(ref _checkedBattery, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _checkedBattery, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -140,8 +133,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _checkedOilLevels;
             set
             {
-                SetProperty(ref _checkedOilLevels, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _checkedOilLevels, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -150,8 +142,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _changedOil;
             set
             {
-                SetProperty(ref _changedOil, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _changedOil, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -160,8 +151,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _replacedOilFilter;
             set
             {
-                SetProperty(ref _replacedOilFilter, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _replacedOilFilter, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -170,8 +160,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _checkAutoTransmissionFluid;
             set
             {
-                SetProperty(ref _checkAutoTransmissionFluid, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _checkAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -180,8 +169,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _addedAutoTransmissionFluid;
             set
             {
-                SetProperty(ref _addedAutoTransmissionFluid, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _addedAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
 
@@ -190,8 +178,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _checkPowerSteeringFluidLevels;
             set
             {               
-                SetProperty(ref _checkPowerSteeringFluidLevels, value);
-                SubmitCommand.RaiseCanExecuteChanged();
+                SetProperty(ref _checkPowerSteeringFluidLevels, value, SubmitCommand.RaiseCanExecuteChanged);
             }
         }
         #endregion

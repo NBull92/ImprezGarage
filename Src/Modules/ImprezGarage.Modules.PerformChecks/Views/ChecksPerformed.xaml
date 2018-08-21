@@ -30,10 +30,30 @@
                             <Run Text=" - "/>
                             <Run Text="{Binding DatePerformed, StringFormat=D}"/>
                     </TextBlock>
-                    <Button Grid.Column="1" Content="Edit" Command="{Binding EditMaintenanceCheckCommand}" d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
-                        VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
-                    <Button Grid.Column="2" Content="Delete" Command="{Binding DeleteMaintenanceCheckCommand}" d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
-                        VerticalAlignment="Center" Padding="5,2,5,2" Width="46" Margin="5"/>
+                    
+                    <Button Grid.Column="1" 
+                            ToolTip="Edit" 
+                            Command="{Binding EditMaintenanceCheckCommand}" 
+                            d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
+                            Background="{x:Null}" 
+                            BorderThickness="0"
+                            Width="48" 
+                            Margin="0">
+                        <Image Source="pack://application:,,,/ImprezGarage.Modules.PerformChecks;component/Resources/icons8-edit-24.png"
+                                    Width="24" Height="24"/>
+                    </Button>
+                    
+                    <Button Grid.Column="2" 
+                            Command="{Binding DeleteMaintenanceCheckCommand}" 
+                            ToolTip="Delete"
+                            d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
+                            Background="{x:Null}" 
+                            BorderThickness="0"
+                            Width="48" 
+                            Margin="0">
+                        <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-close-window-24.png"
+                                    Width="24" Height="24"/>
+                    </Button>
                 </Grid>
             </DataTemplate>
         </ListBox.ItemTemplate>

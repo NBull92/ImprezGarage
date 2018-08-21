@@ -7,8 +7,10 @@
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:vm="clr-namespace:ImprezGarage.Modules.PerformChecks.ViewModels"
                      mc:Ignorable="d"        
-                     Width="370"
-                     Height="100"
+                     Width="376"
+                     Height="135"
+                     ResizeMode="NoResize"
+                     WindowStartupLocation="CenterScreen"
                      prism:ViewModelLocator.AutoWireViewModel="True"
                      d:DataContext="{d:DesignInstance Type=vm:SelectMaintenanceTypeViewModel}">
     <mahApps:MetroWindow.Resources>
@@ -24,7 +26,7 @@
         
         <TextBlock Grid.Row="0" Text="Please select which type of maintenace check you which to perform." Margin="5"/>
         <ComboBox Grid.Row="1" Margin="5" Height="22"
-                  SelectedItem="{Binding SelectedMaintenanceCheckType}" Width="360">
+                  SelectedItem="{Binding SelectedMaintenanceCheckType}" HorizontalAlignment="Stretch">
             <ComboBox.ItemsSource>
                 <CompositeCollection>
                     <ComboBoxItem IsEnabled="False" Foreground="Black">Select a Maintenance Check Type</ComboBoxItem>

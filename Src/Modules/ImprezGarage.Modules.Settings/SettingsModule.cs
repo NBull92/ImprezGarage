@@ -5,6 +5,7 @@
 
 namespace ImprezGarage.Modules.Settings
 {
+    using ImprezGarage.Infrastructure;
     using ImprezGarage.Infrastructure.Services;
     using ImprezGarage.Modules.Settings.Views;
     using Microsoft.Practices.ServiceLocation;
@@ -28,11 +29,12 @@ namespace ImprezGarage.Modules.Settings
         {
             _container.RegisterType<ISettingsService, SettingsService>(new ContainerControlledLifetimeManager());
 
-            _container.RegisterTypeForNavigation<ViewA>();
-
-
+            _container.RegisterType<object, Main>(typeof(Main).FullName);
+            
             var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
             settingsService.LoadConfigurationFile();
+
+            _regionManager.RegisterViewWithRegion(RegionNames.SettingsRegion, typeof(Main));
         }
     }
 }   //ImprezGarage.Modules.Settings namespace 

@@ -5,6 +5,7 @@
 
 namespace ImprezGarage.ViewModels
 {
+    using System;
     using ImprezGarage.Infrastructure;
     using Prism.Commands;
     using Prism.Events;
@@ -15,6 +16,7 @@ namespace ImprezGarage.ViewModels
         #region Attibute
         private readonly IEventAggregator _eventAggregator;
         private string _title = "Imprez Garage";
+        private bool _isSettingsOpen;
         #endregion
 
         #region Properties
@@ -24,8 +26,15 @@ namespace ImprezGarage.ViewModels
             set => SetProperty(ref _title, value); 
         }
 
+        public bool IsSettingsOpen
+        {
+            get => _isSettingsOpen;
+            set => SetProperty(ref _isSettingsOpen, value);
+        }
+
         #region Command
         public DelegateCommand RefreshCommand { get; set; }
+        public DelegateCommand Settings { get; set; }
         #endregion
         #endregion
 
@@ -35,6 +44,12 @@ namespace ImprezGarage.ViewModels
             _eventAggregator = eventAggregator;
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
+            Settings = new DelegateCommand(OnSettingsClicked);
+        }
+
+        private void OnSettingsClicked()
+        {
+            IsSettingsOpen = !IsSettingsOpen;
         }
 
         private void RefreshExecute()

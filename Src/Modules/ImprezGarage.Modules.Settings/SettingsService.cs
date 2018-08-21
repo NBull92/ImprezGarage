@@ -24,8 +24,7 @@ namespace ImprezGarage.Modules.Settings
         {
             _configurationLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ImprezGarage\\Config.xml";           
         }
-        #endregion
-
+        
         public void LoadConfigurationFile()
         {
             if(File.Exists(_configurationLocation))
@@ -44,6 +43,8 @@ namespace ImprezGarage.Modules.Settings
                     MinimizeOnLoad = false,
                     MinimizeToTry = false,
                     NotifyWhenVehicleTaxRenewalIsClose = true,
+                    NotifyWhenInsuranceRenewalIsClose = true,
+                    AllowNotifications = true,
                 };
             }
         }
@@ -51,12 +52,18 @@ namespace ImprezGarage.Modules.Settings
         public void PrintConfigurationFile()
         {
             File.Create(_configurationLocation).Dispose();
-            
-            using (var writer = XmlWriter.Create(_configurationLocation))
+            var xmlWriterSettings = new XmlWriterSettings() { Indent = true };
+            using (var writer = XmlWriter.Create(_configurationLocation, xmlWriterSettings))
             {
                 var serializer = new XmlSerializer(typeof(Configuration));
                 serializer.Serialize(writer, _configuration);
             }
         }
+
+        public Configuration GetConfiguration()
+        {
+            return _configuration;
+        }
+        #endregion
     }
 }   //ImprezGarage.Modules.Settings namespace 

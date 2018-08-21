@@ -9,8 +9,9 @@
                      xmlns:views="clr-namespace:ImprezGarage.Modules.MyGarage.Views"
                      mc:Ignorable="d"
                      HorizontalAlignment="Left"
-                     Width="382"
-                     Height="407"
+                     Width="387"
+                     Height="340"
+                     ResizeMode="NoResize"
                      WindowStartupLocation="CenterScreen"
                      prism:ViewModelLocator.AutoWireViewModel="True"
                      d:DataContext="{d:DesignInstance Type=vm:AddVehicleViewModel}">
@@ -26,35 +27,37 @@
         </DataTemplate>
     </Window.Resources>
 
-    <Grid Margin="5,5,0,0">
+    <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" Width="200" HorizontalAlignment="Left">
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch">
             <Grid Margin="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="Vehicle Type:" Margin="0,0,5,0"/>
-                <ComboBox Grid.Column="1" Width="100" HorizontalAlignment="Left" Margin="5,0,0,0"
-                          SelectedItem="{Binding SelectedVehicleType, Mode=TwoWay}" ItemsSource="{Binding VehicleTypes}" DisplayMemberPath="Name"/>
+                <TextBlock Grid.Column="0" Text="Vehicle Type:" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                <ComboBox Grid.Column="1"  HorizontalAlignment="Stretch" Margin="5,0,0,0"
+                          SelectedItem="{Binding SelectedVehicleType, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" ItemsSource="{Binding VehicleTypes}" 
+                          DisplayMemberPath="Name"
+                      ToolTip="{Binding Path=(Validation.Errors).Count,UpdateSourceTrigger=PropertyChanged,RelativeSource={RelativeSource Self}}"/>
             </Grid>
         </Border>
 
-        <ContentControl Grid.Row="1" HorizontalAlignment="Left" Content="{Binding VehicleCreationViewModel, Mode=TwoWay}"/>
+        <ContentControl Grid.Row="1" Margin="0,5" Content="{Binding VehicleCreationViewModel, Mode=TwoWay}"/>
 
-        <Grid Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="{Binding SaveContent}" Command="{Binding SaveCommand}" Margin="5"  Width="175"/>
-            <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}"  Margin="5"  Width="175"/>
+            <Button Grid.Column="0" Content="{Binding SaveContent}" Command="{Binding SaveCommand}" Margin="0,5,5,5"  Width="175"/>
+            <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}"  Margin="5,5,0,5"  Width="175"/>
         </Grid>
     </Grid>
 </mahApps:MetroWindow>

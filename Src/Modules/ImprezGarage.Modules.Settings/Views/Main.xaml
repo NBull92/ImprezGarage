@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="ImprezGarage.Modules.Settings.Views.Main"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel>
+        <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
+                  Content="Load ImprezGarage On Start Up" Margin="5" 
+                  IsChecked="{Binding LaunchOnStartUp}"/>
+        <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
+                  Content="Minimize On Load" Margin="5"
+                  IsChecked="{Binding MinimizeOnLoad}"/>
+        <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
+                  Content="Minimize To Tray" Margin="5"
+                  IsChecked="{Binding MinimizeToTry}"/>
+        <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
+                  Content="Notify When Vehicle Tax Renewal Is Close" Margin="5"
+                  IsChecked="{Binding NotifyWhenVehicleTaxRenewalIsClose}"/>
+        <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
+                  Content="Notify When Insurance Renewal Is Close" Margin="5"
+                  IsChecked="{Binding NotifyWhenInsuranceRenewalIsClose}"/>
+        <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
+                  Content="Allow Notifications" Margin="5"
+                  IsChecked="{Binding AllowNotifications}"/>
+    </DockPanel>
+</UserControl>
