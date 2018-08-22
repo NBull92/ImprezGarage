@@ -5,12 +5,22 @@
 
 namespace ImprezGarage.Infrastructure.Services
 {
-    using ImprezGarage.Modules.Settings.DataModel;
-
     public interface ISettingsService
     {
         void LoadConfigurationFile();
         void PrintConfigurationFile();
-        Configuration GetConfiguration();
+        bool GetLaunchOnStartUp();
+        bool GetMinimizeOnLoad();
+        bool GetMinimizeToTry();
+        bool GetNotifyWhenVehicleTaxRenewalIsClose();
+        bool GetNotifyWhenInsuranceRenewalIsClose();
+        bool GetAllowNotifications();
+
+        void SetLaunchOnStartUp(bool value);
+        void SetAllowNotifications(bool value);
+        void SetMinimizeOnLoad(bool value);
+        void SetNotifyWhenInsuranceRenewalIsClose(bool value);
+        void SetNotifyWhenVehicleTaxRenewalIsClose(bool value);
+        void SetMinimizeToTry(bool value);
     }
 }   //ImprezGarage.Infrastructure.Services namespace 

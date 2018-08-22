@@ -60,9 +60,64 @@ namespace ImprezGarage.Modules.Settings
             }
         }
 
-        public Configuration GetConfiguration()
+        public bool GetLaunchOnStartUp()
         {
-            return _configuration;
+            return _configuration.LaunchOnStartUp;
+        }
+
+        public bool GetMinimizeOnLoad()
+        {
+            return _configuration.MinimizeOnLoad;
+        }
+
+        public bool GetMinimizeToTry()
+        {
+            return _configuration.MinimizeToTry;
+        }
+
+        public bool GetNotifyWhenVehicleTaxRenewalIsClose()
+        {
+            return _configuration.NotifyWhenVehicleTaxRenewalIsClose;
+        }
+
+        public bool GetNotifyWhenInsuranceRenewalIsClose()
+        {
+            return _configuration.NotifyWhenInsuranceRenewalIsClose;
+        }
+
+        public bool GetAllowNotifications()
+        {
+            return _configuration.AllowNotifications;
+        }
+
+        public void SetLaunchOnStartUp(bool value)
+        {
+            _configuration.LaunchOnStartUp = value;
+        }
+
+        public void SetAllowNotifications(bool value)
+        {
+            _configuration.AllowNotifications = value;
+        }
+
+        public void SetMinimizeOnLoad(bool value)
+        {
+            _configuration.MinimizeOnLoad = value;
+        }
+
+        public void SetNotifyWhenInsuranceRenewalIsClose(bool value)
+        {
+            _configuration.NotifyWhenInsuranceRenewalIsClose = value;
+        }
+
+        public void SetNotifyWhenVehicleTaxRenewalIsClose(bool value)
+        {
+            _configuration.NotifyWhenVehicleTaxRenewalIsClose = value;
+        }
+
+        public void SetMinimizeToTry(bool value)
+        {
+            _configuration.MinimizeToTry = value;
         }
         #endregion
     }
