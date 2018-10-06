@@ -5,8 +5,7 @@
 
 namespace ImprezGarage.ViewModels
 {
-    using System;
-    using ImprezGarage.Infrastructure;
+    using Infrastructure;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;

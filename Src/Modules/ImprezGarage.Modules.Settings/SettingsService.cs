@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.Settings
 {
-    using ImprezGarage.Modules.Settings.DataModel;
+    using Infrastructure.Model.SettingsDataModel;
     using Infrastructure.Services;
     using System;
     using System.IO;
@@ -15,7 +15,7 @@ namespace ImprezGarage.Modules.Settings
     public class SettingsService : ISettingsService
     {
         #region Attribute
-        private string _configurationLocation;
+        private readonly string _configurationLocation;
         private Configuration _configuration;
         #endregion
 

@@ -5,10 +5,10 @@
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure;
+    using Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
-    using ImprezGarage.Modules.PerformChecks.Views;
+    using Views;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -21,10 +21,9 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly IDataService _dataService;
         private readonly INotificationsService _notificationsService;
         private readonly IRegionManager _regionManager;
-        private readonly IEventAggregator _eventAggregator;
 
-        private const string START_MAINTENANCE_CHECK_ERROR = "An error occured when attempting to start a maintenance check.";
-        private const string NOTIFICATION_HEADER = "Alert!";
+        private const string StartMaintenanceCheckError = "An error occured when attempting to start a maintenance check.";
+        private const string NotificationHeader = "Alert!";
 
         private VehicleViewModel _selectedVehicle;
         private ObservableCollection<MaintenanceCheck> _vehicleMaintenanceChecksPerformed;
@@ -44,7 +43,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         }
 
         #region Command
-        public DelegateCommand PerformNewCheckCommand { get; private set; }
+        public DelegateCommand PerformNewCheckCommand { get; }
         #endregion
 
         #endregion
@@ -55,11 +54,10 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             _dataService = dataService;
             _regionManager = regionManager;
             _notificationsService = notificationsService;
-            _eventAggregator = eventAggregator;
 
             PerformNewCheckCommand = new DelegateCommand(PerformNewCheckExecute);
 
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
         }
 
         /// <summary>
@@ -115,7 +113,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 }
                 else
                 {
-                    _notificationsService.Alert(START_MAINTENANCE_CHECK_ERROR, NOTIFICATION_HEADER);
+                    _notificationsService.Alert(StartMaintenanceCheckError, NotificationHeader);
                 }
             }
         }

@@ -9,7 +9,7 @@ namespace ImprezGarage.Infrastructure
     {
         public static string ToolbarRegion = "ToolbarRegion";
         public static string ContentRegion = "ContentRegion";
-        public static string StatusBarRegion = "StatusbarRegion";
+        public static string StatusBarRegion = "StatusBarRegion";
         public static string VehicleListRegion = "VehicleListRegion";
         public static string ChecksRegion = "ChecksRegion";
         public static string PetrolRegion = "PetrolRegion";
@@ -17,7 +17,7 @@ namespace ImprezGarage.Infrastructure
         public static string PetrolEntriesRegion = "PetrolEntriesRegion";
         public static string PetrolHistoryRegion = "PetrolHistoryRegion";
         public static string SettingsRegion = "SettingsRegion";
-
+        public static string LogSettingsRegion = "LogSettingsRegion";
     }
 
 }   //ImprezGarage.Infrastructure namespace 

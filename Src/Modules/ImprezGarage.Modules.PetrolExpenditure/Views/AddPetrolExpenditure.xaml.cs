@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.Views
 {
-    using ImprezGarage.Modules.PetrolExpenditure.ViewModels;
+    using ViewModels;
     using MahApps.Metro.Controls;
 
     /// <summary>

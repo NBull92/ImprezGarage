@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Mvvm;
     using System;
@@ -13,7 +13,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     
     public class SelectMaintenanceTypeViewModel : BindableBase
     {
-        private IDataService _dataService;
+        private readonly IDataService _dataService;
         private MaintenanceCheckType _selectedMaintenanceCheckType;
         private ObservableCollection<MaintenanceCheckType> _maintenanceCheckTypes;
         private bool _dialogResult;
@@ -43,8 +43,8 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         }
 
         #region Commands
-        public DelegateCommand CancelCommand { get; private set; }
-        public DelegateCommand OkayCommand { get; private set; }
+        public DelegateCommand CancelCommand { get; }
+        public DelegateCommand OkayCommand { get; }
         #endregion
         #endregion
 

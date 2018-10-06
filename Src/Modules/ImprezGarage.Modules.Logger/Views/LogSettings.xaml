@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ImprezGarage.Modules.Logger.Views.LogSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"             
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:ImprezGarage.Modules.Logger.ViewModels"
+             xmlns:model="clr-namespace:ImprezGarage.Modules.Logger.DataModels"
+             xmlns:converters="clr-namespace:ImprezGarage.Modules.Logger.Converters"
+             xmlns:helpers="clr-namespace:ImprezGarage.Modules.Logger.Helpers"
+             mc:Ignorable="d"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             d:DataContext="{d:DesignInstance Type=viewModels:LogSettingsViewModel}">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="LogDetailValues"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type helpers:EnumAttributeGetValues}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="model:LogDetail" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider x:Key="LogFileTypeValues"
+                            MethodName="GetValues"
+                            ObjectType="{x:Type helpers:EnumAttributeGetValues}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="model:LogFileType" />
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <converters:EnumValueDescriptionConverter x:Key="EnumValueDescriptionConverter"/>
+    </UserControl.Resources>
+
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Log Settings" Margin="5"/>
+        <Rectangle DockPanel.Dock="Top" Height="1" Fill="White"/>
+
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top" VerticalAlignment="Top"
+                    Margin="5">
+            <TextBlock Text="File Type Of Logs"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource LogFileTypeValues}}" SelectedItem="{Binding SelectedFileType, Converter={StaticResource EnumValueDescriptionConverter}}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top" VerticalAlignment="Top"
+                    Margin="5">
+            <TextBlock Text="Log File Level Of Detail"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource LogDetailValues}}" SelectedItem="{Binding SelectedDetail, Converter={StaticResource EnumValueDescriptionConverter}}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Top" VerticalAlignment="Top"
+                    Margin="5">
+            <TextBlock Text="Life Span Of Logs"/>
+            <ComboBox ItemsSource="{Binding LogLifeCollection}"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Infrastructure.Model
 {
-    using ImprezGarage.Infrastructure.Services;
+    using Services;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -15,7 +15,7 @@ namespace ImprezGarage.Infrastructure.Model
     public class DataService : IDataService
     {
         #region Cached Data
-        private DataStorage _dataStorage;
+        private readonly DataStorage _dataStorage;
         #endregion
 
         public DataService()

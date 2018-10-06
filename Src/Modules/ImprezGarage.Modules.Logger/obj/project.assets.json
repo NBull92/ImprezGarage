@@ -57,8 +57,14 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
-      "Prism.Core/6.3.0": {
+      "Prism.Core/7.0.0.396": {
         "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System.Xaml",
+          "WindowsBase"
+        ],
         "compile": {
           "lib/net45/Prism.dll": {}
         },
@@ -177,8 +183,14 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
-      "Prism.Core/6.3.0": {
+      "Prism.Core/7.0.0.396": {
         "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System.Xaml",
+          "WindowsBase"
+        ],
         "compile": {
           "lib/net45/Prism.dll": {}
         },
@@ -297,8 +309,14 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
-      "Prism.Core/6.3.0": {
+      "Prism.Core/7.0.0.396": {
         "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System.Xaml",
+          "WindowsBase"
+        ],
         "compile": {
           "lib/net45/Prism.dll": {}
         },
@@ -417,8 +435,14 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
-      "Prism.Core/6.3.0": {
+      "Prism.Core/7.0.0.396": {
         "type": "package",
+        "frameworkAssemblies": [
+          "PresentationCore",
+          "PresentationFramework",
+          "System.Xaml",
+          "WindowsBase"
+        ],
         "compile": {
           "lib/net45/Prism.dll": {}
         },
@@ -551,28 +575,21 @@
         "microsoft.sdk.expression.blend.nuspec"
       ]
     },
-    "Prism.Core/6.3.0": {
-      "sha512": "8KKRF/1Hx76dXFrYb3XUbkGFWTZjjI99DTGcPt5/aGghb3iYBscxiT4WDVlGmUpfqw7QS/jDI2BGs5ZsAy8XVA==",
+    "Prism.Core/7.0.0.396": {
+      "sha512": "XxPmXiA+v/D6zUeAUwSz7GgWNIbzyLLgkP32vDr6fGfv/YPg8CRkmkf+MkP+cxXKdUsqezxXgRRwMUcjWRqWMw==",
       "type": "package",
-      "path": "prism.core/6.3.0",
+      "path": "prism.core/7.0.0.396",
       "files": [
-        "lib/MonoAndroid10/Prism.dll",
-        "lib/MonoAndroid10/Prism.xml",
-        "lib/MonoTouch10/Prism.dll",
-        "lib/MonoTouch10/Prism.xml",
-        "lib/Xamarin.iOS10/Prism.dll",
-        "lib/Xamarin.iOS10/Prism.xml",
         "lib/net45/Prism.dll",
         "lib/net45/Prism.xml",
-        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Prism.dll",
-        "lib/portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10/Prism.xml",
-        "lib/wp8/Prism.dll",
-        "lib/wp8/Prism.xml",
-        "lib/wp81/Prism.dll",
-        "lib/wp81/Prism.xml",
-        "lib/wpa81/Prism.dll",
-        "lib/wpa81/Prism.xml",
-        "prism.core.6.3.0.nupkg.sha512",
+        "lib/netstandard1.0/Prism.dll",
+        "lib/netstandard1.0/Prism.xml",
+        "lib/netstandard2.0/Prism.dll",
+        "lib/netstandard2.0/Prism.xml",
+        "lib/uap10.0/Prism.dll",
+        "lib/uap10.0/Prism.pri",
+        "lib/uap10.0/Prism.xml",
+        "prism.core.7.0.0.396.nupkg.sha512",
         "prism.core.nuspec"
       ]
     },
@@ -640,6 +657,7 @@
       "ImprezGarage.Infrastructure >= 1.0.0",
       "MahApps.Metro >= 1.6.5",
       "Microsoft.SDK.Expression.Blend >= 1.0.0",
+      "Prism.Core >= 7.0.0.396",
       "Prism.Unity >= 6.3.0"
     ]
   },
@@ -692,6 +710,10 @@
           "Microsoft.SDK.Expression.Blend": {
             "target": "Package",
             "version": "[1.0.0, )"
+          },
+          "Prism.Core": {
+            "target": "Package",
+            "version": "[7.0.0.396, )"
           },
           "Prism.Unity": {
             "target": "Package",

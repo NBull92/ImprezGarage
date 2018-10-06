@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.StatusBar.ViewModels
 {
-    using ImprezGarage.Infrastructure;
+    using Infrastructure;
     using Prism.Events;
     using Prism.Mvvm;
 
@@ -18,8 +18,8 @@ namespace ImprezGarage.Modules.StatusBar.ViewModels
         #region Proeprties
         public string Message
         {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
+            get => _message;
+            set => SetProperty(ref _message, value);
         }
         #endregion
 

@@ -5,9 +5,9 @@
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Services;
-    using ImprezGarage.Modules.PerformChecks.Views;
+    using Infrastructure;
+    using Infrastructure.Services;
+    using Views;
     using Prism.Commands;
     using Prism.Mvvm;
     using Prism.Regions;
@@ -19,11 +19,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly IDataService _dataService;
         private readonly IRegionManager _regionManager;
         private readonly INotificationsService _notificationsService;
+        private readonly ILoggerService _loggerService;
+        
         private static int _selectedVehicleId;
         private MaintenanceCheck _maintenanceCheck;
-        private const string CHECK_COMPLETED = "Maintenance check completed!";
-        private const string CHECK_UPDATED = "Maintenance check updated!";
-        private const string NOTIFICATION_HEADER = "Alert!";
+        private const string CheckCompleted = "Maintenance check completed!";
+        private const string CheckUpdated = "Maintenance check updated!";
+        private const string NotificationHeader = "Alert!";
         private MaintenanceCheckType _selectedMaintenanceCheckType;
         private bool _isEditMode;
         private string _submitText;
@@ -77,109 +79,73 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         public bool CheckedAirFilter
         {
             get => _checkedAirFilter;
-            set
-            {
-                SetProperty(ref _checkedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _checkedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool ReplacedAirFilter
         {
             get => _replacedAirFilter;
-            set
-            {
-                SetProperty(ref _replacedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _replacedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool CheckCoolantLevels
         {
             get => _checkCoolantLevels;
-            set
-            {
-                SetProperty(ref _checkCoolantLevels, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _checkCoolantLevels, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool FlushedSystemAndChangeCoolant
         {
             get => _flushedSystemAndChangeCoolant;
-            set
-            {
-                SetProperty(ref _flushedSystemAndChangeCoolant, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _flushedSystemAndChangeCoolant, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool ChangeFanBelt
         {
             get => _changeFanBelt;
-            set
-            {
-                SetProperty(ref _changeFanBelt, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _changeFanBelt, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool CheckedBattery
         {
             get => _checkedBattery;
-            set
-            {
-                SetProperty(ref _checkedBattery, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _checkedBattery, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool CheckedOilLevels
         {
             get => _checkedOilLevels;
-            set
-            {
-                SetProperty(ref _checkedOilLevels, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _checkedOilLevels, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool ChangedOil
         {
             get => _changedOil;
-            set
-            {
-                SetProperty(ref _changedOil, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _changedOil, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool ReplacedOilFilter
         {
             get => _replacedOilFilter;
-            set
-            {
-                SetProperty(ref _replacedOilFilter, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _replacedOilFilter, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool CheckAutoTransmissionFluid
         {
             get => _checkAutoTransmissionFluid;
-            set
-            {
-                SetProperty(ref _checkAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _checkAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool AddedAutoTransmissionFluid
         {
             get => _addedAutoTransmissionFluid;
-            set
-            {
-                SetProperty(ref _addedAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _addedAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
         }
 
         public bool CheckPowerSteeringFluidLevels
         {
             get => _checkPowerSteeringFluidLevels;
-            set
-            {               
-                SetProperty(ref _checkPowerSteeringFluidLevels, value, SubmitCommand.RaiseCanExecuteChanged);
-            }
+            set => SetProperty(ref _checkPowerSteeringFluidLevels, value, SubmitCommand.RaiseCanExecuteChanged);
         }
         #endregion
 
@@ -228,11 +194,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #endregion
         
         #region Methods
-        public PerformNewCheckViewModel(IDataService dataService, INotificationsService notificationsService, IRegionManager regionManager)
+        public PerformNewCheckViewModel(IDataService dataService, INotificationsService notificationsService, IRegionManager regionManager, ILoggerService loggerService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
             _regionManager = regionManager;
+            _loggerService = loggerService;
 
             SubmitText = "Submit";
             SubmitCommand = new DelegateCommand(SubmitExecute, CanSubmit);
@@ -306,10 +273,11 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 {
                     if (error != null)
                     {
-
+                        _loggerService.LogException(error);
+                        return;
                     }
 
-                    _notificationsService.Alert(CHECK_UPDATED, NOTIFICATION_HEADER);
+                    _notificationsService.Alert(CheckUpdated, NotificationHeader);
                     _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
                 }, _maintenanceCheck);
             }
@@ -320,10 +288,11 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 {
                     if (error != null)
                     {
-
+                        _loggerService.LogException(error);
+                        return;
                     }
 
-                    _notificationsService.Alert(CHECK_UPDATED, NOTIFICATION_HEADER);
+                    _notificationsService.Alert(CheckCompleted, NotificationHeader);
                     _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
                 }, _maintenanceCheck);
             }

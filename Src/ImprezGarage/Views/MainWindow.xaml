@@ -46,7 +46,7 @@
 
         <mahApps:FlyoutsControl Grid.RowSpan="2">
             <mahApps:Flyout Header="Settings" Position="Right" Width="300" IsOpen="{Binding IsSettingsOpen}">
-                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.SettingsRegion}" Grid.RowSpan="2"/>
+                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.SettingsRegion}"/>
             </mahApps:Flyout>
         </mahApps:FlyoutsControl>
     </Grid>

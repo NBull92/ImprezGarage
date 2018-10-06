@@ -5,9 +5,9 @@
 
 namespace ImprezGarage
 {
-    using ImprezGarage.Infrastructure.Model;
-    using ImprezGarage.Infrastructure.Services;
-    using ImprezGarage.Views;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
+    using Views;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
     using Prism.Unity;
@@ -22,7 +22,7 @@ namespace ImprezGarage
 
         protected override void InitializeShell()
         {
-            Application.Current.MainWindow.Show();
+            Application.Current.MainWindow?.Show();
         }
 
         protected override void ConfigureContainer()
@@ -36,11 +36,10 @@ namespace ImprezGarage
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
-            
-            moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
-            moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));
-            moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
             moduleCatalog.AddModule(typeof(Modules.StatusBar.StatusBarModule));
+            moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
+            moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));
+            moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
             moduleCatalog.AddModule(typeof(Modules.PerformChecks.PerformChecksModule));
             moduleCatalog.AddModule(typeof(Modules.PetrolExpenditure.PetrolExpenditureModule));
 

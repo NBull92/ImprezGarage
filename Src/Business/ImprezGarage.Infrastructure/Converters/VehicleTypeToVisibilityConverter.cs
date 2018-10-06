@@ -5,7 +5,6 @@
 
 namespace ImprezGarage.Infrastructure.Converters
 {
-    using ImprezGarage.Infrastructure.Model;
     using System;
     using System.Globalization;
     using System.Windows;

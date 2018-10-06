@@ -5,7 +5,7 @@
 
 namespace ImprezGarage
 {
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Win32;
     using System;
@@ -29,20 +29,32 @@ namespace ImprezGarage
 
         private void SystemEventsOnSessionEnding(object sender, SessionEndingEventArgs e)
         {
-            var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
-            settingsService.PrintConfigurationFile();
+            PrintFiles();
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
-            settingsService.PrintConfigurationFile();
+            var loggerService = ServiceLocator.Current.GetInstance<ILoggerService>();
+            loggerService.LogException((e.ExceptionObject as Exception));
+            PrintFiles();
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
+            PrintFiles();
+        }
+
+        /// <summary>
+        /// Print out the log and settings files.
+        /// </summary>
+        private static void PrintFiles()
+        {
             var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
             settingsService.PrintConfigurationFile();
+
+            var loggerService = ServiceLocator.Current.GetInstance<ILoggerService>();
+            loggerService.PrintLogFile();
+            loggerService.PrintConfigurationFile();
         }
     }
 }   //ImprezGarage namespace 

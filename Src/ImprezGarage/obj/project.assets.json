@@ -179,6 +179,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -230,6 +231,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -247,6 +249,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -265,6 +268,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -473,6 +477,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -524,6 +529,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -541,6 +547,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -559,6 +566,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -767,6 +775,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -818,6 +827,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -835,6 +845,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -853,6 +864,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -1061,6 +1073,7 @@
           "ImprezGarage.Infrastructure": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
           "Prism.Unity": "6.3.0"
         },
         "compile": {
@@ -1112,6 +1125,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -1129,6 +1143,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -1147,6 +1162,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",

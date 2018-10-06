@@ -5,11 +5,11 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure
 {
-    using ImprezGarage.Modules.PetrolExpenditure.Views;
+    using Views;
     using Prism.Modularity;
     using Prism.Regions;
     using Microsoft.Practices.Unity;
-    using ImprezGarage.Infrastructure;
+    using Infrastructure;
 
     public class PetrolExpenditureModule : IModule
     {

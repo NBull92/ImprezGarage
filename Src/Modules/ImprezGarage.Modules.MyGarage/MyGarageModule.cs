@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.MyGarage
 {
-    using ImprezGarage.Infrastructure;
+    using Infrastructure;
     using Prism.Modularity;
     using Prism.Regions;
     using Views;

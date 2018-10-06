@@ -5,19 +5,28 @@
 
 namespace ImprezGarage.Modules.Settings
 {
-    using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Services;
-    using ImprezGarage.Modules.Settings.Views;
+    using ImprezGarage.Modules.Logger.Views;
+    using Infrastructure;
+    using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
     using Prism.Regions;
-    using Prism.Unity;
+    using Views;
 
     public class SettingsModule : IModule
     {
-        private IRegionManager _regionManager;
-        private IUnityContainer _container;
+        #region Attributes
+        /// <summary>
+        /// Store the container manager.
+        /// </summary>
+        private readonly IUnityContainer _container;
+
+        /// <summary>
+        /// Store the region manager.
+        /// </summary>
+        private readonly IRegionManager _regionManager;
+        #endregion
 
         public SettingsModule(IUnityContainer container, IRegionManager regionManager)
         {
@@ -28,13 +37,14 @@ namespace ImprezGarage.Modules.Settings
         public void Initialize()
         {
             _container.RegisterType<ISettingsService, SettingsService>(new ContainerControlledLifetimeManager());
-
             _container.RegisterType<object, Main>(typeof(Main).FullName);
-            
+            _container.RegisterType<object, LogSettings>(typeof(LogSettings).FullName);
+
             var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
             settingsService.LoadConfigurationFile();
 
             _regionManager.RegisterViewWithRegion(RegionNames.SettingsRegion, typeof(Main));
+            _regionManager.RegisterViewWithRegion(RegionNames.LogSettingsRegion, typeof(LogSettings));
         }
     }
 }   //ImprezGarage.Modules.Settings namespace 

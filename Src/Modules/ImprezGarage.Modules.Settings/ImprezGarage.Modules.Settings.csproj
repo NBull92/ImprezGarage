@@ -83,6 +83,10 @@
       <Project>{4703D4D1-0C8C-4AB2-9058-F8DC87D60C61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImprezGarage.Modules.Logger\ImprezGarage.Modules.Logger.csproj">
+      <Project>{6F89C592-B58E-409B-9211-3F93542688AD}</Project>
+      <Name>ImprezGarage.Modules.Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\Main.xaml">

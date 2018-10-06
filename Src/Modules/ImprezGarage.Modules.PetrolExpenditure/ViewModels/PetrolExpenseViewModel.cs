@@ -5,9 +5,8 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Model;
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure;
+    using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -19,7 +18,9 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private readonly IDataService _dataService;
         private readonly INotificationsService _notificationsService;
         private readonly IEventAggregator _eventAggregator;
-        private const string CONFIRM_EXPENSE_DELETE = "Are you sure you wish to delete this petrol expense?";
+        private readonly ILoggerService _loggerService;
+
+        private const string ConfirmExpenseDelete = "Are you sure you wish to delete this petrol expense?";
         private int _id;
         private int _vehicleId;
         private double _amount;
@@ -58,11 +59,12 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         #region Methods
 
-        public PetrolExpenseViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator)
+        public PetrolExpenseViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator, ILoggerService loggerService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
             _eventAggregator = eventAggregator;
+            _loggerService = loggerService;
 
             DeleteExpenseCommand = new DelegateCommand(OnExpenseDeleted);
         }
@@ -78,14 +80,15 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Command Handler
         private void OnExpenseDeleted()
         {
-            if (!_notificationsService.Confirm(CONFIRM_EXPENSE_DELETE))
+            if (!_notificationsService.Confirm(ConfirmExpenseDelete))
                 return;
 
             _dataService.DeletePetrolExpense((error) =>
             {
                 if (error != null)
                 {
-
+                    _loggerService.LogException(error);
+                    return;
                 }
 
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();

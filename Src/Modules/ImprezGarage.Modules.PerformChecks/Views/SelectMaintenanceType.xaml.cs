@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.PerformChecks.Views
 {
-    using ImprezGarage.Modules.PerformChecks.ViewModels;
+    using ViewModels;
     using MahApps.Metro.Controls;
 
     /// <summary>

@@ -9,6 +9,7 @@
         AllowsTransparency="True" 
         Background="Transparent"
         Loaded="Window_Loaded"
+        ShowActivated="False"
         prism:ViewModelLocator.AutoWireViewModel="True">
     <Window.Resources>
         <infrConv:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>

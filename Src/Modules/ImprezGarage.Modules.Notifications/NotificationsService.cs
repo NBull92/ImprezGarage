@@ -5,9 +5,9 @@
 
 namespace ImprezGarage.Modules.Notifications
 {
-    using ImprezGarage.Infrastructure.Services;
-    using ImprezGarage.Modules.Notifications.ViewModels;
-    using ImprezGarage.Modules.Notifications.Views;
+    using Infrastructure.Services;
+    using ViewModels;
+    using Views;
     using System;
 
     internal class NotificationsService : INotificationsService

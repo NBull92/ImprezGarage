@@ -158,11 +158,29 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -180,6 +198,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -351,11 +370,29 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -373,6 +410,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -544,11 +582,29 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -566,6 +622,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -737,11 +794,29 @@
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
         }
       },
+      "ImprezGarage.Modules.Logger/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Microsoft.SDK.Expression.Blend": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Logger.dll": {}
+        }
+      },
       "ImprezGarage.Modules.PerformChecks/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -759,6 +834,7 @@
         "framework": ".NETFramework,Version=v4.6.1",
         "dependencies": {
           "ImprezGarage.Infrastructure": "1.0.0",
+          "ImprezGarage.Modules.Logger": "1.0.0",
           "MahApps.Metro": "1.6.5",
           "Microsoft.SDK.Expression.Blend": "1.0.0",
           "Prism.Core": "7.0.0.396",
@@ -1000,6 +1076,11 @@
       "type": "project",
       "path": "../../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj",
       "msbuildProject": "../../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj"
+    },
+    "ImprezGarage.Modules.Logger/1.0.0": {
+      "type": "project",
+      "path": "../ImprezGarage.Modules.Logger/ImprezGarage.Modules.Logger.csproj",
+      "msbuildProject": "../ImprezGarage.Modules.Logger/ImprezGarage.Modules.Logger.csproj"
     },
     "ImprezGarage.Modules.PerformChecks/1.0.0": {
       "type": "project",

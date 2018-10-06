@@ -4,10 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="Application Settings" Margin="5"/>
+        <Rectangle DockPanel.Dock="Top" Height="1" Fill="White"/>
+
         <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
                   Content="Load ImprezGarage On Start Up" Margin="5" 
                   IsChecked="{Binding LaunchOnStartUp}"/>
@@ -26,5 +30,7 @@
         <CheckBox DockPanel.Dock="Top" VerticalAlignment="Top" 
                   Content="Allow Notifications" Margin="5"
                   IsChecked="{Binding AllowNotifications}"/>
+
+        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.LogSettingsRegion}"></ContentControl>
     </DockPanel>
 </UserControl>

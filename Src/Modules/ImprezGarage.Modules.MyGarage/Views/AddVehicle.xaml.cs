@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.MyGarage.Views
 {
-    using ImprezGarage.Modules.MyGarage.ViewModels;
+    using ViewModels;
     using MahApps.Metro.Controls;
 
     /// <summary>

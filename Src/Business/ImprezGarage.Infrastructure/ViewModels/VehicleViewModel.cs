@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Infrastructure.ViewModels
 {
-    using ImprezGarage.Infrastructure.Services;
+    using Services;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -14,6 +14,11 @@ namespace ImprezGarage.Infrastructure.ViewModels
     public class VehicleViewModel : BindableBase
     {
         #region Attributes
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IDataService _dataService;
+        private readonly INotificationsService _notificationsService;
+        private readonly ILoggerService _loggerService;
+
         private Vehicle _vehicle;
         private VehicleType _vehicleType;
         private DateTime _dateCreated;
@@ -23,12 +28,9 @@ namespace ImprezGarage.Infrastructure.ViewModels
         private string _registration;
         private DateTime? _taxExpiryDate;
         private DateTime? _insuranceRenewalDate;
-        private const string NOTIFICATION_HEADER = "Alert!";
-        private const string VEHICLE_DELETED = "Vehicle deleted sucessfully!";
-        private const string CONFIRM_VEHICLE_DELETE = "Are you sure you wish to delete this vehicle?";
-        private readonly IEventAggregator _eventAggregator;
-        public IDataService _dataService { get; private set; }
-        public INotificationsService _notificationsService { get; private set; }
+        private const string NotificationHeader = "Alert!";
+        private const string VehicleDeleted = "Vehicle deleted sucessfully!";
+        private const string ConfirmVehicleDelete = "Are you sure you wish to delete this vehicle?";
         #endregion
 
         #region Properties
@@ -94,11 +96,12 @@ namespace ImprezGarage.Infrastructure.ViewModels
         #endregion
 
         #region Methods
-        public VehicleViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator)
+        public VehicleViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator, ILoggerService loggerService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
             _eventAggregator = eventAggregator;
+            _loggerService = loggerService;
 
             EditVehicleCommand = new DelegateCommand(EditVehicleExecute);
             DeleteVehicleCommand = new DelegateCommand(DeleteVehicleExecute);
@@ -110,17 +113,18 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// </summary>
         private void DeleteVehicleExecute()
         {
-            if (!_notificationsService.Confirm(CONFIRM_VEHICLE_DELETE))
+            if (!_notificationsService.Confirm(ConfirmVehicleDelete))
                 return;
 
             _dataService.DeleteVehicle((error) =>
             {
                 if (error != null)
                 {
+                    _loggerService.LogException(error);
                     return;
                 }
 
-                _notificationsService.Alert(VEHICLE_DELETED, NOTIFICATION_HEADER);
+                _notificationsService.Alert(VehicleDeleted, NotificationHeader);
 
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
                 _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(null);
@@ -128,7 +132,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         }
 
         /// <summary>
-        /// Take the current selected vechiel and open a window to edit it.
+        /// Take the current selected vehicle and open a window to edit it.
         /// </summary>
         public void EditVehicleExecute()
         {
@@ -140,7 +144,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         {
             var vehicle = _dataService.GetVehicleByItsId(selectedVehicleId);
 
-            if (vehicle == null || vehicle.Result == null)
+            if (vehicle?.Result == null)
                 return;
 
             LoadInstance(vehicle.Result);
@@ -172,7 +176,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
 
             var type = _dataService.GetVehicleType(Vehicle.VehicleType);
 
-            if (type == null || type.Result == null)
+            if (type?.Result == null)
                 return;
 
             VehicleType = type.Result;

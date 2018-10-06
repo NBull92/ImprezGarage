@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Infrastructure.Model
 {
-    using ImprezGarage.Infrastructure.Services;
+    using Services;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
 

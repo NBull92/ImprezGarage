@@ -5,11 +5,10 @@
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure;
-    using ImprezGarage.Infrastructure.Model;
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure;
+    using Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
-    using ImprezGarage.Modules.PerformChecks.Views;
+    using Views;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -25,8 +24,8 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly INotificationsService _notificationsService;
         private readonly IEventAggregator _eventAggregator;
 
-        private const string DELETE_MAINTENANCE_CHECK = "Are you sure you wish to delete this maintenance check?";
-        private const string DELETED_SUCCESSFULLY = "Maintenance check deleted successfuly!";
+        private const string DeleteMaintenanceCheck = "Are you sure you wish to delete this maintenance check?";
+        private const string DeletedSuccessfully = "Maintenance check deleted successfuly!";
 
         private int _id;
         private VehicleViewModel _selectedVehicle;
@@ -84,7 +83,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #region Command Handlers
         private void DeleteMaintenanceCheckExecute()
         {
-            if (!_notificationsService.Confirm(DELETE_MAINTENANCE_CHECK))
+            if (!_notificationsService.Confirm(DeleteMaintenanceCheck))
                 return;
 
             _dataService.DeleteMaintenanceCheck((error) => 
@@ -94,7 +93,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
                 }
 
-                _notificationsService.Alert(DELETED_SUCCESSFULLY);
+                _notificationsService.Alert(DeletedSuccessfully);
                 _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
             }, Id);
         }

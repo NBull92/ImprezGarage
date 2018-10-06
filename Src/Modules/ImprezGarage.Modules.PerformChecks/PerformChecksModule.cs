@@ -8,8 +8,8 @@ namespace ImprezGarage.Modules.PerformChecks
     using Microsoft.Practices.Unity;
     using Prism.Regions;
     using Prism.Modularity;
-    using ImprezGarage.Modules.PerformChecks.Views;
-    using ImprezGarage.Infrastructure;
+    using Views;
+    using Infrastructure;
 
     public class PerformChecksModule : IModule
     {

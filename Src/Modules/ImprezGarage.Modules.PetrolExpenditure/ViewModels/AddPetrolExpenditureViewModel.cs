@@ -22,8 +22,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly INotificationsService _notificationService;
 
-        private const string EXPENSE_ADDED = "Expense added successfully!";
-        private const string EXPENSE_FAILED = "An error occured during the adding of the petrol expense. \nPlease try again.";
+        private const string ExpenseAdded = "Expense added successfully!";
+        private const string ExpenseFailed = "An error occured during the adding of the petrol expense. \nPlease try again.";
 
         private double _amount = 0;
         private bool _addEnabled;
@@ -45,10 +45,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         public int VehicleId { get; internal set; }
 
         #region Commands
-        public DelegateCommand AddCommand { get; private set; }
-        public DelegateCommand CancelCommand { get; private set; }
-        public DelegateCommand<KeyEventArgs> OnKeyUpCommand { get; private set; }
-        public DelegateCommand<KeyEventArgs> OnKeyDownCommand { get; private set; }
+        public DelegateCommand AddCommand { get; }
+        public DelegateCommand CancelCommand { get; }
+        public DelegateCommand<KeyEventArgs> OnKeyUpCommand { get; }
+        public DelegateCommand<KeyEventArgs> OnKeyDownCommand { get; }
         #endregion
         #endregion
 
@@ -86,7 +86,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         /// </summary>
         private void OnKeyUpExecute(KeyEventArgs args)
         {
-            AddEnabled = string.IsNullOrEmpty(((TextBox)args.Source).Text) ? false : true;
+            AddEnabled = !string.IsNullOrEmpty(((TextBox)args.Source).Text);
         }
 
         /// <summary>
@@ -99,11 +99,11 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             {
                 if(error != null)
                 {
-                    _notificationService.Alert(EXPENSE_FAILED);
+                    _notificationService.Alert(ExpenseFailed);
                     return;
                 }
 
-                _notificationService.Alert(EXPENSE_ADDED);
+                _notificationService.Alert(ExpenseAdded);
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }, Convert.ToDouble(Amount), VehicleId);
             Close();

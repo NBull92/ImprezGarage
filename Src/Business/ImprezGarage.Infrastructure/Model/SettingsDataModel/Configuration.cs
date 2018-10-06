@@ -3,10 +3,10 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Modules.Settings.DataModel
+namespace ImprezGarage.Infrastructure.Model.SettingsDataModel
 {
-    using Prism.Mvvm;
     using System.Xml.Serialization;
+    using Prism.Mvvm;
 
     [XmlRoot("Configuration")]
     public class Configuration : BindableBase

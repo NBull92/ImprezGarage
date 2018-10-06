@@ -5,11 +5,10 @@
 
 namespace ImprezGarage.Modules.Settings.ViewModels
 {
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure.Services;
     using Microsoft.Win32;
     using Prism.Mvvm;
     using System.Reflection;
-    using System.Windows;
 
     public class MainViewModel : BindableBase
     {
@@ -67,8 +66,11 @@ namespace ImprezGarage.Modules.Settings.ViewModels
 
         private void RegisterInStartup(bool isChecked)
         {
-            RegistryKey registryKey = Registry.CurrentUser.OpenSubKey
-                    ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            var registryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            if(registryKey == null)
+                return;
+
             if (isChecked)
             {
                 registryKey.SetValue("ImprezGarage", Assembly.GetEntryAssembly().Location);

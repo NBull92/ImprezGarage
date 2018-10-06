@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Modules.Notifications.Views
 {
-    using ImprezGarage.Modules.Notifications.ViewModels;
+    using ViewModels;
     using System.Windows;
 
     /// <summary>

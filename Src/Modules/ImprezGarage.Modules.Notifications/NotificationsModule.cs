@@ -5,13 +5,13 @@
 
 namespace ImprezGarage.Modules.Notifications
 {
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure.Services;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
 
     public class NotificationsModule : IModule
     {
-        private IUnityContainer _container;
+        private readonly IUnityContainer _container;
 
         public NotificationsModule(IUnityContainer container)
         {
@@ -23,4 +23,4 @@ namespace ImprezGarage.Modules.Notifications
             _container.RegisterType<INotificationsService, NotificationsService>(new ContainerControlledLifetimeManager());
         }
     }
-}   //ImprezGarage.Modules.Notification snamespace 
+}   //ImprezGarage.Modules.Notification namespace 

@@ -5,7 +5,7 @@
 
 namespace ImprezGarage.Infrastructure
 {
-    using ImprezGarage.Infrastructure.ViewModels;
+    using ViewModels;
     using Prism.Events;
 
     public class Events
