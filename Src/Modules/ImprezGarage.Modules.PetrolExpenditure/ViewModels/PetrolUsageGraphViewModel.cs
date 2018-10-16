@@ -174,10 +174,4 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #endregion
         #endregion
     }
-
-    public class ChartData
-    {
-        public double Cost { get; set; }
-        public string Date { get; set; }
-    }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

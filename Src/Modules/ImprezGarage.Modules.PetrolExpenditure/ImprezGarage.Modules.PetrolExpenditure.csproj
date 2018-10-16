@@ -67,6 +67,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewModels\AddPetrolExpenditureViewModel.cs" />
+    <Compile Include="ChartData.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PetrolExpenditureViewModel.cs" />
     <Compile Include="ViewModels\PetrolExpenseViewModel.cs" />
