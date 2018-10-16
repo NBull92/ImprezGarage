@@ -15,16 +15,25 @@ namespace ImprezGarage
 
     class Bootstrapper : UnityBootstrapper
     {
+        /// <summary>
+        /// Create the shell with the main window.
+        /// </summary>
         protected override DependencyObject CreateShell()
         {
             return Container.Resolve<MainWindow>();
         }
 
+        /// <summary>
+        /// Show the main window.
+        /// </summary>
         protected override void InitializeShell()
         {
             Application.Current.MainWindow?.Show();
         }
 
+        /// <summary>
+        /// Register any interfaces and their implementation to the container.
+        /// </summary>
         protected override void ConfigureContainer()
         {
             //register the interface to the container
@@ -33,6 +42,9 @@ namespace ImprezGarage
             base.ConfigureContainer();
         }
 
+        /// <summary>
+        /// Add all of the modules to the catalog for ImprezGarage.
+        /// </summary>
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;

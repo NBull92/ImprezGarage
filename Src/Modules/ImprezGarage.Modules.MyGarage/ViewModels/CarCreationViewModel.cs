@@ -52,37 +52,5 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         public CarCreationViewModel()
         {
         }
-        
-        //public override string this[string columnName]
-        //{
-        //    get
-        //    {
-        //        string error = null;
-
-        //        switch (columnName)
-        //        {
-        //            case "Registration":
-        //                if (_registration == null)
-        //                {
-        //                    error = "Please indicate the registration of this vehicle.";
-        //                }
-        //                break;
-        //            case "TaxExpiryDate":
-        //                if (HasValidTax && TaxExpiryDate.Date <= DateTime.Today)
-        //                {
-        //                    error = "The tax expiry date cannot be earlier than today's date.";
-        //                }
-        //                break;
-        //            case "InsuranceRenewalDate":
-        //                if (HasInsurance && InsuranceRenewalDate.Date <= DateTime.Today)
-        //                {
-        //                    error = "The insurance renewal date cannot be earlier than today's date.";
-        //                }
-        //                break;
-        //        }
-                
-        //        return (error);
-        //    }
-        //}
     }
 }   //ImprezGarage.Modules.MyGarage.ViewModels namespace 

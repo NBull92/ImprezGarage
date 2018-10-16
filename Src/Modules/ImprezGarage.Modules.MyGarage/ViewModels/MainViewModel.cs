@@ -87,7 +87,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             var viewModel = view.DataContext as AddVehicleViewModel;
             view.ShowDialog();
 
-            if (viewModel.DialogResult)
+            if (viewModel != null && viewModel.DialogResult)
             {
                 LoadVehicles();
             }            
@@ -112,12 +112,14 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private void OnEditVehicle(VehicleViewModel vehicle)
         {
             var view = new AddVehicle();
-            var viewModel = view.DataContext as AddVehicleViewModel;
+            if (!(view.DataContext is AddVehicleViewModel viewModel))
+                return;
+
             viewModel.IsEdit = true;
             viewModel.Edit(vehicle.Vehicle);
             view.ShowDialog();
 
-            if(viewModel.DialogResult)
+            if (viewModel.DialogResult)
                 OnRefresh();
         }
         #endregion

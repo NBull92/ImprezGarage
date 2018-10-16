@@ -19,7 +19,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     {
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IRegionManager _regionManager;
         private readonly IUnityContainer _container;
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
@@ -81,8 +80,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 else
                 {
                     // TODO: GetType of viewmodel then clean up all the bindable variables
-                    VehicleCreationViewModel = null;
                     VehicleCreationViewModel.CleanUp();
+                    VehicleCreationViewModel = null;
                 }
             }
         }
@@ -119,11 +118,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         #region Methods
-        public AddVehicleViewModel(IDataService dataService, IRegionManager regionManager, IUnityContainer container, INotificationsService notificationsService,
+        public AddVehicleViewModel(IDataService dataService, IUnityContainer container, INotificationsService notificationsService,
             ILoggerService loggerService)
         {
             _dataService = dataService;
-            _regionManager = regionManager;
             _container = container;
             _notificationsService = notificationsService;
             _loggerService = loggerService;
@@ -436,7 +434,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
 
         /// <summary>
-        /// Forces the save coommand to retry its can save event.
+        /// Forces the save command to retry its can save event.
         /// </summary>
         private void VehicleCreationViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

@@ -11,78 +11,167 @@ namespace ImprezGarage.Infrastructure.ViewModels
     using Prism.Mvvm;
     using System;
 
-    public class VehicleViewModel : BindableBase
+    public sealed class VehicleViewModel : BindableBase
     {
         #region Attributes
+        /// <summary>
+        /// Store the injected event aggregator.
+        /// </summary>
         private readonly IEventAggregator _eventAggregator;
-        private readonly IDataService _dataService;
-        private readonly INotificationsService _notificationsService;
-        private readonly ILoggerService _loggerService;
 
+        /// <summary>
+        /// Store the injected data service.
+        /// </summary>
+        private readonly IDataService _dataService;
+
+        /// <summary>
+        /// Store the injected notification service.
+        /// </summary>
+        private readonly INotificationsService _notificationsService;
+
+        /// <summary>
+        /// Store the injected logger service.
+        /// </summary>
+        private readonly ILoggerService _loggerService;
+        
+        /// <summary>
+        /// Store the vehicle itself.
+        /// </summary>
         private Vehicle _vehicle;
+
+        /// <summary>
+        /// Store the type of vehicle.
+        /// </summary>
         private VehicleType _vehicleType;
+
+        /// <summary>
+        /// Store the date the vehicle was created.
+        /// </summary>
         private DateTime _dateCreated;
+
+        /// <summary>
+        /// Store the date in which the vehicle was last modified.
+        /// </summary>
         private DateTime _dateModified;
+
+        /// <summary>
+        /// Store the make of the vehicle.
+        /// </summary>
         private string _make;
+
+        /// <summary>
+        /// Store the model of the vehicle.
+        /// </summary>
         private string _model;
+
+        /// <summary>
+        /// Store the registration of the vehicle.
+        /// </summary>
         private string _registration;
+
+        /// <summary>
+        /// Store the tax renewal date of the vehicle.
+        /// </summary>
         private DateTime? _taxExpiryDate;
+
+        /// <summary>
+        /// Store the insurance renewal date of the vehicle.
+        /// </summary>
         private DateTime? _insuranceRenewalDate;
+
+        /// <summary>
+        /// Store the constant header for a notification alert.
+        /// </summary>
         private const string NotificationHeader = "Alert!";
+
+        /// <summary>
+        /// Store the constant for when a vehicle is deleted.
+        /// </summary>
         private const string VehicleDeleted = "Vehicle deleted sucessfully!";
+
+        /// <summary>
+        /// Store the constant for when a vehicle is about to be deleted.
+        /// </summary>
         private const string ConfirmVehicleDelete = "Are you sure you wish to delete this vehicle?";
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// Store the vehicle itself.
+        /// </summary>
         public Vehicle Vehicle
         {
             get => _vehicle;
             set => SetProperty(ref _vehicle, value);
         }
 
+        /// <summary>
+        /// Store the type of vehicle.
+        /// </summary>
         public VehicleType VehicleType
         {
             get => _vehicleType;
             set => SetProperty(ref _vehicleType, value);
         }
 
+        /// <summary>
+        /// Store the date the vehicle was created.
+        /// </summary>
         public DateTime DateCreated
         {
             get => _dateCreated;
             set => SetProperty(ref _dateCreated, value);
         }
 
+        /// <summary>
+        /// Store the date in which the vehicle was last modified.
+        /// </summary>
         public DateTime DateModified
         {
             get => _dateModified;
             set => SetProperty(ref _dateModified, value);
         }
 
+        /// <summary>
+        /// Store the make of the vehicle.
+        /// </summary>
         public string Make
         {
             get => _make;
             set => SetProperty(ref _make, value);
         }
 
+        /// <summary>
+        /// Store the model of the vehicle.
+        /// </summary>
         public string Model
         {
             get => _model;
             set => SetProperty(ref _model, value);
         }
 
+        /// <summary>
+        /// Store the registration of the vehicle.
+        /// </summary>
         public string Registration
         {
             get => _registration;
             set => SetProperty(ref _registration, value);
         }
 
+        /// <summary>
+        /// Store the tax renewal date of the vehicle.
+        /// </summary>
         public DateTime? TaxExpiryDate
         {
             get => _taxExpiryDate;
             set => SetProperty(ref _taxExpiryDate, value);
         }
 
+        /// <summary>
+        /// Store the insurance renewal date of the vehicle.
+        /// </summary>
         public DateTime? InsuranceRenewalDate
         {
             get => _insuranceRenewalDate;
@@ -90,12 +179,26 @@ namespace ImprezGarage.Infrastructure.ViewModels
         }
 
         #region Commands
-        public virtual DelegateCommand EditVehicleCommand { get; set; }
-        public virtual DelegateCommand DeleteVehicleCommand { get; set; }
+        /// <summary>
+        /// Command for editing this vehicle.
+        /// </summary>
+        public DelegateCommand EditVehicleCommand { get; set; }
+
+        /// <summary>
+        /// Command for deleting this vehicle.
+        /// </summary>
+        public DelegateCommand DeleteVehicleCommand { get; set; }
         #endregion
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Construct this vehicle view model, store the injected interfaces and instantiate the commands.
+        /// </summary>
+        /// <param name="dataService"></param>
+        /// <param name="notificationsService"></param>
+        /// <param name="eventAggregator"></param>
+        /// <param name="loggerService"></param>
         public VehicleViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator, ILoggerService loggerService)
         {
             _dataService = dataService;
@@ -139,29 +242,10 @@ namespace ImprezGarage.Infrastructure.ViewModels
             _eventAggregator.GetEvent<Events.EditVehicleEvent>().Publish(this);
         }
         #endregion
-
-        public void LoadInstanceViaId(int selectedVehicleId)
-        {
-            var vehicle = _dataService.GetVehicleByItsId(selectedVehicleId);
-
-            if (vehicle?.Result == null)
-                return;
-
-            LoadInstance(vehicle.Result);
-        }
-
-        /// <summary>
-        /// Calls load instance to happen again but refresh the data from the vehicle in this view model.
-        /// </summary>
-        public void Refresh()
-        {
-            LoadInstance();
-        }
-
+        
         /// <summary>
         /// Loads the data from the vehicle passed through are the one already assigned to this viewmodel.
         /// </summary>
-        /// <param name="vehicle"></param>
         public void LoadInstance(Vehicle vehicle = null)
         {
             if (vehicle != null)

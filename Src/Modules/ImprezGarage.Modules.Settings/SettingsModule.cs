@@ -28,12 +28,20 @@ namespace ImprezGarage.Modules.Settings
         private readonly IRegionManager _regionManager;
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Construct the module and inject the container and region manager.
+        /// </summary>
         public SettingsModule(IUnityContainer container, IRegionManager regionManager)
         {
             _container = container;
             _regionManager = regionManager;
         }
 
+        /// <summary>
+        /// Initialize the module and register any types, whether it be an interface and it's implementation, or it be a view.
+        /// Get the current instance of the settings service and load the current file.
+        /// </summary>
         public void Initialize()
         {
             _container.RegisterType<ISettingsService, SettingsService>(new ContainerControlledLifetimeManager());
@@ -46,5 +54,6 @@ namespace ImprezGarage.Modules.Settings
             _regionManager.RegisterViewWithRegion(RegionNames.SettingsRegion, typeof(Main));
             _regionManager.RegisterViewWithRegion(RegionNames.LogSettingsRegion, typeof(LogSettings));
         }
+        #endregion
     }
 }   //ImprezGarage.Modules.Settings namespace 

@@ -32,28 +32,39 @@
     </UserControl.Resources>
 
     <DockPanel>
-        <TextBlock DockPanel.Dock="Top" Text="Log Settings" Margin="5"/>
+        <TextBlock DockPanel.Dock="Top" Text="Log Settings" Margin="5" VerticalAlignment="Center"/>
         <Rectangle DockPanel.Dock="Top" Height="1" Fill="White"/>
 
-        <StackPanel Orientation="Horizontal"
+        <DockPanel
                     DockPanel.Dock="Top" VerticalAlignment="Top"
                     Margin="5">
-            <TextBlock Text="File Type Of Logs"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource LogFileTypeValues}}" SelectedItem="{Binding SelectedFileType, Converter={StaticResource EnumValueDescriptionConverter}}"/>
-        </StackPanel>
+            <TextBlock Text="File Type Of Logs" VerticalAlignment="Center"
+                       Width="150"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource LogFileTypeValues}}" 
+                      SelectedItem="{Binding SelectedFileType, Converter={StaticResource EnumValueDescriptionConverter}}"
+                      HorizontalAlignment="Right"
+                      Width="75"/>
+        </DockPanel>
 
-        <StackPanel Orientation="Horizontal"
+        <DockPanel 
                     DockPanel.Dock="Top" VerticalAlignment="Top"
                     Margin="5">
-            <TextBlock Text="Log File Level Of Detail"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource LogDetailValues}}" SelectedItem="{Binding SelectedDetail, Converter={StaticResource EnumValueDescriptionConverter}}"/>
-        </StackPanel>
+            <TextBlock Text="Log File Level Of Detail" VerticalAlignment="Center"
+                       Width="150"/>
+            <ComboBox ItemsSource="{Binding Source={StaticResource LogDetailValues}}" 
+                      SelectedItem="{Binding SelectedDetail, Converter={StaticResource EnumValueDescriptionConverter}}"
+                      HorizontalAlignment="Right"
+                      Width="75"/>
+        </DockPanel>
 
-        <StackPanel Orientation="Horizontal"
+        <DockPanel 
                     DockPanel.Dock="Top" VerticalAlignment="Top"
                     Margin="5">
-            <TextBlock Text="Life Span Of Logs"/>
-            <ComboBox ItemsSource="{Binding LogLifeCollection}"/>
-        </StackPanel>
+            <TextBlock Text="Life Span Of Logs" VerticalAlignment="Center"
+                       Width="150"/>
+            <ComboBox ItemsSource="{Binding LogLifeCollection}"
+                      HorizontalAlignment="Right"
+                      Width="75"/>
+        </DockPanel>
     </DockPanel>
 </UserControl>

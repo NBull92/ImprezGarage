@@ -14,10 +14,16 @@ namespace ImprezGarage.Infrastructure.Model
 
     public class DataService : IDataService
     {
-        #region Cached Data
+        #region Attributes
+        /// <summary>
+        /// Store for the retrieved data from the database.
+        /// </summary>
         private readonly DataStorage _dataStorage;
         #endregion
 
+        /// <summary>
+        /// Construct the data service class and instantiate the data storage.
+        /// </summary>
         public DataService()
         {
             _dataStorage = new DataStorage();
@@ -34,6 +40,9 @@ namespace ImprezGarage.Infrastructure.Model
             return Task.Run(() => _dataStorage.GetVehicles());
         }
 
+        /// <summary>
+        /// Retrieve the vehicles from the database and find the vehicle with the Id passed through.
+        /// </summary>
         public Task<Vehicle> GetVehicleByItsId(int vehicleId)
         {
             RetrieveVehicles();
@@ -45,6 +54,9 @@ namespace ImprezGarage.Infrastructure.Model
             return null;
         }
 
+        /// <summary>
+        /// Using the entity model, load all of the vehicles and store them in the data model.
+        /// </summary>
         private void RetrieveVehicles(bool refresh = false)
         {
             using (var model = new ImprezGarageEntities())
@@ -79,7 +91,10 @@ namespace ImprezGarage.Infrastructure.Model
             }
             return null;
         }
-
+        
+        /// <summary>
+        /// Using the entity model, load all of the vehicles types and store them in the data model.
+        /// </summary>
         private void RetrieveVehicleTypes(bool refresh = false)
         {
             using (var model = new ImprezGarageEntities())
@@ -114,6 +129,9 @@ namespace ImprezGarage.Infrastructure.Model
             return null;
         }
 
+        /// <summary>
+        /// Using the entity model, load all of the maintenance types and store them in the data model.
+        /// </summary>
         private void RetrieveMaintenanceTypes()
         {
             using (var model = new ImprezGarageEntities())
@@ -145,7 +163,7 @@ namespace ImprezGarage.Infrastructure.Model
         }
 
         /// <summary>
-        /// 
+        /// Retrieve a specific maintenance check.
         /// </summary>
         public Task<MaintenanceCheck> GetMaintenanceChecksById(int maintenanceCheckId)
         {
@@ -160,6 +178,9 @@ namespace ImprezGarage.Infrastructure.Model
             }
         }
 
+        /// <summary>
+        /// Return a collection of all fo the petrol expenses for a specific vehicle.
+        /// </summary>
         public Task<ObservableCollection<PetrolExpense>> GetPetrolExpensesByVehicleId(int vehicleId)
         {
             using (var model = new ImprezGarageEntities())
@@ -173,6 +194,9 @@ namespace ImprezGarage.Infrastructure.Model
             }
         }
 
+        /// <summary>
+        /// Get the last time a specific vehicle had a maintenance check.
+        /// </summary>
         public Task<DateTime?> GetLastMaintenanceCheckDateForVehicleByVehicleId(int vehicleId)
         {
             using (var model = new ImprezGarageEntities())
@@ -220,8 +244,6 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// Save the passed through maintenance check to the database.
         /// </summary>
-        /// <param name="callback"></param>
-        /// <param name="maintenanceCheck"></param>
         public void SubmitMaintenanceCheck(Action<Exception> callback, MaintenanceCheck maintenanceCheck)
         {
             try
@@ -239,6 +261,9 @@ namespace ImprezGarage.Infrastructure.Model
             }
         }
 
+        /// <summary>
+        /// Add a new petrol expense to the database.
+        /// </summary>
         public void AddPetrolExpenditure(Action<Exception> callback, double amount, int vehicleId)
         {
             try
@@ -286,8 +311,10 @@ namespace ImprezGarage.Infrastructure.Model
                 callback(ex);
             }
         }
-
-
+        
+        /// <summary>
+        /// Delete a maintenance check from the database
+        /// </summary>
         public void DeleteMaintenanceCheck(Action<Exception> callback, int maintenanceCheckId)
         {
             try
@@ -308,8 +335,10 @@ namespace ImprezGarage.Infrastructure.Model
                 callback(ex);
             }
         }
-
-
+        
+        /// <summary>
+        /// Delete a petrol expense from the database.
+        /// </summary>
         public void DeletePetrolExpense(Action<Exception> callback, int petrolExpenseId)
         {
             try
@@ -371,6 +400,9 @@ namespace ImprezGarage.Infrastructure.Model
             }
         }
 
+        /// <summary>
+        /// Update a maintenance check in the database with new information.
+        /// </summary>
         public void UpdateMaintenanceCheck(Action<Exception> callback, MaintenanceCheck maintenanceCheck)
         {
             try
