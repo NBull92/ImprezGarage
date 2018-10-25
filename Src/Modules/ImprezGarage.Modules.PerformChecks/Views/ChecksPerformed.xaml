@@ -7,9 +7,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:ImprezGarage.Modules.PerformChecks.ViewModels"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=vm:ChecksPerformedViewModel}"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Width="400">
+             Width="400"
+             d:DataContext="{d:DesignInstance Type=vm:ChecksPerformedViewModel}">
 
     <ListBox ItemsSource="{Binding MaintainanceChecks}">
         <ListBox.ItemTemplate>

@@ -49,6 +49,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModel\NotificationsModel.cs" />
     <Compile Include="NotificationsModule.cs" />
     <Compile Include="NotificationsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

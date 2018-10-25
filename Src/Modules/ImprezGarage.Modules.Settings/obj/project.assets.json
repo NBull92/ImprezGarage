@@ -576,10 +576,11 @@
   },
   "libraries": {
     "CommonServiceLocator/1.3.0": {
-      "sha512": "fbjO0SNwbOFPdwVfyqv+B7gIJ2CVBOFPKqn1mDDECK7KER8jFaOdcvroFYoAHa0ktPbxi5s+15qOLnA96f8GSA==",
+      "sha512": "iDTGD2J6OZP3CIgqfqosG6O8LeidFNstYM6EqsZCDsiPH8BWyT4Glq/fUIthXP12KvedVD0LkF9YubfGmStzFw==",
       "type": "package",
       "path": "commonservicelocator/1.3.0",
       "files": [
+        ".signature.p7s",
         "commonservicelocator.1.3.0.nupkg.sha512",
         "commonservicelocator.nuspec",
         "lib/portable-net4+sl5+netcore45+wpa81+wp8/Microsoft.Practices.ServiceLocation.XML",
@@ -606,10 +607,11 @@
       ]
     },
     "MahApps.Metro/1.6.5": {
-      "sha512": "XFxACnPbTAZ9qYcXMqFDLXXEpAbLj3BYaXqwH8NoY0sfSAYepEpE4C53Nd6AI4TnQ+nmDugtO8dwsAXPtt0SXQ==",
+      "sha512": "LxtMGVhG4zPQSI1/xCn+ImPVUiF13rIuKJ0HZDNdroIyA6d8xD+NwK594a9QbnqUIqkGe+LCZMFDq7TWoPmmqw==",
       "type": "package",
       "path": "mahapps.metro/1.6.5",
       "files": [
+        ".signature.p7s",
         "lib/net40/MahApps.Metro.dll",
         "lib/net40/MahApps.Metro.pdb",
         "lib/net40/MahApps.Metro.xml",
@@ -644,10 +646,11 @@
       ]
     },
     "Prism.Core/7.0.0.396": {
-      "sha512": "XxPmXiA+v/D6zUeAUwSz7GgWNIbzyLLgkP32vDr6fGfv/YPg8CRkmkf+MkP+cxXKdUsqezxXgRRwMUcjWRqWMw==",
+      "sha512": "yRwFVU4FaUCncTsUE1/eVFgxx45tHBQ7XmLCoJfLyhCwh241pxHw3HADj/M/ysC0CxIr34wwqk3dij1c7YUeDA==",
       "type": "package",
       "path": "prism.core/7.0.0.396",
       "files": [
+        ".signature.p7s",
         "lib/net45/Prism.dll",
         "lib/net45/Prism.xml",
         "lib/netstandard1.0/Prism.dll",
@@ -688,10 +691,11 @@
       ]
     },
     "Unity/4.0.1": {
-      "sha512": "FQxLlryE47Y5xY7wJfToUrwtyLsgNJK0jK6sPfNC3YUsjzSX7ILXLA4EX8zVxFPOaIMTJBXRIKrnQ/lsECLufg==",
+      "sha512": "JHeMH/B0brE+EWZQGbTQIyqQt5+deJ8rEzBBLmmV3ItBokNKAOtfqt+KBmn3+vTqGMKPclBz7wOpqOsB6Vcumg==",
       "type": "package",
       "path": "unity/4.0.1",
       "files": [
+        ".signature.p7s",
         "UnityConfiguration30.xsd",
         "lib/net45/Microsoft.Practices.Unity.Configuration.XML",
         "lib/net45/Microsoft.Practices.Unity.Configuration.dll",
@@ -736,7 +740,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nickb\\.nuget\\packages\\": {},
+    "C:\\Users\\nickb.DESKTOP-UNG5SPQ\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
@@ -745,7 +749,7 @@
       "projectUniqueName": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj",
       "projectName": "ImprezGarage.Modules.Settings",
       "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\ImprezGarage.Modules.Settings.csproj",
-      "packagesPath": "C:\\Users\\nickb\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\nickb.DESKTOP-UNG5SPQ\\.nuget\\packages\\",
       "outputPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Settings\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
@@ -753,7 +757,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\nickb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nickb.DESKTOP-UNG5SPQ\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],

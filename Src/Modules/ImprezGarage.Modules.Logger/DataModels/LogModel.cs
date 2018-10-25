@@ -65,11 +65,27 @@ namespace ImprezGarage.Modules.Logger.DataModels
         // Private and public methods
         #region Methods
         /// <summary>
-        /// 
+        /// Construct the log model and set the config file location.
         /// </summary>
         public LogModel()
         {
             _configFileLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ImprezGarage\\LogsConfiguration.xml";
+
+            SetupFileDirectory();
+        }
+
+        /// <summary>
+        /// Check to see if the directory for the config file exists already.
+        /// If not then create it.
+        /// </summary>
+        private void SetupFileDirectory()
+        {
+            FileInfo test = new FileInfo(_configFileLocation);
+            
+            if(!test.Directory.Exists)
+            {
+                Directory.CreateDirectory(test.Directory.FullName);
+            }
         }
 
         /// <summary>

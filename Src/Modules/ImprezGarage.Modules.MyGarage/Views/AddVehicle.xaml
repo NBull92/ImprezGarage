@@ -3,8 +3,8 @@
                      xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
                      xmlns:prism="http://prismlibrary.com/"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:vm="clr-namespace:ImprezGarage.Modules.MyGarage.ViewModels"
                      xmlns:views="clr-namespace:ImprezGarage.Modules.MyGarage.Views"
                      mc:Ignorable="d"
@@ -12,7 +12,7 @@
                      Width="387"
                      Height="340"
                      ResizeMode="NoResize"
-                     WindowStartupLocation="CenterScreen"
+                     WindowStartupLocation="CenterScreen"                     
                      prism:ViewModelLocator.AutoWireViewModel="True"
                      d:DataContext="{d:DesignInstance Type=vm:AddVehicleViewModel}">
     <Window.Resources>

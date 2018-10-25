@@ -27,18 +27,7 @@ namespace ImprezGarage.Modules.Logger
         private LogModel _loggerDataModel;
         #endregion
 
-        // Public methods
-        #region Methods
-        #region Initialisation
-        /// <summary>
-        /// The constructor of the logger service.
-        /// Instantiate the file location of the logs and and create the model that will store the collections of logs and log entries.
-        /// </summary>
-        public LoggerService()
-        {
-        }
-        #endregion
-        
+        #region Methods        
         /// <summary>
         /// Log a more in depth entry, with parameters as well as the basic message.
         /// </summary>

@@ -6,9 +6,13 @@
              xmlns:primitives="clr-namespace:System.Windows.Controls.DataVisualization.Charting.Primitives;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              Height="714"
-             VerticalAlignment="Top">   
+             VerticalAlignment="Top"
+             d:DataContext="{d:DesignInstance Type=vm:PetrolUsageGraphViewModel}">   
     <UserControl.Resources>
         <Style x:Key="ChartStyle" TargetType="{x:Type chartingToolkit:Chart}">
             <Setter Property="BorderBrush" Value="Black"/>

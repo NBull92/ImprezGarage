@@ -17,7 +17,7 @@ namespace ImprezGarage.Modules.MyGarage.Views
         {
             InitializeComponent();
             var viewModel = DataContext as AddVehicleViewModel;
-            viewModel.ClosingRequest += (sender, e) => Close();
+            viewModel.CloseRequest += (sender, e) => Close();
         }
     }
 }   //ImprezGarage.Modules.MyGarage.Views namespace 

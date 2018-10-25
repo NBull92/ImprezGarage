@@ -10,7 +10,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using System;
     using System.ComponentModel;
 
-    public class VehicleCreationViewModel : BindableBase, IDataErrorInfo
+    public class VehicleCreationViewModel : BindableBase, IDataErrorInfo, IDisposable
     {
         #region Attributes
         private string _make;
@@ -97,7 +97,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
         }
 
-        internal virtual void CleanUp()
+        internal virtual void Setup(VehicleType vehicleType)
+        {
+
+        }
+             
+        public void Dispose()
         {
             VehicleType = null;
             Model = null;

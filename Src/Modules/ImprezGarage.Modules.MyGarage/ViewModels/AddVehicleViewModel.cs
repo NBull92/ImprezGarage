@@ -5,28 +5,53 @@
 
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
+    using ImprezGarage.Infrastructure.BaseClasses;
     using Infrastructure.Services;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
-    using Prism.Mvvm;
-    using Prism.Regions;
     using System;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
 
-    public class AddVehicleViewModel : BindableBase
+    public class AddVehicleViewModel : DialogViewModelBase, IDisposable
     {
         #region Attributes
+        /// <summary>
+        /// Store the injected Data Service
+        /// </summary>
         private readonly IDataService _dataService;
+
+        /// <summary>
+        /// Store the injected unity container
+        /// </summary>
         private readonly IUnityContainer _container;
+
+        /// <summary>
+        /// Store the injedcted notification service
+        /// </summary>
         private readonly INotificationsService _notificationsService;
+
+        /// <summary>
+        /// Store the injected logger service
+        /// </summary>
         private readonly ILoggerService _loggerService;
 
+        /// <summary>
+        /// A collection of all the vehicle types.
+        /// </summary>
         private ObservableCollection<VehicleType> _vehicleTypes;
+
+        /// <summary>
+        /// Store which vehicle type the user selected.
+        /// </summary>
         private VehicleType _selectedVehicleType;
+
         private VehicleCreationViewModel _vehicleCreationViewModel;
-        private bool _dialogResult;
+        
+        /// <summary>
+        /// Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
+        /// </summary>
         private string _saveContent;
 
         private const string InsuranceDateWarning = "You have selected to add the vehicles insurance date, however the data entered is in the past. \n\nIs this intended?";
@@ -36,17 +61,26 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private const string VehicleUpdated = "Vehicle updated successfully.";
         private const string VehicleAdded = "Vehicle added successfully!";
 
+        /// <summary>
+        /// True if we editing and already existing vehicle.
+        /// </summary>
         public bool IsEdit;
-        public event EventHandler ClosingRequest;
         #endregion
 
         #region Parameters
+        /// <summary>
+        /// A collection of all the vehicle types.
+        /// </summary>
         public ObservableCollection<VehicleType> VehicleTypes
         {
             get => _vehicleTypes;
             set => SetProperty(ref _vehicleTypes, value);
         }
 
+        /// <summary>
+        /// Store which vehicle type the user selected.
+        /// Then go through and setup the defaults of the selected view model type.
+        /// </summary>
         public VehicleType SelectedVehicleType
         {
             get => _selectedVehicleType;
@@ -60,27 +94,23 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     {
                         case "Car":
                             VehicleCreationViewModel = _container.Resolve<CarCreationViewModel>();
-                            VehicleCreationViewModel.VehicleType = VehicleTypes.FirstOrDefault(o => o.Name == "Car");
+                            ((CarCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Car"));
                             VehicleCreationViewModel.AddVehicleVm = this;
-                            ((CarCreationViewModel)VehicleCreationViewModel).InsuranceRenewalDate = DateTime.Now;
-                            ((CarCreationViewModel)VehicleCreationViewModel).TaxExpiryDate = DateTime.Now;
                             break;
                         case "Bicycle":
                             VehicleCreationViewModel = _container.Resolve<BicycleCreationViewModel>();
-                            VehicleCreationViewModel.VehicleType = VehicleTypes.FirstOrDefault(o => o.Name == "Bicycle");
+                            ((BicycleCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Bicycle"));
                             break;
                         case "Motorbike":
                             VehicleCreationViewModel = _container.Resolve<MotorbikeCreationViewModel>();
-                            VehicleCreationViewModel.VehicleType = VehicleTypes.FirstOrDefault(o => o.Name == "Motorbike");
-                            ((MotorbikeCreationViewModel)VehicleCreationViewModel).InsuranceRenewalDate = DateTime.Now;
-                            ((MotorbikeCreationViewModel)VehicleCreationViewModel).TaxExpiryDate = DateTime.Now;
+                            ((MotorbikeCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Motorbike"));
                             break;
                     }
                 }
                 else
                 {
                     // TODO: GetType of viewmodel then clean up all the bindable variables
-                    VehicleCreationViewModel.CleanUp();
+                    VehicleCreationViewModel.Dispose();
                     VehicleCreationViewModel = null;
                 }
             }
@@ -95,14 +125,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 _vehicleCreationViewModel.PropertyChanged += VehicleCreationViewModel_PropertyChanged;
             }
         }
-
-        public bool DialogResult
-        {
-            get => _dialogResult;
-            set => SetProperty(ref _dialogResult, value);
-        }
-
-        // Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
+        
+        /// <summary>
+        /// Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
+        /// </summary>
         public string SaveContent
         {
             get => _saveContent;
@@ -118,6 +144,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Constructor, with injected interfaces.
+        /// Instantiate the commands and get the vehicle types.
+        /// </summary>
         public AddVehicleViewModel(IDataService dataService, IUnityContainer container, INotificationsService notificationsService,
             ILoggerService loggerService)
         {
@@ -127,22 +157,13 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             _loggerService = loggerService;
 
             SaveCommand = new DelegateCommand(SaveExecute, CanSave);
-            CancelCommand = new DelegateCommand(CancelExecute);
+            CancelCommand = new DelegateCommand(Close);
 
             GetVehicleTypes();
             SaveContent = "Add";
         }
 
         #region Command Handlers
-        /// <summary>
-        /// Cancel the add or edit by closing the window
-        /// </summary>
-        private void CancelExecute()
-        {
-            DialogResult = false;
-            Close();
-        }
-
         /// <summary>
         /// Checks as to whether the user has entered all the required data before they can save.
         /// </summary>
@@ -440,14 +461,13 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             SaveCommand.RaiseCanExecuteChanged();
         }
-
-        /// <summary>
-        /// Closes the window.
-        /// </summary>
-        private void Close()
+        
+        #region IDisposable
+        public override void Dispose()
         {
-            ClosingRequest?.Invoke(this, EventArgs.Empty);
+            VehicleCreationViewModel.PropertyChanged -= VehicleCreationViewModel_PropertyChanged;
         }
+        #endregion
         #endregion
     }
 }   //ImprezGarage.Modules.MyGarage.ViewModels namespace 

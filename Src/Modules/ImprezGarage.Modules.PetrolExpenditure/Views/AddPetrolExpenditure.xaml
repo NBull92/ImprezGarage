@@ -3,13 +3,18 @@
                      xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
                      xmlns:prism="http://prismlibrary.com/"
                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
+                     xmlns:vm="clr-namespace:ImprezGarage.Modules.PetrolExpenditure.ViewModels"
+                     mc:Ignorable="d"        
                      ResizeMode="NoResize" 
                      Width="396"
                      Height="110"
                      WindowStartupLocation="CenterScreen"
-                     prism:ViewModelLocator.AutoWireViewModel="True">
+                     prism:ViewModelLocator.AutoWireViewModel="True"
+                     d:DataContext="{d:DesignInstance Type=vm:AddPetrolExpenditureViewModel}">
 
     <Grid Margin="5">
         <Grid.RowDefinitions>

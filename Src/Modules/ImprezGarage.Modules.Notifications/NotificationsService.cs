@@ -9,9 +9,18 @@ namespace ImprezGarage.Modules.Notifications
     using ViewModels;
     using Views;
     using System;
+    using System.Linq;
+    using ImprezGarage.Modules.Notifications.DataModel;
 
     internal class NotificationsService : INotificationsService
     {
+        #region Attributes
+        /// <summary>
+        /// Store the current instance of the data model.
+        /// </summary>
+        private NotificationsModel _notificationsModel;
+        #endregion
+
         #region Methods
         /// <summary>
         /// Create a simple alert to inform or warn a user.
@@ -58,25 +67,33 @@ namespace ImprezGarage.Modules.Notifications
         /// </summary>
         public void Toast(string message, string header = "ImprezGarage Alert", string buttonContent = null, Action action = null)
         {
+            // Calculate the Id for this notification. It will either be zero or it will be one more than the Id of the last toast.
+            var i = 0;
+
+            if (_notificationsModel.Notifications.Any())
+            {
+                i = _notificationsModel.Notifications.Last().Id + 1;
+            }
+
             var toast = new Toast();
 
             if (toast.DataContext is ToastViewModel viewModel)
             {
+                viewModel.Id = i;
                 viewModel.Header = header;
                 viewModel.Message = message;
                 viewModel.ButtonContent = buttonContent;
+                viewModel.Action = action;
                 toast.Closed += (s, a) =>
                 {
-                    // Check if the user clicked 'yes/okay' then perform the passed through function called action.
-                    if (viewModel.DialogResult)
-                    {
-                        action?.Invoke();
-                    }
+                    _notificationsModel.LowerActivePopUps(viewModel.Id);
                 };
+
+                _notificationsModel.Notifications.Add(viewModel);
             }
 
-            toast.Show();
-            toast.BringIntoView();
+            //toast.Show();
+            //toast.BringIntoView();
         }
         #endregion
     }
