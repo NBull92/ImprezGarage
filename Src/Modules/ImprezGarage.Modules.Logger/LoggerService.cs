@@ -44,7 +44,7 @@ namespace ImprezGarage.Modules.Logger
             // Check the currently chosen level of log details and either print just the exception's message or store the whole exception in the log entry.
             if (_loggerDataModel.GetSelectedLogDetail() == LogDetail.Simple)
             {
-                Log(exception.Message, "");
+                Log(message + $"\n" + exception.Message, parameters);
             }
             else
             {
