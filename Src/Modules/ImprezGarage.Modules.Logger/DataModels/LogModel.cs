@@ -115,7 +115,7 @@ namespace ImprezGarage.Modules.Logger.DataModels
         /// Take the passed through message and parameters and create a new log entry. 
         /// Add it to the list of log messages for the current log file.
         /// </summary>
-        public void AddLogEntry(string message, params object[] parameters)
+        public void AddLogEntry(string message = null, params object[] parameters)
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -129,11 +129,13 @@ namespace ImprezGarage.Modules.Logger.DataModels
         /// Take the passed through exception and create a new log entry. 
         /// Add it to the list of log messages for the current log file.
         /// </summary>
-        public void AddLogEntry(Exception exception)
+        public void AddLogEntry(Exception exception, string message, params object[] parameters)
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                GetCurrentLog()?.LogMessages.Add(new LogEntry(exception: exception));
+                message = string.Format(message, parameters);
+
+                GetCurrentLog()?.LogMessages.Add(new LogEntry(message, exception));
             }));
         }
 
@@ -290,32 +292,48 @@ namespace ImprezGarage.Modules.Logger.DataModels
         /// Otherwise just create a new default logs configuration.
         /// </summary>
         private void LoadConfigFile()
-        {
+        {            
             LogsConfiguration logsConfiguration;
 
             if (!File.Exists(_configFileLocation))
             {
                 File.Create(_configFileLocation).Dispose();
-
-                logsConfiguration = new LogsConfiguration
-                {
-                    LogDetail = LogDetail.Simple.ToString(),
-                    LogFileType = LogFileType.Txt.ToString(),
-                    LogLife = 28,
-                };
+                logsConfiguration = CreateNewLogConfiguration();
             }
             else
             {
-                using (var readFileStream = File.OpenRead(_configFileLocation))
+                try
                 {
-                    var hierarchySerializer = new XmlSerializer(typeof(LogsConfiguration));
+                    using (var readFileStream = File.OpenRead(_configFileLocation))
+                    {
+                        var hierarchySerializer = new XmlSerializer(typeof(LogsConfiguration));
 
-                    // Try to deserialize the config file as a Logger config. If this does not succeed then create a new logger config.
-                    logsConfiguration = hierarchySerializer.Deserialize(readFileStream) as LogsConfiguration;
+                        // Try to deserialize the config file as a Logger config. If this does not succeed then create a new logger config.
+                        logsConfiguration = hierarchySerializer.Deserialize(readFileStream) as LogsConfiguration;
+                    }
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    AddLogEntry("New log configuration has been created.", ioe);
+                    logsConfiguration = CreateNewLogConfiguration();
                 }
             }
 
             SetLogsConfiguration(logsConfiguration);
+        }
+
+        /// <summary>
+        /// Create a new logs configuration.
+        /// </summary>
+        /// <returns></returns>
+        private static LogsConfiguration CreateNewLogConfiguration()
+        {
+            return new LogsConfiguration
+            {
+                LogDetail = LogDetail.Simple.ToString(),
+                LogFileType = LogFileType.Txt.ToString(),
+                LogLife = 28,
+            };
         }
 
         /// <summary>

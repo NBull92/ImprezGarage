@@ -39,7 +39,7 @@ namespace ImprezGarage.Modules.Logger
         /// <summary>
         /// Make a more in depth log entry by accepting the exception as a parameter and print out it's contents.
         /// </summary>
-        public void LogException(Exception exception)
+        public void LogException(Exception exception, string message = null, params object[] parameters)
         {
             // Check the currently chosen level of log details and either print just the exception's message or store the whole exception in the log entry.
             if (_loggerDataModel.GetSelectedLogDetail() == LogDetail.Simple)
@@ -48,7 +48,7 @@ namespace ImprezGarage.Modules.Logger
             }
             else
             {
-                _loggerDataModel.AddLogEntry(exception);
+                _loggerDataModel.AddLogEntry(exception, message, parameters);
             }
         }
 

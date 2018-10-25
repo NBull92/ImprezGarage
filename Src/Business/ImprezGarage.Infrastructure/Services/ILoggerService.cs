@@ -20,7 +20,7 @@ namespace ImprezGarage.Infrastructure.Services
         /// <summary>
         /// Make a more in depth log entry by accepting the exception as a parameter and print out it's contents.
         /// </summary>
-        void LogException(Exception exception);
+        void LogException(Exception exception, string message = null, params object[] parameters);
 
         /// <summary>
         /// Get all of the currently saved log messages and print it out in a text file.

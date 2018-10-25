@@ -16,5 +16,5 @@ DEBUG;TRACE
 841824853978
 Views\Alert.xaml;Views\Confirm.xaml;Views\Toast.xaml;
 
-False
+True
 
