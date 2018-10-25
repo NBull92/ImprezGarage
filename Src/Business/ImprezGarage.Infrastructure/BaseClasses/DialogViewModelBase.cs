@@ -31,12 +31,20 @@ namespace ImprezGarage.Infrastructure.BaseClasses
 
         #region Methods
         /// <summary>
+        /// Call close and change the dialog result at the same time.
+        /// </summary>
+        public void Close(bool dialogResult)
+        {
+            DialogResult = dialogResult;
+            Close();
+        }
+
+        /// <summary>
         /// Request the Close event for the window.
         /// This will close the window.
         /// </summary>
         public void Close()
         {
-            DialogResult = false;
             Dispose();
             CloseRequest?.Invoke(this, EventArgs.Empty);
         }

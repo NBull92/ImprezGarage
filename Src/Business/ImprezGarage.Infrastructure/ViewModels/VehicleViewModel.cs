@@ -10,6 +10,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
     using Prism.Events;
     using Prism.Mvvm;
     using System;
+    using ImprezGarage.Infrastructure.Model;
 
     public sealed class VehicleViewModel : BindableBase
     {

@@ -48,3 +48,40 @@ D:\Visual Studio Projects\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\
 D:\Visual Studio Projects\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.csproj.CoreCompileInputs.cache
 D:\Visual Studio Projects\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.dll
 D:\Visual Studio Projects\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.g.resources
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.Properties.Resources.resources
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.csproj.GenerateResource.Cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\ImprezGarage.Infrastructure.dll.config
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\ImprezGarage.Infrastructure.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\ImprezGarage.Infrastructure.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\CommonServiceLocator.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\ControlzEx.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\MahApps.Metro.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Prism.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Prism.Unity.Wpf.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Prism.Wpf.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\System.Windows.Interactivity.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Abstractions.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Configuration.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Container.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Interception.Configuration.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Interception.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.RegistrationByConvention.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.ServiceLocation.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\ControlzEx.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\MahApps.Metro.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\MahApps.Metro.xml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Prism.xml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Prism.Unity.Wpf.xml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Prism.Wpf.xml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Abstractions.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Configuration.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Container.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Interception.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.Interception.Configuration.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.RegistrationByConvention.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\bin\Debug\Unity.ServiceLocation.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\obj\Debug\ImprezGarage.Infrastructure.csprojResolveAssemblyReference.cache

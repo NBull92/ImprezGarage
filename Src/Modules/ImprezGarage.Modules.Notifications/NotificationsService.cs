@@ -23,6 +23,14 @@ namespace ImprezGarage.Modules.Notifications
 
         #region Methods
         /// <summary>
+        /// Construct the service and instantiate the mode.
+        /// </summary>
+        public NotificationsService()
+        {
+            _notificationsModel = new NotificationsModel();
+        }
+
+        /// <summary>
         /// Create a simple alert to inform or warn a user.
         /// </summary>
         public void Alert(string message, string header = "Alert")

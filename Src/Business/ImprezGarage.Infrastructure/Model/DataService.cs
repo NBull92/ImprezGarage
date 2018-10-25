@@ -63,7 +63,7 @@ namespace ImprezGarage.Infrastructure.Model
             {
                 if (_dataStorage.GetVehicles() == null || refresh)
                 {
-                    _dataStorage.SetVehicles(model.Vehicles.ToList());
+                    _dataStorage.SetVehicles(model.Vehicles?.ToList());
                 }
             }
         }
@@ -231,7 +231,7 @@ namespace ImprezGarage.Infrastructure.Model
                 {
                     model.Vehicles.Add(vehicle);
                     model.SaveChanges();
-                    _dataStorage.AddNewVehicle(model.Vehicles.Last());
+                    _dataStorage.AddNewVehicle(model.Vehicles.ToList().Last());
                 }
                 callback(null);
             }

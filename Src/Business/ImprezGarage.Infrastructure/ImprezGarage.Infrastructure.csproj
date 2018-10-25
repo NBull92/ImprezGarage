@@ -191,6 +191,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ImprezGarageDatabase.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Model\ImprezGarageDatabase.edmx.sql" />
     <Content Include="Model\ImprezGarageDatabase.tt">
       <DependentUpon>ImprezGarageDatabase.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>

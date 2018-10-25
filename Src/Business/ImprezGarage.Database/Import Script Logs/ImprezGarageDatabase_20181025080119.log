@@ -1,0 +1,13 @@
+25/10/2018 21:01:19	This log contains information about the import operation of the script 'ImprezGarageDatabase.edmx.sql' into project 'ImprezGarage.Database' on computer 'DESKTOP-UNG5SPQ' by user'nickb.
+25/10/2018 21:01:19	Started importing file: D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\Model\ImprezGarageDatabase.edmx.sql 
+25/10/2018 21:01:19	File name D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Infrastructure\Model\ImprezGarageDatabase.edmx.sql (size: 7189)
+25/10/2018 21:01:19	Parsing import script
+25/10/2018 21:01:19	Total number of batches in script: 28
+25/10/2018 21:01:19	Total number of statements in script: 16
+25/10/2018 21:01:19	The script was successfully imported into the project.
+25/10/2018 21:01:19	Analyzing schema objects...
+25/10/2018 21:01:19	Scanning project for duplicate elements
+25/10/2018 21:01:19	Finished duplicate element processing
+25/10/2018 21:01:19	In the script that you provided to the import operation, one or more statements were not fully understood. These statements were moved to the ScriptsIgnoredOnImport.sql file. Review the file contents for additional information.
+25/10/2018 21:01:19	A summary of the import was saved to the following location: D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Database\Import Script Logs\ImprezGarageDatabase_20181025080119.log
+25/10/2018 21:01:19	Click Finish to continue...

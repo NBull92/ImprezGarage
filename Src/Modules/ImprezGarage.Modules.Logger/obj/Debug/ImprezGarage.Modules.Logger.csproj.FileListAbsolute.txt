@@ -20,3 +20,41 @@ D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\o
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.csproj.CoreCompileInputs.cache
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.dll
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.csprojResolveAssemblyReference.cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\Views\LogSettings.g.cs
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger_MarkupCompile.cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger_MarkupCompile.lref
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\ImprezGarage.Modules.Logger.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\ImprezGarage.Modules.Logger.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\ControlzEx.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\ControlzEx.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\System.Windows.Interactivity.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\MahApps.Metro.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\MahApps.Metro.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Expression.Controls.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Expression.Drawing.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Expression.Effects.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Expression.Prototyping.Interactivity.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Expression.Prototyping.SketchControls.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.SDK.Expression.Blend.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Prism.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Prism.Unity.Wpf.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Prism.Wpf.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\ImprezGarage.Infrastructure.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\EntityFramework.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\ImprezGarage.Infrastructure.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\bin\Debug\ImprezGarage.Infrastructure.dll.config
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\Views\LogSettings.baml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.g.resources
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.Properties.Resources.resources
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.csproj.GenerateResource.Cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.csproj.CoreCompileInputs.cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Logger\obj\Debug\ImprezGarage.Modules.Logger.pdb

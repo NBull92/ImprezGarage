@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Infrastructure.Services
+namespace ImprezGarage.Infrastructure.Model
 {
     using System;
     using System.Collections.Generic;

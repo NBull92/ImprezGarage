@@ -20,3 +20,44 @@ D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifica
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.csproj.CoreCompileInputs.cache
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.dll
 D:\Visual Studio Projects\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.csprojResolveAssemblyReference.cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\Views\Alert.g.cs
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\Views\Confirm.g.cs
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications_MarkupCompile.cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications_MarkupCompile.lref
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\ImprezGarage.Modules.Notifications.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\ImprezGarage.Modules.Notifications.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Practices.ServiceLocation.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Practices.ServiceLocation.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\ControlzEx.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\ControlzEx.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\System.Windows.Interactivity.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\MahApps.Metro.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\MahApps.Metro.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Expression.Controls.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Expression.Drawing.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Expression.Effects.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Expression.Prototyping.Interactivity.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Expression.Prototyping.SketchControls.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.SDK.Expression.Blend.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Prism.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Prism.Unity.Wpf.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Prism.Wpf.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\Microsoft.Practices.Unity.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\ImprezGarage.Infrastructure.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\EntityFramework.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\ImprezGarage.Infrastructure.pdb
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\bin\Debug\ImprezGarage.Infrastructure.dll.config
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\Views\Toast.g.cs
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\Views\Alert.baml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\Views\Confirm.baml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\Views\Toast.baml
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.g.resources
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.Properties.Resources.resources
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.csproj.GenerateResource.Cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.csproj.CoreCompileInputs.cache
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.dll
+D:\Documents\Nick\GitHub\ImprezGarage\Src\Modules\ImprezGarage.Modules.Notifications\obj\Debug\ImprezGarage.Modules.Notifications.pdb

@@ -14,6 +14,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using Prism.Mvvm;
     using Prism.Regions;
     using System.Collections.ObjectModel;
+    using ImprezGarage.Infrastructure.Model;
 
     public class MainViewModel : BindableBase, INavigationAware
     {

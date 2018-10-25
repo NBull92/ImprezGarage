@@ -5,6 +5,7 @@
 
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
+    using ImprezGarage.Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Mvvm;
     using System;

@@ -6,6 +6,7 @@
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using ImprezGarage.Infrastructure.BaseClasses;
+    using ImprezGarage.Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
@@ -328,7 +329,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             }
             else
             {
-                DialogResult = true;
                 SaveNewVehicle();
             }
         }
@@ -352,13 +352,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 if (VehicleCreationViewModel is CarCreationViewModel vehicleCreate)
                 {
                     newVehicle.Registration = vehicleCreate.Registration;
+                    newVehicle.HasInsurance = vehicleCreate.HasInsurance;
+                    newVehicle.HasValidTax = vehicleCreate.HasValidTax;
 
-                    if (vehicleCreate.HasInsurance)
+                    if (newVehicle.HasInsurance == true)
                     {
                         newVehicle.InsuranceRenewalDate = vehicleCreate.InsuranceRenewalDate;
                     }
 
-                    if (vehicleCreate.HasValidTax)
+                    if (newVehicle.HasValidTax == true)
                     {
                         newVehicle.TaxExpiryDate = vehicleCreate.TaxExpiryDate;
                     }
@@ -369,13 +371,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 if (VehicleCreationViewModel is MotorbikeCreationViewModel vehicleCreate)
                 {
                     newVehicle.Registration = vehicleCreate.Registration;
+                    newVehicle.HasInsurance = vehicleCreate.HasInsurance;
+                    newVehicle.HasValidTax = vehicleCreate.HasValidTax;
 
-                    if (vehicleCreate.HasInsurance)
+                    if (newVehicle.HasInsurance == true)
                     {
                         newVehicle.InsuranceRenewalDate = vehicleCreate.InsuranceRenewalDate;
                     }
 
-                    if (vehicleCreate.HasValidTax)
+                    if (newVehicle.HasValidTax == true)
                     {
                         newVehicle.TaxExpiryDate = vehicleCreate.TaxExpiryDate;
                     }
@@ -398,7 +402,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 }
                                 
                 _notificationsService.Alert(VehicleAdded, NotificationHeader);
-                Close();
+                Close(true);
             }, newVehicle);
         }
         #endregion

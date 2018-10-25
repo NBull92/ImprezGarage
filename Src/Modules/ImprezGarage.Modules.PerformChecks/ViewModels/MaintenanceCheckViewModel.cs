@@ -15,6 +15,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using Prism.Regions;
     using System;
     using System.Windows.Input;
+    using ImprezGarage.Infrastructure.Model;
 
     public class MaintenanceCheckViewModel : BindableBase
     {

@@ -1,0 +1,24 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[MaintenanceChecks] (Table)
+       [dbo].[MaintenanceChecks].[IX_FK_MaintenanceChecks_MaintenanceCheckType] (Index)
+       [dbo].[MaintenanceCheckTypes] (Table)
+       [dbo].[PartsReplacementRecords] (Table)
+       [dbo].[PetrolExpenses] (Table)
+       [dbo].[Vehicles] (Table)
+       [dbo].[Vehicles].[IX_FK_Vehicles_VehicleType] (Index)
+       [dbo].[VehicleTypes] (Table)
+       [dbo].[FK_MaintenanceChecks_MaintenanceCheckType] (Foreign Key)
+       [dbo].[FK_Vehicles_VehicleType] (Foreign Key)
+
+** Supporting actions

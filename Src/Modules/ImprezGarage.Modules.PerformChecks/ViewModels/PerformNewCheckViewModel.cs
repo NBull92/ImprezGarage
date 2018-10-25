@@ -12,6 +12,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
+    using ImprezGarage.Infrastructure.Model;
 
     public class PerformNewCheckViewModel : BindableBase, INavigationAware
     {

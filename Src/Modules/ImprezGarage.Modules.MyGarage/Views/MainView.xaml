@@ -37,8 +37,9 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
 
-    <StackPanel>
-        <Border Background="#FF53CAFD"
+    <DockPanel>
+        <Border DockPanel.Dock="Top"
+            Background="#FF53CAFD"
                 BorderBrush="#FF41B1E1"
                 BorderThickness="2"
                 Margin="5"
@@ -72,8 +73,8 @@
         </Border>
        
 
-        <ListBox Grid.Row="1" Margin="5" ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+        <ListBox Margin="5" ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding SelectedVehicleChanged}" />
@@ -82,7 +83,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <DockPanel Margin="0">
-                        <StackPanel Margin="5,0,0,5" Width="284">
+                        <StackPanel Margin="5,0,0,5" Width="269">
                             <TextBlock Grid.Row="0" Text="{Binding Registration}" 
                                        FontSize="24"
                                        Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Car}" 
@@ -132,5 +133,5 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel>
+    </DockPanel>
 </UserControl>
