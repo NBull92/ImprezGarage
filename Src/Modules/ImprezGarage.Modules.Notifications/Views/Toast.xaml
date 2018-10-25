@@ -13,7 +13,6 @@
         WindowStyle="None" 
         AllowsTransparency="True" 
         Background="Transparent"
-        Loaded="Window_Loaded"
         ShowActivated="False"
         prism:ViewModelLocator.AutoWireViewModel="True"
         d:DataContext="{d:DesignInstance Type=vm:ToastViewModel}">

@@ -17,19 +17,12 @@ namespace ImprezGarage.Modules.Notifications.Views
         {
             InitializeComponent();
             var viewModel = DataContext as ToastViewModel;
-            viewModel.ClosingRequest += (sender, e) => Close();
+            viewModel.CloseRequest += (sender, e) => Close();
         }
         
         private void DoubleAnimationUsingKeyFrames_Completed(object sender, System.EventArgs e)
         {
             Close();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            var desktopWorkingArea = SystemParameters.WorkArea;
-            Left = desktopWorkingArea.Right - Width;
-            Top = desktopWorkingArea.Bottom - Height;
         }
     }
 }   //ImprezGarage.Modules.Notifications.Views namespace 
