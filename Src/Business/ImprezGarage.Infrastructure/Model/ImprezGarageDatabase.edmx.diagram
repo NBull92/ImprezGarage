@@ -8,11 +8,16 @@
         <EntityTypeShape EntityType="ImprezGarageModel.VehicleType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ImprezGarageModel.Vehicle" Width="1.5" PointX="3.375" PointY="0.75" />
         <AssociationConnector Association="ImprezGarageModel.FK_Vehicles_VehicleType" />
-        <EntityTypeShape EntityType="ImprezGarageModel.MaintenanceCheck" Width="2.125" PointX="7.625" PointY="0.875" />
-        <EntityTypeShape EntityType="ImprezGarageModel.MaintenanceCheckType" Width="1.5" PointX="5.375" PointY="1" />
+        <EntityTypeShape EntityType="ImprezGarageModel.MaintenanceCheck" Width="2.125" PointX="13.375" PointY="0.875" />
+        <EntityTypeShape EntityType="ImprezGarageModel.MaintenanceCheckType" Width="2" PointX="7.125" PointY="1.125" />
         <AssociationConnector Association="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType" />
-        <EntityTypeShape EntityType="ImprezGarageModel.PartsReplacementRecord" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ImprezGarageModel.PartsReplacementRecord" Width="2.125" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="ImprezGarageModel.PetrolExpense" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="ImprezGarageModel.MaintenanceCheckOption" Width="2.25" PointX="7" PointY="3.875" />
+        <AssociationConnector Association="ImprezGarageModel.FK_MaintenanceCheckOptions_MaintenanceCheckTypes" />
+        <EntityTypeShape EntityType="ImprezGarageModel.MaintenanceOptionsPerformed" Width="2.375" PointX="10" PointY="3.875" />
+        <AssociationConnector Association="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceCheckOptions" />
+        <AssociationConnector Association="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceChecks" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

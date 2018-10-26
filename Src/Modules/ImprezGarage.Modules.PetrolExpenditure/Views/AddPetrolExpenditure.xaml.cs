@@ -17,7 +17,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.Views
         {
             InitializeComponent();
             var viewModel = DataContext as AddPetrolExpenditureViewModel;
-            viewModel.ClosingRequest += (sender, e) => Close();
+            viewModel.CloseRequest += (sender, e) => Close();
         }
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.Views namespace 

@@ -5,20 +5,18 @@
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
+    using ImprezGarage.Infrastructure.BaseClasses;
     using ImprezGarage.Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
-    using Prism.Mvvm;
     using System;
     using System.Collections.ObjectModel;
-    
-    public class SelectMaintenanceTypeViewModel : BindableBase
+
+    public class SelectMaintenanceTypeViewModel : DialogViewModelBase
     {
         private readonly IDataService _dataService;
         private MaintenanceCheckType _selectedMaintenanceCheckType;
         private ObservableCollection<MaintenanceCheckType> _maintenanceCheckTypes;
-        private bool _dialogResult;
-        public event EventHandler ClosingRequest;
 
         #region Properties
         public MaintenanceCheckType SelectedMaintenanceCheckType
@@ -36,13 +34,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _maintenanceCheckTypes; 
             set => SetProperty(ref _maintenanceCheckTypes, value);
         }
-
-        public bool DialogResult
-        {
-            get => _dialogResult; 
-            set => SetProperty(ref _dialogResult, value);
-        }
-
+        
         #region Commands
         public DelegateCommand CancelCommand { get; }
         public DelegateCommand OkayCommand { get; }
@@ -99,14 +91,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 return;
 
             MaintenanceCheckTypes = new ObservableCollection<MaintenanceCheckType>(types.Result);            
-        }
-
-        /// <summary>
-        /// Closes the window.
-        /// </summary>
-        private void Close()
-        {
-            ClosingRequest?.Invoke(this, EventArgs.Empty);
         }
         #endregion
     }

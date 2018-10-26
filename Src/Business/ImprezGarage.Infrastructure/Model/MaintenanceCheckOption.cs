@@ -12,23 +12,21 @@ namespace ImprezGarage.Infrastructure.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class MaintenanceCheckType
+    public partial class MaintenanceCheckOption
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MaintenanceCheckType()
+        public MaintenanceCheckOption()
         {
-            this.MaintenanceChecks = new HashSet<MaintenanceCheck>();
-            this.MaintenanceCheckOptions = new HashSet<MaintenanceCheckOption>();
+            this.MaintenanceOptionsPerformeds = new HashSet<MaintenanceOptionsPerformed>();
         }
     
         public int Id { get; set; }
-        public string Type { get; set; }
-        public Nullable<int> OccurenceMonthly { get; set; }
-        public Nullable<int> OccurenceMiles { get; set; }
+        public int MaintenanceType { get; set; }
+        public string Name { get; set; }
+        public string Notes { get; set; }
     
+        public virtual MaintenanceCheckType MaintenanceCheckType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaintenanceCheck> MaintenanceChecks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaintenanceCheckOption> MaintenanceCheckOptions { get; set; }
+        public virtual ICollection<MaintenanceOptionsPerformed> MaintenanceOptionsPerformeds { get; set; }
     }
 }

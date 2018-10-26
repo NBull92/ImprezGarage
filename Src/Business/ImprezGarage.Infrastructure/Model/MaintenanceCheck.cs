@@ -14,6 +14,12 @@ namespace ImprezGarage.Infrastructure.Model
     
     public partial class MaintenanceCheck
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MaintenanceCheck()
+        {
+            this.MaintenanceOptionsPerformeds = new HashSet<MaintenanceOptionsPerformed>();
+        }
+    
         public int Id { get; set; }
         public Nullable<System.DateTime> DatePerformed { get; set; }
         public Nullable<int> MaintenanceCheckType { get; set; }
@@ -38,5 +44,7 @@ namespace ImprezGarage.Infrastructure.Model
         public Nullable<int> VehicleId { get; set; }
     
         public virtual MaintenanceCheckType MaintenanceCheckType1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaintenanceOptionsPerformed> MaintenanceOptionsPerformeds { get; set; }
     }
 }

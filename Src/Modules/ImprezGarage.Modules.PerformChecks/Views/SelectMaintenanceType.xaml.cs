@@ -17,7 +17,7 @@ namespace ImprezGarage.Modules.PerformChecks.Views
         {
             InitializeComponent();
             var viewModel = DataContext as SelectMaintenanceTypeViewModel;
-            viewModel.ClosingRequest += (sender, e) => Close();
+            viewModel.CloseRequest += (sender, e) => Close();
         }
     }
 }   //ImprezGarage.Modules.PerformChecks.Views namespace 

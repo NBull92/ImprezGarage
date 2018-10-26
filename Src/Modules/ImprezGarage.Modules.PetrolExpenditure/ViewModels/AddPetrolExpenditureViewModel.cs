@@ -5,17 +5,16 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
+    using ImprezGarage.Infrastructure.BaseClasses;
     using Infrastructure;
-    using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
-    using Prism.Mvvm;
     using System;
     using System.Windows.Controls;
     using System.Windows.Input;
 
-    public class AddPetrolExpenditureViewModel : BindableBase
+    public class AddPetrolExpenditureViewModel : DialogViewModelBase
     {
         #region Attributes
         private readonly IDataService _dataService;
@@ -27,7 +26,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         private double _amount = 0;
         private bool _addEnabled;
-        public event EventHandler ClosingRequest;
         #endregion
 
         #region Properties
@@ -109,14 +107,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             Close();
         }
         #endregion
-        
-        /// <summary>
-        /// Closes the window.
-        /// </summary>
-        private void Close()
-        {
-            ClosingRequest?.Invoke(this, EventArgs.Empty);
-        }
         #endregion
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

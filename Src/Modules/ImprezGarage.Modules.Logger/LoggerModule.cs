@@ -36,6 +36,10 @@ namespace ImprezGarage.Modules.Logger
             _regionManager = regionManager;
         }
 
+        /// <summary>
+        /// Initialize the log module and register the service to the interface.
+        /// Also set the log data model to the status bar region's context and the setup the logger service.
+        /// </summary>
         public void Initialize()
         {
             _container.RegisterType<ILoggerService, LoggerService>(new ContainerControlledLifetimeManager());
