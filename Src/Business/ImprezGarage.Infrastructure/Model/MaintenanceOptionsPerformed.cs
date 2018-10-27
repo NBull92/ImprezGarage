@@ -17,6 +17,7 @@ namespace ImprezGarage.Infrastructure.Model
         public int Id { get; set; }
         public int MaintenanceCheck { get; set; }
         public int MaintenanceOption { get; set; }
+        public Nullable<bool> IsChecked { get; set; }
         public string Notes { get; set; }
     
         public virtual MaintenanceCheckOption MaintenanceCheckOption { get; set; }

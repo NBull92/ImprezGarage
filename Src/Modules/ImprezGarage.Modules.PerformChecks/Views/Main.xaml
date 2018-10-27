@@ -5,6 +5,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"             
              xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
              xmlns:vm="clr-namespace:ImprezGarage.Modules.PerformChecks.ViewModels"
              mc:Ignorable="d" 
@@ -25,6 +26,52 @@
                 Command="{Binding PerformNewCheckCommand}" 
                 IsEnabled="{Binding SelectedVehicle,Mode=TwoWay, Converter={StaticResource NullToBoolConverter}}"/>
 
-        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ChecksPerformedRegion}" Grid.Row="1" />
+        <ListBox Grid.Row="1" ItemsSource="{Binding MaintainanceChecks}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <prism:InvokeCommandAction Command="{Binding OpenMaintenanceCheck}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock VerticalAlignment="Center" Margin="5" Width="260">
+                            <Run Text="{Binding MaintenanceCheckType.Type}"/>
+                            <Run Text=" - "/>
+                            <Run Text="{Binding DatePerformed, StringFormat=D}"/>
+                        </TextBlock>
+
+                        <Button Grid.Column="1" 
+                            ToolTip="Edit" 
+                            Command="{Binding EditMaintenanceCheckCommand}" 
+                            d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
+                            Background="{x:Null}" 
+                            BorderThickness="0"
+                            Width="48" 
+                            Margin="0">
+                            <Image Source="pack://application:,,,/ImprezGarage.Modules.PerformChecks;component/Resources/icons8-edit-24.png"
+                                    Width="24" Height="24"/>
+                        </Button>
+
+                        <Button Grid.Column="2" 
+                            Command="{Binding DeleteMaintenanceCheckCommand}" 
+                            ToolTip="Delete"
+                            d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
+                            Background="{x:Null}" 
+                            BorderThickness="0"
+                            Width="48" 
+                            Margin="0">
+                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-close-window-24.png"
+                                    Width="24" Height="24"/>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

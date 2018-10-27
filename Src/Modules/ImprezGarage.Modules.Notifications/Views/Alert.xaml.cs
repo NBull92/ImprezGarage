@@ -17,7 +17,7 @@ namespace ImprezGarage.Modules.Notifications.Views
         {
             InitializeComponent();
             var viewModel = DataContext as AlertViewModel;
-            viewModel.ClosingRequest += (sender, e) => Close();
+            viewModel.CloseRequest += (sender, e) => Close();
         }
     }
 }   //ImprezGarage.Modules.Notifications.Views namespace 

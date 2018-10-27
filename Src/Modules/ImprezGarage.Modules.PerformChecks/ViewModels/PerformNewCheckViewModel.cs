@@ -13,6 +13,9 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using Prism.Regions;
     using System;
     using ImprezGarage.Infrastructure.Model;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using Prism.Events;
 
     public class PerformNewCheckViewModel : BindableBase, INavigationAware
     {
@@ -21,7 +24,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
-        
+        private readonly IEventAggregator _eventAggregator;
         private static int _selectedVehicleId;
         private MaintenanceCheck _maintenanceCheck;
         private const string CheckCompleted = "Maintenance check completed!";
@@ -29,32 +32,8 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private const string NotificationHeader = "Alert!";
         private MaintenanceCheckType _selectedMaintenanceCheckType;
         private bool _isEditMode;
-        private string _submitText;
-
-        #region Check box variables
-        private bool _checkedAirFilter;
-        private bool _replacedAirFilter;
-        private bool _checkCoolantLevels;
-        private bool _flushedSystemAndChangeCoolant;
-        private bool _changeFanBelt;
-        private bool _checkedBattery;
-        private bool _checkedOilLevels;
-        private bool _changedOil;
-        private bool _replacedOilFilter;
-        private bool _checkAutoTransmissionFluid;
-        private bool _addedAutoTransmissionFluid;
-        private bool _checkPowerSteeringFluidLevels;
-        #endregion
-
-        #region Notes variables
-        private string _airFilterNotes;
-        private string _coolantNotes;
-        private string _batteryNotes;
-        private string _oilLevelNotes;
-        private string _autoTransmissionFluidNotes;
-        private string _powerSteeringNotes;
-        #endregion
-
+        private string _submitText;        
+        private ObservableCollection<MaintenanceOptionsPerformed> _maintenanceOptionsPerformed;
         #endregion
 
         #region Properties
@@ -62,6 +41,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         {
             get => _selectedMaintenanceCheckType;
             set => SetProperty(ref _selectedMaintenanceCheckType, value);
+        }
+
+        public ObservableCollection<MaintenanceOptionsPerformed> MaintenanceOptionsPerformed
+        {
+            get => _maintenanceOptionsPerformed;
+            set => SetProperty(ref _maintenanceOptionsPerformed, value);
         }
 
         public bool IsEditMode
@@ -75,119 +60,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             get => _submitText;
             set => SetProperty(ref _submitText, value);
         }
-
-        #region Check box variables
-        public bool CheckedAirFilter
-        {
-            get => _checkedAirFilter;
-            set => SetProperty(ref _checkedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool ReplacedAirFilter
-        {
-            get => _replacedAirFilter;
-            set => SetProperty(ref _replacedAirFilter, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool CheckCoolantLevels
-        {
-            get => _checkCoolantLevels;
-            set => SetProperty(ref _checkCoolantLevels, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool FlushedSystemAndChangeCoolant
-        {
-            get => _flushedSystemAndChangeCoolant;
-            set => SetProperty(ref _flushedSystemAndChangeCoolant, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool ChangeFanBelt
-        {
-            get => _changeFanBelt;
-            set => SetProperty(ref _changeFanBelt, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool CheckedBattery
-        {
-            get => _checkedBattery;
-            set => SetProperty(ref _checkedBattery, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool CheckedOilLevels
-        {
-            get => _checkedOilLevels;
-            set => SetProperty(ref _checkedOilLevels, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool ChangedOil
-        {
-            get => _changedOil;
-            set => SetProperty(ref _changedOil, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool ReplacedOilFilter
-        {
-            get => _replacedOilFilter;
-            set => SetProperty(ref _replacedOilFilter, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool CheckAutoTransmissionFluid
-        {
-            get => _checkAutoTransmissionFluid;
-            set => SetProperty(ref _checkAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool AddedAutoTransmissionFluid
-        {
-            get => _addedAutoTransmissionFluid;
-            set => SetProperty(ref _addedAutoTransmissionFluid, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-
-        public bool CheckPowerSteeringFluidLevels
-        {
-            get => _checkPowerSteeringFluidLevels;
-            set => SetProperty(ref _checkPowerSteeringFluidLevels, value, SubmitCommand.RaiseCanExecuteChanged);
-        }
-        #endregion
-
-        #region Notes variables
-        public string AirFilterNotes
-        {
-            get => _airFilterNotes;
-            set => SetProperty(ref _airFilterNotes, value);
-        }
-
-        public string CoolantNotes
-        {
-            get => _coolantNotes;
-            set => SetProperty(ref _coolantNotes, value);
-        }
-
-        public string BatteryNotes
-        {
-            get => _batteryNotes;
-            set => SetProperty(ref _batteryNotes, value);
-        }
-
-        public string OilLevelNotes
-        {
-            get => _oilLevelNotes;
-            set => SetProperty(ref _oilLevelNotes, value);
-        }
-
-        public string AutoTransmissionFluidNotes
-        {
-            get => _autoTransmissionFluidNotes;
-            set => SetProperty(ref _autoTransmissionFluidNotes, value);
-        }
-
-        public string PowerSteeringNotes
-        {
-            get => _powerSteeringNotes;
-            set => SetProperty(ref _powerSteeringNotes, value);
-        }
-        #endregion
-
+        
         #region Commands
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SubmitCommand { get; set; }
@@ -195,15 +68,17 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #endregion
         
         #region Methods
-        public PerformNewCheckViewModel(IDataService dataService, INotificationsService notificationsService, IRegionManager regionManager, ILoggerService loggerService)
+        public PerformNewCheckViewModel(IDataService dataService, INotificationsService notificationsService, IRegionManager regionManager,
+            ILoggerService loggerService, IEventAggregator eventAggregator)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
             _regionManager = regionManager;
             _loggerService = loggerService;
+            _eventAggregator = eventAggregator;
 
             SubmitText = "Submit";
-            SubmitCommand = new DelegateCommand(SubmitExecute, CanSubmit);
+            SubmitCommand = new DelegateCommand(SubmitExecute);
             CancelCommand = new DelegateCommand(CancelExecute);
         }
 
@@ -225,49 +100,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 };
             }
 
-            _maintenanceCheck.CheckedAirFilter = Convert.ToBoolean(CheckedAirFilter);
-            _maintenanceCheck.ReplacedAirFilter = Convert.ToBoolean(ReplacedAirFilter);
-            _maintenanceCheck.CheckCoolantLevels = Convert.ToBoolean(CheckCoolantLevels);
-            _maintenanceCheck.FlushedSystemAndChangeCoolant = Convert.ToBoolean(FlushedSystemAndChangeCoolant);
-            _maintenanceCheck.ChangeFanBelt = Convert.ToBoolean(ChangeFanBelt);
-            _maintenanceCheck.CheckedBattery = Convert.ToBoolean(CheckedBattery);
-            _maintenanceCheck.CheckedOilLevels = Convert.ToBoolean(CheckedOilLevels);
-            _maintenanceCheck.ReplacedOilFilter = Convert.ToBoolean(ReplacedOilFilter);
-            _maintenanceCheck.CheckAutoTransmissionFluid = Convert.ToBoolean(CheckAutoTransmissionFluid);
-            _maintenanceCheck.AddedAutoTransmissionFluid = Convert.ToBoolean(AddedAutoTransmissionFluid);
-            _maintenanceCheck.CheckPowerSteeringFluidLevels = Convert.ToBoolean(CheckPowerSteeringFluidLevels);
-
-            //Check if the user has added any notes and add them to the maintenance check.
-            if (!string.IsNullOrEmpty(AirFilterNotes))
-            {
-                _maintenanceCheck.AirFilterNotes = AirFilterNotes;
-            }
-
-            if (!string.IsNullOrEmpty(CoolantNotes))
-            {
-                _maintenanceCheck.CoolantNotes = CoolantNotes;
-            }
-
-            if (!string.IsNullOrEmpty(BatteryNotes))
-            {
-                _maintenanceCheck.BatteryNotes = BatteryNotes;
-            }
-
-            if (!string.IsNullOrEmpty(OilLevelNotes))
-            {
-                _maintenanceCheck.OilLevelNotes = OilLevelNotes;
-            }
-
-            if (!string.IsNullOrEmpty(AutoTransmissionFluidNotes))
-            {
-                _maintenanceCheck.AutoTransmissionFluidNotes = AutoTransmissionFluidNotes;
-            }
-
-            if (!string.IsNullOrEmpty(PowerSteeringNotes))
-            {
-                _maintenanceCheck.PowerSteeringNotes = PowerSteeringNotes;
-            }
-
             if (IsEditMode)
             {
                 _dataService.UpdateMaintenanceCheck((error) =>
@@ -278,8 +110,22 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                         return;
                     }
 
-                    _notificationsService.Alert(CheckUpdated, NotificationHeader);
-                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
+                    foreach (var option in MaintenanceOptionsPerformed)
+                    {
+                        option.MaintenanceCheck = _maintenanceCheck.Id;
+                    }
+
+                    _dataService.UpdateOptionsPerformed((optionsError) =>
+                    {
+                        if (optionsError != null)
+                        {
+                            _loggerService.LogException(optionsError);
+                            return;
+                        }
+
+                        _notificationsService.Alert(CheckUpdated, NotificationHeader);
+                        _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+                    }, MaintenanceOptionsPerformed);
                 }, _maintenanceCheck);
             }
             else
@@ -293,8 +139,22 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                         return;
                     }
 
-                    _notificationsService.Alert(CheckCompleted, NotificationHeader);
-                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
+                    foreach (var option in MaintenanceOptionsPerformed)
+                    {
+                        option.MaintenanceCheck = _maintenanceCheck.Id;
+                    }
+
+                    _dataService.UpdateOptionsPerformed((optionsError) =>
+                    {
+                        if (optionsError != null)
+                        {
+                            _loggerService.LogException(optionsError);
+                            return;
+                        }
+
+                        _notificationsService.Alert(CheckCompleted, NotificationHeader);
+                        _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+                    }, MaintenanceOptionsPerformed);
                 }, _maintenanceCheck);
             }
         }
@@ -305,13 +165,11 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         /// <returns>True/False</returns>
         private bool CanSubmit()
         {
-            //check if the user has actually done anything.
-            if (!CheckedAirFilter && !ReplacedAirFilter && !CheckCoolantLevels && !FlushedSystemAndChangeCoolant
-                 && !ChangeFanBelt && !CheckedBattery && !CheckedOilLevels && !ReplacedOilFilter && !CheckAutoTransmissionFluid
-                 && !AddedAutoTransmissionFluid && !CheckPowerSteeringFluidLevels)
+            if (MaintenanceOptionsPerformed == null)
                 return false;
 
-            return true;
+            //check if the user has actually done anything.
+            return MaintenanceOptionsPerformed.Any(o => o.IsChecked == true);
         }
 
         /// <summary>
@@ -323,6 +181,71 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
         }
         #endregion
+        
+        private void SetProperties()
+        {
+            SubmitText = "Update";            
+        }
+
+        private void GetMaintenanceCheckType(int maintenanceCheckTypeId)
+        {
+            MaintenanceOptionsPerformed = new ObservableCollection<MaintenanceOptionsPerformed>();
+            SelectedMaintenanceCheckType = null;
+
+            var type = _dataService.GetMaintenanceCheckTypeById(maintenanceCheckTypeId);
+
+            if (type == null || type.Result == null)
+                return;
+
+            SelectedMaintenanceCheckType = SelectedMaintenanceCheckType = type.Result;
+
+            GetMaintenanceCheckOptions();
+        }
+
+        /// <summary>
+        /// Retrieve all of the current Options assocaited with the selected maintenance type and make a list of OptionsPerformed, based off of these Options.
+        /// </summary>
+        private void GetMaintenanceCheckOptions()
+        {
+            var options = _dataService.GetMaintenanceCheckOptionsForType(SelectedMaintenanceCheckType.Id);
+
+            if (options == null || options.Result == null)
+                return;
+
+            foreach (var option in options.Result)
+            {
+                MaintenanceOptionsPerformed optionPerformed = null;
+
+                if(IsEditMode && _maintenanceCheck != null)
+                {
+                    var currentState = _dataService.GetOptionPerformedCurrentState(_maintenanceCheck.Id, option.Id);
+
+                    if (currentState == null || currentState.Result == null)
+                    {
+                        optionPerformed = new MaintenanceOptionsPerformed
+                        {
+                            MaintenanceCheckOption = option,
+                            IsChecked = false
+                        };
+                    }
+                    else
+                    {
+                        optionPerformed = currentState.Result;
+                        optionPerformed.MaintenanceCheckOption = option;
+                    }
+                }
+                else
+                {
+                    optionPerformed = new MaintenanceOptionsPerformed
+                    {
+                        MaintenanceCheckOption = option,
+                        IsChecked = false
+                    };
+                }
+
+                MaintenanceOptionsPerformed.Add(optionPerformed);
+            }
+        }
 
         #region INavigationAware
         public void OnNavigatedTo(NavigationContext navigationContext)
@@ -404,63 +327,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         {
         }
         #endregion
-        
-        private void SetProperties()
-        {
-            SubmitText = "Update";
-            CheckedAirFilter = Convert.ToBoolean(_maintenanceCheck.CheckedAirFilter);
-            ReplacedAirFilter = Convert.ToBoolean(_maintenanceCheck.ReplacedAirFilter);
-            CheckCoolantLevels = Convert.ToBoolean(_maintenanceCheck.CheckCoolantLevels);
-            FlushedSystemAndChangeCoolant = Convert.ToBoolean(_maintenanceCheck.FlushedSystemAndChangeCoolant);
-            ChangeFanBelt = Convert.ToBoolean(_maintenanceCheck.ChangeFanBelt);
-            CheckedBattery = Convert.ToBoolean(_maintenanceCheck.CheckedBattery);
-            CheckedOilLevels = Convert.ToBoolean(_maintenanceCheck.CheckedOilLevels);
-            ReplacedOilFilter = Convert.ToBoolean(_maintenanceCheck.ReplacedOilFilter);
-            CheckAutoTransmissionFluid = Convert.ToBoolean(_maintenanceCheck.CheckAutoTransmissionFluid);
-            AddedAutoTransmissionFluid = Convert.ToBoolean(_maintenanceCheck.AddedAutoTransmissionFluid);
-            CheckPowerSteeringFluidLevels = Convert.ToBoolean(_maintenanceCheck.CheckPowerSteeringFluidLevels);
-
-            //Check if the user has added any notes and add them to the maintenance check.
-            if (!string.IsNullOrEmpty(_maintenanceCheck.AirFilterNotes))
-            {
-                AirFilterNotes = _maintenanceCheck.AirFilterNotes;
-            }
-
-            if (!string.IsNullOrEmpty(_maintenanceCheck.CoolantNotes))
-            {
-                CoolantNotes = _maintenanceCheck.CoolantNotes;
-            }
-
-            if (!string.IsNullOrEmpty(_maintenanceCheck.BatteryNotes))
-            {
-                BatteryNotes = _maintenanceCheck.BatteryNotes;
-            }
-
-            if (!string.IsNullOrEmpty(_maintenanceCheck.OilLevelNotes))
-            {
-                OilLevelNotes = _maintenanceCheck.OilLevelNotes;
-            }
-
-            if (!string.IsNullOrEmpty(_maintenanceCheck.AutoTransmissionFluidNotes))
-            {
-                AutoTransmissionFluidNotes = _maintenanceCheck.AutoTransmissionFluidNotes;
-            }
-
-            if (!string.IsNullOrEmpty(_maintenanceCheck.PowerSteeringNotes))
-            {
-                PowerSteeringNotes = _maintenanceCheck.PowerSteeringNotes;
-            }
-        }
-
-        private void GetMaintenanceCheckType(int maintenanceCheckTypeId)
-        {
-            var type = _dataService.GetMaintenanceCheckTypeById(maintenanceCheckTypeId);
-
-            if (type == null || type.Result == null)
-                return;
-
-            SelectedMaintenanceCheckType = SelectedMaintenanceCheckType = type.Result;
-        }
         #endregion
     }
 }   //ImprezGarage.Modules.PerformChecks.ViewModels namespace

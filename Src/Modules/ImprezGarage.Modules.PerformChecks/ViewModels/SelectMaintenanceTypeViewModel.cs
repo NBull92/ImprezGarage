@@ -9,7 +9,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using ImprezGarage.Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
-    using System;
     using System.Collections.ObjectModel;
 
     public class SelectMaintenanceTypeViewModel : DialogViewModelBase

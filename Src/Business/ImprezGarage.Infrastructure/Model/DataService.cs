@@ -217,6 +217,38 @@ namespace ImprezGarage.Infrastructure.Model
                 return null;
             }
         }
+
+        /// <summary>
+        /// Return a list of all the options that are associated with a certain maintenance check type.
+        /// </summary>
+        public Task<List<MaintenanceCheckOption>> GetMaintenanceCheckOptionsForType(int typeId)
+        {
+            using (var model = new ImprezGarageEntities())
+            {
+                if(model.MaintenanceCheckOptions.Any(o => o.MaintenanceType == typeId))
+                {
+                    var options = new List<MaintenanceCheckOption>(model.MaintenanceCheckOptions.Where(o => o.MaintenanceType == typeId));
+                    return Task.Run(() => options);
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// See if the user had previously chosen this maintenance option during a previous check.
+        /// </summary>
+        public Task<MaintenanceOptionsPerformed> GetOptionPerformedCurrentState(int maintenanceCheckId, int optionId)
+        {
+            using (var model = new ImprezGarageEntities())
+            {
+                if (model.MaintenanceOptionsPerformeds.Any(o => o.MaintenanceCheck == maintenanceCheckId && o.MaintenanceOption == optionId))
+                {
+                    var option = model.MaintenanceOptionsPerformeds.FirstOrDefault(o => o.MaintenanceCheck == maintenanceCheckId && o.MaintenanceOption == optionId);
+                    return Task.Run(() => option);
+                }
+                return null;
+            }
+        }
         #endregion
 
         #region Adds
@@ -285,6 +317,55 @@ namespace ImprezGarage.Infrastructure.Model
                 callback(ex);
             }
         }
+
+        /// <summary>
+        /// Save the OptionsPerformed to the database. First off check to see if any of them are currently in the database and if so, update their current information.
+        /// If they are in the database and now set to not checked then delete them.
+        /// If they are not currently in the database and not set to checked, then add the new option.
+        /// </summary>
+        public void UpdateOptionsPerformed(Action<Exception> callback, IEnumerable<MaintenanceOptionsPerformed> maintenanceOptionsPerformed)
+        {
+            try
+            {
+                using (var model = new ImprezGarageEntities())
+                {
+                    foreach(var options in maintenanceOptionsPerformed)
+                    {
+                        if (options?.Id != 0)
+                        {
+                            if (options.IsChecked == true)
+                            {
+                                if (model.MaintenanceOptionsPerformeds.Any(o => o.Id == options.Id))
+                                {
+                                    model.MaintenanceOptionsPerformeds.FirstOrDefault(o => o.Id == options.Id).Notes = options.Notes;
+                                }
+                            }
+                            else
+                            {
+                                if (model.MaintenanceOptionsPerformeds.Any(o => o.Id == options.Id))
+                                {
+                                    var performed = model.MaintenanceOptionsPerformeds.FirstOrDefault(o => o.Id == options.Id);
+                                    model.MaintenanceOptionsPerformeds.Remove(performed);
+                                }
+                            }
+                        }
+                        else if (options.IsChecked == true)
+                        {
+                            options.MaintenanceOption = options.MaintenanceCheckOption.Id;
+                            options.MaintenanceCheckOption = null;
+                            options.MaintenanceCheck1 = null;
+                            model.MaintenanceOptionsPerformeds.Add(options);
+                        }
+                    }
+                    model.SaveChanges();
+                    callback(null);
+                }
+            }
+            catch (Exception ex)
+            {
+                callback(ex);
+            }
+        }
         #endregion
 
         #region Deletes
@@ -313,7 +394,7 @@ namespace ImprezGarage.Infrastructure.Model
         }
         
         /// <summary>
-        /// Delete a maintenance check from the database
+        /// Delete a maintenance check from the database and any performed options.
         /// </summary>
         public void DeleteMaintenanceCheck(Action<Exception> callback, int maintenanceCheckId)
         {
@@ -324,6 +405,12 @@ namespace ImprezGarage.Infrastructure.Model
                     if (model.MaintenanceChecks.Any(o => o.Id == maintenanceCheckId))
                     {
                         var check = model.MaintenanceChecks.First(o => o.Id == maintenanceCheckId);
+
+                        if (model.MaintenanceOptionsPerformeds.Any(o => o.MaintenanceCheck == maintenanceCheckId))
+                        {
+                            model.MaintenanceOptionsPerformeds.RemoveRange(model.MaintenanceOptionsPerformeds.Where(o => o.MaintenanceCheck == maintenanceCheckId));
+                        }
+                        
                         model.MaintenanceChecks.Remove(check);
                         model.SaveChanges();
                         callback(null);
@@ -412,24 +499,7 @@ namespace ImprezGarage.Infrastructure.Model
                     if (model.MaintenanceChecks.Any(o => o.Id == maintenanceCheck.Id))
                     {
                         var check = model.MaintenanceChecks.First(o => o.Id == maintenanceCheck.Id);
-                        check.AddedAutoTransmissionFluid = check.AddedAutoTransmissionFluid;
-                        check.AirFilterNotes = check.AirFilterNotes;
-                        check.AutoTransmissionFluidNotes = check.AutoTransmissionFluidNotes;
-                        check.BatteryNotes = check.BatteryNotes;
-                        check.ChangeFanBelt = check.ChangeFanBelt;
-                        check.CheckAutoTransmissionFluid = check.CheckAutoTransmissionFluid;
-                        check.CheckCoolantLevels = check.CheckCoolantLevels;
-                        check.CheckedAirFilter = check.CheckedAirFilter;
-                        check.CheckedBattery = check.CheckedBattery;
-                        check.CheckedOilLevels = check.CheckedOilLevels;
-                        check.CheckPowerSteeringFluidLevels = check.CheckPowerSteeringFluidLevels;
-                        check.CoolantNotes = check.CoolantNotes;
-                        check.FlushedSystemAndChangeCoolant = check.FlushedSystemAndChangeCoolant;
-                        check.OilLevelNotes = check.OilLevelNotes;
                         check.PerformedBy = check.PerformedBy;
-                        check.PowerSteeringNotes = check.PowerSteeringNotes;
-                        check.ReplacedAirFilter = check.ReplacedAirFilter;
-                        check.ReplacedOilFilter = check.ReplacedOilFilter;
 
                         model.SaveChanges();
                     }

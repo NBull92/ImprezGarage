@@ -65,6 +65,16 @@ namespace ImprezGarage.Infrastructure.Services
         /// Get the last time a specific vehicle had a maintenance check.
         /// </summary>
         Task<DateTime?> GetLastMaintenanceCheckDateForVehicleByVehicleId(int vehicleId);
+
+        /// <summary>
+        /// Return a list of all the options that are associated with a certain maintenance check type.
+        /// </summary>
+        Task<List<MaintenanceCheckOption>> GetMaintenanceCheckOptionsForType(int typeId);
+
+        /// <summary>
+        /// See if the user had previously chosen this maintenance option during a previous check.
+        /// </summary>
+        Task<MaintenanceOptionsPerformed> GetOptionPerformedCurrentState(int maintenanceCheckId, int optionId);
         #endregion
 
         #region Adds
@@ -82,6 +92,13 @@ namespace ImprezGarage.Infrastructure.Services
         /// Add a new petrol expense to the database.
         /// </summary>
         void AddPetrolExpenditure(Action<Exception> callback, double amount, int vehicleId);
+
+        /// <summary>
+        /// Save the OptionsPerformed to the database. First off check to see if any of them are currently in the database and if so, update their current information.
+        /// If they are in the database and now set to not checked then delete them.
+        /// If they are not currently in the database and not set to checked, then add the new option.
+        /// </summary>
+        void UpdateOptionsPerformed(Action<Exception> callback, IEnumerable<MaintenanceOptionsPerformed> maintenanceOptionsPerformed);
         #endregion
 
         #region Deletes

@@ -111,7 +111,13 @@
     <Compile Include="Model\MaintenanceCheck.cs">
       <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\MaintenanceCheckOption.cs">
+      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\MaintenanceCheckType.cs">
+      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MaintenanceOptionsPerformed.cs">
       <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PartsReplacementRecord.cs">

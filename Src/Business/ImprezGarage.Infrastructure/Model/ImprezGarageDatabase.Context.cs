@@ -27,11 +27,11 @@ namespace ImprezGarage.Infrastructure.Model
     
         public virtual DbSet<VehicleType> VehicleTypes { get; set; }
         public virtual DbSet<Vehicle> Vehicles { get; set; }
-        public virtual DbSet<MaintenanceCheck> MaintenanceChecks { get; set; }
         public virtual DbSet<MaintenanceCheckType> MaintenanceCheckTypes { get; set; }
         public virtual DbSet<PartsReplacementRecord> PartsReplacementRecords { get; set; }
         public virtual DbSet<PetrolExpense> PetrolExpenses { get; set; }
-        public virtual DbSet<MaintenanceCheckOption> MaintenanceCheckOptions { get; set; }
         public virtual DbSet<MaintenanceOptionsPerformed> MaintenanceOptionsPerformeds { get; set; }
+        public virtual DbSet<MaintenanceCheckOption> MaintenanceCheckOptions { get; set; }
+        public virtual DbSet<MaintenanceCheck> MaintenanceChecks { get; set; }
     }
 }

@@ -63,14 +63,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\ChecksPerformedViewModel.cs" />
     <Compile Include="ViewModels\MaintenanceCheckViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PerformNewCheckViewModel.cs" />
     <Compile Include="ViewModels\SelectMaintenanceTypeViewModel.cs" />
-    <Compile Include="Views\ChecksPerformed.xaml.cs">
-      <DependentUpon>ChecksPerformed.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
@@ -101,10 +97,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\ChecksPerformed.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

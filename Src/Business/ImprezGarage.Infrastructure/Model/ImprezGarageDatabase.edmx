@@ -12,7 +12,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaintenanceType" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="120" Nullable="false" />
-          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Tooltip" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="MaintenanceChecks">
           <Key>
@@ -22,23 +22,6 @@
           <Property Name="DatePerformed" Type="datetime" />
           <Property Name="MaintenanceCheckType" Type="int" />
           <Property Name="PerformedBy" Type="nvarchar" MaxLength="50" />
-          <Property Name="CheckedAirFilter" Type="bit" />
-          <Property Name="ReplacedAirFilter" Type="bit" />
-          <Property Name="CheckCoolantLevels" Type="bit" />
-          <Property Name="FlushedSystemAndChangeCoolant" Type="bit" />
-          <Property Name="ChangeFanBelt" Type="bit" />
-          <Property Name="CheckedBattery" Type="bit" />
-          <Property Name="CheckedOilLevels" Type="bit" />
-          <Property Name="ReplacedOilFilter" Type="bit" />
-          <Property Name="CheckAutoTransmissionFluid" Type="bit" />
-          <Property Name="AddedAutoTransmissionFluid" Type="bit" />
-          <Property Name="CheckPowerSteeringFluidLevels" Type="bit" />
-          <Property Name="AirFilterNotes" Type="nvarchar" MaxLength="120" />
-          <Property Name="CoolantNotes" Type="nvarchar" MaxLength="120" />
-          <Property Name="BatteryNotes" Type="nvarchar" MaxLength="120" />
-          <Property Name="OilLevelNotes" Type="nvarchar" MaxLength="120" />
-          <Property Name="AutoTransmissionFluidNotes" Type="nvarchar" MaxLength="120" />
-          <Property Name="PowerSteeringNotes" Type="nvarchar" MaxLength="120" />
           <Property Name="VehicleId" Type="int" />
         </EntityType>
         <EntityType Name="MaintenanceCheckTypes">
@@ -57,6 +40,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaintenanceCheck" Type="int" Nullable="false" />
           <Property Name="MaintenanceOption" Type="int" Nullable="false" />
+          <Property Name="IsChecked" Type="bit" />
           <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PartsReplacementRecords">
@@ -222,29 +206,29 @@
             <End Role="VehicleType" EntitySet="VehicleTypes" />
             <End Role="Vehicle" EntitySet="Vehicles" />
           </AssociationSet>
-          <EntitySet Name="MaintenanceChecks" EntityType="ImprezGarageModel.MaintenanceCheck" />
           <EntitySet Name="MaintenanceCheckTypes" EntityType="ImprezGarageModel.MaintenanceCheckType" />
-          <AssociationSet Name="FK_MaintenanceChecks_MaintenanceCheckType" Association="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType">
-            <End Role="MaintenanceCheckType" EntitySet="MaintenanceCheckTypes" />
-            <End Role="MaintenanceCheck" EntitySet="MaintenanceChecks" />
-          </AssociationSet>
           <EntitySet Name="PartsReplacementRecords" EntityType="ImprezGarageModel.PartsReplacementRecord" />
           <EntitySet Name="PetrolExpenses" EntityType="ImprezGarageModel.PetrolExpense" />
+          <EntitySet Name="MaintenanceOptionsPerformeds" EntityType="ImprezGarageModel.MaintenanceOptionsPerformed" />
           <EntitySet Name="MaintenanceCheckOptions" EntityType="ImprezGarageModel.MaintenanceCheckOption" />
           <AssociationSet Name="FK_MaintenanceCheckOptions_MaintenanceCheckTypes" Association="ImprezGarageModel.FK_MaintenanceCheckOptions_MaintenanceCheckTypes">
             <End Role="MaintenanceCheckType" EntitySet="MaintenanceCheckTypes" />
             <End Role="MaintenanceCheckOption" EntitySet="MaintenanceCheckOptions" />
           </AssociationSet>
-          <EntitySet Name="MaintenanceOptionsPerformeds" EntityType="ImprezGarageModel.MaintenanceOptionsPerformed" />
           <AssociationSet Name="FK_MaintenanceOptionsPerformed_MaintenanceCheckOptions" Association="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceCheckOptions">
             <End Role="MaintenanceCheckOption" EntitySet="MaintenanceCheckOptions" />
             <End Role="MaintenanceOptionsPerformed" EntitySet="MaintenanceOptionsPerformeds" />
+          </AssociationSet>
+          <EntitySet Name="MaintenanceChecks" EntityType="ImprezGarageModel.MaintenanceCheck" />
+          <AssociationSet Name="FK_MaintenanceChecks_MaintenanceCheckType" Association="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType">
+            <End Role="MaintenanceCheckType" EntitySet="MaintenanceCheckTypes" />
+            <End Role="MaintenanceCheck" EntitySet="MaintenanceChecks" />
           </AssociationSet>
           <AssociationSet Name="FK_MaintenanceOptionsPerformed_MaintenanceChecks" Association="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceChecks">
             <End Role="MaintenanceCheck" EntitySet="MaintenanceChecks" />
             <End Role="MaintenanceOptionsPerformed" EntitySet="MaintenanceOptionsPerformeds" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Vehicle">
           <Key>
             <PropertyRef Name="Id" />
@@ -278,58 +262,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="MaintenanceCheck">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DatePerformed" Type="DateTime" Precision="3" />
-          <Property Name="MaintenanceCheckType" Type="Int32" />
-          <NavigationProperty Name="MaintenanceCheckType1" Relationship="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType" FromRole="MaintenanceCheck" ToRole="MaintenanceCheckType" />
-          <Property Name="PerformedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CheckedAirFilter" Type="Boolean" />
-          <Property Name="ReplacedAirFilter" Type="Boolean" />
-          <Property Name="CheckCoolantLevels" Type="Boolean" />
-          <Property Name="FlushedSystemAndChangeCoolant" Type="Boolean" />
-          <Property Name="ChangeFanBelt" Type="Boolean" />
-          <Property Name="CheckedBattery" Type="Boolean" />
-          <Property Name="CheckedOilLevels" Type="Boolean" />
-          <Property Name="ReplacedOilFilter" Type="Boolean" />
-          <Property Name="CheckAutoTransmissionFluid" Type="Boolean" />
-          <Property Name="AddedAutoTransmissionFluid" Type="Boolean" />
-          <Property Name="CheckPowerSteeringFluidLevels" Type="Boolean" />
-          <Property Name="AirFilterNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="CoolantNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="BatteryNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="OilLevelNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="AutoTransmissionFluidNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="PowerSteeringNotes" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="VehicleId" Type="Int32" />
-          <NavigationProperty Name="MaintenanceOptionsPerformeds" Relationship="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceChecks" FromRole="MaintenanceCheck" ToRole="MaintenanceOptionsPerformed" />
-        </EntityType>
         <EntityType Name="MaintenanceCheckType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MaintenanceChecks" Relationship="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType" FromRole="MaintenanceCheckType" ToRole="MaintenanceCheck" />
           <Property Name="OccurenceMonthly" Type="Int32" />
           <Property Name="OccurenceMiles" Type="Int32" />
           <NavigationProperty Name="MaintenanceCheckOptions" Relationship="ImprezGarageModel.FK_MaintenanceCheckOptions_MaintenanceCheckTypes" FromRole="MaintenanceCheckType" ToRole="MaintenanceCheckOption" />
+          <NavigationProperty Name="MaintenanceChecks" Relationship="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType" FromRole="MaintenanceCheckType" ToRole="MaintenanceCheck" />
         </EntityType>
-        <Association Name="FK_MaintenanceChecks_MaintenanceCheckType">
-          <End Type="ImprezGarageModel.MaintenanceCheckType" Role="MaintenanceCheckType" Multiplicity="0..1" />
-          <End Type="ImprezGarageModel.MaintenanceCheck" Role="MaintenanceCheck" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MaintenanceCheckType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MaintenanceCheck">
-              <PropertyRef Name="MaintenanceCheckType" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="PartsReplacementRecord">
           <Key>
             <PropertyRef Name="Id" />
@@ -357,6 +300,18 @@
           <Property Name="DateEntered" Type="DateTime" Precision="3" />
           <Property Name="VehicleId" Type="Int32" />
         </EntityType>
+        <EntityType Name="MaintenanceOptionsPerformed">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaintenanceCheck" Type="Int32" Nullable="false" />
+          <Property Name="MaintenanceOption" Type="Int32" Nullable="false" />
+          <Property Name="IsChecked" Type="Boolean" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MaintenanceCheckOption" Relationship="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceCheckOptions" FromRole="MaintenanceOptionsPerformed" ToRole="MaintenanceCheckOption" />
+          <NavigationProperty Name="MaintenanceCheck1" Relationship="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceChecks" FromRole="MaintenanceOptionsPerformed" ToRole="MaintenanceCheck" />
+        </EntityType>
         <EntityType Name="MaintenanceCheckOption">
           <Key>
             <PropertyRef Name="Id" />
@@ -364,7 +319,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaintenanceType" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tooltip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="MaintenanceCheckType" Relationship="ImprezGarageModel.FK_MaintenanceCheckOptions_MaintenanceCheckTypes" FromRole="MaintenanceCheckOption" ToRole="MaintenanceCheckType" />
           <NavigationProperty Name="MaintenanceOptionsPerformeds" Relationship="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceCheckOptions" FromRole="MaintenanceCheckOption" ToRole="MaintenanceOptionsPerformed" />
         </EntityType>
@@ -380,17 +335,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="MaintenanceOptionsPerformed">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaintenanceCheck" Type="Int32" Nullable="false" />
-          <Property Name="MaintenanceOption" Type="Int32" Nullable="false" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MaintenanceCheckOption" Relationship="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceCheckOptions" FromRole="MaintenanceOptionsPerformed" ToRole="MaintenanceCheckOption" />
-          <NavigationProperty Name="MaintenanceCheck1" Relationship="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceChecks" FromRole="MaintenanceOptionsPerformed" ToRole="MaintenanceCheck" />
-        </EntityType>
         <Association Name="FK_MaintenanceOptionsPerformed_MaintenanceCheckOptions">
           <End Type="ImprezGarageModel.MaintenanceCheckOption" Role="MaintenanceCheckOption" Multiplicity="1" />
           <End Type="ImprezGarageModel.MaintenanceOptionsPerformed" Role="MaintenanceOptionsPerformed" Multiplicity="*" />
@@ -400,6 +344,30 @@
             </Principal>
             <Dependent Role="MaintenanceOptionsPerformed">
               <PropertyRef Name="MaintenanceOption" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MaintenanceCheck">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatePerformed" Type="DateTime" Precision="3" />
+          <Property Name="MaintenanceCheckType" Type="Int32" />
+          <Property Name="PerformedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VehicleId" Type="Int32" />
+          <NavigationProperty Name="MaintenanceCheckType1" Relationship="ImprezGarageModel.FK_MaintenanceChecks_MaintenanceCheckType" FromRole="MaintenanceCheck" ToRole="MaintenanceCheckType" />
+          <NavigationProperty Name="MaintenanceOptionsPerformeds" Relationship="ImprezGarageModel.FK_MaintenanceOptionsPerformed_MaintenanceChecks" FromRole="MaintenanceCheck" ToRole="MaintenanceOptionsPerformed" />
+        </EntityType>
+        <Association Name="FK_MaintenanceChecks_MaintenanceCheckType">
+          <End Type="ImprezGarageModel.MaintenanceCheckType" Role="MaintenanceCheckType" Multiplicity="0..1" />
+          <End Type="ImprezGarageModel.MaintenanceCheck" Role="MaintenanceCheck" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaintenanceCheckType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MaintenanceCheck">
+              <PropertyRef Name="MaintenanceCheckType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -415,7 +383,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -447,34 +415,6 @@
           <ScalarProperty Name="IsManual" ColumnName="IsManual" />
           <ScalarProperty Name="CurrentMilage" ColumnName="CurrentMilage" />
           <ScalarProperty Name="MilageOnPurchase" ColumnName="MilageOnPurchase" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MaintenanceChecks">
-      <EntityTypeMapping TypeName="IsTypeOf(ImprezGarageModel.MaintenanceCheck)">
-        <MappingFragment StoreEntitySet="MaintenanceChecks">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DatePerformed" ColumnName="DatePerformed" />
-          <ScalarProperty Name="MaintenanceCheckType" ColumnName="MaintenanceCheckType" />
-          <ScalarProperty Name="PerformedBy" ColumnName="PerformedBy" />
-          <ScalarProperty Name="CheckedAirFilter" ColumnName="CheckedAirFilter" />
-          <ScalarProperty Name="ReplacedAirFilter" ColumnName="ReplacedAirFilter" />
-          <ScalarProperty Name="CheckCoolantLevels" ColumnName="CheckCoolantLevels" />
-          <ScalarProperty Name="FlushedSystemAndChangeCoolant" ColumnName="FlushedSystemAndChangeCoolant" />
-          <ScalarProperty Name="ChangeFanBelt" ColumnName="ChangeFanBelt" />
-          <ScalarProperty Name="CheckedBattery" ColumnName="CheckedBattery" />
-          <ScalarProperty Name="CheckedOilLevels" ColumnName="CheckedOilLevels" />
-          <ScalarProperty Name="ReplacedOilFilter" ColumnName="ReplacedOilFilter" />
-          <ScalarProperty Name="CheckAutoTransmissionFluid" ColumnName="CheckAutoTransmissionFluid" />
-          <ScalarProperty Name="AddedAutoTransmissionFluid" ColumnName="AddedAutoTransmissionFluid" />
-          <ScalarProperty Name="CheckPowerSteeringFluidLevels" ColumnName="CheckPowerSteeringFluidLevels" />
-          <ScalarProperty Name="AirFilterNotes" ColumnName="AirFilterNotes" />
-          <ScalarProperty Name="CoolantNotes" ColumnName="CoolantNotes" />
-          <ScalarProperty Name="BatteryNotes" ColumnName="BatteryNotes" />
-          <ScalarProperty Name="OilLevelNotes" ColumnName="OilLevelNotes" />
-          <ScalarProperty Name="AutoTransmissionFluidNotes" ColumnName="AutoTransmissionFluidNotes" />
-          <ScalarProperty Name="PowerSteeringNotes" ColumnName="PowerSteeringNotes" />
-          <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -517,22 +457,34 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="MaintenanceOptionsPerformeds">
+            <EntityTypeMapping TypeName="ImprezGarageModel.MaintenanceOptionsPerformed">
+              <MappingFragment StoreEntitySet="MaintenanceOptionsPerformed">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="IsChecked" ColumnName="IsChecked" />
+                <ScalarProperty Name="MaintenanceOption" ColumnName="MaintenanceOption" />
+                <ScalarProperty Name="MaintenanceCheck" ColumnName="MaintenanceCheck" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MaintenanceCheckOptions">
             <EntityTypeMapping TypeName="ImprezGarageModel.MaintenanceCheckOption">
               <MappingFragment StoreEntitySet="MaintenanceCheckOptions">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Tooltip" ColumnName="Tooltip" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="MaintenanceType" ColumnName="MaintenanceType" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MaintenanceOptionsPerformeds">
-            <EntityTypeMapping TypeName="ImprezGarageModel.MaintenanceOptionsPerformed">
-              <MappingFragment StoreEntitySet="MaintenanceOptionsPerformed">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="MaintenanceOption" ColumnName="MaintenanceOption" />
-                <ScalarProperty Name="MaintenanceCheck" ColumnName="MaintenanceCheck" />
+          <EntitySetMapping Name="MaintenanceChecks">
+            <EntityTypeMapping TypeName="ImprezGarageModel.MaintenanceCheck">
+              <MappingFragment StoreEntitySet="MaintenanceChecks">
+                <ScalarProperty Name="VehicleId" ColumnName="VehicleId" />
+                <ScalarProperty Name="PerformedBy" ColumnName="PerformedBy" />
+                <ScalarProperty Name="MaintenanceCheckType" ColumnName="MaintenanceCheckType" />
+                <ScalarProperty Name="DatePerformed" ColumnName="DatePerformed" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

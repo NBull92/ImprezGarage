@@ -17,8 +17,8 @@ namespace ImprezGarage.Infrastructure.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MaintenanceCheckType()
         {
-            this.MaintenanceChecks = new HashSet<MaintenanceCheck>();
             this.MaintenanceCheckOptions = new HashSet<MaintenanceCheckOption>();
+            this.MaintenanceChecks = new HashSet<MaintenanceCheck>();
         }
     
         public int Id { get; set; }
@@ -27,8 +27,8 @@ namespace ImprezGarage.Infrastructure.Model
         public Nullable<int> OccurenceMiles { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaintenanceCheck> MaintenanceChecks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MaintenanceCheckOption> MaintenanceCheckOptions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaintenanceCheck> MaintenanceChecks { get; set; }
     }
 }

@@ -5,21 +5,17 @@
 
 namespace ImprezGarage.Modules.Notifications.ViewModels
 {
+    using ImprezGarage.Infrastructure.BaseClasses;
     using Prism.Commands;
-    using Prism.Mvvm;
-    using System;
 
-    public class ConfirmViewModel : BindableBase
+    public class ConfirmViewModel : DialogViewModelBase
     {
         #region Attributes
         private string _message;
         private string _header;
-        public event EventHandler ClosingRequest;
         #endregion
 
         #region Properties
-        public bool DialogResult { get; set; }
-
         public string Message
         {
             get => _message;
@@ -41,24 +37,17 @@ namespace ImprezGarage.Modules.Notifications.ViewModels
         #region Methods
         public ConfirmViewModel()
         {
-            Header = "Alert!";
+            Header = "Confirm!";
             Message = "This is an alert notification.";
 
             Confirm = new DelegateCommand(OnConfirm);
-            Cancel = new DelegateCommand(OnCancel);
+            Cancel = new DelegateCommand(Close);
         }
 
         #region Command Handlers
-        private void OnCancel()
-        {
-            DialogResult = false;
-            ClosingRequest?.Invoke(this, EventArgs.Empty);
-        }
-
         private void OnConfirm()
         {
-            DialogResult = true;
-            ClosingRequest?.Invoke(this, EventArgs.Empty);
+            Close(true);
         }
         #endregion
         #endregion

@@ -24,23 +24,6 @@ namespace ImprezGarage.Infrastructure.Model
         public Nullable<System.DateTime> DatePerformed { get; set; }
         public Nullable<int> MaintenanceCheckType { get; set; }
         public string PerformedBy { get; set; }
-        public Nullable<bool> CheckedAirFilter { get; set; }
-        public Nullable<bool> ReplacedAirFilter { get; set; }
-        public Nullable<bool> CheckCoolantLevels { get; set; }
-        public Nullable<bool> FlushedSystemAndChangeCoolant { get; set; }
-        public Nullable<bool> ChangeFanBelt { get; set; }
-        public Nullable<bool> CheckedBattery { get; set; }
-        public Nullable<bool> CheckedOilLevels { get; set; }
-        public Nullable<bool> ReplacedOilFilter { get; set; }
-        public Nullable<bool> CheckAutoTransmissionFluid { get; set; }
-        public Nullable<bool> AddedAutoTransmissionFluid { get; set; }
-        public Nullable<bool> CheckPowerSteeringFluidLevels { get; set; }
-        public string AirFilterNotes { get; set; }
-        public string CoolantNotes { get; set; }
-        public string BatteryNotes { get; set; }
-        public string OilLevelNotes { get; set; }
-        public string AutoTransmissionFluidNotes { get; set; }
-        public string PowerSteeringNotes { get; set; }
         public Nullable<int> VehicleId { get; set; }
     
         public virtual MaintenanceCheckType MaintenanceCheckType1 { get; set; }

@@ -5,16 +5,14 @@
 
 namespace ImprezGarage.Modules.Notifications.ViewModels
 {
+    using ImprezGarage.Infrastructure.BaseClasses;
     using Prism.Commands;
-    using Prism.Mvvm;
-    using System;
 
-    public class AlertViewModel : BindableBase
+    public class AlertViewModel : DialogViewModelBase
     {
         #region Attributes
         private string _message;
         private string _header;
-        public event EventHandler ClosingRequest;
         #endregion
 
         #region Properties
@@ -41,15 +39,8 @@ namespace ImprezGarage.Modules.Notifications.ViewModels
             Header = "Alert!";
             Message = "This is an alert notification.";
 
-            Okay = new DelegateCommand(OnOkay);
+            Okay = new DelegateCommand(Close);
         }
-
-        #region Command Handlers
-        private void OnOkay()
-        {
-            ClosingRequest?.Invoke(this, EventArgs.Empty);
-        }
-        #endregion
         #endregion
     }
 }   //ImprezGarage.Modules.Notifications.ViewModels namespace 

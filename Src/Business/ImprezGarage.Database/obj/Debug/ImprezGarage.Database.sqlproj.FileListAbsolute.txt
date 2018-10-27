@@ -1,5 +1,0 @@
-D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Database\bin\Debug\ImprezGarage.Database.dacpac
-D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Database\bin\Debug\ImprezGarage.Database.dll
-D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Database\bin\Debug\ImprezGarage.Database.pdb
-D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Database\obj\Debug\ImprezGarage.Database.dll
-D:\Documents\Nick\GitHub\ImprezGarage\Src\Business\ImprezGarage.Database\obj\Debug\ImprezGarage.Database.pdb

@@ -48,81 +48,20 @@
         
         <ScrollViewer Height="385">            
             <StackPanel>
-                <!--Air Filter-->
-                <CheckBox Content="Check Air Filter:" Margin="5" Height="25"
-                   VerticalContentAlignment="Center" IsChecked="{Binding CheckedAirFilter,Mode=TwoWay}"/>
-                <TextBox Margin="5" Height="25" 
-                 Visibility="{Binding CheckedAirFilter, Converter={StaticResource BoolToVisibilityConverter}}"
-                 Text="{Binding AirFilterNotes, Mode=TwoWay}"/>
-
-                <!--Replaced Air Filter-->
-                <CheckBox Content="Replaced Air Filter:"
-                   ToolTip="Perform every 20,000 miles." Margin="5" Height="25"
-                   VerticalContentAlignment="Center" IsChecked="{Binding ReplacedAirFilter,Mode=TwoWay}"/>
-
-                <!--Check coolant levels-->
-                <CheckBox Content="Check Coolant Levels:" Margin="5" Height="25"
-                   VerticalContentAlignment="Center" IsChecked="{Binding CheckCoolantLevels,Mode=TwoWay}"/>
-                <TextBox Margin="5" Height="25" Text="{Binding CoolantNotes, Mode=TwoWay}"
-                         Visibility="{Binding CheckCoolantLevels, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-                <!--Flushed system and changed coolant-->
-                <CheckBox Content="Flushed System and Changed Coolant:"
-                  ToolTip="Perform once a year." Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding FlushedSystemAndChangeCoolant,Mode=TwoWay}"/>
-
-                <!--Change fan belt or serpentine belt-->
-                <CheckBox Content="Change Fan Belt or Serpentine Belt:"
-                  Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding ChangeFanBelt,Mode=TwoWay}"/>
-
-                <!--Checked battery-->
-                <CheckBox Content="Checked Battery:"
-                  ToolTip="Peform monthly." Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding CheckedBattery,Mode=TwoWay}"/>
-                <TextBox Margin="5" Height="25" Text="{Binding BatteryNotes, Mode=TwoWay}"
-                         Visibility="{Binding CheckedBattery, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-                <!--Replaced battery-->
-                <CheckBox Content="Replaced Battery:"
-                  ToolTip="Peform when needed." Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding ReplacedBattery,Mode=TwoWay}"/>
-
-                <!--Check oil levels-->
-                <CheckBox Content="Check Oil levels:"
-                  ToolTip="Peform monthly." Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding CheckedOilLevels,Mode=TwoWay}"/>
-                <TextBox Margin="5" Height="25" Text="{Binding OilLevelNotes, Mode=TwoWay}"
-                         Visibility="{Binding CheckedOilLevels, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-                <!--changed oil-->
-                <CheckBox Content="Changed Oil:" Height="25"
-                  ToolTip="Peform every six months or 5,000 miles." Margin="5"
-                   VerticalContentAlignment="Center" IsChecked="{Binding ChangedOil,Mode=TwoWay}"/>
-
-                <!--replace oil filter-->
-                <CheckBox Content="Replace Oil Filter:"
-                  ToolTip="Peform every oil change." Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding ReplacedOilFilter,Mode=TwoWay}"/>
-
-                <!--Checked automatic transmission fluid level-->
-                <CheckBox Content="Checked Automatic Transmission Fluid level:"
-                  Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding CheckAutoTransmissionFluid,Mode=TwoWay}"/>
-                <TextBox Margin="5" Height="25"  Text="{Binding AutoTransmissionFluidNotes,Mode=TwoWay}"
-                         Visibility="{Binding CheckAutoTransmissionFluid, Converter={StaticResource BoolToVisibilityConverter}}"/>
-
-                <!--Added automatic transmission fluid levels-->
-                <CheckBox Content="Added Automatic Transmission Ffluid levels:"
-                   Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding AddedAutoTransmissionFluid,Mode=TwoWay}"/>
-
-                <!--Checked power steering fluid level-->
-                <CheckBox Content="Checked Power Steering Fluid level:"
-                  Margin="5" Height="25" VerticalContentAlignment="Center"
-                  IsChecked="{Binding CheckPowerSteeringFluidLevels,Mode=TwoWay}"/>
-                <TextBox Margin="5" Height="25" Text="{Binding PowerSteeringNotes,Mode=TwoWay}" 
-                         Visibility="{Binding CheckPowerSteeringFluidLevels, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <ListBox ItemsSource="{Binding MaintenanceOptionsPerformed}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <CheckBox Content="{Binding MaintenanceCheckOption.Name}" Margin="5" Height="25" 
+                                          ToolTip="{Binding MaintenanceCheckOption.Tooltip}" 
+                                          VerticalContentAlignment="Center" IsChecked="{Binding IsChecked,Mode=TwoWay}"/>
+                                <TextBox Margin="5" Height="25" 
+                                     Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}}"
+                                     Text="{Binding Notes, Mode=TwoWay}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>                
             </StackPanel>
         </ScrollViewer>
 
