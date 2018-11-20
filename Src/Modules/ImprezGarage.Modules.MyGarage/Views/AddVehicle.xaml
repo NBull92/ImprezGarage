@@ -9,7 +9,7 @@
                      xmlns:views="clr-namespace:ImprezGarage.Modules.MyGarage.Views"
                      mc:Ignorable="d"
                      HorizontalAlignment="Left"
-                     Width="387"
+                     Width="{Binding Width}"
                      Height="340"
                      ResizeMode="NoResize"
                      WindowStartupLocation="CenterScreen"                     

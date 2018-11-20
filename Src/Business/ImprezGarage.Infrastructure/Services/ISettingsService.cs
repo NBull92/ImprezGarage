@@ -17,7 +17,7 @@ namespace ImprezGarage.Infrastructure.Services
         /// <summary>
         /// Take the current settings configuration file and save it to the app data file location.
         /// </summary>
-        void PrintConfigurationFile();
+        void SaveConfigurationFile();
 
         /// <summary>
         /// Return whether or not the user wants the app to load on startup.

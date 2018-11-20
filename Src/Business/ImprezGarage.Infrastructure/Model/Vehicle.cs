@@ -27,8 +27,10 @@ namespace ImprezGarage.Infrastructure.Model
         public Nullable<bool> HasInsurance { get; set; }
         public Nullable<bool> HasValidTax { get; set; }
         public Nullable<bool> IsManual { get; set; }
-        public Nullable<int> CurrentMilage { get; set; }
-        public Nullable<int> MilageOnPurchase { get; set; }
+        public Nullable<bool> HasMot { get; set; }
+        public Nullable<System.DateTime> MotExpiryDate { get; set; }
+        public Nullable<int> CurrentMileage { get; set; }
+        public Nullable<int> MileageOnPurchase { get; set; }
     
         public virtual VehicleType VehicleType1 { get; set; }
     }

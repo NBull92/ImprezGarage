@@ -50,7 +50,7 @@ namespace ImprezGarage
         private static void PrintFiles()
         {
             var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
-            settingsService.PrintConfigurationFile();
+            settingsService.SaveConfigurationFile();
 
             var loggerService = ServiceLocator.Current.GetInstance<ILoggerService>();
             loggerService.PrintLogFile();

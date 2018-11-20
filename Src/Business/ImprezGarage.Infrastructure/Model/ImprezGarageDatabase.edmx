@@ -87,8 +87,10 @@
           <Property Name="HasInsurance" Type="bit" />
           <Property Name="HasValidTax" Type="bit" />
           <Property Name="IsManual" Type="bit" />
-          <Property Name="CurrentMilage" Type="int" />
-          <Property Name="MilageOnPurchase" Type="int" />
+          <Property Name="CurrentMileage" Type="int" />
+          <Property Name="MileageOnPurchase" Type="int" />
+          <Property Name="HasMot" Type="bit" />
+          <Property Name="MotExpiryDate" Type="datetime" />
         </EntityType>
         <EntityType Name="VehicleTypes">
           <Key>
@@ -247,8 +249,10 @@
           <Property Name="HasInsurance" Type="Boolean" />
           <Property Name="HasValidTax" Type="Boolean" />
           <Property Name="IsManual" Type="Boolean" />
-          <Property Name="CurrentMilage" Type="Int32" />
-          <Property Name="MilageOnPurchase" Type="Int32" />
+          <Property Name="HasMot" Type="Boolean" />
+          <Property Name="MotExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="CurrentMileage" Type="Int32" />
+          <Property Name="MileageOnPurchase" Type="Int32" />
         </EntityType>
         <Association Name="FK_Vehicles_VehicleType">
           <End Type="ImprezGarageModel.VehicleType" Role="VehicleType" Multiplicity="1" />
@@ -400,7 +404,11 @@
     <EntitySetMapping Name="Vehicles">
       <EntityTypeMapping TypeName="IsTypeOf(ImprezGarageModel.Vehicle)">
         <MappingFragment StoreEntitySet="Vehicles">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MileageOnPurchase" ColumnName="MileageOnPurchase" />
+                <ScalarProperty Name="CurrentMileage" ColumnName="CurrentMileage" />
+                <ScalarProperty Name="MotExpiryDate" ColumnName="MotExpiryDate" />
+                <ScalarProperty Name="HasMot" ColumnName="HasMot" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
           <ScalarProperty Name="DateModified" ColumnName="DateModified" />
           <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
@@ -413,9 +421,7 @@
           <ScalarProperty Name="HasInsurance" ColumnName="HasInsurance" />
           <ScalarProperty Name="HasValidTax" ColumnName="HasValidTax" />
           <ScalarProperty Name="IsManual" ColumnName="IsManual" />
-          <ScalarProperty Name="CurrentMilage" ColumnName="CurrentMilage" />
-          <ScalarProperty Name="MilageOnPurchase" ColumnName="MilageOnPurchase" />
-        </MappingFragment>
+          </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MaintenanceCheckTypes">

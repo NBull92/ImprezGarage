@@ -6,7 +6,6 @@
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using ImprezGarage.Infrastructure.Model;
-    using ImprezGarage.Infrastructure.Services;
     using System;
 
     public class CarCreationViewModel : VehicleCreationViewModel
@@ -36,6 +35,31 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// The car's current insurance renewal date.
         /// </summary>
         private DateTime _insuranceRenewalDate;
+
+        /// <summary>
+        /// Has the car had an MOT.
+        /// </summary>
+        private bool _hasMot;
+
+        /// <summary>
+        /// The milage the car had when the user bought the car.
+        /// </summary>
+        private int _mileageOnPurchase;
+
+        /// <summary>
+        /// Current milage of the car.
+        /// </summary>
+        private int _currentMileage;
+
+        /// <summary>
+        /// Mot expiry date of the car.
+        /// </summary>
+        private DateTime _motExpiryDate;
+
+        /// <summary>
+        /// Is this car a manual or automatic car.
+        /// </summary>
+        private bool _isManual;
         #endregion
 
         #region Parameters
@@ -82,6 +106,51 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             get => _insuranceRenewalDate;
             set => SetProperty(ref _insuranceRenewalDate, value);
+        }
+        
+        /// <summary>
+        /// Is this car a manual or automatic car.
+        /// </summary>
+        public bool IsManual
+        {
+            get => _isManual;
+            set => SetProperty(ref _isManual, value);
+        }
+
+        /// <summary>
+        /// Has the car had an MOT.
+        /// </summary>
+        public bool HasMot
+        {
+            get => _hasMot;
+            set => SetProperty(ref _hasMot, value);
+        }
+
+        /// <summary>
+        /// Mot expiry date of the car.
+        /// </summary>
+        public DateTime MotExpiryDate
+        {
+            get => _motExpiryDate;
+            set => SetProperty(ref _motExpiryDate, value);
+        }
+
+        /// <summary>
+        /// The milage the car had when the user bought the car.
+        /// </summary>
+        public int MileageOnPurchase
+        {
+            get => _mileageOnPurchase;
+            set => SetProperty(ref _mileageOnPurchase, value);
+        }
+
+        /// <summary>
+        /// Current milage of the car.
+        /// </summary>
+        public int CurrentMileage
+        {
+            get => _currentMileage;
+            set => SetProperty(ref _currentMileage, value);
         }
         #endregion
 

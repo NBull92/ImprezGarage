@@ -63,7 +63,7 @@
                         <TextBlock Grid.Column="0" Text="{Binding Amount, StringFormat='c'}" 
                                    Margin="5" VerticalAlignment="Center" Width="45"/>
                         <TextBlock Grid.Column="1" Text="{Binding DateEntered, StringFormat=D}" 
-                                   Margin="5" VerticalAlignment="Center" Width="150"/>
+                                   Margin="5" VerticalAlignment="Center" Width="160"/>
                         
                         <Button Grid.Column="2" 
                                 ToolTip="Delete" 

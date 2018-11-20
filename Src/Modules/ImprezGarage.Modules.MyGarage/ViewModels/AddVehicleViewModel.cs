@@ -66,6 +66,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// True if we editing and already existing vehicle.
         /// </summary>
         public bool IsEdit;
+        private int _width;
         #endregion
 
         #region Parameters
@@ -136,6 +137,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             set => SetProperty(ref _saveContent, value);
         }
 
+        public int Width
+        {
+            get => _width;
+            set => SetProperty(ref _width, value);
+        }
+
         #region Commands
         public DelegateCommand SaveCommand { get; }
         public DelegateCommand CancelCommand { get; }
@@ -162,6 +169,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             GetVehicleTypes();
             SaveContent = "Add";
+            Width = 387;
         }
 
         #region Command Handlers
@@ -258,28 +266,43 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     switch (_selectedVehicleType.Name)
                     {
                         case "Car":
-                            EditVehicle.Registration = ((CarCreationViewModel)VehicleCreationViewModel).Registration;
-                            EditVehicle.Make = ((CarCreationViewModel)VehicleCreationViewModel).Make;
-                            EditVehicle.Model = ((CarCreationViewModel)VehicleCreationViewModel).Model;
-                            EditVehicle.HasInsurance = ((CarCreationViewModel)VehicleCreationViewModel).HasInsurance;
-                            EditVehicle.HasValidTax = ((CarCreationViewModel)VehicleCreationViewModel).HasValidTax;
+                            var car = ((CarCreationViewModel)VehicleCreationViewModel);
+                            EditVehicle.Registration = car.Registration;
+                            EditVehicle.Make = car.Make;
+                            EditVehicle.Model = car.Model;
+                            EditVehicle.HasInsurance = car.HasInsurance;
+                            EditVehicle.HasValidTax = car.HasValidTax;
+                            EditVehicle.HasMot = car.HasMot;
+                            EditVehicle.CurrentMileage = car.CurrentMileage;
+                            EditVehicle.MileageOnPurchase = car.MileageOnPurchase;
+                            EditVehicle.IsManual = car.IsManual;
 
-                            if (((CarCreationViewModel)VehicleCreationViewModel).HasValidTax)
+                            if (car.HasValidTax)
                             {
-                                EditVehicle.InsuranceRenewalDate = ((CarCreationViewModel)VehicleCreationViewModel).InsuranceRenewalDate;
+                                EditVehicle.InsuranceRenewalDate = car.InsuranceRenewalDate;
                             }
                             else
                             {
                                 EditVehicle.InsuranceRenewalDate = null;
                             }
 
-                            if (((CarCreationViewModel)VehicleCreationViewModel).HasValidTax)
+                            if (car.HasValidTax)
                             {
-                                EditVehicle.TaxExpiryDate = ((CarCreationViewModel)VehicleCreationViewModel).TaxExpiryDate;
+                                EditVehicle.TaxExpiryDate = car.TaxExpiryDate;
                             }
                             else
                             {
                                 EditVehicle.TaxExpiryDate = null;
+                            }
+
+
+                            if (EditVehicle.HasMot == true)
+                            {
+                                EditVehicle.MotExpiryDate = car.MotExpiryDate;
+                            }
+                            else
+                            {
+                                EditVehicle.MotExpiryDate = null;
                             }
                             break;
                         case "Bicycle":
@@ -308,6 +331,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                             {
                                 EditVehicle.TaxExpiryDate = null;
                             }
+
                             break;
                     }
 
@@ -354,6 +378,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     newVehicle.Registration = vehicleCreate.Registration;
                     newVehicle.HasInsurance = vehicleCreate.HasInsurance;
                     newVehicle.HasValidTax = vehicleCreate.HasValidTax;
+                    newVehicle.HasMot = vehicleCreate.HasMot;
+                    newVehicle.CurrentMileage = vehicleCreate.CurrentMileage;
+                    newVehicle.MileageOnPurchase = vehicleCreate.MileageOnPurchase;
+                    newVehicle.IsManual = vehicleCreate.IsManual;
 
                     if (newVehicle.HasInsurance == true)
                     {
@@ -363,6 +391,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     if (newVehicle.HasValidTax == true)
                     {
                         newVehicle.TaxExpiryDate = vehicleCreate.TaxExpiryDate;
+                    }
+                    
+                    if (newVehicle.HasMot == true)
+                    {
+                        newVehicle.MotExpiryDate = vehicleCreate.MotExpiryDate;
                     }
                 }
             }
@@ -425,10 +458,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         internal void Edit(Vehicle vehicle)
         {
             EditVehicle = vehicle;
-
+            
             if (VehicleTypes.Any(o => o.Id == EditVehicle.VehicleType))
             {
                 SelectedVehicleType = VehicleTypes.First(o => o.Id == EditVehicle.VehicleType);
+                VehicleCreationViewModel.ShowEditView = true;
+                Width = 706;
 
                 switch (_selectedVehicleType.Name)
                 {
@@ -438,8 +473,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                         ((CarCreationViewModel)VehicleCreationViewModel).Model = EditVehicle.Model;
                         ((CarCreationViewModel)VehicleCreationViewModel).HasInsurance = Convert.ToBoolean(EditVehicle.HasInsurance);
                         ((CarCreationViewModel)VehicleCreationViewModel).HasValidTax = Convert.ToBoolean(EditVehicle.HasValidTax);
+                        ((CarCreationViewModel)VehicleCreationViewModel).HasMot = Convert.ToBoolean(EditVehicle.HasMot);
                         ((CarCreationViewModel)VehicleCreationViewModel).InsuranceRenewalDate = ((CarCreationViewModel)VehicleCreationViewModel).HasInsurance ? Convert.ToDateTime(EditVehicle.InsuranceRenewalDate) : DateTime.Now;
                         ((CarCreationViewModel)VehicleCreationViewModel).TaxExpiryDate = ((CarCreationViewModel)VehicleCreationViewModel).HasValidTax ? Convert.ToDateTime(EditVehicle.TaxExpiryDate) : DateTime.Now;
+                        ((CarCreationViewModel)VehicleCreationViewModel).MotExpiryDate = ((CarCreationViewModel)VehicleCreationViewModel).HasMot ? Convert.ToDateTime(EditVehicle.MotExpiryDate) : DateTime.Now;
+                        ((CarCreationViewModel)VehicleCreationViewModel).CurrentMileage = Convert.ToInt32(EditVehicle.CurrentMileage);
+                        ((CarCreationViewModel)VehicleCreationViewModel).MileageOnPurchase = Convert.ToInt32(EditVehicle.MileageOnPurchase);
                         break;
                     case "Bicycle":
                         break;

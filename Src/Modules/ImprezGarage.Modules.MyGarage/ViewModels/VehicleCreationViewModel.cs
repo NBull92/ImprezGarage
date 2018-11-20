@@ -19,6 +19,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private VehicleType _vehicleType;
         private DateTime _dateCreated;
         private DateTime _dateModified;
+
+        /// <summary>
+        /// Bool to decide whether to show the extra content that can be added when managing a vehicle.
+        /// </summary>
+        private bool _showEditView;
         #endregion
 
         #region Properties
@@ -54,6 +59,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             get => _dateModified;
             set => SetProperty(ref _dateModified, value);
+        }
+
+        /// <summary>
+        /// Bool to decide whether to show the extra content that can be added when managing a vehicle.
+        /// </summary>
+        public bool ShowEditView
+        {
+            get => _showEditView;
+            set => SetProperty(ref _showEditView, value);
         }
 
         #region IDataErrorInfo

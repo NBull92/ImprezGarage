@@ -47,7 +47,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
 
         #region Commands
-        public DelegateCommand<object> AddNewVehicleCommand { get; set; }
+        public DelegateCommand AddNewVehicleCommand { get; set; }
         public DelegateCommand<SelectionChangedEventArgs> SelectedVehicleChanged { get; set; }
         #endregion
         #endregion
@@ -60,7 +60,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             _eventAggregator = eventAggregator;
             _notificationsService = notificationsService;
 
-            AddNewVehicleCommand = new DelegateCommand<object>(AddNewVehicleExecute);
+            AddNewVehicleCommand = new DelegateCommand(AddNewVehicleExecute);
             SelectedVehicleChanged = new DelegateCommand<SelectionChangedEventArgs>(SelectedVehicleChangedExecute);
 
             _eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
@@ -81,16 +81,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Open a new window to allow the user to create a new vehicle.
         /// </summary>
-        private void AddNewVehicleExecute(object navigationPath)
+        private void AddNewVehicleExecute()
         {
             var view = new AddVehicle();
-            var viewModel = view.DataContext as AddVehicleViewModel;
             view.ShowDialog();
 
-            if (viewModel != null && viewModel.DialogResult)
+            if (view.DataContext is AddVehicleViewModel viewModel && viewModel.DialogResult)
             {
                 LoadVehicles();
-            }            
+            }
         }
         #endregion
 

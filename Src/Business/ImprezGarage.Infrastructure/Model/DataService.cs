@@ -472,6 +472,11 @@ namespace ImprezGarage.Infrastructure.Model
                         updateVehicle.Registration = vehicle.Registration;
                         updateVehicle.TaxExpiryDate = vehicle.TaxExpiryDate;
                         updateVehicle.VehicleType = vehicle.VehicleType;
+                        updateVehicle.HasMot = vehicle.HasMot;
+                        updateVehicle.CurrentMileage = vehicle.CurrentMileage;
+                        updateVehicle.MileageOnPurchase = vehicle.MileageOnPurchase;
+                        updateVehicle.IsManual = vehicle.IsManual;
+                        updateVehicle.MotExpiryDate = vehicle.MotExpiryDate;
                         model.SaveChanges();
                         callback(null);
                     }

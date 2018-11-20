@@ -16,6 +16,11 @@ namespace ImprezGarage.Modules.Settings
     {
         #region Attribute
         /// <summary>
+        /// Store the dependency injected logger service.
+        /// </summary>
+        private readonly ILoggerService _logger;
+
+        /// <summary>
         /// Store the location of the settings file.
         /// </summary>
         private readonly string _configurationLocation;
@@ -30,8 +35,9 @@ namespace ImprezGarage.Modules.Settings
         /// <summary>
         /// Construct the settings service and store the location of the settings file.
         /// </summary>
-        public SettingsService()
+        public SettingsService(ILoggerService logger)
         {
+            _logger = logger;
             _configurationLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\ImprezGarage\\Config.xml";           
         }
         
@@ -43,37 +49,71 @@ namespace ImprezGarage.Modules.Settings
         {
             if(File.Exists(_configurationLocation))
             {
-                using (var writer = XmlReader.Create(_configurationLocation))
+                XmlReader writer = null;
+                try
                 {
-                    var serializer = new XmlSerializer(typeof(Configuration));
-                    _configuration = serializer.Deserialize(writer) as Configuration;
+                    using (writer = XmlReader.Create(_configurationLocation))
+                    {
+                        var serializer = new XmlSerializer(typeof(Configuration));
+                        _configuration = serializer.Deserialize(writer) as Configuration;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogException(ex, "Error occured when attempting to load the current configuration file.");
+
+                    CreateNewConfiguration();
+                }
+                finally
+                {
+                    writer?.Close();
                 }
             }
             else
             {
-                _configuration = new Configuration
-                {
-                    LaunchOnStartUp = false,
-                    MinimizeOnLoad = false,
-                    MinimizeToTry = false,
-                    NotifyWhenVehicleTaxRenewalIsClose = true,
-                    NotifyWhenInsuranceRenewalIsClose = true,
-                    AllowNotifications = true,
-                };
+                CreateNewConfiguration();
             }
+        }
+
+        /// <summary>
+        /// Create a new configuration with the default settings applied.
+        /// </summary>
+        private void CreateNewConfiguration()
+        {
+            _configuration = new Configuration
+            {
+                LaunchOnStartUp = false,
+                MinimizeOnLoad = false,
+                MinimizeToTry = false,
+                NotifyWhenVehicleTaxRenewalIsClose = true,
+                NotifyWhenInsuranceRenewalIsClose = true,
+                AllowNotifications = true,
+            };
         }
 
         /// <summary>
         /// Take the current settings configuration file and save it to the app data file location.
         /// </summary>
-        public void PrintConfigurationFile()
+        public void SaveConfigurationFile()
         {
-            File.Create(_configurationLocation).Dispose();
+            XmlWriter writer = null;
             var xmlWriterSettings = new XmlWriterSettings { Indent = true };
-            using (var writer = XmlWriter.Create(_configurationLocation, xmlWriterSettings))
+            File.Create(_configurationLocation).Dispose();
+            try
             {
-                var serializer = new XmlSerializer(typeof(Configuration));
-                serializer.Serialize(writer, _configuration);
+                using (writer = XmlWriter.Create(_configurationLocation, xmlWriterSettings))
+                {
+                    var serializer = new XmlSerializer(typeof(Configuration));
+                    serializer.Serialize(writer, _configuration);
+                }
+            }
+            catch(Exception ex)
+            {
+                _logger.LogException(ex,"An error occured while attempting to print the configuration file.");
+            }
+            finally
+            {
+                writer?.Close();
             }
         }
 

@@ -293,7 +293,7 @@ namespace ImprezGarage.Modules.Logger.DataModels
         /// </summary>
         private void LoadConfigFile()
         {            
-            LogsConfiguration logsConfiguration;
+            LogsConfiguration logsConfiguration = null;
 
             if (!File.Exists(_configFileLocation))
             {
@@ -302,9 +302,11 @@ namespace ImprezGarage.Modules.Logger.DataModels
             }
             else
             {
+                FileStream readFileStream = null;
+
                 try
                 {
-                    using (var readFileStream = File.OpenRead(_configFileLocation))
+                    using (readFileStream = File.OpenRead(_configFileLocation))
                     {
                         var hierarchySerializer = new XmlSerializer(typeof(LogsConfiguration));
 
@@ -317,6 +319,14 @@ namespace ImprezGarage.Modules.Logger.DataModels
                     AddLogEntry("New log configuration has been created.", ioe);
                     logsConfiguration = CreateNewLogConfiguration();
                 }
+                catch (Exception ex)
+                {
+                    AddLogEntry("An error occured when loading the logs configuration file..", ex);
+                }
+                finally
+                {
+                    readFileStream?.Close();
+                }
             }
 
             SetLogsConfiguration(logsConfiguration);
@@ -325,7 +335,6 @@ namespace ImprezGarage.Modules.Logger.DataModels
         /// <summary>
         /// Create a new logs configuration.
         /// </summary>
-        /// <returns></returns>
         private static LogsConfiguration CreateNewLogConfiguration()
         {
             return new LogsConfiguration

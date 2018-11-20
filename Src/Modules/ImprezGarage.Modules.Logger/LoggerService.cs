@@ -77,29 +77,41 @@ namespace ImprezGarage.Modules.Logger
                 // Create/update the the txt file.
                 File.Create(filePath).Dispose();
 
-                using (var writer = new StreamWriter(filePath, true))
+                StreamWriter writer = null;
+                try
                 {
-                    foreach (var logMessage in current.LogMessages)
+                    using (writer = new StreamWriter(filePath, true))
                     {
-                        if (!string.IsNullOrEmpty(logMessage.DateTimeStamp))
+                        foreach (var logMessage in current.LogMessages)
                         {
-                            writer.WriteLine(logMessage.DateTimeStamp + " : " + logMessage.Message);
+                            if (!string.IsNullOrEmpty(logMessage.DateTimeStamp))
+                            {
+                                writer.WriteLine(logMessage.DateTimeStamp + " : " + logMessage.Message);
+                            }
+                            else
+                            {
+                                writer.WriteLine(logMessage.Message);
+                            }
+
+                            if (logMessage.ExceptionType != null)
+                                writer.WriteLine(logMessage.ExceptionType);
+
+                            if (!string.IsNullOrEmpty(logMessage.Source))
+                                writer.WriteLine(logMessage.Source);
+
+                            if (!string.IsNullOrEmpty(logMessage.StackTrace))
+                                writer.WriteLine(logMessage.StackTrace);
                         }
-                        else
-                        {
-                            writer.WriteLine(logMessage.Message);
-                        }
-
-                        if (logMessage.ExceptionType != null)
-                            writer.WriteLine(logMessage.ExceptionType);
-
-                        if (!string.IsNullOrEmpty(logMessage.Source))
-                            writer.WriteLine(logMessage.Source);
-
-                        if (!string.IsNullOrEmpty(logMessage.StackTrace))
-                            writer.WriteLine(logMessage.StackTrace);
                     }
                 }
+                catch (Exception ex)
+                {
+                    LogException(ex, "An error occured while printing the logs file.");
+                }
+                finally
+                {
+                    writer?.Close();
+                }                
             }
             else
             {
@@ -117,44 +129,56 @@ namespace ImprezGarage.Modules.Logger
 
                 // Create/update the the csv file.
                 File.Create(filePath).Dispose();
+                StreamWriter writer = null;
 
-                using (var writer = new StreamWriter(filePath, true))
+                try
                 {
-                    writer.WriteLine("Time,Message,Exception,Source,StackTrace");
-
-                    foreach (var logMessage in current.LogMessages)
+                    using (writer = new StreamWriter(filePath, true))
                     {
-                        var sb = new StringBuilder();
+                        writer.WriteLine("Time,Message,Exception,Source,StackTrace");
 
-                        sb.Append(!string.IsNullOrEmpty(logMessage.DateTimeStamp) ? logMessage.DateTimeStamp : "");
-
-                        sb.Append(",");
-
-                        sb.Append(logMessage.Message);
-
-                        sb.Append(",");
-
-                        if (logMessage.ExceptionType != null)
+                        foreach (var logMessage in current.LogMessages)
                         {
-                            sb.Append(logMessage.ExceptionType);
+                            var sb = new StringBuilder();
+
+                            sb.Append(!string.IsNullOrEmpty(logMessage.DateTimeStamp) ? logMessage.DateTimeStamp : "");
+
+                            sb.Append(",");
+
+                            sb.Append(logMessage.Message);
+
+                            sb.Append(",");
+
+                            if (logMessage.ExceptionType != null)
+                            {
+                                sb.Append(logMessage.ExceptionType);
+                            }
+
+                            sb.Append(",");
+
+                            if (!string.IsNullOrEmpty(logMessage.Source))
+                            {
+                                sb.Append(logMessage.Source);
+                            }
+
+                            sb.Append(",");
+
+                            if (!string.IsNullOrEmpty(logMessage.StackTrace))
+                            {
+                                sb.Append(logMessage.StackTrace);
+                            }
+
+                            writer.WriteLine(sb.ToString());
                         }
-
-                        sb.Append(",");
-
-                        if (!string.IsNullOrEmpty(logMessage.Source))
-                        {
-                            sb.Append(logMessage.Source);
-                        }
-
-                        sb.Append(",");
-
-                        if (!string.IsNullOrEmpty(logMessage.StackTrace))
-                        {
-                            sb.Append(logMessage.StackTrace);
-                        }
-
-                        writer.WriteLine(sb.ToString());
                     }
+                }
+                catch (Exception ex)
+                {
+                    LogException(ex, "An error occured while printing the logs file.");
+                }
+                finally
+                {
+                    writer?.Close();
                 }
             }
 
@@ -173,10 +197,23 @@ namespace ImprezGarage.Modules.Logger
         {
             // Print the logger configuration file.
             var serializer = new XmlSerializer(typeof(LogsConfiguration));
-            using (var writer = new StreamWriter(_loggerDataModel.GetConfigFileLocation()))
+            StreamWriter writer = null;
+
+            try
             {
-                serializer.Serialize(writer, _loggerDataModel.GetConfigFile());
+                using (writer = new StreamWriter(_loggerDataModel.GetConfigFileLocation()))
+                {
+                    serializer.Serialize(writer, _loggerDataModel.GetConfigFile());
+                }
             }
+            catch (Exception ex)
+            {
+                LogException(ex, "An error occured while printing the logs configuration file.");
+            }
+            finally
+            {
+                writer?.Close();
+            }            
         }
 
         /// <summary>

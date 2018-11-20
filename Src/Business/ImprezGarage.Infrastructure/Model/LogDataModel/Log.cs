@@ -162,61 +162,73 @@ namespace ImprezGarage.Infrastructure.Model.LogDataModel
             if (string.IsNullOrEmpty(FilePath))
                 return;
 
-            // Check if the log being read in, is a cev file.
+            // Check if the log being read in, is a csv file.
             if (FilePath.Contains(".Csv"))
             {
-                using (var sr = new StreamReader(FilePath))
+                StreamReader sr = null;
+                try
                 {
-                    sr.ReadLine();
-                    while (sr.Peek() != -1)
+                    using (sr = new StreamReader(FilePath))
                     {
-                        var line = sr.ReadLine();
-
-                        if (line == null)
-                            return;
-
-                        var values = line.Split(',');
-
-                        if (DateTime.TryParse(values[0], out DateTime dateTime))
+                        sr.ReadLine();
+                        while (sr.Peek() != -1)
                         {
-                            var message = new LogEntry();
-                            message.DateTimeStamp = dateTime.ToShortTimeString();
-                            message.Message = values[1];
+                            var line = sr.ReadLine();
 
-                            if (message.Message.StartsWith(" : "))
+                            if (line == null)
+                                return;
+
+                            var values = line.Split(',');
+
+                            if (DateTime.TryParse(values[0], out DateTime dateTime))
                             {
-                                message.Message = message.Message.Remove(0, 3);
+                                var message = new LogEntry();
+                                message.DateTimeStamp = dateTime.ToShortTimeString();
+                                message.Message = values[1];
+
+                                if (message.Message.StartsWith(" : "))
+                                {
+                                    message.Message = message.Message.Remove(0, 3);
+                                }
+
+                                if (values.Length > 2 && !string.IsNullOrEmpty(values[2]))
+                                {
+                                    message.ExceptionType = values[2];
+                                }
+
+                                if (values.Length > 3 && !string.IsNullOrEmpty(values[3]))
+                                {
+                                    message.Source = values[3];
+                                }
+
+                                if (values.Length > 4 && !string.IsNullOrEmpty(values[4]))
+                                {
+                                    message.StackTrace = values[4];
+                                }
+
+                                LogMessages.Add(message);
                             }
-
-                            if (values.Length > 2 && !string.IsNullOrEmpty(values[2]))
+                            else
                             {
-                                message.ExceptionType = values[2];
-                            }
+                                if (!LogMessages.Any())
+                                    continue;
 
-                            if (values.Length > 3 && !string.IsNullOrEmpty(values[3]))
-                            {
-                                message.Source = values[3];
-                            }
-
-                            if (values.Length > 4 && !string.IsNullOrEmpty(values[4]))
-                            {
-                                message.StackTrace = values[4];
-                            }
-
-                            LogMessages.Add(message);
-                        }
-                        else
-                        {
-                            if (!LogMessages.Any())
-                                continue;
-
-                            var previousLog = LogMessages.LastOrDefault();
-                            if (previousLog != null)
-                            {
-                                previousLog.StackTrace += "\n" + line;
+                                var previousLog = LogMessages.LastOrDefault();
+                                if (previousLog != null)
+                                {
+                                    previousLog.StackTrace += "\n" + line;
+                                }
                             }
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    LogMessages.Add(new LogEntry("An error occured when attempting to load the current log entries.", ex));
+                }
+                finally
+                {
+                    sr?.Close();
                 }
             }
             // Else it is a txt file.
