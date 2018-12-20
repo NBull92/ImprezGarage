@@ -9,9 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Converters;
 using ImprezGarage.Modules.MyGarage.ViewModels;
-using ImprezGarage.Modules.MyGarage.Views;
 using System;
 using System.Diagnostics;
 using System.Windows;
