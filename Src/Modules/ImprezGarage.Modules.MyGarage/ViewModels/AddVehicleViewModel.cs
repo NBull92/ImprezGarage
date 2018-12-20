@@ -38,6 +38,13 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private readonly ILoggerService _loggerService;
 
+        private const string InsuranceDateWarning = "You have selected to add the vehicles insurance date, however the data entered is in the past. \n\nIs this intended?";
+        private const string TaxRenewalDateWarning = "You have selected to add the vehicles tax renewal date, however the data entered is in the past. \n\nIs this intended?";
+        private const string NotificationHeader = "Alert!";
+        private const string ErrorOccuredDuringSave = "An error occured during the save. \n\nPlease check all the data provided is correct and try again. If this issue persists, then contact support.";
+        private const string VehicleUpdated = "Vehicle updated successfully.";
+        private const string VehicleAdded = "Vehicle added successfully!";
+
         /// <summary>
         /// A collection of all the vehicle types.
         /// </summary>
@@ -55,18 +62,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private string _saveContent;
 
-        private const string InsuranceDateWarning = "You have selected to add the vehicles insurance date, however the data entered is in the past. \n\nIs this intended?";
-        private const string TaxRenewalDateWarning = "You have selected to add the vehicles tax renewal date, however the data entered is in the past. \n\nIs this intended?";
-        private const string NotificationHeader = "Alert!";
-        private const string ErrorOccuredDuringSave = "An error occured during the save. \n\nPlease check all the data provided is correct and try again. If this issue persists, then contact support.";
-        private const string VehicleUpdated = "Vehicle updated successfully.";
-        private const string VehicleAdded = "Vehicle added successfully!";
+        private int _width;
 
         /// <summary>
         /// True if we editing and already existing vehicle.
         /// </summary>
-        public bool IsEdit;
-        private int _width;
+        private bool _isEdit;
         #endregion
 
         #region Parameters
@@ -141,6 +142,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             get => _width;
             set => SetProperty(ref _width, value);
+        }
+
+        /// <summary>
+        /// True if we editing and already existing vehicle.
+        /// </summary>
+        public bool IsEdit
+        {
+            get => _isEdit;
+            set => SetProperty(ref _isEdit, value);
         }
 
         #region Commands
@@ -479,6 +489,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                         ((CarCreationViewModel)VehicleCreationViewModel).MotExpiryDate = ((CarCreationViewModel)VehicleCreationViewModel).HasMot ? Convert.ToDateTime(EditVehicle.MotExpiryDate) : DateTime.Now;
                         ((CarCreationViewModel)VehicleCreationViewModel).CurrentMileage = Convert.ToInt32(EditVehicle.CurrentMileage);
                         ((CarCreationViewModel)VehicleCreationViewModel).MileageOnPurchase = Convert.ToInt32(EditVehicle.MileageOnPurchase);
+                        ((CarCreationViewModel)VehicleCreationViewModel).IsManual = Convert.ToBoolean(EditVehicle.IsManual);
                         break;
                     case "Bicycle":
                         break;
@@ -508,7 +519,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #region IDisposable
         public override void Dispose()
         {
-            VehicleCreationViewModel.PropertyChanged -= VehicleCreationViewModel_PropertyChanged;
+            if(VehicleCreationViewModel != null)
+                VehicleCreationViewModel.PropertyChanged -= VehicleCreationViewModel_PropertyChanged;
         }
         #endregion
         #endregion

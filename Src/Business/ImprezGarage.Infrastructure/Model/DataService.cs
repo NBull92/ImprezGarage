@@ -261,6 +261,7 @@ namespace ImprezGarage.Infrastructure.Model
             {
                 using (var model = new ImprezGarageEntities())
                 {
+                    vehicle.IsManual = true;
                     model.Vehicles.Add(vehicle);
                     model.SaveChanges();
                     _dataStorage.AddNewVehicle(model.Vehicles.ToList().Last());
