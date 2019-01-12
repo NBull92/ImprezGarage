@@ -121,7 +121,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
                 var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
 
-                if (expenses == null || expenses.Result == null)
+                if (expenses?.Result == null)
                     return;
 
                 foreach (var expense in expenses.Result)
@@ -144,7 +144,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 return;
 
             FilteredExpenses = new ObservableCollection<ChartData>(_expenses.Where(o => Convert.ToDateTime(o.Date).Date >= Convert.ToDateTime(MinDate).Date
-                                                    && Convert.ToDateTime(o.Date).Date <= Convert.ToDateTime(MaxDate).Date));
+                                                    && Convert.ToDateTime(o.Date).Date <= Convert.ToDateTime(MaxDate).Date).OrderBy(o => Convert.ToDateTime(o.Date).Date));
         }
 
         #region Command Handlers
