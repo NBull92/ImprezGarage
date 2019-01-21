@@ -297,7 +297,7 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// Add a new petrol expense to the database.
         /// </summary>
-        public void AddPetrolExpenditure(Action<Exception> callback, double amount, int vehicleId)
+        public void AddPetrolExpenditure(Action<Exception> callback, double amount, DateTime date, int vehicleId)
         {
             try
             {
@@ -306,7 +306,7 @@ namespace ImprezGarage.Infrastructure.Model
                     model.PetrolExpenses.Add(new PetrolExpense
                     {
                         Amount = amount,
-                        DateEntered = DateTime.Now,
+                        DateEntered = date,
                         VehicleId = vehicleId
                     });
                     model.SaveChanges();

@@ -91,7 +91,7 @@ namespace ImprezGarage.Infrastructure.Services
         /// <summary>
         /// Add a new petrol expense to the database.
         /// </summary>
-        void AddPetrolExpenditure(Action<Exception> callback, double amount, int vehicleId);
+        void AddPetrolExpenditure(Action<Exception> callback, double amount, DateTime date, int vehicleId);
 
         /// <summary>
         /// Save the OptionsPerformed to the database. First off check to see if any of them are currently in the database and if so, update their current information.

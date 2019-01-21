@@ -11,13 +11,14 @@
                      mc:Ignorable="d"        
                      ResizeMode="NoResize" 
                      Width="396"
-                     Height="110"
+                     Height="150"
                      WindowStartupLocation="CenterScreen"
                      prism:ViewModelLocator.AutoWireViewModel="True"
                      d:DataContext="{d:DesignInstance Type=vm:AddPetrolExpenditureViewModel}">
 
     <Grid Margin="5">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -30,18 +31,19 @@
         <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Amount,
            UpdateSourceTrigger=PropertyChanged,
            StringFormat='0.00',
-           ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture},Mode=TwoWay}" Margin="5,0,0,0" Width="224" HorizontalAlignment="Left">
+           ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture},Mode=TwoWay}" Margin="5" Width="224" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="KeyDown">
                     <prism:InvokeCommandAction Command="{Binding OnKeyDownCommand}" />
                 </i:EventTrigger>
-                <i:EventTrigger EventName="KeyUp">
-                    <prism:InvokeCommandAction Command="{Binding OnKeyUpCommand}" />
-                </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>
 
-        <Grid Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Enter the date purchased:" VerticalAlignment="Center" Margin="5,0,0,0"/>
+        <mahApps:DateTimePicker Grid.Row="1" Grid.Column="1" Margin="5" Width="224" SelectedDate="{Binding Date,
+           UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

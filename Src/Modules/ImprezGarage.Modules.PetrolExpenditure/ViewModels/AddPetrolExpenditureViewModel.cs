@@ -3,15 +3,16 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using System.Globalization;
+
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using ImprezGarage.Infrastructure.BaseClasses;
+    using Infrastructure.BaseClasses;
     using Infrastructure;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
     using System;
-    using System.Windows.Controls;
     using System.Windows.Input;
 
     public class AddPetrolExpenditureViewModel : DialogViewModelBase
@@ -24,7 +25,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private const string ExpenseAdded = "Expense added successfully!";
         private const string ExpenseFailed = "An error occured during the adding of the petrol expense. \nPlease try again.";
 
-        private double _amount = 0;
+        private double _amount;
+        private DateTime? _date;
         private bool _addEnabled;
         #endregion
 
@@ -32,8 +34,26 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         public double Amount
         {
             get => _amount;
-            set => SetProperty(ref _amount, value);
+            set
+            {
+               SetProperty(ref _amount, value);
+
+                AddEnabled = !string.IsNullOrEmpty(_amount.ToString(CultureInfo.InvariantCulture));
+
+                CanExecute();
+            }
         }
+
+        public DateTime? Date
+        {
+            get => _date;
+            set
+            {
+                SetProperty(ref _date, value);
+                CanExecute();
+            }
+        }
+
         public bool AddEnabled
         {
             get => _addEnabled;
@@ -45,7 +65,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Commands
         public DelegateCommand AddCommand { get; }
         public DelegateCommand CancelCommand { get; }
-        public DelegateCommand<KeyEventArgs> OnKeyUpCommand { get; }
         public DelegateCommand<KeyEventArgs> OnKeyDownCommand { get; }
         #endregion
         #endregion
@@ -57,13 +76,52 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _eventAggregator = eventAggregator;
             _notificationService = notificationService;
 
-            AddCommand = new DelegateCommand(AddExecute);
+            Date = DateTime.Now;
+
+            AddCommand = new DelegateCommand(AddExecute).ObservesCanExecute(() => AddEnabled);
             CancelCommand = new DelegateCommand(Close);
-            OnKeyUpCommand = new DelegateCommand<KeyEventArgs>(OnKeyUpExecute);
             OnKeyDownCommand = new DelegateCommand<KeyEventArgs>(OnKeyDownExecute);
         }
 
+        #region Methods
         #region Command Handlers
+        /// <summary>
+        /// Proceed with adding the expenditure.
+        /// Then close the window.
+        /// </summary>
+        private void AddExecute()
+        {   
+            _dataService.AddPetrolExpenditure((error) =>
+            {
+                if(error != null)
+                {
+                    _notificationService.Alert(ExpenseFailed);
+                    return;
+                }
+
+                _notificationService.Alert(ExpenseAdded);
+                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
+            }, Amount, Convert.ToDateTime(Date), VehicleId);
+
+            Close();
+        }
+        #endregion
+        
+        /// <summary>
+        /// Do a check on the amount and the date to see if the user has entered any data and can therefore proceed with saving this to the database.
+        /// </summary>
+        private void CanExecute()
+        {
+            if (Math.Abs(_amount) < 0.01 || Date == null)
+            {
+                AddEnabled = false;
+            }
+            else
+            {
+                AddEnabled = true;
+            }
+        }
+
         /// <summary>
         /// Check if the key is a numeric key by passing the Key to the KeyConverter.
         /// If it is a numpad key, then replace the text 'NumPad' from the string to leave only the number.
@@ -76,35 +134,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             strKey = strKey.Replace("NumPad", "");
             if (!int.TryParse(strKey, out int n) && strKey != "OemPeriod" && strKey != "Decimal")
                 args.Handled = true;
-        }
-
-        /// <summary>
-        /// Check if there was any text left in the textbox.
-        /// Enable Add button if so.
-        /// </summary>
-        private void OnKeyUpExecute(KeyEventArgs args)
-        {
-            AddEnabled = !string.IsNullOrEmpty(((TextBox)args.Source).Text);
-        }
-
-        /// <summary>
-        /// Proceed with adding the expenditure.
-        /// Then close the window.
-        /// </summary>
-        private void AddExecute()
-        {
-            _dataService.AddPetrolExpenditure((error) =>
-            {
-                if(error != null)
-                {
-                    _notificationService.Alert(ExpenseFailed);
-                    return;
-                }
-
-                _notificationService.Alert(ExpenseAdded);
-                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
-            }, Convert.ToDouble(Amount), VehicleId);
-            Close();
         }
         #endregion
         #endregion

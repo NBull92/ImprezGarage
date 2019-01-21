@@ -20,7 +20,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     {
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IEventAggregator _eventAggregator;
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
         private VehicleViewModel _selectedVehicle;
         private string _label;
@@ -52,8 +51,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         public PetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator)
         {
             _dataService = dataService;
-            _eventAggregator = eventAggregator;
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
 
             AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
         }
@@ -63,8 +61,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private void AddExpenditureExecute()
         {
             var addExpense = new AddPetrolExpenditure();
-            var vm = addExpense.DataContext as AddPetrolExpenditureViewModel;
-            vm.VehicleId = _selectedVehicle.Vehicle.Id;
+            if (addExpense.DataContext is AddPetrolExpenditureViewModel vm)
+                vm.VehicleId = _selectedVehicle.Vehicle.Id;
             addExpense.ShowDialog();
         }
         #endregion
