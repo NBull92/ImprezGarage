@@ -203,16 +203,18 @@ namespace ImprezGarage.Infrastructure.Model
             {
                 if (model.MaintenanceChecks.Any(o => o.VehicleId == vehicleId))
                 {
-                    if (model.MaintenanceChecks.Count(o => o.VehicleId == vehicleId) == 1)
+                    var all = model.MaintenanceChecks.Where(o => o.VehicleId == vehicleId);
+
+                    if (all.Count() == 1)
                     {
-                        var last = model.MaintenanceChecks.First(o => o.VehicleId == vehicleId);
-                        return Task.Run(() => last.DatePerformed);
+                        var onlyOne = all.FirstOrDefault();
+                        return Task.Run(() => onlyOne.DatePerformed);
                     }
-                    else
-                    {
-                        var last = model.MaintenanceChecks.Last(o => o.VehicleId == vehicleId);
-                        return Task.Run(() => last.DatePerformed);
-                    }
+
+                    all = all.OrderByDescending(o => o.Id);
+
+                    var last = all.FirstOrDefault();
+                    return Task.Run(() => last.DatePerformed);
                 }
                 return null;
             }
