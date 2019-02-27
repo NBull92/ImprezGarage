@@ -14,3 +14,5 @@ ImprezGarage is a vehicle maintenance tool designed to help keep track of when I
 ImprezGarage has been built on the Prism framework, allowing for me to break up the application into loosely couple modules. This allows for each module to be maintained and tested more thoroughly as well as, allowing for modules to be added or removed at any point without causing an affect on the other parts of the application.
 
 For more information please contact me via: http://www.nickbull-computing.biz/About/Contact.aspx
+
+View the final thing on Youtube: https://youtu.be/3UlAXmtliM4
