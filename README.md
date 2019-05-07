@@ -1,6 +1,6 @@
 # ImprezGarage
 
-Copyright of Nicholas Andrew Bull 2018
+Copyright of Nicholas Andrew Bull 2019
 
 This code is for portfolio use only.
 
@@ -18,4 +18,4 @@ For more information please contact me via: http://www.nickbull-computing.biz/Ab
 View the final thing on Youtube: https://youtu.be/3UlAXmtliM4
 
 ![alt text](https://github.com/NBull92/ImprezGarage/blob/master/Images/OhFonlOFoJ.png)
-There ate more screenshots of the project here: https://github.com/NBull92/ImprezGarage/tree/master/Images
+There are more screenshots of the project here: https://github.com/NBull92/ImprezGarage/tree/master/Images
