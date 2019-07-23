@@ -1,5 +1,6 @@
 
 *.lock
+.vs
 .vs/
 .vs/ImprezGarage/v15/Server/sqlite3/storage.ide-wal
 .vs/ImprezGarage/v15/Server/sqlite3/storage.ide
