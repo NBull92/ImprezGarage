@@ -56,7 +56,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private VehicleType _selectedVehicleType;
 
         private VehicleCreationViewModel _vehicleCreationViewModel;
-        
+
         /// <summary>
         /// Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
         /// </summary>
@@ -123,12 +123,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             get => _vehicleCreationViewModel;
             set
-            {                
+            {
                 SetProperty(ref _vehicleCreationViewModel, value);
                 _vehicleCreationViewModel.PropertyChanged += VehicleCreationViewModel_PropertyChanged;
             }
         }
-        
+
         /// <summary>
         /// Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
         /// </summary>
@@ -402,7 +402,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     {
                         newVehicle.TaxExpiryDate = vehicleCreate.TaxExpiryDate;
                     }
-                    
+
                     if (newVehicle.HasMot == true)
                     {
                         newVehicle.MotExpiryDate = vehicleCreate.MotExpiryDate;
@@ -443,10 +443,25 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     _loggerService.LogException(error);
                     return;
                 }
-                                
+
                 _notificationsService.Alert(VehicleAdded, NotificationHeader);
                 Close(true);
             }, newVehicle);
+
+            _dataService.AddNewVehicle(HandleError, newVehicle);
+
+        }
+
+        private void HandleError(Exception error)
+        {
+            if (error != null)
+            {
+                _loggerService.LogException(error);
+                return;
+            }
+
+            _notificationsService.Alert(VehicleAdded, NotificationHeader);
+            Close(true);
         }
         #endregion
 
@@ -457,7 +472,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             var types = _dataService.GetVehicleTypes();
 
-            VehicleTypes = types == null && types.Result == null ? VehicleTypes = new ObservableCollection<VehicleType>() 
+            VehicleTypes = types == null && types.Result == null ? VehicleTypes = new ObservableCollection<VehicleType>()
                 : VehicleTypes = new ObservableCollection<VehicleType>(types.Result);
         }
 
@@ -468,7 +483,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         internal void Edit(Vehicle vehicle)
         {
             EditVehicle = vehicle;
-            
+
             if (VehicleTypes.Any(o => o.Id == EditVehicle.VehicleType))
             {
                 SelectedVehicleType = VehicleTypes.First(o => o.Id == EditVehicle.VehicleType);
@@ -515,11 +530,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             SaveCommand.RaiseCanExecuteChanged();
         }
-        
+
         #region IDisposable
         public override void Dispose()
         {
-            if(VehicleCreationViewModel != null)
+            if (VehicleCreationViewModel != null)
                 VehicleCreationViewModel.PropertyChanged -= VehicleCreationViewModel_PropertyChanged;
         }
         #endregion

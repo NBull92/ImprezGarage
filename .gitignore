@@ -6,3 +6,6 @@
 .vs/ImprezGarage/v15/Server/sqlite3/storage.ide
 .vs/ImprezGarage/v15/Server/sqlite3/storage.ide-shm
 .vs/ImprezGarage/v15/.suo
+
+[Bb]in/
+[Oo]bj/
