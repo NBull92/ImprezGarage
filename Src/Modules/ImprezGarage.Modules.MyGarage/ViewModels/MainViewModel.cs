@@ -43,13 +43,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
-            set => SetProperty(ref _selectedVehicle, value, OnSelectedVehicleChange);
-        }
-
-        private void OnSelectedVehicleChange()
-        {
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
-            RequestNavigationToPetrolExpenditureMainView();
+            set => SetProperty(ref _selectedVehicle, value);
         }
 
         #region Commands
@@ -80,8 +74,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #region Command Handlers
         private void SelectedVehicleChangedExecute(SelectionChangedEventArgs obj)
         {
-            //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
-            //RequestNavigationToPetrolExpenditureMainView();
+            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
+            RequestNavigationToPetrolExpenditureMainView();
         }
 
         /// <summary>
@@ -149,7 +143,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 Vehicles.Add(viewModel);
             }
 
-            SelectedVehicle = Vehicles.FirstOrDefault();
             CheckForVehicleReminders();
         }
 

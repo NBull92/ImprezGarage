@@ -73,7 +73,7 @@
         </Border>
        
 
-        <ListBox Margin="5" ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle, Mode=TwoWay}"
+        <ListBox Margin="5" ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}"
                   ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
