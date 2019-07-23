@@ -20,6 +20,10 @@ namespace ImprezGarage.Infrastructure.BaseClasses
         /// An event handler request for dragging and moving the associated view.
         /// </summary>
         public event EventHandler DragMoveRequest;
+        
+        public event EventHandler HideRequest;
+
+        public event EventHandler ShowWindowRequest;
         #endregion
 
         #region Properties
@@ -55,6 +59,16 @@ namespace ImprezGarage.Infrastructure.BaseClasses
         public void Move()
         {
             DragMoveRequest?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Hide()
+        {
+            HideRequest?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void ShowWindow()
+        {
+            ShowWindowRequest?.Invoke(this, EventArgs.Empty);
         }
 
         /// <summary>

@@ -1,18 +1,21 @@
-﻿<mahApps:MetroWindow x:Class="ImprezGarage.Views.MainWindow"
+﻿<baseClasses:DialogViewBase x:Class="ImprezGarage.Views.MainWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
                      xmlns:prism="http://prismlibrary.com/"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
+                     xmlns:baseClasses="clr-namespace:ImprezGarage.Infrastructure.BaseClasses;assembly=ImprezGarage.Infrastructure"
                      WindowStartupLocation="CenterScreen"
                      prism:ViewModelLocator.AutoWireViewModel="True"
+                     Icon="{Binding Icon}"
                      Title="{Binding Title}" Height="1000" Width="1373">
-    <mahApps:MetroWindow.RightWindowCommands>
+    <baseClasses:DialogViewBase.RightWindowCommands>
         <mahApps:WindowCommands>
-            <Button Content="Refresh" Command="{Binding RefreshCommand}"/>
-            <Button Content="Settings" Command="{Binding Settings}"/>
+            <Button Content="Refresh" Command="{Binding RefreshCommand}" ToolTip="Refresh the current data."/>
+            <Button Content="Settings" Command="{Binding Settings}" ToolTip="Open settings panel."/>
+            <Button Content="." Command="{Binding MinimizeToTray}" ToolTip="Minimize to system tray."/>
         </mahApps:WindowCommands>
-    </mahApps:MetroWindow.RightWindowCommands>
+    </baseClasses:DialogViewBase.RightWindowCommands>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -50,4 +53,4 @@
             </mahApps:Flyout>
         </mahApps:FlyoutsControl>
     </Grid>
-</mahApps:MetroWindow>
+</baseClasses:DialogViewBase>

@@ -193,7 +193,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             if (vehicle.Vehicle.HasValidTax == false)
                 return;
 
-               var taxDate = Convert.ToDateTime(vehicle.TaxExpiryDate);
+            var taxDate = Convert.ToDateTime(vehicle.TaxExpiryDate);
             if ((taxDate - DateTime.Now).TotalDays < DaysAllowanceBeforeReminder)
             {
                 _reminders.Add("The tax of vehicle:  " + vehicle.Registration + " runs out on the : " + taxDate.ToShortDateString());

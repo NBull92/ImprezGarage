@@ -25,6 +25,7 @@ namespace ImprezGarage
 
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
             SystemEvents.SessionEnding += SystemEventsOnSessionEnding;
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 
         private void SystemEventsOnSessionEnding(object sender, SessionEndingEventArgs e)
