@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using System.Linq;
+
 namespace ImprezGarage.Infrastructure.Model
 {
     using Services;
@@ -12,7 +14,7 @@ namespace ImprezGarage.Infrastructure.Model
     /// <summary>
     /// A storage of all of the data retrieved from the database.
     /// </summary>
-    internal class DataStorage
+    public class DataStorage : IRepository
     {
         #region Attributes
         /// <summary>
@@ -34,7 +36,7 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// Construct the data model and instantiate the collections.
         /// </summary>
-        internal DataStorage()
+        public DataStorage()
         {
             _vehicles = new ObservableCollection<Vehicle>();
             _vehicleTypes = new ObservableCollection<VehicleType>();
@@ -44,15 +46,15 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// return the list of vehicle types.
         /// </summary>
-        internal ObservableCollection<VehicleType> GetVehicleTypes()
+        public List<VehicleType> GetVehicleTypes()
         {
-            return _vehicleTypes;
+            return _vehicleTypes.ToList();
         }
 
         /// <summary>
         /// Set the collection of vehicle types to the passed through list.
         /// </summary>
-        internal void SetVehicleTypes(List<VehicleType> vehicleTypes)
+        public void SetVehicleTypes(List<VehicleType> vehicleTypes)
         {
             _vehicleTypes = new ObservableCollection<VehicleType>(vehicleTypes);
         }
@@ -60,7 +62,7 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// Return the collection of maintenance types.
         /// </summary>
-        internal ObservableCollection<MaintenanceCheckType> GetMaintenanceTypes()
+        public ObservableCollection<MaintenanceCheckType> GetMaintenanceTypes()
         {
             return _maintenanceTypes;
         }
@@ -68,7 +70,7 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// Set the collection of maintenance types to the passed through list.
         /// </summary>
-        internal void SetMaintenanceTypes(List<MaintenanceCheckType> maintenanceCheckType)
+        public void SetMaintenanceTypes(List<MaintenanceCheckType> maintenanceCheckType)
         {
             _maintenanceTypes = new ObservableCollection<MaintenanceCheckType>(maintenanceCheckType);
         }
@@ -76,7 +78,7 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// Set the collection of vehicle to the passed through list.
         /// </summary>
-        internal void SetVehicles(List<Vehicle> vehicles)
+        public void SetVehicles(List<Vehicle> vehicles)
         {
             _vehicles = new ObservableCollection<Vehicle>(vehicles);
         }
@@ -85,7 +87,7 @@ namespace ImprezGarage.Infrastructure.Model
         /// Return the collection of vehicles.
         /// </summary>
         /// <returns></returns>
-        internal ObservableCollection<Vehicle> GetVehicles()
+        public ObservableCollection<Vehicle> GetVehicles()
         {
             return _vehicles;
         }
@@ -93,7 +95,7 @@ namespace ImprezGarage.Infrastructure.Model
         /// <summary>
         /// Add a new vehicle to the collection of vehicles.
         /// </summary>
-        internal void AddNewVehicle(Vehicle vehicle)
+        public void AddNewVehicle(Vehicle vehicle)
         {
             _vehicles.Add(vehicle);
         }

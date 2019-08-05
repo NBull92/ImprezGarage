@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model.Temp_New_Classes;
+
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using ImprezGarage.Infrastructure.Model;
@@ -86,10 +88,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         #region Methods
-        public MotorbikeCreationViewModel()
-        {
-        }
-
         /// <summary>
         /// Override the setup function of the parent class.
         /// Set the current insurance and tax date.

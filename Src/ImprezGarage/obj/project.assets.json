@@ -36,6 +36,67 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
+      "Extended.Wpf.Toolkit/3.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "resource": {
+          "lib/net40/de/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/es/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/fr/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/hu/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "hu"
+          },
+          "lib/net40/it/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/pt-BR/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net40/ro/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ro"
+          },
+          "lib/net40/ru/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/sv/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "sv"
+          },
+          "lib/net40/zh-Hans/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "zh-Hans"
+          }
+        }
+      },
+      "FireSharp/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "RestSharp": "104.4.0"
+        },
+        "compile": {
+          "lib/net45/FireSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net45/FireSharp.dll": {}
+        }
+      },
       "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
@@ -115,6 +176,15 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
+      "RestSharp/104.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net4/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net4/RestSharp.dll": {}
+        }
+      },
       "Unity/5.6.1": {
         "type": "package",
         "compile": {
@@ -170,6 +240,22 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Firebase/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "FireSharp": "1.1.0",
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
         }
       },
       "ImprezGarage.Modules.Logger/1.0.0": {
@@ -334,6 +420,67 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
+      "Extended.Wpf.Toolkit/3.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "resource": {
+          "lib/net40/de/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/es/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/fr/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/hu/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "hu"
+          },
+          "lib/net40/it/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/pt-BR/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net40/ro/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ro"
+          },
+          "lib/net40/ru/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/sv/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "sv"
+          },
+          "lib/net40/zh-Hans/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "zh-Hans"
+          }
+        }
+      },
+      "FireSharp/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "RestSharp": "104.4.0"
+        },
+        "compile": {
+          "lib/net45/FireSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net45/FireSharp.dll": {}
+        }
+      },
       "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
@@ -413,6 +560,15 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
+      "RestSharp/104.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net4/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net4/RestSharp.dll": {}
+        }
+      },
       "Unity/5.6.1": {
         "type": "package",
         "compile": {
@@ -468,6 +624,22 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Firebase/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "FireSharp": "1.1.0",
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
         }
       },
       "ImprezGarage.Modules.Logger/1.0.0": {
@@ -632,6 +804,67 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
+      "Extended.Wpf.Toolkit/3.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "resource": {
+          "lib/net40/de/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/es/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/fr/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/hu/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "hu"
+          },
+          "lib/net40/it/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/pt-BR/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net40/ro/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ro"
+          },
+          "lib/net40/ru/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/sv/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "sv"
+          },
+          "lib/net40/zh-Hans/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "zh-Hans"
+          }
+        }
+      },
+      "FireSharp/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "RestSharp": "104.4.0"
+        },
+        "compile": {
+          "lib/net45/FireSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net45/FireSharp.dll": {}
+        }
+      },
       "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
@@ -711,6 +944,15 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
+      "RestSharp/104.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net4/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net4/RestSharp.dll": {}
+        }
+      },
       "Unity/5.6.1": {
         "type": "package",
         "compile": {
@@ -766,6 +1008,22 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Firebase/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "FireSharp": "1.1.0",
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
         }
       },
       "ImprezGarage.Modules.Logger/1.0.0": {
@@ -930,6 +1188,67 @@
           "lib/net45/EntityFramework.dll": {}
         }
       },
+      "Extended.Wpf.Toolkit/3.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "runtime": {
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll": {},
+          "lib/net40/Xceed.Wpf.AvalonDock.dll": {},
+          "lib/net40/Xceed.Wpf.Toolkit.dll": {}
+        },
+        "resource": {
+          "lib/net40/de/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net40/es/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "es"
+          },
+          "lib/net40/fr/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "fr"
+          },
+          "lib/net40/hu/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "hu"
+          },
+          "lib/net40/it/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net40/pt-BR/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "pt-BR"
+          },
+          "lib/net40/ro/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ro"
+          },
+          "lib/net40/ru/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "ru"
+          },
+          "lib/net40/sv/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "sv"
+          },
+          "lib/net40/zh-Hans/Xceed.Wpf.AvalonDock.resources.dll": {
+            "locale": "zh-Hans"
+          }
+        }
+      },
+      "FireSharp/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "RestSharp": "104.4.0"
+        },
+        "compile": {
+          "lib/net45/FireSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net45/FireSharp.dll": {}
+        }
+      },
       "MahApps.Metro/1.6.5": {
         "type": "package",
         "dependencies": {
@@ -1009,6 +1328,15 @@
           "lib/net45/System.Windows.Interactivity.dll": {}
         }
       },
+      "RestSharp/104.4.0": {
+        "type": "package",
+        "compile": {
+          "lib/net4/RestSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net4/RestSharp.dll": {}
+        }
+      },
       "Unity/5.6.1": {
         "type": "package",
         "compile": {
@@ -1064,6 +1392,22 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Infrastructure.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.Firebase/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "FireSharp": "1.1.0",
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Unity": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
         }
       },
       "ImprezGarage.Modules.Logger/1.0.0": {
@@ -1258,6 +1602,46 @@
         "tools/migrate.exe"
       ]
     },
+    "Extended.Wpf.Toolkit/3.5.0": {
+      "sha512": "syHi2FK/THdupMYBRu/XIYiPRZ3QuIaPlsTTJBFhH/BrFbmSOJ6qhgiKwoAdzFdGVCDSKX+QNbKrw6e1uvwaqg==",
+      "type": "package",
+      "path": "extended.wpf.toolkit/3.5.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "extended.wpf.toolkit.3.5.0.nupkg.sha512",
+        "extended.wpf.toolkit.nuspec",
+        "lib/net40/Xceed.Wpf.AvalonDock.Themes.Aero.dll",
+        "lib/net40/Xceed.Wpf.AvalonDock.Themes.Metro.dll",
+        "lib/net40/Xceed.Wpf.AvalonDock.Themes.VS2010.dll",
+        "lib/net40/Xceed.Wpf.AvalonDock.dll",
+        "lib/net40/Xceed.Wpf.Toolkit.dll",
+        "lib/net40/de/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/es/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/fr/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/hu/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/it/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/pt-BR/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/ro/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/ru/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/sv/Xceed.Wpf.AvalonDock.resources.dll",
+        "lib/net40/zh-Hans/Xceed.Wpf.AvalonDock.resources.dll",
+        "tools/install.ps1"
+      ]
+    },
+    "FireSharp/1.1.0": {
+      "sha512": "FRkskFsuZeaWm/qNHpydFlaUAU+g6PzIgeFZYixkyARXaSzsooDLFmOYKmkNPjQiXWflCI2cVgYCILZYrqa8Uw==",
+      "type": "package",
+      "path": "firesharp/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "firesharp.1.1.0.nupkg.sha512",
+        "firesharp.nuspec",
+        "lib/net45/FireSharp.dll"
+      ]
+    },
     "MahApps.Metro/1.6.5": {
       "sha512": "XFxACnPbTAZ9qYcXMqFDLXXEpAbLj3BYaXqwH8NoY0sfSAYepEpE4C53Nd6AI4TnQ+nmDugtO8dwsAXPtt0SXQ==",
       "type": "package",
@@ -1345,6 +1729,30 @@
         "lib/net45/System.Windows.Interactivity.dll",
         "prism.wpf.6.3.0.nupkg.sha512",
         "prism.wpf.nuspec"
+      ]
+    },
+    "RestSharp/104.4.0": {
+      "sha512": "noACbS/gvceWlZO4kaV6AepG1cTLtHRhHZftdve+lytX6AIFDk5bdzsq4FfJ2/byAH3Y04I92wlH/z95lb7UwQ==",
+      "type": "package",
+      "path": "restsharp/104.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35-client/RestSharp.dll",
+        "lib/net35-client/RestSharp.xml",
+        "lib/net35/RestSharp.dll",
+        "lib/net35/RestSharp.xml",
+        "lib/net4-client/RestSharp.dll",
+        "lib/net4-client/RestSharp.xml",
+        "lib/net4/RestSharp.dll",
+        "lib/net4/RestSharp.xml",
+        "lib/sl4-wp71/RestSharp.WindowsPhone.dll",
+        "lib/sl4-wp71/RestSharp.WindowsPhone.xml",
+        "lib/sl4/RestSharp.Silverlight.dll",
+        "lib/sl4/RestSharp.Silverlight.xml",
+        "readme.txt",
+        "restsharp.104.4.0.nupkg.sha512",
+        "restsharp.nuspec"
       ]
     },
     "Unity/5.6.1": {
@@ -1465,6 +1873,11 @@
       "path": "../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj",
       "msbuildProject": "../Business/ImprezGarage.Infrastructure/ImprezGarage.Infrastructure.csproj"
     },
+    "ImprezGarage.Modules.Firebase/1.0.0": {
+      "type": "project",
+      "path": "../Modules/ImprezGarage.Modules.Firebase/ImprezGarage.Modules.Firebase.csproj",
+      "msbuildProject": "../Modules/ImprezGarage.Modules.Firebase/ImprezGarage.Modules.Firebase.csproj"
+    },
     "ImprezGarage.Modules.Logger/1.0.0": {
       "type": "project",
       "path": "../Modules/ImprezGarage.Modules.Logger/ImprezGarage.Modules.Logger.csproj",
@@ -1504,7 +1917,9 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.6.1": [
       "EntityFramework >= 6.2.0",
+      "Extended.Wpf.Toolkit >= 3.5.0",
       "ImprezGarage.Infrastructure >= 1.0.0",
+      "ImprezGarage.Modules.Firebase >= 1.0.0",
       "ImprezGarage.Modules.Logger >= 1.0.0",
       "ImprezGarage.Modules.MyGarage >= 1.0.0",
       "ImprezGarage.Modules.Notifications >= 1.0.0",
@@ -1547,6 +1962,9 @@
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
             },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Firebase\\ImprezGarage.Modules.Firebase.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Firebase\\ImprezGarage.Modules.Firebase.csproj"
+            },
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Logger\\ImprezGarage.Modules.Logger.csproj"
             },
@@ -1578,6 +1996,10 @@
           "EntityFramework": {
             "target": "Package",
             "version": "[6.2.0, )"
+          },
+          "Extended.Wpf.Toolkit": {
+            "target": "Package",
+            "version": "[3.5.0, )"
           },
           "MahApps.Metro": {
             "target": "Package",

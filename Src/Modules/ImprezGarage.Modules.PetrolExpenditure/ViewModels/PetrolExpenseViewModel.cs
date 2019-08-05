@@ -3,9 +3,10 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using ImprezGarage.Infrastructure.Model;
+    using Infrastructure.Model.Temp_New_Classes;
     using Infrastructure;
     using Infrastructure.Services;
     using Prism.Commands;
@@ -60,7 +61,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         #region Methods
 
-        public PetrolExpenseViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator, ILoggerService loggerService)
+        public PetrolExpenseViewModel(IDataService dataService, INotificationsService notificationsService, IEventAggregator eventAggregator, 
+            ILoggerService loggerService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
@@ -84,16 +86,15 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             if (!_notificationsService.Confirm(ConfirmExpenseDelete))
                 return;
 
-            _dataService.DeletePetrolExpense((error) =>
+            try
             {
-                if (error != null)
-                {
-                    _loggerService.LogException(error);
-                    return;
-                }
-
+                _dataService.DeletePetrolExpense(Id);
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
-            }, Id);
+            }
+            catch (Exception e)
+            {
+                _loggerService.LogException(e);
+            }
         }
         #endregion
         #endregion

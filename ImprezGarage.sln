@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Modules.Logger
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ImprezGarage.Database", "Src\Business\ImprezGarage.Database\ImprezGarage.Database.sqlproj", "{F8102192-E32B-4D49-B9F0-373DFACB5C39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Modules.Firebase", "Src\Modules\ImprezGarage.Modules.Firebase\ImprezGarage.Modules.Firebase.csproj", "{F94645C3-A792-418B-9004-B3507A3FF95D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{F8102192-E32B-4D49-B9F0-373DFACB5C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8102192-E32B-4D49-B9F0-373DFACB5C39}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8102192-E32B-4D49-B9F0-373DFACB5C39}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{F94645C3-A792-418B-9004-B3507A3FF95D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F94645C3-A792-418B-9004-B3507A3FF95D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F94645C3-A792-418B-9004-B3507A3FF95D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F94645C3-A792-418B-9004-B3507A3FF95D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{105530C0-3BAA-40D3-9763-979707CB0C65} = {0112AA5B-F663-428B-8991-18CF085F755C}
 		{6F89C592-B58E-409B-9211-3F93542688AD} = {0112AA5B-F663-428B-8991-18CF085F755C}
 		{F8102192-E32B-4D49-B9F0-373DFACB5C39} = {292AAB90-F2F0-4F78-8F5F-8C106DCED9C2}
+		{F94645C3-A792-418B-9004-B3507A3FF95D} = {0112AA5B-F663-428B-8991-18CF085F755C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {654855BA-1C13-4216-9E13-C9095F6C4831}

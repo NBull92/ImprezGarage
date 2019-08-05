@@ -1,0 +1,260 @@
+[
+  {
+    "Id": 1,
+    "MaintenanceType": 1,
+    "Name": "Checked Air Filter",
+    "Tooltip": ""
+  },
+  {
+    "Id": 2,
+    "MaintenanceType": 1,
+    "Name": "Replaced Air Filter",
+    "Tooltip": "Once a year or every 20"
+  },
+  {
+    "Id": 3,
+    "MaintenanceType": 1,
+    "Name": "Checked Coolant Level",
+    "Tooltip": ""
+  },
+  {
+    "Id": 4,
+    "MaintenanceType": 1,
+    "Name": "Flushed System and Changed Coolant",
+    "Tooltip": "Once a year"
+  },
+  {
+    "Id": 5,
+    "MaintenanceType": 1,
+    "Name": "Checked Fan Belt or Serpentine Belt",
+    "Tooltip": ""
+  },
+  {
+    "Id": 7,
+    "MaintenanceType": 1,
+    "Name": "Changed Fan Belt or Serpentine Belt",
+    "Tooltip": ""
+  },
+  {
+    "Id": 8,
+    "MaintenanceType": 1,
+    "Name": "Checked Battery",
+    "Tooltip": ""
+  },
+  {
+    "Id": 9,
+    "MaintenanceType": 1,
+    "Name": "Replaced Battery",
+    "Tooltip": "When needed"
+  },
+  {
+    "Id": 10,
+    "MaintenanceType": 1,
+    "Name": "Checked Oil Level",
+    "Tooltip": ""
+  },
+  {
+    "Id": 11,
+    "MaintenanceType": 1,
+    "Name": "Changed Oil Level",
+    "Tooltip": "Every six months or 5"
+  },
+  {
+    "Id": 12,
+    "MaintenanceType": 1,
+    "Name": "Replaced Oil Filter",
+    "Tooltip": "Every oil change"
+  },
+  {
+    "Id": 13,
+    "MaintenanceType": 1,
+    "Name": "Checked Automatic Transmission Fluid Level",
+    "Tooltip": ""
+  },
+  {
+    "Id": 14,
+    "MaintenanceType": 1,
+    "Name": "Added Automatic Transmission Fluid",
+    "Tooltip": ""
+  },
+  {
+    "Id": 15,
+    "MaintenanceType": 1,
+    "Name": "Added Brake Fluid",
+    "Tooltip": ""
+  },
+  {
+    "Id": 16,
+    "MaintenanceType": 1,
+    "Name": "Checked Power-Steering",
+    "Tooltip": ""
+  },
+  {
+    "Id": 17,
+    "MaintenanceType": 1,
+    "Name": "Added Power-Steering Fluid",
+    "Tooltip": ""
+  },
+  {
+    "Id": 18,
+    "MaintenanceType": 1,
+    "Name": "Checked Front and Rear Windshield Washer Fluid Level",
+    "Tooltip": ""
+  },
+  {
+    "Id": 19,
+    "MaintenanceType": 1,
+    "Name": "Added Windshield Washer Fluid",
+    "Tooltip": ""
+  },
+  {
+    "Id": 20,
+    "MaintenanceType": 1,
+    "Name": "Checked Front and Rear Windshield Wiper Blades",
+    "Tooltip": ""
+  },
+  {
+    "Id": 21,
+    "MaintenanceType": 1,
+    "Name": "Replaced Front Windshield Wiper Blades",
+    "Tooltip": ""
+  },
+  {
+    "Id": 22,
+    "MaintenanceType": 1,
+    "Name": "Replaced Rear Windshield Wiper Blades",
+    "Tooltip": ""
+  },
+  {
+    "Id": 23,
+    "MaintenanceType": 1,
+    "Name": "Checked Tire Pressure",
+    "Tooltip": "Don't forget the spare"
+  },
+  {
+    "Id": 24,
+    "MaintenanceType": 1,
+    "Name": "Replaced Tires",
+    "Tooltip": ""
+  },
+  {
+    "Id": 25,
+    "MaintenanceType": 1,
+    "Name": "Checked Wiring",
+    "Tooltip": ""
+  },
+  {
+    "Id": 26,
+    "MaintenanceType": 1,
+    "Name": "Replaced Hoses",
+    "Tooltip": ""
+  },
+  {
+    "Id": 27,
+    "MaintenanceType": 2,
+    "Name": "Checked Fuel Filter",
+    "Tooltip": ""
+  },
+  {
+    "Id": 28,
+    "MaintenanceType": 2,
+    "Name": "Replaced Fuel Filter",
+    "Tooltip": "Every tune-up or as manufacturer recommends"
+  },
+  {
+    "Id": 29,
+    "MaintenanceType": 2,
+    "Name": "Checked PCV Valve",
+    "Tooltip": "If indicator light goes on"
+  },
+  {
+    "Id": 30,
+    "MaintenanceType": 2,
+    "Name": "Cleaned or Replaced PCV Valve",
+    "Tooltip": "Every 12"
+  },
+  {
+    "Id": 31,
+    "MaintenanceType": 2,
+    "Name": "Checked Spark Plugs",
+    "Tooltip": "If engine performance suffers"
+  },
+  {
+    "Id": 32,
+    "MaintenanceType": 2,
+    "Name": "Cleaned and Re-Gapped Spark Plugs",
+    "Tooltip": ""
+  },
+  {
+    "Id": 33,
+    "MaintenanceType": 2,
+    "Name": "Changed Spark PLugs",
+    "Tooltip": "Every scheduled tune-up; More often if burnt or worn"
+  },
+  {
+    "Id": 34,
+    "MaintenanceType": 2,
+    "Name": "Had Fuel Injectors Cleaned",
+    "Tooltip": "When needed"
+  },
+  {
+    "Id": 35,
+    "MaintenanceType": 3,
+    "Name": "Checked Grease Fittings",
+    "Tooltip": "Every 3"
+  },
+  {
+    "Id": 36,
+    "MaintenanceType": 3,
+    "Name": "Lubricated Steering and Suspension",
+    "Tooltip": "Every 3"
+  },
+  {
+    "Id": 37,
+    "MaintenanceType": 3,
+    "Name": "Checked Brakes",
+    "Tooltip": "Every 10"
+  },
+  {
+    "Id": 38,
+    "MaintenanceType": 3,
+    "Name": "Had Brakes Rebuilt",
+    "Tooltip": ""
+  },
+  {
+    "Id": 39,
+    "MaintenanceType": 3,
+    "Name": "Checked Wheel Bearings",
+    "Tooltip": "Every 10"
+  },
+  {
+    "Id": 40,
+    "MaintenanceType": 3,
+    "Name": "Repacked Wheel Bearings",
+    "Tooltip": "Every 20"
+  },
+  {
+    "Id": 41,
+    "MaintenanceType": 3,
+    "Name": "Checked Shock Absorbers",
+    "Tooltip": "If ride seems impaired"
+  },
+  {
+    "Id": 42,
+    "MaintenanceType": 3,
+    "Name": "Replaced Shock Absorbers",
+    "Tooltip": "As needed"
+  },
+  {
+    "Id": 43,
+    "MaintenanceType": 3,
+    "Name": "Had Front-end Aligned",
+    "Tooltip": "As needed"
+  },
+  {
+    "Id": 44,
+    "MaintenanceType": 3,
+    "Name": "Had Automatic Transmission Serviced",
+    "Tooltip": "Every 20"
+  }
+]

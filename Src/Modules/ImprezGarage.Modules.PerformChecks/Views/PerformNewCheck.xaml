@@ -52,8 +52,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <CheckBox Content="{Binding MaintenanceCheckOption.Name}" Margin="5" Height="25" 
-                                          ToolTip="{Binding MaintenanceCheckOption.Tooltip}" 
+                                <CheckBox Content="{Binding MaintenanceOption.Name}" Margin="5" Height="25" 
+                                          ToolTip="{Binding MaintenanceOption.Tooltip}" 
                                           VerticalContentAlignment="Center" IsChecked="{Binding IsChecked,Mode=TwoWay}"/>
                                 <TextBox Margin="5" Height="25" 
                                      Visibility="{Binding IsChecked, Converter={StaticResource BoolToVisibilityConverter}}"

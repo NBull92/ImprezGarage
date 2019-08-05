@@ -54,6 +54,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
 
             AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
+            Expenses = new ObservableCollection<PetrolExpenseViewModel>();
         }
 
         #region Command Handlers
@@ -71,7 +72,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             if (vehicleViewModel == null)
             {
-                Expenses = null;
+                Expenses.Clear();
                 SelectedVehicle = null;
                 return;
             }
@@ -84,28 +85,24 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         private void GetSelectedVehiclePetrolExpenses()
         {
+            Expenses.Clear();
+
             if (_selectedVehicle == null)
-            {
-                Expenses = null;
-            }
-            else
-            {
-                Expenses = new ObservableCollection<PetrolExpenseViewModel>();
+                return;
 
-                var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
+            var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
 
-                if (expenses == null || expenses.Result == null)
-                    return;
+            if (expenses?.Result == null)
+                return;
                 
-                foreach (var expense in expenses.Result)
-                {
-                    var viewModel = ServiceLocator.Current.GetInstance<PetrolExpenseViewModel>();
-                    viewModel.LoadInstance(expense);
-                    Expenses.Add(viewModel);
-                }
-
-                Expenses = new ObservableCollection<PetrolExpenseViewModel>(Expenses.OrderByDescending(o => o.DateEntered));
+            foreach (var expense in expenses.Result)
+            {
+                var viewModel = ServiceLocator.Current.GetInstance<PetrolExpenseViewModel>();
+                viewModel.LoadInstance(expense);
+                Expenses.Add(viewModel);
             }
+
+            Expenses = new ObservableCollection<PetrolExpenseViewModel>(Expenses.OrderByDescending(o => o.DateEntered));
         }
         #endregion
     }

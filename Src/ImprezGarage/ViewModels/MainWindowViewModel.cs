@@ -34,6 +34,9 @@ namespace ImprezGarage.ViewModels
         /// Store whether the settings view is currently open or not.
         /// </summary>
         private bool _isSettingsOpen;
+
+        private bool _isBusy;
+
         #endregion
 
         #region Properties
@@ -57,6 +60,12 @@ namespace ImprezGarage.ViewModels
 
         public string Icon { get; } = "pack://application:,,,/ImprezGarage;component/icon.png";
 
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
+        }
+        
         #region Command
         /// <summary>
         /// Command for refreshing the current data.
@@ -83,7 +92,7 @@ namespace ImprezGarage.ViewModels
             RefreshCommand = new DelegateCommand(RefreshExecute);
             Settings = new DelegateCommand(OnSettingsClicked);
             MinimizeToTray = new DelegateCommand(Hide);
-
+            
             CreateSystemTrayIcon();
         }
 

@@ -3,16 +3,15 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using System.Globalization;
-
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure.BaseClasses;
     using Infrastructure;
+    using Infrastructure.BaseClasses;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
     using System;
+    using System.Globalization;
     using System.Windows.Input;
 
     public class AddPetrolExpenditureViewModel : DialogViewModelBase
@@ -21,6 +20,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private readonly IDataService _dataService;
         private readonly IEventAggregator _eventAggregator;
         private readonly INotificationsService _notificationService;
+        private readonly ILoggerService _loggerService;
 
         private const string ExpenseAdded = "Expense added successfully!";
         private const string ExpenseFailed = "An error occured during the adding of the petrol expense. \nPlease try again.";
@@ -70,11 +70,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #endregion
 
         #region Methods
-        public AddPetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, INotificationsService notificationService)
+        public AddPetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, INotificationsService notificationService,
+            ILoggerService loggerService)
         {
             _dataService = dataService;
             _eventAggregator = eventAggregator;
             _notificationService = notificationService;
+            _loggerService = loggerService;
 
             Date = DateTime.Now;
 
@@ -90,19 +92,19 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         /// Then close the window.
         /// </summary>
         private void AddExecute()
-        {   
-            _dataService.AddPetrolExpenditure((error) =>
+        {
+            try
             {
-                if(error != null)
-                {
-                    _notificationService.Alert(ExpenseFailed);
-                    return;
-                }
-
+                _dataService.AddPetrolExpenditure(Amount, Convert.ToDateTime(Date), VehicleId);
                 _notificationService.Alert(ExpenseAdded);
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
-            }, Amount, Convert.ToDateTime(Date), VehicleId);
 
+            }
+            catch (Exception e)
+            {
+                _loggerService.LogException(e);
+                _notificationService.Alert(ExpenseFailed);
+            }
             Close();
         }
         #endregion

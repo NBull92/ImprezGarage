@@ -13,7 +13,7 @@
         <mahApps:WindowCommands>
             <Button Content="Refresh" Command="{Binding RefreshCommand}" ToolTip="Refresh the current data."/>
             <Button Content="Settings" Command="{Binding Settings}" ToolTip="Open settings panel."/>
-            <Button Content="." Command="{Binding MinimizeToTray}" ToolTip="Minimize to system tray."/>
+            <Button Content="." FontSize="25" Command="{Binding MinimizeToTray}" ToolTip="Minimize to system tray." Margin="0,-10,0,0"/>
         </mahApps:WindowCommands>
     </baseClasses:DialogViewBase.RightWindowCommands>
     <Grid>
@@ -36,7 +36,7 @@
                 <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleListRegion}" VerticalAlignment="Top"/>
             </Border>
             
-            <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.RowSpan="2" Grid.Column="1">
+            <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
                 <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolRegion}"/>
             </Border>
 
@@ -47,7 +47,7 @@
 
         <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.StatusBarRegion}" Grid.Row="2" />
 
-        <mahApps:FlyoutsControl Grid.RowSpan="2">
+        <mahApps:FlyoutsControl Grid.Row="0" Grid.RowSpan="2">
             <mahApps:Flyout Header="Settings" Position="Right" Width="300" IsOpen="{Binding IsSettingsOpen}">
                 <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.SettingsRegion}"/>
             </mahApps:Flyout>

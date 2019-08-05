@@ -1,0 +1,4 @@
+Id,DateCreated,DateModified,VehicleType,Registration,TaxExpiryDate,InsuranceRenewalDate,FriendlyName,Model,Make,HasInsurance,HasValidTax,IsManual,CurrentMileage,MileageOnPurchase,HasMot,MotExpiryDate
+23,2018-10-25 21:25:57.987000000,2019-01-12 18:01:51.417000000,1,BD53LRV,2019-06-01 00:00:00,2020-01-12 00:00:00,,Impreza GX Sport,Subaru,True,True,True,82000,52000,True,2019-09-17 00:00:00
+24,2018-10-25 21:25:58.177000000,2018-12-20 20:54:13.030000000,1,BD53LRV - Test,2019-06-01 00:00:00,2019-01-01 00:00:00,,Impreza GX Sport,Subaru,True,True,True,0,0,True,2019-10-17 00:00:00
+2003,2019-02-27 11:34:20.630000000,2019-02-27 11:34:20.630000000,2,FG34HOJ,2020-02-02 00:00:00,2020-02-14 00:00:00,,RC 125 Super Sports 125cc,KTM,True,True,True,,,,
