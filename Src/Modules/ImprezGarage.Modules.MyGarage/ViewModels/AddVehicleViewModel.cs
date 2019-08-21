@@ -3,11 +3,12 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure.BaseClasses;
-    using Infrastructure.Model.Temp_New_Classes;
     using Infrastructure.Services;
     using Microsoft.Practices.Unity;
     using Prism.Commands;

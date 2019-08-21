@@ -3,12 +3,13 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Infrastructure.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Model.Temp_New_Classes;
 
     public interface IDataService
     {

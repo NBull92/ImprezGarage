@@ -3,8 +3,6 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model.Temp_New_Classes;
-
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using ImprezGarage.Infrastructure.Model;

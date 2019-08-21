@@ -1,7 +1,6 @@
 ﻿namespace ImprezGarage.Modules.Firebase
 {
     using Infrastructure.Model;
-    using Infrastructure.Model.Temp_New_Classes;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;

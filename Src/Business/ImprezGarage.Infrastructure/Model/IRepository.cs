@@ -1,7 +1,6 @@
 ﻿
 namespace ImprezGarage.Infrastructure.Model
 {
-    using Temp_New_Classes;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 

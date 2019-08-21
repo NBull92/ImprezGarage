@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="{Binding Message}" VerticalAlignment="Center" TextWrapping="Wrap" Width="379" MaxHeight="70"/>
 
-        <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

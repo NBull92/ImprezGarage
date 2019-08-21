@@ -1,7 +1,7 @@
-﻿namespace ImprezGarage.Modules.PerformChecks
-{
-    using Infrastructure.Model.Temp_New_Classes;
+﻿using ImprezGarage.Infrastructure.Model;
 
+namespace ImprezGarage.Modules.PerformChecks
+{
     public class Option
     {
         public int Id { get; set; }

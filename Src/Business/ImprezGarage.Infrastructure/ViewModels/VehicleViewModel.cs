@@ -3,9 +3,10 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Infrastructure.ViewModels
 {
-    using Model.Temp_New_Classes;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;

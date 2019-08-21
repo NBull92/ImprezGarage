@@ -258,6 +258,22 @@
           "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
         }
       },
+      "ImprezGarage.Modules.FirebaseAuth/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Wpf": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
+        }
+      },
       "ImprezGarage.Modules.Logger/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -640,6 +656,22 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.FirebaseAuth/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Wpf": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
         }
       },
       "ImprezGarage.Modules.Logger/1.0.0": {
@@ -1026,6 +1058,22 @@
           "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
         }
       },
+      "ImprezGarage.Modules.FirebaseAuth/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Wpf": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
+        }
+      },
       "ImprezGarage.Modules.Logger/1.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.6.1",
@@ -1408,6 +1456,22 @@
         },
         "runtime": {
           "bin/placeholder/ImprezGarage.Modules.Firebase.dll": {}
+        }
+      },
+      "ImprezGarage.Modules.FirebaseAuth/1.0.0": {
+        "type": "project",
+        "framework": ".NETFramework,Version=v4.6.1",
+        "dependencies": {
+          "ImprezGarage.Infrastructure": "1.0.0",
+          "MahApps.Metro": "1.6.5",
+          "Prism.Core": "7.0.0.396",
+          "Prism.Wpf": "6.3.0"
+        },
+        "compile": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ImprezGarage.Modules.FirebaseAuth.dll": {}
         }
       },
       "ImprezGarage.Modules.Logger/1.0.0": {
@@ -1878,6 +1942,11 @@
       "path": "../Modules/ImprezGarage.Modules.Firebase/ImprezGarage.Modules.Firebase.csproj",
       "msbuildProject": "../Modules/ImprezGarage.Modules.Firebase/ImprezGarage.Modules.Firebase.csproj"
     },
+    "ImprezGarage.Modules.FirebaseAuth/1.0.0": {
+      "type": "project",
+      "path": "../Modules/ImprezGarage.Modules.FirebaseAuth/ImprezGarage.Modules.FirebaseAuth.csproj",
+      "msbuildProject": "../Modules/ImprezGarage.Modules.FirebaseAuth/ImprezGarage.Modules.FirebaseAuth.csproj"
+    },
     "ImprezGarage.Modules.Logger/1.0.0": {
       "type": "project",
       "path": "../Modules/ImprezGarage.Modules.Logger/ImprezGarage.Modules.Logger.csproj",
@@ -1920,6 +1989,7 @@
       "Extended.Wpf.Toolkit >= 3.5.0",
       "ImprezGarage.Infrastructure >= 1.0.0",
       "ImprezGarage.Modules.Firebase >= 1.0.0",
+      "ImprezGarage.Modules.FirebaseAuth >= 1.0.0",
       "ImprezGarage.Modules.Logger >= 1.0.0",
       "ImprezGarage.Modules.MyGarage >= 1.0.0",
       "ImprezGarage.Modules.Notifications >= 1.0.0",
@@ -1961,6 +2031,9 @@
           "projectReferences": {
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Business\\ImprezGarage.Infrastructure\\ImprezGarage.Infrastructure.csproj"
+            },
+            "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.FirebaseAuth\\ImprezGarage.Modules.FirebaseAuth.csproj": {
+              "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.FirebaseAuth\\ImprezGarage.Modules.FirebaseAuth.csproj"
             },
             "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Firebase\\ImprezGarage.Modules.Firebase.csproj": {
               "projectPath": "D:\\Documents\\Nick\\GitHub\\ImprezGarage\\Src\\Modules\\ImprezGarage.Modules.Firebase\\ImprezGarage.Modules.Firebase.csproj"

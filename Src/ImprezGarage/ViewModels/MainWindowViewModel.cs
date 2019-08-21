@@ -5,17 +5,17 @@
 
 namespace ImprezGarage.ViewModels
 {
+    using Infrastructure.Services;
     using Infrastructure;
     using Infrastructure.BaseClasses;
+    using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using System;
     using System.Drawing;
     using System.IO;
+    using System.Windows.Forms;
     using System.Windows.Media.Imaging;
-
-
-    //using System.Windows.Forms;
 
     public class MainWindowViewModel : DialogViewModelBase
     {
@@ -24,25 +24,13 @@ namespace ImprezGarage.ViewModels
         /// Store the injected event aggregator.
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
-
-        /// <summary>
-        /// Store the title of the main window.
-        /// </summary>
-        private string _title = "Imprez Garage";
-
-        /// <summary>
-        /// Store whether the settings view is currently open or not.
-        /// </summary>
-        private bool _isSettingsOpen;
-
-        private bool _isBusy;
-
         #endregion
 
         #region Properties
         /// <summary>
         /// Store the title of the main window.
         /// </summary>
+        private string _title = "Imprez Garage";
         public string Title
         {
             get => _title; 
@@ -52,21 +40,30 @@ namespace ImprezGarage.ViewModels
         /// <summary>
         /// Store whether the settings view is currently open or not.
         /// </summary>
+        private bool _isSettingsOpen;
         public bool IsSettingsOpen
         {
             get => _isSettingsOpen;
             set => SetProperty(ref _isSettingsOpen, value);
         }
 
-        public string Icon { get; } = "pack://application:,,,/ImprezGarage;component/icon.png";
+        public string Icon { get; } = "pack://application:,,,/ImprezGarage;component/Resources/icon_v2.png";
 
+        private string _signInOut;
+        public string SignInOut
+        {
+            get => _signInOut;
+            set => SetProperty(ref _signInOut, value);
+        }
+
+        private bool _isBusy = true;
         public bool IsBusy
         {
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
         }
         
-        #region Command
+        #region Commands
         /// <summary>
         /// Command for refreshing the current data.
         /// </summary>
@@ -76,8 +73,8 @@ namespace ImprezGarage.ViewModels
         /// Command for showing and closing the settings view.
         /// </summary>
         public DelegateCommand Settings { get; set; }
-
         public DelegateCommand MinimizeToTray { get; set; }
+        public DelegateCommand SignOut { get; set; }
         #endregion
         #endregion
 
@@ -92,30 +89,52 @@ namespace ImprezGarage.ViewModels
             RefreshCommand = new DelegateCommand(RefreshExecute);
             Settings = new DelegateCommand(OnSettingsClicked);
             MinimizeToTray = new DelegateCommand(Hide);
-            
+            SignOut = new DelegateCommand(OnSignOut);
+
+            _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+            SignInOut = "Sign In";
             CreateSystemTrayIcon();
+        }
+        
+        private void OnUserAccountChange(Tuple<bool, string> loginData)
+        {
+            IsBusy = !loginData.Item1;
+            if (IsBusy)
+            {
+                SignInOut = "Sign In";
+                ServiceLocator.Current.GetInstance<IAuthenticationService>().SignIn();
+            }
+            else
+            {
+                SignInOut ="Sign Out";
+            }
+        }
+
+        private void OnSignOut()
+        {
+            _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, string>(false, string.Empty));
         }
 
         private void CreateSystemTrayIcon()
         {
-            var icon = ConvertFromBitmapFrame("pack://application:,,,/ImprezGarage;component/icon.png");
+            var icon = ConvertFromBitmapFrame("pack://application:,,,/ImprezGarage;component/Resources/icon_v2.png");
 
-            var notifyIcon = new System.Windows.Forms.NotifyIcon
+            var notifyIcon = new NotifyIcon
             {
                 Icon = icon,
                 Visible = true,
-                ContextMenu = new System.Windows.Forms.ContextMenu(),
+                ContextMenu = new ContextMenu(),
                 Text = Title,
             };
             notifyIcon.MouseDoubleClick += OnNotifyIcon_MouseDoubleClick;
 
-            var itemOpen = new System.Windows.Forms.MenuItem("Open",
+            var itemOpen = new MenuItem("Open",
                 (o, e) =>
                 {
                     ShowWindow();
                 });
 
-            var itemQuit = new System.Windows.Forms.MenuItem("Exit",
+            var itemQuit = new MenuItem("Exit",
                 (o, e) =>
                 {
                     Close();

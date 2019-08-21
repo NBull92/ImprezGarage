@@ -46,6 +46,7 @@ namespace ImprezGarage
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
+            moduleCatalog.AddModule(typeof(Modules.FirebaseAuth.AuthModule));
             moduleCatalog.AddModule(typeof(Modules.Firebase.FirebaseModule));
             moduleCatalog.AddModule(typeof(Modules.StatusBar.StatusBarModule));
             moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));

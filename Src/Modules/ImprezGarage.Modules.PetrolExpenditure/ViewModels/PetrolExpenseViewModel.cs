@@ -4,9 +4,10 @@
 //------------------------------------------------------------------------------
 
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure.Model.Temp_New_Classes;
     using Infrastructure;
     using Infrastructure.Services;
     using Prism.Commands;

@@ -96,7 +96,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
         #region Command Handlers
         /// <summary>
-        /// This will navigate to the view which allows the user to peform a new check on their vehicle.
+        /// This will navigate to the view which allows the user to perform a new check on their vehicle.
         /// </summary>
         private void PerformNewCheckExecute()
         {

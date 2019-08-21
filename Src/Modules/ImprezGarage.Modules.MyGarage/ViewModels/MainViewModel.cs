@@ -30,8 +30,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
-        private ObservableCollection<VehicleViewModel> _vehicles;
+        private ObservableCollection<VehicleViewModel> _vehicles = new ObservableCollection<VehicleViewModel>();
         private VehicleViewModel _selectedVehicle;
+        private string _userId;
         #endregion
 
         #region Properties
@@ -46,6 +47,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
         }
+        
 
         #region Commands
         public DelegateCommand AddNewVehicleCommand { get; set; }
@@ -68,10 +70,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             _eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
             _eventAggregator.GetEvent<Events.EditVehicleEvent>().Subscribe(OnEditVehicle);
-
-            LoadVehicles();
+            _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
         }
-        
+
         #region Command Handlers
         private void SelectedVehicleChangedExecute(SelectionChangedEventArgs obj)
         {
@@ -96,6 +97,21 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         #region Event Handlers
+        private void OnUserAccountChange(Tuple<bool,string> loginData)
+        {
+            if (loginData.Item1)
+            {
+                _userId = loginData.Item2;
+                OnRefresh();
+            }
+            else
+            {
+                _userId = string.Empty;
+                SelectedVehicle = null;
+                Vehicles.Clear();
+            }
+        }
+
         private void OnRefresh()
         {
             var currentlySelectedVehicle = SelectedVehicle;
@@ -127,7 +143,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         public async void LoadVehicles()
         {
-            Vehicles = new ObservableCollection<VehicleViewModel>();
+            Vehicles.Clear();;
 
             var vehicles = await _dataService.GetVehicles(true);
 
@@ -139,9 +155,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 await _dataService.GetVehicleTypesAsync().ContinueWith(task =>
                 {
                     //TODO - do the query.Subscribe bit here Reactive
-                    foreach (var vehicle in vehicles)
+                    foreach (var vehicle in vehicles.Where(o => o.UserId == _userId))
                     {
-                        var viewModel = new VehicleViewModel(_dataService, _notificationsService, _eventAggregator, ServiceLocator.Current.GetInstance<ILoggerService>());
+                        var viewModel = new VehicleViewModel(_dataService, _notificationsService, _eventAggregator, _loggerService);
                         viewModel.LoadInstance(vehicle);
                         Application.Current.Dispatcher?.Invoke(() =>
                         {

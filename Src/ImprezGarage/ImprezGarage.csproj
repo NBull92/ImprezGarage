@@ -55,6 +55,10 @@
     <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.3.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -62,7 +66,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -134,6 +137,10 @@
       <Project>{4703d4d1-0c8c-4ab2-9058-f8dc87d60c61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\ImprezGarage.Modules.FirebaseAuth\ImprezGarage.Modules.FirebaseAuth.csproj">
+      <Project>{efe76be9-a5ca-4e99-976f-e34c03e941b1}</Project>
+      <Name>ImprezGarage.Modules.FirebaseAuth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\ImprezGarage.Modules.Firebase\ImprezGarage.Modules.Firebase.csproj">
       <Project>{f94645c3-a792-418b-9004-b3507a3ff95d}</Project>
       <Name>ImprezGarage.Modules.Firebase</Name>
@@ -172,6 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_v2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,11 +4,11 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using ImprezGarage.Infrastructure.Model;
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using Infrastructure;
-    using Infrastructure.Model.Temp_New_Classes;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
