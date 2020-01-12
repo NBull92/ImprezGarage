@@ -13,11 +13,11 @@ namespace ImprezGarage.Modules.MyGarage.Views
     /// </summary>
     public partial class AddVehicle : MetroWindow
     {
-        public AddVehicle()
+        public AddVehicle(AddVehicleViewModel model)
         {
             InitializeComponent();
-            var viewModel = DataContext as AddVehicleViewModel;
-            viewModel.CloseRequest += (sender, e) => Close();
+            DataContext = model;
+            model.CloseRequest += (sender, e) => Close();
         }
     }
 }   //ImprezGarage.Modules.MyGarage.Views namespace 

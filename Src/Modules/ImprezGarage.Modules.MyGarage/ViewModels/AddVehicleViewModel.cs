@@ -3,10 +3,12 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
-    using ImprezGarage.Infrastructure.BaseClasses;
-    using ImprezGarage.Infrastructure.Model;
+    using ImprezGarage.Infrastructure.ViewModels;
+    using Infrastructure.BaseClasses;
     using Infrastructure.Services;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
@@ -14,8 +16,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Threading.Tasks;
 
-    public class AddVehicleViewModel : DialogViewModelBase, IDisposable
+    public class AddVehicleViewModel : DialogViewModelBase
     {
         #region Attributes
         /// <summary>
@@ -29,7 +32,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private readonly IUnityContainer _container;
 
         /// <summary>
-        /// Store the injedcted notification service
+        /// Store the injected notification service
         /// </summary>
         private readonly INotificationsService _notificationsService;
 
@@ -58,7 +61,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private VehicleCreationViewModel _vehicleCreationViewModel;
         
         /// <summary>
-        /// Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
+        /// Could be Add or Save, dependent on whether the user is adding a new vehicle or editing a current one.
         /// </summary>
         private string _saveContent;
 
@@ -130,7 +133,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
         
         /// <summary>
-        /// Could be Add or Save, dependant on whether the user is adding a new vehicle or editing a current one.
+        /// Could be Add or Save, dependent on whether the user is adding a new vehicle or editing a current one.
         /// </summary>
         public string SaveContent
         {
@@ -165,9 +168,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Constructor, with injected interfaces.
         /// Instantiate the commands and get the vehicle types.
-        /// </summary>
+        /// </summary> 
         public AddVehicleViewModel(IDataService dataService, IUnityContainer container, INotificationsService notificationsService,
-            ILoggerService loggerService)
+            ILoggerService loggerService, VehicleViewModel vehicle = null)
         {
             _dataService = dataService;
             _container = container;
@@ -176,10 +179,22 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             SaveCommand = new DelegateCommand(SaveExecute, CanSave);
             CancelCommand = new DelegateCommand(Close);
-
-            GetVehicleTypes();
-            SaveContent = "Add";
             Width = 387;
+            InitialiseAsync(vehicle);
+        }
+
+        private async void InitialiseAsync(VehicleViewModel vehicle)
+        {
+            await GetVehicleTypes();
+
+            if (vehicle != null)
+            {
+                Edit(vehicle.Vehicle);
+            }
+            else
+            {
+                SaveContent = "Add";
+            }
         }
 
         #region Command Handlers
@@ -235,130 +250,107 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             if (IsEdit)
             {
-                if (_notificationsService.Confirm("Are you sure you wish to save these changes?"))
+                if (!_notificationsService.Confirm("Are you sure you wish to save these changes?"))
+                    return;
+
+                var proceed = true;
+
+                // Check the insurance and tax are selected. 
+                // If so check the dates provided are not in the past. 
+                // If they are then warn the user and see if this is as intended.
+                switch (_selectedVehicleType.Name)
                 {
-                    bool proceed = true;
-
-                    // Check the insurance and tax are selected. 
-                    // If so check the dates provided are not in the past. 
-                    // If they are then warn the user and see if this is as intended.
-                    switch (_selectedVehicleType.Name)
-                    {
-                        case "Car":
-                            var carCreate = ((CarCreationViewModel)VehicleCreationViewModel);
-                            if (carCreate.HasValidTax && carCreate.TaxExpiryDate.Date <= DateTime.Today)
-                            {
-                                proceed = _notificationsService.Confirm(TaxRenewalDateWarning, "Warning!");
-                            }
-                            else if (carCreate.HasInsurance && carCreate.InsuranceRenewalDate.Date <= DateTime.Today)
-                            {
-                                proceed = _notificationsService.Confirm(InsuranceDateWarning, "Warning!");
-                            }
-                            break;
-                        case "Bicycle":
-                            break;
-                        case "Motorbike":
-                            var motorbikeCreate = ((MotorbikeCreationViewModel)VehicleCreationViewModel);
-                            if (motorbikeCreate.HasValidTax && motorbikeCreate.TaxExpiryDate.Date <= DateTime.Today)
-                            {
-                                proceed = _notificationsService.Confirm(TaxRenewalDateWarning, "Warning!");
-                            }
-                            else if (motorbikeCreate.HasInsurance && motorbikeCreate.InsuranceRenewalDate.Date <= DateTime.Today)
-                            {
-                                proceed = _notificationsService.Confirm(InsuranceDateWarning, "Warning!");
-                            }
-                            break;
-                    }
-
-                    if (!proceed)
-                        return;
-
-                    switch (_selectedVehicleType.Name)
-                    {
-                        case "Car":
-                            var car = ((CarCreationViewModel)VehicleCreationViewModel);
-                            EditVehicle.Registration = car.Registration;
-                            EditVehicle.Make = car.Make;
-                            EditVehicle.Model = car.Model;
-                            EditVehicle.HasInsurance = car.HasInsurance;
-                            EditVehicle.HasValidTax = car.HasValidTax;
-                            EditVehicle.HasMot = car.HasMot;
-                            EditVehicle.CurrentMileage = car.CurrentMileage;
-                            EditVehicle.MileageOnPurchase = car.MileageOnPurchase;
-                            EditVehicle.IsManual = car.IsManual;
-
-                            if (car.HasValidTax)
-                            {
-                                EditVehicle.InsuranceRenewalDate = car.InsuranceRenewalDate;
-                            }
-                            else
-                            {
-                                EditVehicle.InsuranceRenewalDate = null;
-                            }
-
-                            if (car.HasValidTax)
-                            {
-                                EditVehicle.TaxExpiryDate = car.TaxExpiryDate;
-                            }
-                            else
-                            {
-                                EditVehicle.TaxExpiryDate = null;
-                            }
-
-
-                            if (EditVehicle.HasMot == true)
-                            {
-                                EditVehicle.MotExpiryDate = car.MotExpiryDate;
-                            }
-                            else
-                            {
-                                EditVehicle.MotExpiryDate = null;
-                            }
-                            break;
-                        case "Bicycle":
-                            break;
-                        case "Motorbike":
-                            EditVehicle.Registration = ((MotorbikeCreationViewModel)VehicleCreationViewModel).Registration;
-                            EditVehicle.Make = ((MotorbikeCreationViewModel)VehicleCreationViewModel).Make;
-                            EditVehicle.Model = ((MotorbikeCreationViewModel)VehicleCreationViewModel).Model;
-                            EditVehicle.HasInsurance = ((MotorbikeCreationViewModel)VehicleCreationViewModel).HasInsurance;
-                            EditVehicle.HasValidTax = ((MotorbikeCreationViewModel)VehicleCreationViewModel).HasValidTax;
-
-                            if (((MotorbikeCreationViewModel)VehicleCreationViewModel).HasValidTax)
-                            {
-                                EditVehicle.InsuranceRenewalDate = ((MotorbikeCreationViewModel)VehicleCreationViewModel).InsuranceRenewalDate;
-                            }
-                            else
-                            {
-                                EditVehicle.InsuranceRenewalDate = null;
-                            }
-
-                            if (((MotorbikeCreationViewModel)VehicleCreationViewModel).HasValidTax)
-                            {
-                                EditVehicle.TaxExpiryDate = ((MotorbikeCreationViewModel)VehicleCreationViewModel).TaxExpiryDate;
-                            }
-                            else
-                            {
-                                EditVehicle.TaxExpiryDate = null;
-                            }
-
-                            break;
-                    }
-
-                    DialogResult = true;
-
-                    _dataService.UpdateVehicle((error) =>
-                    {
-                        if (error != null)
+                    case "Car":
+                        var carCreate = ((CarCreationViewModel)VehicleCreationViewModel);
+                        if (carCreate.HasValidTax && carCreate.TaxExpiryDate.Date <= DateTime.Today)
                         {
-                            _loggerService.LogException(error);
-                            _notificationsService.Alert(ErrorOccuredDuringSave, NotificationHeader);
-                            return;
+                            proceed = _notificationsService.Confirm(TaxRenewalDateWarning, "Warning!");
+                        }
+                        else if (carCreate.HasInsurance && carCreate.InsuranceRenewalDate.Date <= DateTime.Today)
+                        {
+                            proceed = _notificationsService.Confirm(InsuranceDateWarning, "Warning!");
+                        }
+                        break;
+                    case "Bicycle":
+                        break;
+                    case "Motorbike":
+                        var motorbikeCreate = ((MotorbikeCreationViewModel)VehicleCreationViewModel);
+                        if (motorbikeCreate.HasValidTax && motorbikeCreate.TaxExpiryDate.Date <= DateTime.Today)
+                        {
+                            proceed = _notificationsService.Confirm(TaxRenewalDateWarning, "Warning!");
+                        }
+                        else if (motorbikeCreate.HasInsurance && motorbikeCreate.InsuranceRenewalDate.Date <= DateTime.Today)
+                        {
+                            proceed = _notificationsService.Confirm(InsuranceDateWarning, "Warning!");
+                        }
+                        break;
+                }
+
+                if (!proceed)
+                    return;
+
+                switch (_selectedVehicleType.Name)
+                {
+                    case "Car":
+                        var car = ((CarCreationViewModel)VehicleCreationViewModel);
+                        EditVehicle.Registration = car.Registration;
+                        EditVehicle.Make = car.Make;
+                        EditVehicle.Model = car.Model;
+                        EditVehicle.HasInsurance = car.HasInsurance;
+                        EditVehicle.HasValidTax = car.HasValidTax;
+                        EditVehicle.HasMot = car.HasMot;
+                        EditVehicle.CurrentMileage = car.CurrentMileage;
+                        EditVehicle.MileageOnPurchase = car.MileageOnPurchase;
+                        EditVehicle.IsManual = car.IsManual;
+
+                        if (car.HasValidTax)
+                        {
+                            EditVehicle.InsuranceRenewalDate = car.InsuranceRenewalDate;
                         }
 
-                        _notificationsService.Alert(VehicleUpdated, NotificationHeader);
-                        Close();
-                    }, EditVehicle);
+                        if (car.HasValidTax)
+                        {
+                            EditVehicle.TaxExpiryDate = car.TaxExpiryDate;
+                        }
+                        
+                        if (EditVehicle.HasMot)
+                        {
+                            EditVehicle.MotExpiryDate = car.MotExpiryDate;
+                        }
+                        break;
+                    case "Bicycle":
+                        break;
+                    case "Motorbike":
+                        EditVehicle.Registration = ((MotorbikeCreationViewModel)VehicleCreationViewModel).Registration;
+                        EditVehicle.Make = ((MotorbikeCreationViewModel)VehicleCreationViewModel).Make;
+                        EditVehicle.Model = ((MotorbikeCreationViewModel)VehicleCreationViewModel).Model;
+                        EditVehicle.HasInsurance = ((MotorbikeCreationViewModel)VehicleCreationViewModel).HasInsurance;
+                        EditVehicle.HasValidTax = ((MotorbikeCreationViewModel)VehicleCreationViewModel).HasValidTax;
+
+                        if (((MotorbikeCreationViewModel)VehicleCreationViewModel).HasValidTax)
+                        {
+                            EditVehicle.InsuranceRenewalDate = ((MotorbikeCreationViewModel)VehicleCreationViewModel).InsuranceRenewalDate;
+                        }
+
+                        if (((MotorbikeCreationViewModel)VehicleCreationViewModel).HasValidTax)
+                        {
+                            EditVehicle.TaxExpiryDate = ((MotorbikeCreationViewModel)VehicleCreationViewModel).TaxExpiryDate;
+                        }
+                        break;
+                }
+
+                DialogResult = true;
+
+                try
+                {
+                    _dataService.UpdateVehicle(EditVehicle);
+                    _notificationsService.Alert(VehicleUpdated, NotificationHeader);
+                    Close();
+                }
+                catch (Exception e)
+                {
+                    _loggerService.LogException(e);
+                    _notificationsService.Alert(ErrorOccuredDuringSave, NotificationHeader);
                 }
             }
             else
@@ -366,6 +358,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 SaveNewVehicle();
             }
         }
+        #endregion
 
         /// <summary>
         /// Take all the data the user has set and adds it to a new vehicle. This vehicle is then added to the database.
@@ -393,19 +386,16 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     newVehicle.MileageOnPurchase = vehicleCreate.MileageOnPurchase;
                     newVehicle.IsManual = vehicleCreate.IsManual;
 
-                    if (newVehicle.HasInsurance == true)
+                    if (newVehicle.HasInsurance)
                     {
-                        newVehicle.InsuranceRenewalDate = vehicleCreate.InsuranceRenewalDate;
+                        newVehicle.InsuranceRenewalDate = newVehicle.InsuranceRenewalDate;
                     }
 
-                    if (newVehicle.HasValidTax == true)
+
+                    if (newVehicle.HasValidTax)
                     {
                         newVehicle.TaxExpiryDate = vehicleCreate.TaxExpiryDate;
-                    }
-                    
-                    if (newVehicle.HasMot == true)
-                    {
-                        newVehicle.MotExpiryDate = vehicleCreate.MotExpiryDate;
+
                     }
                 }
             }
@@ -417,14 +407,16 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     newVehicle.HasInsurance = vehicleCreate.HasInsurance;
                     newVehicle.HasValidTax = vehicleCreate.HasValidTax;
 
-                    if (newVehicle.HasInsurance == true)
+                    if (newVehicle.HasInsurance)
                     {
-                        newVehicle.InsuranceRenewalDate = vehicleCreate.InsuranceRenewalDate;
+                        newVehicle.InsuranceRenewalDate = newVehicle.InsuranceRenewalDate;
                     }
 
-                    if (newVehicle.HasValidTax == true)
+
+                    if (newVehicle.HasValidTax)
                     {
                         newVehicle.TaxExpiryDate = vehicleCreate.TaxExpiryDate;
+
                     }
                 }
             }
@@ -436,39 +428,38 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 }
             }
 
-            _dataService.AddNewVehicle((error) =>
+            try
             {
-                if (error != null)
-                {
-                    _loggerService.LogException(error);
-                    return;
-                }
-                                
+                _dataService.AddNewVehicle(newVehicle);
                 _notificationsService.Alert(VehicleAdded, NotificationHeader);
                 Close(true);
-            }, newVehicle);
+            }
+            catch (Exception e)
+            {
+                _loggerService.LogException(e);
+            }
         }
-        #endregion
 
         /// <summary>
         /// This function retrieves the vehicle types from the database.
         /// </summary>
-        private void GetVehicleTypes()
+        private async Task GetVehicleTypes()
         {
-            var types = _dataService.GetVehicleTypes();
+            var types = await _dataService.GetVehicleTypesAsync();
 
-            VehicleTypes = types == null && types.Result == null ? VehicleTypes = new ObservableCollection<VehicleType>() 
-                : VehicleTypes = new ObservableCollection<VehicleType>(types.Result);
+            VehicleTypes = types == null ? VehicleTypes = new ObservableCollection<VehicleType>() 
+                : VehicleTypes = new ObservableCollection<VehicleType>(types);
         }
 
         /// <summary>
         /// Takes the passed through vehicle the user has selected to edit and applies its data to the variables that are shown on the UI.
         /// </summary>
         /// <param name="vehicle"></param>
-        internal void Edit(Vehicle vehicle)
+        private void Edit(Vehicle vehicle)
         {
+            IsEdit = true;
             EditVehicle = vehicle;
-            
+
             if (VehicleTypes.Any(o => o.Id == EditVehicle.VehicleType))
             {
                 SelectedVehicleType = VehicleTypes.First(o => o.Id == EditVehicle.VehicleType);

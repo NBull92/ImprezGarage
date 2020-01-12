@@ -100,8 +100,8 @@ namespace ImprezGarage.Modules.Notifications
                 _notificationsModel.Notifications.Add(viewModel);
             }
 
-            //toast.Show();
-            //toast.BringIntoView();
+            toast.Show();
+            toast.BringIntoView();
         }
         #endregion
     }

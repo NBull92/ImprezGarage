@@ -127,7 +127,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 foreach (var expense in expenses.Result)
                 {
                     MaxCost = MaxCost < expense.Amount ? Convert.ToDouble(expense.Amount) : MaxCost;
-                    _expenses.Add(new ChartData()
+                    _expenses.Add(new ChartData
                     {
                         Cost = Convert.ToDouble(expense.Amount),
                         Date = expense.DateEntered.Value.ToShortDateString()

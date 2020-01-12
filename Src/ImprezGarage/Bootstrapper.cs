@@ -5,13 +5,11 @@
 
 namespace ImprezGarage
 {
-    using Infrastructure.Model;
-    using Infrastructure.Services;
-    using Views;
     using Microsoft.Practices.Unity;
     using Prism.Modularity;
     using Prism.Unity;
     using System.Windows;
+    using Views;
 
     class Bootstrapper : UnityBootstrapper
     {
@@ -37,7 +35,7 @@ namespace ImprezGarage
         protected override void ConfigureContainer()
         {
             //register the interface to the container
-            Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
+            //Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
 
             base.ConfigureContainer();
         }
@@ -48,6 +46,8 @@ namespace ImprezGarage
         protected override void ConfigureModuleCatalog()
         {
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
+            moduleCatalog.AddModule(typeof(Modules.FirebaseAuth.AuthModule));
+            moduleCatalog.AddModule(typeof(Modules.Firebase.FirebaseModule));
             moduleCatalog.AddModule(typeof(Modules.StatusBar.StatusBarModule));
             moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
             moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));

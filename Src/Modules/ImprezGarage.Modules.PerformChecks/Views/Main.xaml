@@ -6,7 +6,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:conv="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"             
-             xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
              xmlns:vm="clr-namespace:ImprezGarage.Modules.PerformChecks.ViewModels"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"

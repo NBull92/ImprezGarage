@@ -1,0 +1,10 @@
+﻿<Window x:Class="ImprezGarage.Modules.FirebaseAuth.Views.AuthenticationDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:infrastructure="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="{x:Static infrastructure:RegionNames.AuthenticateRegion}"/>  
+    </Grid>
+</Window>

@@ -3,9 +3,11 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+
 namespace ImprezGarage.Views
 {
     using Infrastructure.BaseClasses;
+    using ViewModels;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -16,7 +18,7 @@ namespace ImprezGarage.Views
         {
             InitializeComponent();
 
-            if (!(DataContext is DialogViewModelBase model))
+            if (!(DataContext is MainWindowViewModel model))
                 return;
 
             model.CloseRequest += (sender, e) => Close();

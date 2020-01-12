@@ -66,30 +66,23 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
         }
 
-        private void GetSelectedVehicleMaintainanceChecks()
+        private void GetSelectedVehicleMaintenanceChecks()
         {
+            MaintainanceChecks = new ObservableCollection<MaintenanceCheckViewModel>();
+
             if (SelectedVehicle == null)
+                return;
+
+            var performedCheck = _dataService.GetVehicleMaintenanceChecks(SelectedVehicle.Vehicle.Id);
+
+            if (performedCheck == null)
+                return;
+
+            foreach (var check in performedCheck.OrderByDescending(o => o.DatePerformed))
             {
-                MaintainanceChecks = null;
-            }
-            else
-            {
-                var performedCheck = _dataService.GetMaintenanceChecksForVehicleByVehicleId(SelectedVehicle.Vehicle.Id);
-
-                if (performedCheck == null || performedCheck.Result == null)
-                {
-                    MaintainanceChecks = null;
-                    return;
-                }
-
-                MaintainanceChecks = new ObservableCollection<MaintenanceCheckViewModel>();
-
-                foreach (var check in performedCheck.Result.OrderByDescending(o => o.DatePerformed))
-                {
-                    var checkVm = _container.Resolve<MaintenanceCheckViewModel>();
-                    checkVm.LoadInstance(check, SelectedVehicle);
-                    MaintainanceChecks.Add(checkVm);
-                }
+                var checkVm = _container.Resolve<MaintenanceCheckViewModel>();
+                checkVm.LoadInstance(check, SelectedVehicle);
+                MaintainanceChecks.Add(checkVm);
             }
         }
 
@@ -97,13 +90,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
             SelectedVehicle = vehicleViewModel;
-            GetSelectedVehicleMaintainanceChecks();
+            GetSelectedVehicleMaintenanceChecks();
         }
         #endregion
 
         #region Command Handlers
         /// <summary>
-        /// This will navigate to the view which allows the user to peform a new check on their vehicle.
+        /// This will navigate to the view which allows the user to perform a new check on their vehicle.
         /// </summary>
         private void PerformNewCheckExecute()
         {
@@ -137,9 +130,9 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             var refresh = navigationContext.Parameters["Refresh"];
 
             //check it is not null.
-            if (refresh != null && Convert.ToBoolean(refresh) == true)
+            if (refresh != null && Convert.ToBoolean(refresh))
             {
-                GetSelectedVehicleMaintainanceChecks();
+                GetSelectedVehicleMaintenanceChecks();
             }
         }
 

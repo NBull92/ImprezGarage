@@ -3,19 +3,21 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using Infrastructure;
     using Infrastructure.Services;
-    using Views;
     using Prism.Commands;
+    using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
-    using ImprezGarage.Infrastructure.Model;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Prism.Events;
+    using Views;
 
     public class PerformNewCheckViewModel : BindableBase, INavigationAware
     {
@@ -33,7 +35,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private MaintenanceCheckType _selectedMaintenanceCheckType;
         private bool _isEditMode;
         private string _submitText;        
-        private ObservableCollection<MaintenanceOptionsPerformed> _maintenanceOptionsPerformed;
+        private ObservableCollection<Option> _maintenanceOptionsPerformed;
         #endregion
 
         #region Properties
@@ -43,7 +45,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             set => SetProperty(ref _selectedMaintenanceCheckType, value);
         }
 
-        public ObservableCollection<MaintenanceOptionsPerformed> MaintenanceOptionsPerformed
+        public ObservableCollection<Option> MaintenanceOptionsPerformed
         {
             get => _maintenanceOptionsPerformed;
             set => SetProperty(ref _maintenanceOptionsPerformed, value);
@@ -84,10 +86,10 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
         #region Command Handlers
         /// <summary>
-        /// Take all of the variable equired to 'perform' a maintenance check and create a new instance, 
-        /// before submiting it to the database.
+        /// Take all of the variables required to 'perform' a maintenance check and create a new instance, 
+        /// before submitting it to the database.
         /// </summary>
-        private void SubmitExecute()
+        private async void SubmitExecute()
         {
             if (!IsEditMode)
             {
@@ -102,60 +104,64 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
             if (IsEditMode)
             {
-                _dataService.UpdateMaintenanceCheck((error) =>
+                try
                 {
-                    if (error != null)
-                    {
-                        _loggerService.LogException(error);
-                        return;
-                    }
+                    _dataService.SetMaintenanceCheckAsync(_maintenanceCheck);
+                    
+                    var performedChecks = new List<PerformedMaintenanceOption>();
 
                     foreach (var option in MaintenanceOptionsPerformed)
                     {
-                        option.MaintenanceCheck = _maintenanceCheck.Id;
+                        var performedOption = new PerformedMaintenanceOption
+                        {
+                            IsChecked = option.IsChecked,
+                            Id = option.Id,
+                            Notes = option.Notes,
+                            MaintenanceOption = option.MaintenanceOption.Id,
+                            MaintenanceCheck = _maintenanceCheck.Id
+                        };
+                        performedChecks.Add(performedOption);
                     }
 
-                    _dataService.UpdateOptionsPerformed((optionsError) =>
-                    {
-                        if (optionsError != null)
-                        {
-                            _loggerService.LogException(optionsError);
-                            return;
-                        }
+                    await _dataService.SetOptionsPerformedAsync(performedChecks);
 
-                        _notificationsService.Alert(CheckUpdated, NotificationHeader);
-                        _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
-                    }, MaintenanceOptionsPerformed);
-                }, _maintenanceCheck);
+                    _notificationsService.Alert(CheckUpdated, NotificationHeader);
+                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+                }
+                catch (Exception e)
+                {
+                    _loggerService.LogException(e);
+                }
             }
             else
             {
-                //Add the new check to the database.
-                _dataService.SubmitMaintenanceCheck((error) =>
+                try
                 {
-                    if (error != null)
-                    {
-                        _loggerService.LogException(error);
-                        return;
-                    }
+                    var returnedId = await _dataService.SetMaintenanceCheckAsync(_maintenanceCheck);
 
-                    foreach (var option in MaintenanceOptionsPerformed)
-                    {
-                        option.MaintenanceCheck = _maintenanceCheck.Id;
-                    }
+                    var performedChecks = new List<PerformedMaintenanceOption>();
 
-                    _dataService.UpdateOptionsPerformed((optionsError) =>
+                    foreach (var option in MaintenanceOptionsPerformed.Where(o => o.IsChecked == true))
                     {
-                        if (optionsError != null)
+                        var performedOption = new PerformedMaintenanceOption
                         {
-                            _loggerService.LogException(optionsError);
-                            return;
-                        }
+                            IsChecked = option.IsChecked,
+                            Notes = option.Notes,
+                            MaintenanceOption = option.MaintenanceOption.Id,
+                            MaintenanceCheck = returnedId
+                        };
+                        performedChecks.Add(performedOption);
+                    }
 
-                        _notificationsService.Alert(CheckCompleted, NotificationHeader);
-                        _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
-                    }, MaintenanceOptionsPerformed);
-                }, _maintenanceCheck);
+                    await _dataService.SetOptionsPerformedAsync(performedChecks);
+
+                    _notificationsService.Alert(CheckCompleted, NotificationHeader);
+                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+                }
+                catch (Exception e)
+                {
+                    _loggerService.LogException(e);
+                }
             }
         }
 
@@ -189,66 +195,53 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
         private void GetMaintenanceCheckType(int maintenanceCheckTypeId)
         {
-            MaintenanceOptionsPerformed = new ObservableCollection<MaintenanceOptionsPerformed>();
+            MaintenanceOptionsPerformed = new ObservableCollection<Option>();
             SelectedMaintenanceCheckType = null;
 
             var type = _dataService.GetMaintenanceCheckTypeById(maintenanceCheckTypeId);
 
-            if (type == null || type.Result == null)
+            if (type == null)
                 return;
 
-            SelectedMaintenanceCheckType = SelectedMaintenanceCheckType = type.Result;
+            SelectedMaintenanceCheckType = type;
 
             GetMaintenanceCheckOptions();
         }
 
         /// <summary>
-        /// Retrieve all of the current Options assocaited with the selected maintenance type and make a list of OptionsPerformed, based off of these Options.
+        /// Retrieve all of the current Options associated with the selected maintenance type and make a list of OptionsPerformed, based off of these Options.
         /// </summary>
-        private void GetMaintenanceCheckOptions()
+        private async void GetMaintenanceCheckOptions()
         {
             var options = _dataService.GetMaintenanceCheckOptionsForType(SelectedMaintenanceCheckType.Id);
 
-            if (options == null || options.Result == null)
+            if (options?.Result == null)
                 return;
 
-            foreach (var option in options.Result)
+            if (_maintenanceCheck != null)
             {
-                MaintenanceOptionsPerformed optionPerformed = null;
+                var currentOptionsSelected = await _dataService.GetOptionsPerformedAsync(_maintenanceCheck.Id);
+                var performedMaintenanceOptions = currentOptionsSelected.ToList();
 
-                if(IsEditMode && _maintenanceCheck != null)
+                foreach (var option in options.Result)
                 {
-                    var currentState = _dataService.GetOptionPerformedCurrentState(_maintenanceCheck.Id, option.Id);
-
-                    if (currentState == null || currentState.Result == null)
-                    {
-                        optionPerformed = new MaintenanceOptionsPerformed
-                        {
-                            MaintenanceCheckOption = option,
-                            IsChecked = false
-                        };
-                    }
-                    else
-                    {
-                        optionPerformed = currentState.Result;
-                        optionPerformed.MaintenanceCheckOption = option;
-                    }
+                    var currentState = performedMaintenanceOptions.FirstOrDefault(o => o.MaintenanceOption == option.Id);
+                    var optionPerformed = currentState == null ? new Option(option) : new Option(option, currentState);
+                    MaintenanceOptionsPerformed.Add(optionPerformed);
                 }
-                else
+            }
+            else
+            {
+                foreach (var option in options.Result)
                 {
-                    optionPerformed = new MaintenanceOptionsPerformed
-                    {
-                        MaintenanceCheckOption = option,
-                        IsChecked = false
-                    };
+                    var optionPerformed = new Option(option);
+                    MaintenanceOptionsPerformed.Add(optionPerformed);
                 }
-
-                MaintenanceOptionsPerformed.Add(optionPerformed);
             }
         }
 
         #region INavigationAware
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public async void OnNavigatedTo(NavigationContext navigationContext)
         {
             //store the passed through bool of whether or not this is in edit mode.
             var isEditMode = navigationContext.Parameters["IsEditMode"];
@@ -264,12 +257,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 //check it is not null.
                 if (maintenanceCheckId != null)
                 {
-                    var check = _dataService.GetMaintenanceChecksById(Convert.ToInt32(maintenanceCheckId));
+                    var check = await _dataService.GetMaintenanceChecksByIdAsync(Convert.ToInt32(maintenanceCheckId));
 
-                    if (check == null || check.Result == null)
+                    if (check == null)
                         return;
 
-                    _maintenanceCheck = check.Result;
+                    _maintenanceCheck = check;
                     GetMaintenanceCheckType(Convert.ToInt32(_maintenanceCheck.MaintenanceCheckType));
                     SetProperties();
                 }

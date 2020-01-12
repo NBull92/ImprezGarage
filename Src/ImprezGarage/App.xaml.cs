@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using CommonServiceLocator;
+
 namespace ImprezGarage
 {
     using Infrastructure.Services;
@@ -25,7 +27,7 @@ namespace ImprezGarage
 
             AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
             SystemEvents.SessionEnding += SystemEventsOnSessionEnding;
-            ShutdownMode = ShutdownMode.OnMainWindowClose;
+            //ShutdownMode = ShutdownMode.OnMainWindowClose;
         }
 
         private void SystemEventsOnSessionEnding(object sender, SessionEndingEventArgs e)

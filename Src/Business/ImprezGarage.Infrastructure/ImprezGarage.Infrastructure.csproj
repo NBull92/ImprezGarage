@@ -64,6 +64,7 @@
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -113,7 +114,6 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClasses\DialogViewBase.cs" />
@@ -124,56 +124,25 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\VehicleTypeToVisibilityConverter.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="Model\DataStorage.cs" />
+    <Compile Include="Services\IRepository.cs" />
     <Compile Include="Model\LogDataModel\Log.cs" />
     <Compile Include="Model\LogDataModel\LogEntry.cs" />
-    <Compile Include="Model\MaintenanceCheck.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\MaintenanceCheckOption.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\MaintenanceCheckType.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\MaintenanceOptionsPerformed.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PartsReplacementRecord.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PetrolExpense.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\SettingsDataModel\Configuration.cs" />
+    <Compile Include="Model\MaintenanceCheck.cs" />
+    <Compile Include="Model\MaintenanceCheckOption.cs" />
+    <Compile Include="Model\MaintenanceCheckType.cs" />
+    <Compile Include="Model\PerformedMaintenanceOption.cs" />
+    <Compile Include="Model\PartsReplacementRecords.cs" />
+    <Compile Include="Model\PetrolExpense.cs" />
+    <Compile Include="Model\Vehicle.cs" />
+    <Compile Include="Model\VehicleType.cs" />
     <Compile Include="RegionNames.cs" />
+    <Compile Include="Services\IAuthenticationService.cs" />
     <Compile Include="Services\ILoggerService.cs" />
     <Compile Include="Services\INotificationsService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
-    <Compile Include="Model\DataService.cs" />
     <Compile Include="Services\IDataService.cs" />
-    <Compile Include="Model\ImprezGarageDatabase.Context.cs">
-      <DependentUpon>ImprezGarageDatabase.Context.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Model\ImprezGarageDatabase.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Model\ImprezGarageDatabase.Designer.cs">
-      <DependentUpon>ImprezGarageDatabase.edmx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Include="Model\Vehicle.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\VehicleType.cs">
-      <DependentUpon>ImprezGarageDatabase.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -192,9 +161,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="App.config" />
-    <None Include="Model\ImprezGarageDatabase.edmx.diagram">
-      <DependentUpon>ImprezGarageDatabase.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -205,23 +171,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Model\ImprezGarageDatabase.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ImprezGarageDatabase.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Model\ImprezGarageDatabase.Context.tt">
-      <DependentUpon>ImprezGarageDatabase.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ImprezGarageDatabase.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model\ImprezGarageDatabase.edmx.sql" />
-    <Content Include="Model\ImprezGarageDatabase.tt">
-      <DependentUpon>ImprezGarageDatabase.edmx</DependentUpon>
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ImprezGarageDatabase.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\icons8-close-window-24.png" />
     <Resource Include="Resources\icons8-plus-math-24.png" />
   </ItemGroup>

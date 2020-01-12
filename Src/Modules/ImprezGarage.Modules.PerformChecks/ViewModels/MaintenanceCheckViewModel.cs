@@ -3,19 +3,20 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
+    using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure;
     using Infrastructure.Services;
-    using ImprezGarage.Infrastructure.ViewModels;
-    using Views;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
     using System.Windows.Input;
-    using ImprezGarage.Infrastructure.Model;
+    using Views;
 
     public class MaintenanceCheckViewModel : BindableBase
     {
@@ -24,6 +25,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly INotificationsService _notificationsService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly ILoggerService _loggerService;
 
         private const string DeleteMaintenanceCheck = "Are you sure you wish to delete this maintenance check?";
         private const string DeletedSuccessfully = "Maintenance check deleted successfuly!";
@@ -68,12 +70,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         
         #region Methods
         public MaintenanceCheckViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator, ILoggerService loggerService)
         {
             _dataService = dataService;
             _regionManager = regionManager;
             _notificationsService = notificationsService;
             _eventAggregator = eventAggregator;
+            _loggerService = loggerService;
 
             OpenMaintenanceCheck = new DelegateCommand<MouseButtonEventArgs>(OpenMaintenanceCheckExecute);
             EditMaintenanceCheckCommand = new DelegateCommand(EditMaintenanceCheckExecute);
@@ -87,16 +90,16 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             if (!_notificationsService.Confirm(DeleteMaintenanceCheck))
                 return;
 
-            _dataService.DeleteMaintenanceCheck((error) => 
+            try
             {
-                if(error != null)
-                {
-
-                }
-
+                _dataService.DeleteMaintenanceCheck(Id);
                 _notificationsService.Alert(DeletedSuccessfully);
                 _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
-            }, Id);
+            }
+            catch (Exception e)
+            {
+                _loggerService.LogException(e);
+            }
         }
 
         private void EditMaintenanceCheckExecute()
@@ -135,10 +138,10 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
             var type = _dataService.GetMaintenanceCheckTypeById(Convert.ToInt32(check.MaintenanceCheckType));
             
-            if (type == null || type.Result == null)
+            if (type == null)
                 return;
 
-            MaintenanceCheckType = type.Result;
+            MaintenanceCheckType = type;
         }
         #endregion
     }

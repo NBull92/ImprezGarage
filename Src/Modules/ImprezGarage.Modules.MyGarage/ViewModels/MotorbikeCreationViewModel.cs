@@ -86,10 +86,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         #region Methods
-        public MotorbikeCreationViewModel()
-        {
-        }
-
         /// <summary>
         /// Override the setup function of the parent class.
         /// Set the current insurance and tax date.

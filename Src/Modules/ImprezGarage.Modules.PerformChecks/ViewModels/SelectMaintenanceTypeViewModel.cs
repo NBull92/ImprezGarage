@@ -48,7 +48,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             CancelCommand = new DelegateCommand(CancelExecute);
             OkayCommand = new DelegateCommand(OkayExecute, CanProceed);
 
-            LoadMaintenaceCheckTypes();
+            LoadMaintenanceCheckTypes();
         }
 
         #region Command Handlers
@@ -82,14 +82,14 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         /// <summary>
         /// Load all the types from the data service.
         /// </summary>
-        private void LoadMaintenaceCheckTypes()
+        private async void LoadMaintenanceCheckTypes()
         {
-            var types = _dataService.GetMaintenanceCheckTypes();
+            var types = await _dataService.GetMaintenanceCheckTypesAsync();
 
-            if (types == null || types.Result == null)
+            if (types == null)
                 return;
 
-            MaintenanceCheckTypes = new ObservableCollection<MaintenanceCheckType>(types.Result);            
+            MaintenanceCheckTypes = new ObservableCollection<MaintenanceCheckType>(types);            
         }
         #endregion
     }
