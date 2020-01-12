@@ -16,3 +16,8 @@
 Src/Modules/ImprezGarage.Modules.FirebaseAuth/DemoAccountDetails.cs
 .vs/ImprezGarage/v15/.suo
 Src/Modules/ImprezGarage.Modules.Firebase/ConnectionCredentials.cs
+*.cache
+Src/ImprezGarage/obj/Debug/ImprezGarage_MarkupCompile.i.cache
+Src/ImprezGarage/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Src/ImprezGarage/obj/Debug/ImprezGarage_MarkupCompile.i.cache
+Src/ImprezGarage/ImprezGarage.csproj.user
