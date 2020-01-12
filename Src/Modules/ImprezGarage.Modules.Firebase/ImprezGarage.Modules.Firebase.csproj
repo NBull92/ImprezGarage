@@ -50,6 +50,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionCredentials.cs" />
     <Compile Include="FirebaseDataService.cs" />
     <Compile Include="FirebaseDataStorage.cs" />
     <Compile Include="FirebaseModule.cs" />

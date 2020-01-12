@@ -64,6 +64,7 @@
     <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="Prism, Version=7.0.0.396, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Prism.Core.7.0.0.396\lib\net45\Prism.dll</HintPath>
     </Reference>
@@ -113,7 +114,6 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseClasses\DialogViewBase.cs" />
@@ -124,7 +124,7 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\VehicleTypeToVisibilityConverter.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="Model\IRepository.cs" />
+    <Compile Include="Services\IRepository.cs" />
     <Compile Include="Model\LogDataModel\Log.cs" />
     <Compile Include="Model\LogDataModel\LogEntry.cs" />
     <Compile Include="Model\SettingsDataModel\Configuration.cs" />

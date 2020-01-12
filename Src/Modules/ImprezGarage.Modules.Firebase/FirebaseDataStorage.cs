@@ -1,4 +1,6 @@
-﻿namespace ImprezGarage.Modules.Firebase
+﻿using ImprezGarage.Infrastructure.Services;
+
+namespace ImprezGarage.Modules.Firebase
 {
     using Infrastructure.Model;
     using System.Collections.Generic;

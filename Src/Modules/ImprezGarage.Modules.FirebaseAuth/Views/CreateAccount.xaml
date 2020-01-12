@@ -56,14 +56,29 @@
 
             <Border BorderThickness="0" Grid.Row="1" Background="#FFE4E6E6">
                 <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="212">
-                    <TextBlock Text="Already have an account?" Height="20" VerticalAlignment="Center"/>
-                    <TextBlock Text="Sign In" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FF53CAFD">
+                    <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Width="212">
+                        <TextBlock Text="Already have an account?" Height="20" VerticalAlignment="Center"/>
+                        <TextBlock Text="Sign In" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FF53CAFD">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
                             <prism:InvokeCommandAction Command="{Binding SignIn}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    </TextBlock>
+                        </TextBlock>
+                    </DockPanel>
+
+                    <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="212" Margin="0,4,0,0">
+                        <TextBlock Text="Sign in with a " Height="20" VerticalAlignment="Center"/>
+                        <TextBlock Text="Demo" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right"  
+                                   Foreground="#FF53CAFD">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <prism:InvokeCommandAction Command="{Binding DemoAccountCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBlock>
+                        <TextBlock Text=" account?" Height="20" VerticalAlignment="Center"/>
+                    </DockPanel>
                 </DockPanel>
             </Border>
         </Grid>

@@ -1,6 +1,7 @@
 ﻿
-namespace ImprezGarage.Infrastructure.Model
+namespace ImprezGarage.Infrastructure.Services
 {
+    using Model;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 

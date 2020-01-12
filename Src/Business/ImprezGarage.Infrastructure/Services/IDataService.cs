@@ -3,10 +3,9 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Infrastructure.Services
 {
+    using Model;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;

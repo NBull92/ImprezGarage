@@ -1,4 +1,6 @@
 ﻿
+using ImprezGarage.Modules.FirebaseAuth.Commands;
+
 namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 {
     using Firebase.Auth;
@@ -23,6 +25,7 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
         public DelegateCommand SignIn { get; }
         public DelegateCommand ForgotPassword { get; }
         public DelegateCommand CreateAccount { get; }
+        public DemoAccountCommand DemoAccountCommand { get; set; }
         #endregion
 
         #region Methods
@@ -34,6 +37,7 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
             SignIn = new DelegateCommand(OnSignIn);
             ForgotPassword = new DelegateCommand(OnForgotPassword);
             CreateAccount = new DelegateCommand(OnCreateAccount);
+            DemoAccountCommand = new DemoAccountCommand();
         }
 
         private void OnCreateAccount()
