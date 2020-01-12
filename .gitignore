@@ -15,3 +15,4 @@
 *.jfm
 Src/Modules/ImprezGarage.Modules.FirebaseAuth/DemoAccountDetails.cs
 .vs/ImprezGarage/v15/.suo
+Src/Modules/ImprezGarage.Modules.Firebase/ConnectionCredentials.cs
