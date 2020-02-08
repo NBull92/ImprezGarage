@@ -93,6 +93,8 @@ namespace ImprezGarage.Infrastructure.Services
         /// If they are not currently in the database and not set to checked, then add the new option.
         /// </summary>
         Task SetOptionsPerformedAsync(IEnumerable<PerformedMaintenanceOption> maintenanceOptionsPerformed);
+
+        void AddRepairReport(string partReplaced, string replacedWith, double price, int vehicleId);
         #endregion
 
         #region Deletes

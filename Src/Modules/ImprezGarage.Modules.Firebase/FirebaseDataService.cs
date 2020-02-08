@@ -116,10 +116,27 @@ namespace ImprezGarage.Modules.Firebase
             _dataStorage.AddPetrolExpenditure(expense);
         }
 
+
         public async Task SetOptionsPerformedAsync(IEnumerable<PerformedMaintenanceOption> maintenanceOptionsPerformed)
         {
             await _dataStorage.SetOptionsPerformedAsync(maintenanceOptionsPerformed);
         }
+
+        public void AddRepairReport(string partReplaced, string replacedWith, double price, int vehicleId)
+        {
+            var repair = new PartsReplacementRecord
+            {
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now,
+                PartReplaced = partReplaced,
+                ReplacedWith = replacedWith,
+                Price = price,
+                VehicleId= vehicleId,
+            };
+
+            _dataStorage.AddRepair(repair);
+        }
+
         #endregion
 
         #region Deletes

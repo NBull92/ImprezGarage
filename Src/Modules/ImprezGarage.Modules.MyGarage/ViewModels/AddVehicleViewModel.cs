@@ -3,10 +3,9 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
+    using Infrastructure.Model;
     using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure.BaseClasses;
     using Infrastructure.Services;
@@ -156,10 +155,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             set => SetProperty(ref _isEdit, value);
         }
 
+        public Vehicle EditVehicle { get; internal set; }
+        
         #region Commands
         public DelegateCommand SaveCommand { get; }
         public DelegateCommand CancelCommand { get; }
-        public Vehicle EditVehicle { get; internal set; }
         #endregion
 
         #endregion

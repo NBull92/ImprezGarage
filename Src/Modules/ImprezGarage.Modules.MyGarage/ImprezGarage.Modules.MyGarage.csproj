@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\CarCreationViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MotorbikeCreationViewModel.cs" />
+    <Compile Include="ViewModels\ReportRepairViewModel.cs" />
     <Compile Include="ViewModels\VehicleCreationViewModel.cs" />
     <Compile Include="Views\AddVehicle.xaml.cs">
       <DependentUpon>AddVehicle.xaml</DependentUpon>
