@@ -1,8 +1,7 @@
-﻿using ImprezGarage.Infrastructure.Services;
-
-namespace ImprezGarage.Modules.Firebase
+﻿namespace ImprezGarage.Modules.Firebase
 {
     using Infrastructure.Model;
+    using Infrastructure.Services;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -188,6 +187,12 @@ namespace ImprezGarage.Modules.Firebase
         public void DeleteMaintenanceCheck(int maintenanceCheckId)
         {
             _connection.Delete<MaintenanceCheck>(maintenanceCheckId);
+        }
+
+        public void AddRepair(PartsReplacementRecord repair)
+        {
+            repair.Id = _connection.Get<PartsReplacementRecord>().Count;
+            _connection.Submit(repair, repair.Id);
         }
     }
 }

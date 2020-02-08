@@ -124,6 +124,9 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\VehicleTypeToVisibilityConverter.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="ReportRepair.xaml.cs">
+      <DependentUpon>ReportRepair.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\IRepository.cs" />
     <Compile Include="Model\LogDataModel\Log.cs" />
     <Compile Include="Model\LogDataModel\LogEntry.cs" />
@@ -132,7 +135,7 @@
     <Compile Include="Model\MaintenanceCheckOption.cs" />
     <Compile Include="Model\MaintenanceCheckType.cs" />
     <Compile Include="Model\PerformedMaintenanceOption.cs" />
-    <Compile Include="Model\PartsReplacementRecords.cs" />
+    <Compile Include="Model\PartsReplacementRecord.cs" />
     <Compile Include="Model\PetrolExpense.cs" />
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Model\VehicleType.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Services\ILoggerService.cs" />
     <Compile Include="Services\INotificationsService.cs" />
     <Compile Include="Services\ISettingsService.cs" />
+    <Compile Include="ViewModels\ReportRepairViewModel.cs" />
     <Compile Include="ViewModels\VehicleViewModel.cs" />
     <Compile Include="Services\IDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -174,6 +178,11 @@
     <Resource Include="Resources\icons8-close-window-24.png" />
     <Resource Include="Resources\icons8-plus-math-24.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="ReportRepair.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

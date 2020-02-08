@@ -195,6 +195,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// Command for deleting this vehicle.
         /// </summary>
         public DelegateCommand DeleteVehicleCommand { get; set; }
+        public DelegateCommand Repairs { get; }
         #endregion
         #endregion
 
@@ -216,6 +217,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
 
             EditVehicleCommand = new DelegateCommand(EditVehicleExecute);
             DeleteVehicleCommand = new DelegateCommand(DeleteVehicleExecute);
+            Repairs = new DelegateCommand(OnRepairs);
         }
 
         #region Command Handlers
@@ -247,8 +249,18 @@ namespace ImprezGarage.Infrastructure.ViewModels
         {
             _eventAggregator.GetEvent<Events.EditVehicleEvent>().Publish(this);
         }
-        #endregion
         
+        private void OnRepairs()
+        {
+            var vm = new ReportRepairViewModel(_dataService, _notificationsService, _loggerService)
+            {
+                VehicleId = Vehicle.Id
+            };
+            var repair = new ReportRepair(vm);
+            repair.ShowDialog();
+        }
+        #endregion
+
         /// <summary>
         /// Loads the data from the vehicle passed through are the one already assigned to this viewmodel.
         /// </summary>

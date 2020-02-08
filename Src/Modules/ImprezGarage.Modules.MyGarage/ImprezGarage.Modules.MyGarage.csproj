@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\CarCreationViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MotorbikeCreationViewModel.cs" />
+    <Compile Include="ViewModels\ReportRepairViewModel.cs" />
     <Compile Include="ViewModels\VehicleCreationViewModel.cs" />
     <Compile Include="Views\AddVehicle.xaml.cs">
       <DependentUpon>AddVehicle.xaml</DependentUpon>
@@ -168,7 +169,10 @@
       <Name>ImprezGarage.Modules.PetrolExpenditure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\icons8-car-service-24.png" />
+    <Resource Include="Resources\icons8-car-service-96.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-maintenance-24.png" />
   </ItemGroup>

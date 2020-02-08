@@ -27,7 +27,12 @@ namespace ImprezGarage.Modules.Firebase
             var name = typeof(T).Name;
             var response =  _client.Get($"{name}s/");
 
-            return response.Body != null ? response.ResultAs<List<T>>() : new List<T>();
+            if (response.Body == null || response.Body.Equals("null"))
+            {
+                return new List<T>();
+            }
+
+            return response.ResultAs<List<T>>();
         }
 
         public async Task<List<T>> GetAsync<T>()

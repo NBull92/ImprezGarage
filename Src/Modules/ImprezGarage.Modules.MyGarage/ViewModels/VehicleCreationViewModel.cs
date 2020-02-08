@@ -3,10 +3,9 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
+    using Infrastructure.Model;
     using Prism.Mvvm;
     using System;
     using System.ComponentModel;
