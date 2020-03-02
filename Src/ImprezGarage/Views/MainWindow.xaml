@@ -9,7 +9,15 @@
                      ShowIconOnTitleBar="False"
                      prism:ViewModelLocator.AutoWireViewModel="True"
                      Icon="{Binding Icon}"
-                     Title="{Binding Title}" Height="1000" Width="1373">
+                     Title="{Binding Title}"  Height="659" Width="858">
+    <baseClasses:DialogViewBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </baseClasses:DialogViewBase.Resources>
+
     <baseClasses:DialogViewBase.RightWindowCommands>
         <mahApps:WindowCommands>
             <Button Content="{Binding SignInOut}" Command="{Binding SignOut}"/>
@@ -18,46 +26,272 @@
             <Button Content="." FontSize="25" Command="{Binding MinimizeToTray}" ToolTip="Minimize to system tray." Margin="0,-10,0,0"/>
         </mahApps:WindowCommands>
     </baseClasses:DialogViewBase.RightWindowCommands>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
+    <Grid>
+       <!-- New UI -->
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="425"/>
+                <ColumnDefinition Width="179"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Column="0">
-                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleListRegion}" VerticalAlignment="Top"/>
-            </Border>
-            
-            <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
-                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolRegion}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center">
+                <!-- Source="GD.jpg" -->
+                <Image 
+                       Height="18"
+                       Margin="0,0,5,0"/>
+                <TextBlock Foreground="{StaticResource ImprezGarage.Main}" 
+                           Text="ImprezGarage" 
+                           FontSize="18"/>
+            </StackPanel>
+
+
+            <!-- Menu Strip -->
+            <Border Grid.Column="0" Grid.Row="1" Background="{StaticResource ImprezGarage.Main}" CornerRadius="0,46,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="88"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="174"/>
+                    </Grid.RowDefinitions>
+
+                    <Button Content="Upload New Files"
+                            Height="28"
+                            Width="127"
+                            Margin="17, 30, 0, 30" 
+                            Style="{DynamicResource RoundedRectangleButtonStyle}"/>
+
+
+                    <StackPanel Grid.Row="1" Margin="0,8,0,0">
+                        <RadioButton HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Height="16"
+                                 Width="127"
+                                 FontSize="8"
+                                 Margin="17, 0, 0, 18"
+                                 Style="{DynamicResource ImprezGarageTabRadioButtonStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="GD-MyDrive.jpg"/>
+                                <TextBlock Text="My Drive" TextAlignment="Center" Padding="0,1.5,0,0" Margin="10,0,0,0"/>
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Height="16"
+                                 Width="127"
+                                 FontSize="8"
+                                 Margin="17, 0, 0, 18"
+                                Style="{DynamicResource ImprezGarageTabRadioButtonStyle}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Image Source="GD-MyDrive.jpg"/>
+                                <TextBlock Text="Computers" TextAlignment="Center" Padding="0,1.5,0,0" Margin="10,0,0,0" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Height="16"
+                                 Width="127"
+                                 FontSize="8"
+                                 Margin="17, 0, 0, 18"
+                                 Style="{DynamicResource ImprezGarageTabRadioButtonStyle}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Image Source="GD-MyDrive.jpg"/>
+                                <TextBlock Text="Shared With Me" TextAlignment="Center" Padding="0,1.5,0,0" Margin="10,0,0,0" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Height="16"
+                                 Width="127"
+                                 FontSize="8"
+                                 Margin="17, 0, 0, 18"
+                                 Style="{DynamicResource ImprezGarageTabRadioButtonStyle}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Image Source="GD-MyDrive.jpg"/>
+                                <TextBlock Text="Recent" TextAlignment="Center" Padding="0,1.5,0,0" Margin="10,0,0,0" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Height="16"
+                                 Width="127"
+                                 FontSize="8"
+                                 Margin="17, 0, 0, 18"
+                                 Style="{DynamicResource ImprezGarageTabRadioButtonStyle}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Image Source="GD-MyDrive.jpg"/>
+                                <TextBlock Text="Starred" TextAlignment="Center" Padding="0,1.5,0,0" Margin="10,0,0,0" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Height="16"
+                                 Width="127"
+                                 FontSize="8"
+                                 Margin="17, 0, 0, 18"
+                                 Style="{DynamicResource ImprezGarageTabRadioButtonStyle}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Image Source="GD-MyDrive.jpg"/>
+                                <TextBlock Text="Trash" TextAlignment="Center" Padding="0,1.5,0,0" Margin="10,0,0,0" />
+                            </StackPanel>
+                        </RadioButton>
+
+                        <RadioButton HorizontalAlignment="Left" 
+                                 VerticalAlignment="Top" 
+                                 Height="16"
+                                 Width="127"
+                                 FontSize="8"
+                                 Margin="17, 0, 0, 18"
+                                 Style="{DynamicResource ImprezGarageTabRadioButtonStyle}">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Image Source="GD-MyDrive.jpg"/>
+                                <TextBlock Text="Backups" TextAlignment="Center" Padding="0,1.5,0,0" Margin="10,0,0,0" />
+                            </StackPanel>
+                        </RadioButton>
+                    </StackPanel>
+
+                    <Grid Grid.Column="0" Grid.Row="2" Margin="17, 0, 0, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="ACCOUNT DETAILS"
+                                   FontWeight="Bold"
+                                   FontSize="7"
+                                   Foreground="{StaticResource ImprezGarage.Grey}"
+                                   VerticalAlignment="Top"/>
+                            <Rectangle Margin="12.5,1,0,0" 
+                                   Height="1" 
+                                   Width="90"
+                                   Fill="{StaticResource ImprezGarage.Grey}"
+                                   VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top"
+                                        Margin="0,16,0,0"
+                                        Height="16">
+                                    <Image Source="GD-MyDrive.jpg"/>
+                                    <TextBlock Text="Storage" 
+                                           Margin="10,0,0,0" 
+                                           FontSize="7"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource ImprezGarage.Foreground}"/>
+                                </StackPanel>
+
+                                <Rectangle Margin="0,7,0,0"
+                                       Height="3" 
+                                       Width="127"
+                                       Fill="{StaticResource ImprezGarage.Grey}"
+                                       HorizontalAlignment="Left"/>
+
+                                <TextBlock FontSize="6"
+                                       Margin="0,6,0,0"
+                                       Text="60.8 GB of 1 TB used"
+                                       Foreground="{StaticResource ImprezGarage.Accent}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
+                                        VerticalAlignment="Top"
+                                        Margin="0,16,0,0"
+                                        Height="16">
+                                    <Image Source="GD-MyDrive.jpg"/>
+                                    <TextBlock Text="Photos" 
+                                           Margin="10,0,0,0" 
+                                           FontSize="7"
+                                           VerticalAlignment="Center"
+                                           Foreground="{StaticResource ImprezGarage.Foreground}"/>
+                                </StackPanel>
+
+                                <Rectangle Margin="0,7,0,0"
+                                       Height="3" 
+                                       Width="127"
+                                       Fill="{StaticResource ImprezGarage.Grey}"
+                                       HorizontalAlignment="Left"/>
+
+                                <TextBlock FontSize="6"
+                                       Margin="0,6,0,0"
+                                       Text="10.3 GB of 1 TB used"
+                                       Foreground="{StaticResource ImprezGarage.Accent}"/>
+                            </StackPanel>
+
+                            <TextBlock Grid.Row="2" Text="Upgrade Storage"
+                                   FontWeight="Bold"
+                                   FontSize="7"
+                                   Margin="0,16,0,0"
+                                   Foreground="{StaticResource ImprezGarage.Grey}"
+                                   VerticalAlignment="Top"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Border>
 
-            <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="1" Grid.Column="0">
-                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ChecksRegion}" VerticalAlignment="Top"/>
-            </Border>
         </Grid>
 
-        <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.StatusBarRegion}" Grid.Row="2" />
+            <!-- Old UI To be removed after -->
+        <Grid Grid.Row="1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <mahApps:FlyoutsControl Grid.Row="0" Grid.RowSpan="2">
-            <mahApps:Flyout Header="Settings" Position="Right" Width="300" IsOpen="{Binding IsSettingsOpen}">
-                <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.SettingsRegion}"/>
-            </mahApps:Flyout>
-        </mahApps:FlyoutsControl>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition MaxWidth="425"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Column="0">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleListRegion}" VerticalAlignment="Top"/>
+                </Border>
+
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolRegion}"/>
+                </Border>
+
+                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="1" Grid.Column="0">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ChecksRegion}" VerticalAlignment="Top"/>
+                </Border>
+            </Grid>
+
+            <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.StatusBarRegion}" Grid.Row="2" />
+
+            <mahApps:FlyoutsControl Grid.Row="0" Grid.RowSpan="2">
+                <mahApps:Flyout Header="Settings" Position="Right" Width="300" IsOpen="{Binding IsSettingsOpen}">
+                    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.SettingsRegion}"/>
+                </mahApps:Flyout>
+            </mahApps:FlyoutsControl>
 
 
-        <ContentControl Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse}" 
+            <ContentControl Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse}" 
                         prism:RegionManager.RegionName="{x:Static inf:RegionNames.AuthenticateRegion}" />
 
+        </Grid>
     </Grid>
+
+
 </baseClasses:DialogViewBase>
