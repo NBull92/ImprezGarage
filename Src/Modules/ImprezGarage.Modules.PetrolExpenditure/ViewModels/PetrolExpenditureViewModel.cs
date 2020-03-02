@@ -44,7 +44,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _selectedVehicle, value);
         }
 
-        public DelegateCommand AddExpenditureCommand { get;set; }
         #endregion
 
         #region Methods
@@ -53,20 +52,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _dataService = dataService;
             eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
 
-            AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
             Expenses = new ObservableCollection<PetrolExpenseViewModel>();
         }
-
-        #region Command Handlers
-
-        private void AddExpenditureExecute()
-        {
-            var addExpense = new AddPetrolExpenditure();
-            if (addExpense.DataContext is AddPetrolExpenditureViewModel vm)
-                vm.VehicleId = _selectedVehicle.Vehicle.Id;
-            addExpense.ShowDialog();
-        }
-        #endregion
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {

@@ -5,10 +5,13 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure;
     using ImprezGarage.Infrastructure.ViewModels;
+    using Infrastructure;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
+    using Views;
+
 
     public class MainViewModel : BindableBase
     {
@@ -22,13 +25,27 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
         }
+
+        public DelegateCommand AddExpenditureCommand { get;set; }
         #endregion
 
         #region Methods
         public MainViewModel(IEventAggregator eventAggregator)
         {
             eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
         }
+
+        #region Command Handlers
+
+        private void AddExpenditureExecute()
+        {
+            var addExpense = new AddPetrolExpenditure();
+            if (addExpense.DataContext is AddPetrolExpenditureViewModel vm)
+                vm.VehicleId = _selectedVehicle.Vehicle.Id;
+            addExpense.ShowDialog();
+        }
+        #endregion
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {

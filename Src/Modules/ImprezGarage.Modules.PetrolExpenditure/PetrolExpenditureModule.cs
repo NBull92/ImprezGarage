@@ -43,7 +43,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure
         {
             _container.RegisterType<object, Main>(typeof(Main).FullName);
             
-            _regionManager.RegisterViewWithRegion(RegionNames.PetrolRegion, typeof(Main)); 
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(Main)); 
             _regionManager.RegisterViewWithRegion(RegionNames.PetrolEntriesRegion, typeof(PetrolExpenditure)); 
             _regionManager.RegisterViewWithRegion(RegionNames.PetrolHistoryRegion, typeof(PetrolUsageGraph));
         }

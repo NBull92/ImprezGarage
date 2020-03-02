@@ -69,5 +69,7 @@ namespace ImprezGarage.Infrastructure
         /// The region for displaying the sign in and create account views.
         /// </summary>
         public static string AuthenticateRegion = "AuthenticateRegion";
+
+        public static string VehicleHeaderRegion = "VehicleHeaderRegion";
     }
 }   //ImprezGarage.Infrastructure namespace 

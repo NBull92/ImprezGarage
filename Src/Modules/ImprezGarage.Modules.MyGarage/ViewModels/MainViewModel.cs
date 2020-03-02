@@ -157,7 +157,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     //TODO - do the query.Subscribe bit here Reactive
                     foreach (var vehicle in vehicles.Where(o => o.UserId == _userId))
                     {
-                        var viewModel = new VehicleViewModel(_dataService, _notificationsService, _eventAggregator, _loggerService);
+                        var viewModel = new VehicleViewModel(_dataService, _notificationsService);
                         viewModel.LoadInstance(vehicle);
                         Application.Current.Dispatcher?.Invoke(() =>
                         {
@@ -188,7 +188,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 { "SelectedVehicle", SelectedVehicle}
             };
 
-            _regionManager.RequestNavigate(RegionNames.PetrolRegion, typeof(PetrolExpenditure.Views.Main).FullName + parameters);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PetrolExpenditure.Views.Main).FullName + parameters);
         }
         #endregion
     }

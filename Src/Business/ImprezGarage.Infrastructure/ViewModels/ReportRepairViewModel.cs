@@ -83,7 +83,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
             }
         }
 
-        public int VehicleId { get; internal set; }
+        public int VehicleId { get; set; }
 
         #region Commands
         public DelegateCommand Add { get; }

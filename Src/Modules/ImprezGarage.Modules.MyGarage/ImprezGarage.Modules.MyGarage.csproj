@@ -91,8 +91,8 @@
     <Compile Include="ViewModels\CarCreationViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MotorbikeCreationViewModel.cs" />
-    <Compile Include="ViewModels\ReportRepairViewModel.cs" />
     <Compile Include="ViewModels\VehicleCreationViewModel.cs" />
+    <Compile Include="ViewModels\VehicleHeaderViewModel.cs" />
     <Compile Include="Views\AddVehicle.xaml.cs">
       <DependentUpon>AddVehicle.xaml</DependentUpon>
     </Compile>
@@ -107,6 +107,9 @@
     </Compile>
     <Compile Include="Views\MotorbikeCreation.xaml.cs">
       <DependentUpon>MotorbikeCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VehicleHeader.xaml.cs">
+      <DependentUpon>VehicleHeader.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,6 +139,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MotorbikeCreation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VehicleHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

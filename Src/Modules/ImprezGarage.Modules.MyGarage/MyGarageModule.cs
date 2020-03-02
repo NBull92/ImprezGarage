@@ -22,6 +22,7 @@ namespace ImprezGarage.Modules.MyGarage
         public void Initialize()
         {
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleListRegion, typeof(MainView));
+            _regionManager.RegisterViewWithRegion(RegionNames.VehicleHeaderRegion, typeof(VehicleHeader));
         }
     }
 }   //ImprezGarage.Modules.MyGarage namespace 

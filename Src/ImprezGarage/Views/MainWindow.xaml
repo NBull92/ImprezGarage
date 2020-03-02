@@ -5,7 +5,8 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
                      xmlns:baseClasses="clr-namespace:ImprezGarage.Infrastructure.BaseClasses;assembly=ImprezGarage.Infrastructure"
-                     xmlns:mah="http://metro.mahapps.com/winfx/xaml/shared" x:Class="ImprezGarage.Views.MainWindow"
+                     xmlns:mah="http://metro.mahapps.com/winfx/xaml/shared" 
+                     x:Class="ImprezGarage.Views.MainWindow"
                      WindowStartupLocation="CenterScreen"
                      ShowIconOnTitleBar="False"
                      prism:ViewModelLocator.AutoWireViewModel="True"
@@ -210,6 +211,26 @@
                     </DockPanel>
                     <TextBox Style="{DynamicResource GreyTextBoxStyle}"/>
                 </DockPanel>
+            </Grid>
+
+
+            <!-- Content Region -->
+            <Grid Grid.Column="1" Grid.Row="1" Margin="42,0,29,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="68"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Margin="0,0,0,11"
+                                prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleHeaderRegion}"/>
+               
+
+                <Rectangle Grid.Row="1"
+                       Height="1"
+                       Fill="{StaticResource ImprezGarage.Grey}"
+                       HorizontalAlignment="Stretch"/>
+
+                <ContentControl Grid.Row="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}" />
             </Grid>
 
             <ContentControl Grid.Row="0" Grid.RowSpan="2" 
