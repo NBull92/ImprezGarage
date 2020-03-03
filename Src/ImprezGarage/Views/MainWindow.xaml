@@ -230,12 +230,13 @@
                        Fill="{StaticResource ImprezGarage.Grey}"
                        HorizontalAlignment="Stretch"/>
 
+                
                 <ContentControl Grid.Row="2" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ContentRegion}" />
             </Grid>
 
             <ContentControl Grid.Row="0" Grid.RowSpan="2" 
                             Grid.Column="0" Grid.ColumnSpan="2"
-                            Visibility="Collapsed" 
+                            Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse}"
                             prism:RegionManager.RegionName="{x:Static inf:RegionNames.AuthenticateRegion}" />
         </Grid>
 

@@ -54,9 +54,9 @@
                 </Button.Content>
             </Button>
         </Grid>
-        <ContentControl Grid.Row="1" Grid.Column="0" VerticalAlignment="Top"
+        <ContentControl Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"
                         prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolEntriesRegion}"/>
-        <ContentControl Grid.Row="1" Grid.Column="1"  VerticalAlignment="Top"
+        <ContentControl Grid.Row="1" Grid.Column="1"  VerticalAlignment="Stretch"
                         prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolHistoryRegion}"/>        
     </Grid>
 </UserControl>

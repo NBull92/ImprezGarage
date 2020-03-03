@@ -8,12 +8,13 @@
              xmlns:visualizationToolkit="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:ImprezGarage.Modules.PetrolExpenditure.ViewModels"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              VerticalAlignment="Top"
-             d:DataContext="{d:DesignInstance Type=vm:PetrolUsageGraphViewModel}">   
+             d:DataContext="{d:DesignInstance Type=viewModels:PetrolUsageGraphViewModel}">   
     <UserControl.Resources>
         <Style x:Key="ChartStyle" TargetType="{x:Type chartingToolkit:Chart}">
             <Setter Property="BorderBrush" Value="Black"/>
@@ -343,10 +344,11 @@
         </Style>
         <infconv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
-    <StackPanel>
-        <ToggleButton Grid.Column="0" Content="{Binding ChartStyleContent}" Margin="5"  Width="175" IsChecked="{Binding IsLineChart}"/>
+    <StackPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}">
+        <ToggleButton Content="{Binding ChartStyleContent}" Margin="5"  Width="175" IsChecked="{Binding IsLineChart}"/>
 
-        <chartingToolkit:Chart Grid.Row="1" BorderThickness="0" Padding="10,0"  Style="{DynamicResource ChartStyle}" >
+        <chartingToolkit:Chart BorderThickness="0" Padding="10,0"  Style="{DynamicResource ChartStyle}" >
             <chartingToolkit:ColumnSeries DependentValuePath="Cost" IndependentValuePath="Date"
                                           ItemsSource="{Binding FilteredExpenses}" 
                                           Background="Transparent" 
@@ -357,16 +359,16 @@
                                         Visibility="{Binding IsLineChart, Converter={StaticResource BoolToVisibilityConverter}}"/>
         </chartingToolkit:Chart>
 
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <RadioButton Grid.Column="0" Content="Week" Margin="5" Width="175" GroupName="ChartDisplay" IsChecked="True"
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <RadioButton Content="Week" Margin="5" Width="175" GroupName="ChartDisplay" IsChecked="True"
                          Command="{Binding OnChartDisplayChangeCommand}" CommandParameter="Week"/>
-            <RadioButton Grid.Column="1" Content="Month" Margin="5" Width="175" GroupName="ChartDisplay"
+            <RadioButton Content="Month" Margin="5" Width="175" GroupName="ChartDisplay"
                          Command="{Binding OnChartDisplayChangeCommand}" CommandParameter="Month"/>
-            <RadioButton Grid.Column="2" Content="Six Months" Margin="5" Width="175" GroupName="ChartDisplay"
+            <RadioButton Content="Six Months" Margin="5" Width="175" GroupName="ChartDisplay"
                          Command="{Binding OnChartDisplayChangeCommand}" CommandParameter="Six Months"/>
-            <RadioButton Grid.Column="3" Content="Year" Margin="5" Width="175" GroupName="ChartDisplay"
+            <RadioButton Content="Year" Margin="5" Width="175" GroupName="ChartDisplay"
                          Command="{Binding OnChartDisplayChangeCommand}" CommandParameter="Year"/>
-            <RadioButton Grid.Column="4" Content="All Time" Margin="5" Width="175" GroupName="ChartDisplay"
+            <RadioButton Content="All Time" Margin="5" Width="175" GroupName="ChartDisplay"
                          Command="{Binding OnChartDisplayChangeCommand}" CommandParameter="All Time"/>
         </StackPanel>
     </StackPanel>
