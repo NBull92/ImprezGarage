@@ -10,7 +10,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Height="714"
+             Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
+             Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              VerticalAlignment="Top"
              d:DataContext="{d:DesignInstance Type=vm:PetrolUsageGraphViewModel}">   
     <UserControl.Resources>

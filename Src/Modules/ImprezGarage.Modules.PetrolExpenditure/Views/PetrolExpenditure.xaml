@@ -10,6 +10,8 @@
              mc:Ignorable="d"
              HorizontalAlignment="Stretch"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
+             Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              d:DataContext="{d:DesignInstance Type=vm:PetrolExpenditureViewModel}">
     <UserControl.Resources>
         <ResourceDictionary>
