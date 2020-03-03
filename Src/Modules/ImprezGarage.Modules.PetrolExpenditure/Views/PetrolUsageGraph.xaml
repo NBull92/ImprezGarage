@@ -346,7 +346,7 @@
     <StackPanel>
         <ToggleButton Grid.Column="0" Content="{Binding ChartStyleContent}" Margin="5"  Width="175" IsChecked="{Binding IsLineChart}"/>
 
-        <chartingToolkit:Chart Grid.Row="1" BorderThickness="0" Padding="10,0" Height="600" Style="{DynamicResource ChartStyle}" >
+        <chartingToolkit:Chart Grid.Row="1" BorderThickness="0" Padding="10,0"  Style="{DynamicResource ChartStyle}" >
             <chartingToolkit:ColumnSeries DependentValuePath="Cost" IndependentValuePath="Date"
                                           ItemsSource="{Binding FilteredExpenses}" 
                                           Background="Transparent" 

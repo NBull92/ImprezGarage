@@ -235,7 +235,7 @@
 
             <ContentControl Grid.Row="0" Grid.RowSpan="2" 
                             Grid.Column="0" Grid.ColumnSpan="2"
-                            Visibility="{Binding IsBusy, ConverterParameter=Inverse, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            Visibility="Collapsed" 
                             prism:RegionManager.RegionName="{x:Static inf:RegionNames.AuthenticateRegion}" />
         </Grid>
 
