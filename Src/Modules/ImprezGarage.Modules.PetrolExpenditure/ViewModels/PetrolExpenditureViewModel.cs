@@ -8,11 +8,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     using Infrastructure;
     using Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
-    using Views;
     using Microsoft.Practices.ServiceLocation;
-    using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
+    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
 
@@ -23,6 +22,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
         private VehicleViewModel _selectedVehicle;
         private string _label;
+        private DateTime _fromDate;
+        private DateTime _toDate;
         #endregion
 
         #region Properties
@@ -32,10 +33,11 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _label, value);
         }
 
-        public ObservableCollection<PetrolExpenseViewModel> Expenses
+        private ObservableCollection<PetrolExpenseViewModel> _filteredExpenses;
+        public ObservableCollection<PetrolExpenseViewModel> FilteredExpenses
         {
-            get => _expenses;
-            set => SetProperty(ref _expenses, value);
+            get => _filteredExpenses;
+            set => SetProperty(ref _filteredExpenses, value);
         }
 
         public VehicleViewModel SelectedVehicle
@@ -51,15 +53,17 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _dataService = dataService;
             eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
 
-            Expenses = new ObservableCollection<PetrolExpenseViewModel>();
+            _expenses = new ObservableCollection<PetrolExpenseViewModel>();
+            FilteredExpenses = new ObservableCollection<PetrolExpenseViewModel>();
         }
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
         {
             if (vehicleViewModel == null)
             {
-                Expenses.Clear();
+                FilteredExpenses.Clear();
                 SelectedVehicle = null;
                 return;
             }
@@ -70,9 +74,16 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             GetSelectedVehiclePetrolExpenses();
         }
 
+        private void OnFilteredDatesChanged(Tuple<DateTime, DateTime> updatedDates)
+        {
+            _fromDate = updatedDates.Item1;
+            _toDate = updatedDates.Item2;
+            FilterExpenses();
+        }
+
         private void GetSelectedVehiclePetrolExpenses()
         {
-            Expenses.Clear();
+            FilteredExpenses.Clear();
 
             if (_selectedVehicle == null)
                 return;
@@ -86,10 +97,21 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             {
                 var viewModel = ServiceLocator.Current.GetInstance<PetrolExpenseViewModel>();
                 viewModel.LoadInstance(expense);
-                Expenses.Add(viewModel);
+                _expenses.Add(viewModel);
             }
 
-            Expenses = new ObservableCollection<PetrolExpenseViewModel>(Expenses.OrderByDescending(o => o.DateEntered));
+        }
+
+        private void FilterExpenses()
+        {
+            FilteredExpenses.Clear();
+
+            if (_expenses == null)
+                return;
+
+            FilteredExpenses = new ObservableCollection<PetrolExpenseViewModel>(_expenses.Where(o => Convert.ToDateTime(o.DateEntered).Date >= _fromDate
+                                                                                        && Convert.ToDateTime(o.DateEntered).Date <= _toDate)
+                                                                                        .OrderBy(o => Convert.ToDateTime(o.DateEntered).Date));
         }
         #endregion
     }

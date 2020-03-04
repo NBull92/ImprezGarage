@@ -20,7 +20,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
  
-    <ListBox ItemsSource="{Binding Expenses}" HorizontalAlignment="Stretch"  
+    <ListBox ItemsSource="{Binding FilteredExpenses}" HorizontalAlignment="Stretch"  
          VerticalAlignment="Stretch">
         <ListBox.ItemTemplate>
             <DataTemplate>

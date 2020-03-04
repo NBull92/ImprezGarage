@@ -3,18 +3,17 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using Views;

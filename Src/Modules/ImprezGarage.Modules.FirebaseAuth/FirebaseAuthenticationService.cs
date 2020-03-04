@@ -7,24 +7,25 @@
     using Prism.Regions;
     using Views;
     using System;
+    using System.Threading.Tasks;
 
     public class FirebaseAuthenticationService : IAuthenticationService
     {
         private string _userId;
 
-        public string CreateAccount(string email, string password)
+        public async Task<string> CreateAccountAsync(string email, string password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
-            var response = auth.CreateUserWithEmailAndPasswordAsync(email, password);
-            _userId = response.Result.User.LocalId;
+            var response = await auth.CreateUserWithEmailAndPasswordAsync(email, password);
+            _userId = response.User.LocalId;
             return _userId;
         }
 
-        public string Login(string email, string password)
+        public async Task<string> LoginAsync(string email, string password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
-            var response = auth.SignInWithEmailAndPasswordAsync(email, password);
-            _userId = response.Result.User.LocalId;
+            var response = await auth.SignInWithEmailAndPasswordAsync(email, password);
+            _userId = response.User.LocalId;
             return _userId;
         }
 

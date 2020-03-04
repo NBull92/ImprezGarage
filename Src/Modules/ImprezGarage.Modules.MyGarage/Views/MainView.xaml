@@ -7,7 +7,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"   
              xmlns:vm="clr-namespace:ImprezGarage.Modules.MyGarage.ViewModels"
              xmlns:views="clr-namespace:ImprezGarage.Modules.MyGarage.Views"
-             xmlns:conv="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}">
@@ -16,30 +15,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <conv:VehicleTypeToVisibilityConverter x:Key="VehicleTypeToVisibilityConverter"/>
-            <Style x:Key="HiddenButton" BasedOn="{StaticResource MahApps.Metro.Styles.MetroButton}" TargetType="{x:Type Button}">
-                <Setter Property="Visibility" Value="Hidden" />
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}},Path=IsSelected}" Value="True">
-                        <Setter Property="Visibility" Value="Visible" />
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <i:Interaction.Triggers>
-        <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
-            <prism:PopupWindowAction IsModal="True" WindowStartupLocation="CenterScreen">
-                <prism:PopupWindowAction.WindowStyle>
-                    <Style TargetType="Window">
-                        <Setter Property="ResizeMode" Value="NoResize"/>
-                        <Setter Property="Width" Value="250"/>
-                        <Setter Property="Height" Value="150"/>
-                    </Style>
-                </prism:PopupWindowAction.WindowStyle>
-            </prism:PopupWindowAction>
-        </prism:InteractionRequestTrigger>
-    </i:Interaction.Triggers>
 
     <DockPanel>
         <Grid>
@@ -70,79 +47,5 @@
                 </i:Interaction.Triggers>
             </ListBox>
         </Grid>
-
-        <!--<ListBox Margin="5" ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Hidden" >
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <prism:InvokeCommandAction Command="{Binding SelectedVehicleChanged}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <DockPanel Margin="0">
-                        <StackPanel Margin="5,0,0,5" Width="236">
-                            <TextBlock Text="{Binding Registration}" 
-                                       FontSize="24"
-                                       Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Car}" 
-                                       VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Registration}" 
-                                       FontSize="24"
-                                       Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Motorbike}" 
-                                       VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Model}" 
-                                       FontSize="24"
-                                       Visibility="{Binding VehicleType.Id, Converter={StaticResource VehicleTypeToVisibilityConverter}, ConverterParameter=Bicycle}"
-                                       VerticalAlignment="Center"/>
-
-                            <TextBlock VerticalAlignment="Center" >
-                                <Run Text="{Binding Make}"/>
-                                <Run Text=", "/>
-                                <Run Text="{Binding Model}"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <Button Command="{Binding EditVehicleCommand}"
-                                Style="{StaticResource HiddenButton}"
-                                Background="{x:Null}" 
-                                BorderThickness="0" 
-                                Width="48" 
-                                Margin="0"
-                                ToolTip="Manage">
-                            <Button.Content>
-                                <Image Source="pack://application:,,,/ImprezGarage.Modules.MyGarage;component/Resources/icons8-maintenance-24.png"
-                                    Width="24" Height="24"/>
-                            </Button.Content>
-                        </Button>
-
-                        <Button Command="{Binding Repairs}"
-                                Style="{StaticResource HiddenButton}"
-                                Background="{x:Null}" 
-                                BorderThickness="0" 
-                                Width="48" 
-                                Margin="0"
-                                ToolTip="Repairs">
-                            <Button.Content>
-                                <Image Source="pack://application:,,,/ImprezGarage.Modules.MyGarage;component/Resources/icons8-car-service-24.png"
-                                       Width="24" Height="24"/>
-                            </Button.Content>
-                        </Button>
-
-                        <Button Command="{Binding DeleteVehicleCommand}"
-                                Style="{StaticResource HiddenButton}"
-                                Background="{x:Null}" 
-                                BorderThickness="0"
-                                Width="48" 
-                                Margin="0"
-                                ToolTip="Delete">
-                            <Button.Content>
-                                <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-close-window-24.png"
-                                    Width="24" Height="24"/>
-                            </Button.Content>
-                        </Button>
-                    </DockPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
     </DockPanel>
 </UserControl>

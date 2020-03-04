@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              xmlns:prism="http://prismlibrary.com/"
              xmlns:converters="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              prism:ViewModelLocator.AutoWireViewModel="True" 
@@ -22,6 +23,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -54,9 +56,25 @@
                 </Button.Content>
             </Button>
         </Grid>
-        <ContentControl Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch"
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Date:" VerticalAlignment="Center" Margin="5,0,5,0" 
+                       Foreground="{StaticResource ImprezGarage.Main}"/>
+            <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Center"
+                        DisplayDateEnd="{Binding ToDate}"
+                        Foreground="{StaticResource ImprezGarage.Main}"/>
+            <TextBlock Text="To:" VerticalAlignment="Center" Margin="5,0,5,0"
+                       Foreground="{StaticResource ImprezGarage.Main}"/>
+            <DatePicker SelectedDate="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Center"
+                        DisplayDateEnd="{x:Static sys:DateTime.Today}"
+                        Foreground="{StaticResource ImprezGarage.Main}"/>
+        </StackPanel>
+
+        <ContentControl Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch"
                         prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolEntriesRegion}"/>
-        <ContentControl Grid.Row="1" Grid.Column="1"  VerticalAlignment="Stretch"
+        <ContentControl Grid.Row="2" Grid.Column="1"  VerticalAlignment="Stretch"
                         prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolHistoryRegion}"/>        
     </Grid>
 </UserControl>

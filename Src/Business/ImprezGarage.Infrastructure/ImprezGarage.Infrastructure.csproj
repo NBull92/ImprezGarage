@@ -188,7 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\icons8-car-24.png" />
+    <Resource Include="Resources\icons8-quad-bike-24.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Temp Resources\GD-Bell.png" />
     <Resource Include="Temp Resources\GD-Help.png" />
