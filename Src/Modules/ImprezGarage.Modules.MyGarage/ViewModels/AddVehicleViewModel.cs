@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using Microsoft.Practices.ServiceLocation;
+
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using Infrastructure.Model;
@@ -365,13 +367,16 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private void SaveNewVehicle()
         {
+            var authentication = ServiceLocator.Current.GetInstance<IAuthenticationService>();
+
             var newVehicle = new Vehicle
             {
                 VehicleType = VehicleCreationViewModel.VehicleType.Id,
                 Model = VehicleCreationViewModel.Model,
                 Make = VehicleCreationViewModel.Make,
                 DateCreated = DateTime.Now,
-                DateModified = DateTime.Now
+                DateModified = DateTime.Now,
+                UserId = authentication.CurrentUser()
             };
 
             if (VehicleCreationViewModel.GetType() == typeof(CarCreationViewModel))
