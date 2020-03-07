@@ -82,6 +82,7 @@
                     Margin="17, 30, 0, 30" 
                     Background="{StaticResource ImprezGarage.Grey}"
                     Foreground="White"
+                    Visibility="{Binding IsEdit, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"
                     Style="{StaticResource RoundedRectangleButtonStyle}"/>
         </Grid>
     </Grid>

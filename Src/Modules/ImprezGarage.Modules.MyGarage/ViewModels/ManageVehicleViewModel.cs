@@ -45,7 +45,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private readonly ILoggerService _loggerService;
 
-        private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
 
         private const string InsuranceDateWarning = "You have selected to add the vehicles insurance date, however the data entered is in the past. \n\nIs this intended?";
@@ -150,18 +149,16 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// Instantiate the commands and get the vehicle types.
         /// </summary> 
         public ManageVehicleViewModel(IDataService dataService, IUnityContainer container, INotificationsService notificationsService,
-            ILoggerService loggerService, IRegionManager regionManager, IEventAggregator eventAggregator,
-            IVehicleService vehicleService, VehicleViewModel vehicle = null)
+            ILoggerService loggerService, IEventAggregator eventAggregator, IVehicleService vehicleService, VehicleViewModel vehicle = null)
         {
             _dataService = dataService;
             _container = container;
             _notificationsService = notificationsService;
             _loggerService = loggerService;
-            _regionManager = regionManager;
             _eventAggregator = eventAggregator;
 
             SaveCommand = new DelegateCommand(SaveExecute, CanSave);
-            CancelCommand = new DelegateCommand(OnCancel);
+            CancelCommand = new DelegateCommand(Close);
 
             Width = 305;
             InitialiseAsync(vehicle);
@@ -193,18 +190,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
 
         #region Command Handlers
-        private void OnCancel()
-        {
-            if (IsEdit)
-            {
-                _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PetrolExpenditure.Views.Main).FullName);
-            }
-            else
-            {
-                Close();
-            }
-        }
-
         /// <summary>
         /// Checks as to whether the user has entered all the required data before they can save.
         /// </summary>
@@ -328,7 +313,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 _dataService.AddNewVehicle(newVehicle);
                 _notificationsService.Alert(VehicleAdded, NotificationHeader);
                 DialogResult = true;
-                OnCancel();
+                Close();
             }
             catch (Exception e)
             {
