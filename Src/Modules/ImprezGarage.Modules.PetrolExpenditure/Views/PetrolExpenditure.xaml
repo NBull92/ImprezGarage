@@ -20,6 +20,11 @@
         </ResourceDictionary>
     </UserControl.Resources>
  
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
     <ListBox ItemsSource="{Binding FilteredExpenses}" HorizontalAlignment="Stretch"  
          VerticalAlignment="Stretch">
         <ListBox.ItemTemplate>
@@ -43,5 +48,13 @@
             </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>
-   
+        <TextBlock Grid.Row="1" Foreground="{StaticResource ImprezGarage.Main}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="14"
+                   Margin="0,5,0,5">
+            <Run Text="Total:"/>
+            <Run Text="{Binding ExpenseTotal}"/>
+        </TextBlock>
+    </Grid>
 </UserControl>

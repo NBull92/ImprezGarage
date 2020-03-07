@@ -40,6 +40,14 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _filteredExpenses, value);
         }
 
+        private string _expenseTotal;
+        public string ExpenseTotal
+        {
+            get => _expenseTotal;
+            set => SetProperty(ref _expenseTotal, value);
+        }
+
+
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
@@ -57,6 +65,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
             _expenses = new ObservableCollection<PetrolExpenseViewModel>();
             FilteredExpenses = new ObservableCollection<PetrolExpenseViewModel>();
+            ExpenseTotal = "£0.00";
         }
 
         private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
@@ -105,6 +114,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private void FilterExpenses()
         {
             FilteredExpenses.Clear();
+            ExpenseTotal = "£0.00";
 
             if (_expenses == null)
                 return;
@@ -112,6 +122,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             FilteredExpenses = new ObservableCollection<PetrolExpenseViewModel>(_expenses.Where(o => Convert.ToDateTime(o.DateEntered).Date >= _fromDate
                                                                                         && Convert.ToDateTime(o.DateEntered).Date <= _toDate)
                                                                                         .OrderBy(o => Convert.ToDateTime(o.DateEntered).Date));
+
+            ExpenseTotal = $"£{FilteredExpenses.Select(o => o.Amount).Sum()}";
         }
         #endregion
     }
