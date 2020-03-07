@@ -46,6 +46,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
         }
 
+        private void ResetParameters()
+        {
+            _expenses = new ObservableCollection<ChartData>();
+            _fromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            _toDate = DateTime.Now;
+        }
+
         private void OnFilteredDatesChanged(Tuple<DateTime, DateTime> updatedDates)
         {
             _fromDate = updatedDates.Item1;
@@ -53,12 +60,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             FilterExpenses();
         }
 
-        private void ResetParameters()
-        {
-            _expenses = new ObservableCollection<ChartData>();
-            _fromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            _toDate = DateTime.Now;
-        }
 
         private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
@@ -72,10 +73,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
             _selectedVehicle = vehicle;
             GetSelectedVehiclePetrolExpenses();
+            FilterExpenses();
         }
 
         private void GetSelectedVehiclePetrolExpenses()
         {
+            _expenses.Clear();
+
             if (_selectedVehicle == null)
                 return;
 
@@ -92,8 +96,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                     Date = expense.DateEntered.Value.ToShortDateString()
                 });
             }
-
-            FilterExpenses();
         }
 
         private void FilterExpenses()

@@ -19,13 +19,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Attributes
         private readonly IDataService _dataService;
         private readonly IVehicleService _vehicleService;
-        private readonly ObservableCollection<PetrolExpenseViewModel> _expenses;
-        private string _label;
+        private ObservableCollection<PetrolExpenseViewModel> _expenses;
         private DateTime _fromDate;
         private DateTime _toDate;
         #endregion
 
         #region Properties
+        private string _label;
         public string Label
         {
             get => _label;
@@ -61,19 +61,27 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _dataService = dataService;
             _vehicleService = vehicleService;
 
+            ResetParameters();
+
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
+        }
 
+        private void ResetParameters()
+        {
             _expenses = new ObservableCollection<PetrolExpenseViewModel>();
             FilteredExpenses = new ObservableCollection<PetrolExpenseViewModel>();
             ExpenseTotal = "£0.00";
+            _fromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            _toDate = DateTime.Now;
         }
 
         private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
+            FilteredExpenses.Clear();
+            _expenses.Clear();
             if (vehicle == null)
             {
-                FilteredExpenses.Clear();
                 SelectedVehicle = null;
                 return;
             }
@@ -82,6 +90,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
             Label = _selectedVehicle.Make + " " + _selectedVehicle.Model;
             GetSelectedVehiclePetrolExpenses();
+            FilterExpenses();
         }
 
         private void OnFilteredDatesChanged(Tuple<DateTime, DateTime> updatedDates)
@@ -109,7 +118,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 viewModel.LoadInstance(expense);
                 _expenses.Add(viewModel);
             }
-
         }
 
         private void FilterExpenses()

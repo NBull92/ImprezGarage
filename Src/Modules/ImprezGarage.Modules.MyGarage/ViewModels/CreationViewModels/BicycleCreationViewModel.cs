@@ -3,8 +3,10 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Modules.MyGarage.ViewModels
+
+namespace ImprezGarage.Modules.MyGarage.ViewModels.CreationViewModels
 {
+
     public class BicycleCreationViewModel : VehicleCreationViewModel
     {
         public BicycleCreationViewModel()

@@ -3,10 +3,9 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Modules.MyGarage.ViewModels
+namespace ImprezGarage.Modules.MyGarage.ViewModels.CreationViewModels
 {
-    using ImprezGarage.Infrastructure.Model;
-    using ImprezGarage.Infrastructure.Services;
+    using Infrastructure.Model;
     using System;
 
     public class MotorbikeCreationViewModel : VehicleCreationViewModel
@@ -91,7 +90,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// Set the current insurance and tax date.
         /// Store the vehicle type also.
         /// </summary>
-        internal override void Setup(VehicleType vehicleType)
+        public override void Setup(VehicleType vehicleType)
         {
             VehicleType = vehicleType;
             InsuranceRenewalDate = DateTime.Now;
@@ -131,14 +130,74 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             }
         }
 
+        public override void SaveNew(Vehicle vehicle)
+        {
+            vehicle.Registration = Registration;
+            vehicle.HasInsurance = HasInsurance;
+            vehicle.HasValidTax = HasValidTax;
+
+            if (vehicle.HasInsurance)
+            {
+                vehicle.InsuranceRenewalDate = InsuranceRenewalDate;
+            }
+
+            if (vehicle.HasValidTax)
+            {
+                vehicle.TaxExpiryDate = TaxExpiryDate;
+            }
+            base.SaveNew(vehicle);
+        }
+
+        public override void Update(Vehicle vehicle)
+        {
+            vehicle.Registration = Registration;
+            vehicle.Make = Make;
+            vehicle.Model = Model;
+            vehicle.HasInsurance = HasInsurance;
+            vehicle.HasValidTax = HasValidTax;
+
+            if (HasValidTax)
+            {
+                vehicle.InsuranceRenewalDate = InsuranceRenewalDate;
+            }
+
+            if (HasValidTax)
+            {
+                vehicle.TaxExpiryDate = TaxExpiryDate;
+            }
+
+            base.Update(vehicle);
+        }
+
+        public override bool CanSave()
+        {
+            return !string.IsNullOrEmpty(Registration);
+        }
+
+        public override void EditInitialise(Vehicle vehicle)
+        {
+            Registration = Registration;
+            Make = Make;
+            Model = Model;
+            HasInsurance = Convert.ToBoolean(HasInsurance);
+            HasValidTax = Convert.ToBoolean(HasValidTax);
+            InsuranceRenewalDate = HasInsurance ? Convert.ToDateTime(InsuranceRenewalDate) : DateTime.Now;
+            TaxExpiryDate = HasValidTax ? Convert.ToDateTime(TaxExpiryDate) : DateTime.Now;
+        }
+
         /// <summary>
-        /// Reset all of the properties to empty and then call the parent's dispose fucntion.
+        /// Reset all of the properties to empty and then call the parent's dispose function.
         /// </summary>
-        public void CleanUp()
+        public override void CleanUp()
         {
             Registration = null;
-            TaxExpiryDate = new DateTime();
+            Make = null;
+            Model = null;
+            HasInsurance = false;
+            HasValidTax = false;
             InsuranceRenewalDate = new DateTime();
+            TaxExpiryDate = new DateTime();
+
             Dispose();
         }
         #endregion

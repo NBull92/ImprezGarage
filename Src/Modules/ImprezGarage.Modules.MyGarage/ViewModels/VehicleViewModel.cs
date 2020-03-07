@@ -3,11 +3,11 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Infrastructure.ViewModels
+namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
-    using Model;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
     using Prism.Mvvm;
-    using Services;
     using System;
     using System.Collections.Generic;
     using System.Windows;
@@ -27,51 +27,6 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// Store the injected notification service.
         /// </summary>
         private readonly INotificationsService _notificationsService;
-        
-        /// <summary>
-        /// Store the vehicle itself.
-        /// </summary>
-        private Vehicle _vehicle;
-
-        /// <summary>
-        /// Store the type of vehicle.
-        /// </summary>
-        private VehicleType _vehicleType;
-
-        /// <summary>
-        /// Store the date the vehicle was created.
-        /// </summary>
-        private DateTime _dateCreated;
-
-        /// <summary>
-        /// Store the date in which the vehicle was last modified.
-        /// </summary>
-        private DateTime _dateModified;
-
-        /// <summary>
-        /// Store the make of the vehicle.
-        /// </summary>
-        private string _make;
-
-        /// <summary>
-        /// Store the model of the vehicle.
-        /// </summary>
-        private string _model;
-
-        /// <summary>
-        /// Store the registration of the vehicle.
-        /// </summary>
-        private string _registration;
-
-        /// <summary>
-        /// Store the tax renewal date of the vehicle.
-        /// </summary>
-        private DateTime? _taxExpiryDate;
-
-        /// <summary>
-        /// Store the insurance renewal date of the vehicle.
-        /// </summary>
-        private DateTime? _insuranceRenewalDate;
         #endregion
 
         #region Properties
@@ -79,6 +34,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the vehicle itself.
         /// </summary>
+        private Vehicle _vehicle;
         public Vehicle Vehicle
         {
             get => _vehicle;
@@ -88,6 +44,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the type of vehicle.
         /// </summary>
+        private VehicleType _vehicleType;
         public VehicleType VehicleType
         {
             get => _vehicleType;
@@ -97,6 +54,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the date the vehicle was created.
         /// </summary>
+        private DateTime _dateCreated;
         public DateTime DateCreated
         {
             get => _dateCreated;
@@ -106,6 +64,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the date in which the vehicle was last modified.
         /// </summary>
+        private DateTime _dateModified;
         public DateTime DateModified
         {
             get => _dateModified;
@@ -115,6 +74,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the make of the vehicle.
         /// </summary>
+        private string _make;
         public string Make
         {
             get => _make;
@@ -124,6 +84,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the model of the vehicle.
         /// </summary>
+        private string _model;
         public string Model
         {
             get => _model;
@@ -133,6 +94,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the registration of the vehicle.
         /// </summary>
+        private string _registration;
         public string Registration
         {
             get => _registration;
@@ -142,6 +104,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the tax renewal date of the vehicle.
         /// </summary>
+        private DateTime? _taxExpiryDate;
         public DateTime? TaxExpiryDate
         {
             get => _taxExpiryDate;
@@ -151,12 +114,12 @@ namespace ImprezGarage.Infrastructure.ViewModels
         /// <summary>
         /// Store the insurance renewal date of the vehicle.
         /// </summary>
+        private DateTime? _insuranceRenewalDate;
         public DateTime? InsuranceRenewalDate
         {
             get => _insuranceRenewalDate;
             set => SetProperty(ref _insuranceRenewalDate, value);
         }
-
         #endregion
 
         #region Methods

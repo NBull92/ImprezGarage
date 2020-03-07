@@ -3,7 +3,7 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Modules.MyGarage.ViewModels
+namespace ImprezGarage.Modules.MyGarage.ViewModels.CreationViewModels
 {
     using Infrastructure.Model;
     using Prism.Mvvm;
@@ -83,7 +83,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     case "VehicleType":
                         if (_vehicleType == null)
                         {
-                            error = "There is no associated vechile type selected.";
+                            error = "There is no associated vehicle type selected.";
                         }
                         break;
                     case "Model":
@@ -111,11 +111,36 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
         }
 
-        internal virtual void Setup(VehicleType vehicleType)
+        public virtual void Setup(VehicleType vehicleType)
         {
 
         }
-             
+
+        public virtual void SaveNew(Vehicle newVehicle)
+        {
+            
+        }
+
+        public virtual void Update(Vehicle vehicle)
+        {
+            
+        }
+
+        public virtual bool CanSave()
+        {
+            return true;
+        }
+
+        public virtual void EditInitialise(Vehicle vehicle)
+        {
+            
+        }
+
+        public virtual void CleanUp()
+        {
+            
+        }
+
         public void Dispose()
         {
             VehicleType = null;
@@ -125,5 +150,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             DateModified = new DateTime();
         }
         #endregion
+
     }
 }   //ImprezGarage.Modules.MyGarage.ViewModels namespace 

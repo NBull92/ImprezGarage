@@ -7,6 +7,7 @@
                      xmlns:views="clr-namespace:ImprezGarage.Modules.MyGarage.Views"
                      xmlns:infra="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
                      xmlns:prism="http://prismlibrary.com/"
+                     xmlns:creationViewModels="clr-namespace:ImprezGarage.Modules.MyGarage.ViewModels.CreationViewModels"
                      mc:Ignorable="d"
                      HorizontalAlignment="Left"
                      Width="{Binding Width, Mode=TwoWay}"
@@ -18,13 +19,13 @@
                 <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <infra:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            <DataTemplate DataType="{x:Type vm:CarCreationViewModel}">
+            <DataTemplate DataType="{x:Type creationViewModels:CarCreationViewModel}">
                 <views:CarCreation />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:MotorbikeCreationViewModel}">
+            <DataTemplate DataType="{x:Type creationViewModels:MotorbikeCreationViewModel}">
                 <views:MotorbikeCreation />
             </DataTemplate>
-            <DataTemplate DataType="{x:Type vm:BicycleCreationViewModel}">
+            <DataTemplate DataType="{x:Type creationViewModels:BicycleCreationViewModel}">
                 <views:BicycleCreation />
             </DataTemplate>
         </ResourceDictionary>
@@ -66,14 +67,16 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="{Binding SaveContent}" Command="{Binding SaveCommand}" 
+            <Button Grid.Column="0" Content="{Binding SaveContent}" 
+                    Command="{Binding SaveCommand}" 
                     Height="28"
                     Width="127"
                     Margin="17, 30, 0, 30" 
                     Background="{StaticResource ImprezGarage.Grey}"
                     Foreground="White"
                     Style="{StaticResource RoundedRectangleButtonStyle}"/>
-            <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}"  
+            <Button Grid.Column="1" Content="Cancel" 
+                    Command="{Binding CancelCommand}"  
                     Height="28"
                     Width="127"
                     Margin="17, 30, 0, 30" 

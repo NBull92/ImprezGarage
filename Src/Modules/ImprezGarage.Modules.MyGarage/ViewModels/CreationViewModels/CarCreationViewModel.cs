@@ -3,9 +3,9 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-namespace ImprezGarage.Modules.MyGarage.ViewModels
+namespace ImprezGarage.Modules.MyGarage.ViewModels.CreationViewModels
 {
-    using ImprezGarage.Infrastructure.Model;
+    using Infrastructure.Model;
     using System;
 
     public class CarCreationViewModel : VehicleCreationViewModel
@@ -136,7 +136,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
 
         /// <summary>
-        /// The milage the car had when the user bought the car.
+        /// The Mileage the car had when the user bought the car.
         /// </summary>
         public int MileageOnPurchase
         {
@@ -145,7 +145,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
 
         /// <summary>
-        /// Current milage of the car.
+        /// Current Mileage of the car.
         /// </summary>
         public int CurrentMileage
         {
@@ -160,7 +160,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// Set the current insurance and tax date.
         /// Store the vehicle type also.
         /// </summary>
-        internal override void Setup(VehicleType vehicleType)
+        public override void Setup(VehicleType vehicleType)
         {
             VehicleType = vehicleType;
             InsuranceRenewalDate = DateTime.Now;
@@ -168,14 +168,100 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             base.Setup(vehicleType);
         }
 
+        public override void SaveNew(Vehicle vehicle)
+        {
+            vehicle.Registration = Registration;
+            vehicle.HasInsurance = HasInsurance;
+            vehicle.HasValidTax = HasValidTax;
+            vehicle.HasMot = HasMot;
+            vehicle.CurrentMileage = CurrentMileage;
+            vehicle.MileageOnPurchase = MileageOnPurchase;
+            vehicle.IsManual = IsManual;
+
+            if (vehicle.HasInsurance)
+            {
+                vehicle.InsuranceRenewalDate = InsuranceRenewalDate;
+            }
+
+
+            if (vehicle.HasValidTax)
+            {
+                vehicle.TaxExpiryDate = TaxExpiryDate;
+            }
+
+            base.SaveNew(vehicle);
+        }
+
+        public override void Update(Vehicle vehicle)
+        {
+            vehicle.Registration = Registration;
+            vehicle.Make = Make;
+            vehicle.Model = Model;
+            vehicle.HasInsurance = HasInsurance;
+            vehicle.HasValidTax = HasValidTax;
+            vehicle.HasMot = HasMot;
+            vehicle.CurrentMileage = CurrentMileage;
+            vehicle.MileageOnPurchase = MileageOnPurchase;
+            vehicle.IsManual = IsManual;
+
+            if (HasValidTax)
+            {
+                vehicle.InsuranceRenewalDate = InsuranceRenewalDate;
+            }
+
+            if (HasValidTax)
+            {
+                vehicle.TaxExpiryDate = TaxExpiryDate;
+            }
+
+            if (vehicle.HasMot)
+            {
+                vehicle.MotExpiryDate = MotExpiryDate;
+            }
+
+            base.Update(vehicle);
+        }
+
+        public override bool CanSave()
+        {
+            return !string.IsNullOrEmpty(Registration);
+        }
+
+        public override void EditInitialise(Vehicle vehicle)
+        {
+            ShowEditView = true;
+            Registration = vehicle.Registration;
+            Make = vehicle.Make;
+            Model = vehicle.Model;
+            HasInsurance = Convert.ToBoolean(vehicle.HasInsurance);
+            HasValidTax = Convert.ToBoolean(vehicle.HasValidTax);
+            HasMot = Convert.ToBoolean(vehicle.HasMot);
+            InsuranceRenewalDate = vehicle.HasInsurance ? Convert.ToDateTime(vehicle.InsuranceRenewalDate) : DateTime.Now;
+            TaxExpiryDate = vehicle.HasValidTax ? Convert.ToDateTime(vehicle.TaxExpiryDate) : DateTime.Now;
+            MotExpiryDate = vehicle.HasMot ? Convert.ToDateTime(vehicle.MotExpiryDate) : DateTime.Now;
+            CurrentMileage = Convert.ToInt32(vehicle.CurrentMileage);
+            MileageOnPurchase = Convert.ToInt32(vehicle.MileageOnPurchase);
+            IsManual = Convert.ToBoolean(vehicle.IsManual);
+        }
+
         /// <summary>
-        /// Reset all of the properties to empty and then call the parent's dispose fucntion.
+        /// Reset all of the properties to empty and then call the parent's dispose function.
         /// </summary>
-        public void CleanUp()
+        public override void CleanUp()
         {
             Registration = null;
-            TaxExpiryDate = new DateTime();
+            Make = null;
+            Model = null;
+            HasInsurance = false;
+            HasValidTax = false;
+            HasMot = false;
             InsuranceRenewalDate = new DateTime();
+            TaxExpiryDate = new DateTime();
+            MotExpiryDate = new DateTime();
+            CurrentMileage = 0;
+            MileageOnPurchase = 0;
+            IsManual = false;
+
             Dispose();
         }
         #endregion

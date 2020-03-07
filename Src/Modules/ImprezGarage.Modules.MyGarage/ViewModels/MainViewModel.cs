@@ -88,8 +88,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             var vehicleControl = new ManageVehicle();
             var window = new MetroWindow
             {
-                Height = 340,
-                Width = 387,
+                Height = 350,
+                Width = 305,
                 ResizeMode = ResizeMode.NoResize,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Content = vehicleControl
