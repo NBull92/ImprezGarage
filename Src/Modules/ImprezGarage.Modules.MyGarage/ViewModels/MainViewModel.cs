@@ -154,7 +154,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 await _dataService.GetVehicleTypesAsync().ContinueWith(task =>
                 {
-                    //TODO - do the query.Subscribe bit here Reactive
                     foreach (var vehicle in vehicles.Where(o => o.UserId == _userId))
                     {
                         var viewModel = new VehicleViewModel(_dataService, _notificationsService);
@@ -164,6 +163,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                             Vehicles.Add(viewModel);
                         });
                     }
+
+                    SelectedVehicle = Vehicles.FirstOrDefault();
                 }, TaskContinuationOptions.OnlyOnRanToCompletion);
             }
             catch (Exception e)
