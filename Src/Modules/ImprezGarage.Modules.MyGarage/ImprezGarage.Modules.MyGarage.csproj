@@ -87,17 +87,16 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="VehicleService.cs" />
-    <Compile Include="ViewModels\AddVehicleViewModel.cs" />
+    <Compile Include="ViewModels\ManageVehicleViewModel.cs" />
     <Compile Include="ViewModels\BicycleCreationViewModel.cs" />
     <Compile Include="ViewModels\CarCreationViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\ManageVehicleViewModel.cs" />
     <Compile Include="ViewModels\MotorbikeCreationViewModel.cs" />
     <Compile Include="ViewModels\ReportRepairViewModel.cs" />
     <Compile Include="ViewModels\VehicleCreationViewModel.cs" />
     <Compile Include="ViewModels\VehicleHeaderViewModel.cs" />
-    <Compile Include="Views\AddVehicle.xaml.cs">
-      <DependentUpon>AddVehicle.xaml</DependentUpon>
+    <Compile Include="Views\ManageVehicle.xaml.cs">
+      <DependentUpon>ManageVehicle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BicycleCreation.xaml.cs">
       <DependentUpon>BicycleCreation.xaml</DependentUpon>
@@ -107,9 +106,6 @@
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ManageVehicleView.xaml.cs">
-      <DependentUpon>ManageVehicleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MotorbikeCreation.xaml.cs">
       <DependentUpon>MotorbikeCreation.xaml</DependentUpon>
@@ -131,7 +127,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\AddVehicle.xaml">
+    <Page Include="Views\ManageVehicle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -144,10 +140,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ManageVehicleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

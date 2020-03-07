@@ -26,6 +26,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IVehicleService _vehicleService;
         private static int _selectedVehicleId;
         private MaintenanceCheck _maintenanceCheck;
         private const string CheckCompleted = "Maintenance check completed!";
@@ -70,13 +71,14 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         
         #region Methods
         public PerformNewCheckViewModel(IDataService dataService, INotificationsService notificationsService, IRegionManager regionManager,
-            ILoggerService loggerService, IEventAggregator eventAggregator)
+            ILoggerService loggerService, IEventAggregator eventAggregator, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
             _regionManager = regionManager;
             _loggerService = loggerService;
             _eventAggregator = eventAggregator;
+            _vehicleService = vehicleService;
 
             SubmitText = "Submit";
             SubmitCommand = new DelegateCommand(SubmitExecute);
@@ -278,13 +280,10 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 }
             }
 
-            //store the passed through vehicle Id.
-            var selectedVehicleId = navigationContext.Parameters["SelectedVehicleId"];
-
-            //check it is not null.
-            if (selectedVehicleId != null)
+            var vehicle = _vehicleService.GetSelectedVehicle();
+            if (vehicle != null)
             {
-                _selectedVehicleId = Convert.ToInt32(selectedVehicleId);
+                _selectedVehicleId = vehicle.Id;
             }
         }
 

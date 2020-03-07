@@ -5,13 +5,11 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using LiveCharts;
     using LiveCharts.Defaults;
     using LiveCharts.Wpf;
-    using Microsoft.Practices.ServiceLocation;
     using Prism.Events;
     using Prism.Mvvm;
     using System;
@@ -24,7 +22,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private readonly IDataService _dataService;
         private readonly IVehicleService _vehicleService;
         private ObservableCollection<ChartData> _expenses;
-        private VehicleViewModel _selectedVehicle;
+        private Vehicle _selectedVehicle;
         private DateTime _fromDate;
         private DateTime _toDate;
 
@@ -72,9 +70,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 return;
             }
 
-            var model = new VehicleViewModel(_dataService, ServiceLocator.Current.GetInstance<INotificationsService>());
-            model.LoadInstance(vehicle);
-            _selectedVehicle = model;
+            _selectedVehicle = vehicle;
             GetSelectedVehiclePetrolExpenses();
         }
 
@@ -83,7 +79,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             if (_selectedVehicle == null)
                 return;
 
-            var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
+            var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Id);
 
             if (expenses?.Result == null)
                 return;

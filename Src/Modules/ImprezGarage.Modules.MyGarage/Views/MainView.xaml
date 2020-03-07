@@ -31,7 +31,7 @@
                             Margin="17, 30, 0, 30" 
                             Style="{DynamicResource RoundedRectangleButtonStyle}"
                             Command="{Binding AddNewVehicleCommand}" 
-                            CommandParameter="{x:Type views:AddVehicle}"/>
+                            CommandParameter="{x:Type views:ManageVehicle}"/>
 
             <ListBox Grid.Row="1" Margin="0,8,0,0" 
                      ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}"

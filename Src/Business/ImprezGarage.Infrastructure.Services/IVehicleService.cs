@@ -9,5 +9,6 @@ namespace ImprezGarage.Infrastructure.Services
         event EventHandler<Vehicle> SelectedVehicleChanged;
         void RaiseSelectedVehicleChanged(Vehicle vehicle);
         void ClearSelectedVehicle();
+        Vehicle GetSelectedVehicle();
     }
 }

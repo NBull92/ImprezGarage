@@ -8,12 +8,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using Infrastructure;
     using Infrastructure.Services;
     using Infrastructure.ViewModels;
-    using Microsoft.Practices.ServiceLocation;
-    using Microsoft.Practices.Unity;
+    using MahApps.Metro.Controls;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
-    using Prism.Regions;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -26,28 +24,26 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     {
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IRegionManager _regionManager;
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
         private readonly IVehicleService _vehicleService;
-        private ObservableCollection<VehicleViewModel> _vehicles = new ObservableCollection<VehicleViewModel>();
-        private VehicleViewModel _selectedVehicle;
         private string _userId;
         #endregion
 
         #region Properties
+        private ObservableCollection<VehicleViewModel> _vehicles = new ObservableCollection<VehicleViewModel>();
         public ObservableCollection<VehicleViewModel> Vehicles
         {
             get => _vehicles;
             set => SetProperty(ref _vehicles, value);
         }
 
+        private VehicleViewModel _selectedVehicle;
         public VehicleViewModel SelectedVehicle
         {
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
         }
-        
 
         #region Commands
         public DelegateCommand AddNewVehicleCommand { get; set; }
@@ -56,11 +52,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
         
         #region Methods
-        public MainViewModel(IDataService dataService, IRegionManager regionManager, IEventAggregator eventAggregator, 
+        public MainViewModel(IDataService dataService, IEventAggregator eventAggregator, 
             INotificationsService notificationsService, ILoggerService loggerService, IVehicleService vehicleService)
         {
             _dataService = dataService;
-            _regionManager = regionManager;
             _notificationsService = notificationsService;
             _loggerService = loggerService;
             _vehicleService = vehicleService;
@@ -83,7 +78,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _vehicleService.ClearSelectedVehicle();
             }
-            RequestNavigationToPetrolExpenditureMainView();
         }
 
         /// <summary>
@@ -91,14 +85,26 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private void AddNewVehicleExecute()
         {
-            var unityContainer = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            var model = new AddVehicleViewModel(_dataService, unityContainer, _notificationsService, _loggerService);
+            var vehicleControl = new ManageVehicle();
+            var window = new MetroWindow
+            {
+                Height = 340,
+                Width = 387,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Content = vehicleControl
+            };
 
-            var view = new AddVehicle(model);
-            view.ShowDialog();
-
-            if (model.DialogResult)
-                LoadVehicles();
+            if (vehicleControl.DataContext is ManageVehicleViewModel model)
+            {
+                model.CloseRequest += (sender, e) => window.Close();
+                window.Closed += (s, a) =>
+                {
+                    if (model.DialogResult)
+                        LoadVehicles();
+                };
+            }
+            window.ShowDialog();
         }
         #endregion
 
@@ -138,17 +144,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 _vehicleService.ClearSelectedVehicle();
             }
         }
-
-        private void OnEditVehicle(VehicleViewModel vehicle)
-        {
-            var unityContainer = ServiceLocator.Current.GetInstance<IUnityContainer>();
-            var model = new AddVehicleViewModel(_dataService, unityContainer, _notificationsService, _loggerService, vehicle);
-            var view = new AddVehicle(model);
-            view.ShowDialog();
-
-            if (model.DialogResult)
-                OnRefresh();
-        }
         #endregion
 
         /// <summary>
@@ -156,7 +151,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         public async void LoadVehicles()
         {
-            Vehicles.Clear();;
+            Vehicles.Clear();
 
             var vehicles = await _dataService.GetVehicles(true);
 
@@ -184,25 +179,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _loggerService.LogException(e);
             }
-        }
-
-        /// <summary>
-        /// This function will request that the main view of the petrol expenditure module is navigated to in the 'PetrolRegion'.
-        /// It will also pass through the selected vehicle to that view also.
-        /// </summary>
-        private void RequestNavigationToPetrolExpenditureMainView()
-        {
-            //check if vehicle was not selected and exit this function.
-            if (SelectedVehicle == null)
-                return;
-
-            //create navigation parameters using the selected vehicle.
-            var parameters = new NavigationParameters
-            {
-                { "SelectedVehicle", SelectedVehicle}
-            };
-
-            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PetrolExpenditure.Views.Main).FullName + parameters);
         }
         #endregion
     }

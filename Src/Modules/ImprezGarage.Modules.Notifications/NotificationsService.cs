@@ -5,12 +5,12 @@
 
 namespace ImprezGarage.Modules.Notifications
 {
+    using DataModel;
     using Infrastructure.Services;
-    using ViewModels;
-    using Views;
     using System;
     using System.Linq;
-    using ImprezGarage.Modules.Notifications.DataModel;
+    using ViewModels;
+    using Views;
 
     internal class NotificationsService : INotificationsService
     {

@@ -7,26 +7,22 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Infrastructure.ViewModels;
-    using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
     using System;
     using Views;
 
-
     public class MainViewModel : BindableBase, IDisposable
     {
+        #region Attributes
         private readonly IEventAggregator _eventAggregator;
         private readonly IVehicleService _vehicleService;
-
-        #region Attributes
-        private VehicleViewModel _selectedVehicle;
         #endregion
 
         #region Properties
-        public VehicleViewModel SelectedVehicle
+        private Vehicle _selectedVehicle;
+        public Vehicle SelectedVehicle
         {
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
@@ -75,7 +71,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             var addExpense = new AddPetrolExpenditure();
             if (addExpense.DataContext is AddPetrolExpenditureViewModel vm)
-                vm.VehicleId = _selectedVehicle.Vehicle.Id;
+                vm.VehicleId = _selectedVehicle.Id;
             addExpense.ShowDialog();
         }
         #endregion
@@ -94,9 +90,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 return;
             }
 
-            var model = new VehicleViewModel(ServiceLocator.Current.GetInstance<IDataService>(), ServiceLocator.Current.GetInstance<INotificationsService>());
-            model.LoadInstance(vehicle);
-            SelectedVehicle = model;
+            SelectedVehicle = vehicle;
         }
         #endregion
 

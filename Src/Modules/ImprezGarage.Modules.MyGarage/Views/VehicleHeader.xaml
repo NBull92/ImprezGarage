@@ -56,11 +56,24 @@
                         Width="30"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
+                        Margin="12,0,0,0"
                         ToolTip="Manage Vehicle"
                         Command="{Binding EditVehicle}"
                         Background="{StaticResource ImprezGarage.Grey}"
                         Foreground="{StaticResource ImprezGarage.Grey2}"
                         Style="{DynamicResource RoundedSquareButtonStyle}"/>
+
+        <Button DockPanel.Dock="Right"
+                Content="V"
+                Height="30"
+                Width="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                ToolTip="View Petrol Expenditure"
+                Command="{Binding ViewPetrolExpenditure}"
+                Background="{StaticResource ImprezGarage.Grey}"
+                Foreground="{StaticResource ImprezGarage.Grey2}"
+                Style="{DynamicResource RoundedSquareButtonStyle}"/>
 
     </DockPanel>
 </UserControl>

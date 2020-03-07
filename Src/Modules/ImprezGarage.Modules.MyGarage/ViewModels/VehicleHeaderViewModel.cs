@@ -70,6 +70,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         public DelegateCommand DeleteVehicle { get; set; }
         public DelegateCommand Repairs { get; }
+        public DelegateCommand ViewPetrolExpenditure { get; }
         #endregion
 
         public VehicleHeaderViewModel(IDataService dataService, INotificationsService notificationsService,
@@ -86,6 +87,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             EditVehicle = new DelegateCommand(EditVehicleExecute);
             DeleteVehicle = new DelegateCommand(DeleteVehicleExecute);
             Repairs = new DelegateCommand(OnRepairs);
+            ViewPetrolExpenditure = new DelegateCommand(OnViewPetrolExpenditure);
         }
 
         private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
@@ -129,8 +131,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         public void EditVehicleExecute()
         {
-            //_eventAggregator.GetEvent<Events.EditVehicleEvent>().Publish(SelectedVehicle);
-            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(ManageVehicleView).FullName);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(ManageVehicle).FullName);
+        }
+
+        private void OnViewPetrolExpenditure()
+        {
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PetrolExpenditure.Views.Main).FullName);
         }
 
         private void OnRepairs()

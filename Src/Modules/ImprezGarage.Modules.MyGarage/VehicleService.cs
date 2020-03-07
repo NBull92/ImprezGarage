@@ -9,19 +9,28 @@ namespace ImprezGarage.Modules.MyGarage
 
     public class VehicleService : IVehicleService
     {
+        private Vehicle _currentVehicle;
+        
         public event EventHandler<Vehicle> SelectedVehicleChanged = delegate { };
 
         public void RaiseSelectedVehicleChanged(Vehicle vehicle)
         {
-            OnRaiseSelectedVehicleChanged(vehicle);
+            _currentVehicle = vehicle;
+            OnRaiseSelectedVehicleChanged();
         }
 
         public void ClearSelectedVehicle()
         {
+            _currentVehicle = null;
             OnRaiseSelectedVehicleChanged();
         }
 
-        private void OnRaiseSelectedVehicleChanged(Vehicle vehicle = null)
+        public Vehicle GetSelectedVehicle()
+        {
+            return _currentVehicle;
+        }
+
+        private void OnRaiseSelectedVehicleChanged()
         {
             //Create list of exception
             var exceptions = new List<Exception>();
@@ -32,7 +41,7 @@ namespace ImprezGarage.Modules.MyGarage
                 try
                 {
                     //pass sender object and eventArgs while
-                    handler.DynamicInvoke(this, vehicle);
+                    handler.DynamicInvoke(this, _currentVehicle);
                 }
                 catch (Exception e)
                 {

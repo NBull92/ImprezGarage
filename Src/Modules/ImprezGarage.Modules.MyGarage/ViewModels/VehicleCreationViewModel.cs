@@ -26,7 +26,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         #region Properties
-        internal AddVehicleViewModel AddVehicleVm { get; set; }
+        internal ManageVehicleViewModel AddVehicleVm { get; set; }
 
         public int Id { get; set; }
 

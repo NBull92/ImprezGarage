@@ -8,7 +8,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Infrastructure.ViewModels;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
     using Prism.Mvvm;
@@ -30,17 +29,17 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private const string StartMaintenanceCheckError = "An error occured when attempting to start a maintenance check.";
         private const string NotificationHeader = "Alert!";
 
-        private VehicleViewModel _selectedVehicle;
-        private ObservableCollection<MaintenanceCheckViewModel> _maintainanceChecks;
         #endregion
 
         #region Properties
-        public VehicleViewModel SelectedVehicle
+        private Vehicle _selectedVehicle;
+        public Vehicle SelectedVehicle
         {
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
         }
 
+        private ObservableCollection<MaintenanceCheckViewModel> _maintainanceChecks;
         public ObservableCollection<MaintenanceCheckViewModel> MaintainanceChecks
         {
             get => _maintainanceChecks;
@@ -75,7 +74,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             if (SelectedVehicle == null)
                 return;
 
-            var performedCheck = _dataService.GetVehicleMaintenanceChecks(SelectedVehicle.Vehicle.Id);
+            var performedCheck = _dataService.GetVehicleMaintenanceChecks(SelectedVehicle.Id);
 
             if (performedCheck == null)
                 return;
@@ -97,9 +96,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 return;
             }
 
-            var model = new VehicleViewModel(_dataService, _notificationsService);
-            model.LoadInstance(vehicle);
-            SelectedVehicle = model;
+            SelectedVehicle = vehicle;
             GetSelectedVehicleMaintenanceChecks();
         }
         #endregion
@@ -121,7 +118,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                     var parameters = new NavigationParameters
                     {
                         { "SelectedTypeId", viewModel.SelectedMaintenanceCheckType.Id },
-                        { "SelectedVehicleId", SelectedVehicle.Vehicle.Id}
                     };
 
                     _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(PerformNewCheck).FullName + parameters);

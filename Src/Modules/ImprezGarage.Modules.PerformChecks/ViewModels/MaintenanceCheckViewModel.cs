@@ -3,10 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
@@ -28,32 +26,31 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
         private const string DeleteMaintenanceCheck = "Are you sure you wish to delete this maintenance check?";
         private const string DeletedSuccessfully = "Maintenance check deleted successfuly!";
-
-        private int _id;
-        private VehicleViewModel _selectedVehicle;
-        private MaintenanceCheckType _maintenanceCheckType;
-        private DateTime _datePerformed;
         #endregion
 
         #region Properties
+        private int _id;
         public int Id
         {
             get => _id;
             set => SetProperty(ref _id, value);
         }
 
-        public VehicleViewModel SelectedVehicle
+        private Vehicle _selectedVehicle;
+        public Vehicle SelectedVehicle
         {
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
         }
 
+        private MaintenanceCheckType _maintenanceCheckType;
         public MaintenanceCheckType MaintenanceCheckType
         {
             get => _maintenanceCheckType;
             set => SetProperty(ref _maintenanceCheckType, value);
         }
 
+        private DateTime _datePerformed;
         public DateTime DatePerformed
         {
             get => _datePerformed;
@@ -95,7 +92,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 _notificationsService.Alert(DeletedSuccessfully);
                 if (SelectedVehicle != null)
                 {
-                    _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle.Vehicle);
+                    _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle);
                 }
                 else
                 {
@@ -128,14 +125,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             var parameters = new NavigationParameters
             {
                 { "MaintenanceCheckId", Id },
-                { "SelectedVehicleId", SelectedVehicle.Vehicle.Id},
                 { "IsEditMode", true }
             };
 
             _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(PerformNewCheck).FullName + parameters);
         }
 
-        internal void LoadInstance(MaintenanceCheck check, VehicleViewModel selectedVehicle)
+        internal void LoadInstance(MaintenanceCheck check, Vehicle selectedVehicle)
         {
             Id = check.Id;
 

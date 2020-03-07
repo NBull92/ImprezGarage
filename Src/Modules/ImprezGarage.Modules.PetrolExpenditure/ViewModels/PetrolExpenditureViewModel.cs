@@ -3,13 +3,10 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
-    using ImprezGarage.Infrastructure.ViewModels;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Events;
     using Prism.Mvvm;
@@ -22,8 +19,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Attributes
         private readonly IDataService _dataService;
         private readonly IVehicleService _vehicleService;
-        private ObservableCollection<PetrolExpenseViewModel> _expenses;
-        private VehicleViewModel _selectedVehicle;
+        private readonly ObservableCollection<PetrolExpenseViewModel> _expenses;
         private string _label;
         private DateTime _fromDate;
         private DateTime _toDate;
@@ -50,8 +46,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _expenseTotal, value);
         }
 
-
-        public VehicleViewModel SelectedVehicle
+        private Vehicle _selectedVehicle;
+        public Vehicle SelectedVehicle
         {
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
@@ -82,10 +78,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 return;
             }
 
-
-            var model = new VehicleViewModel(_dataService, ServiceLocator.Current.GetInstance<INotificationsService>());
-            model.LoadInstance(vehicle);
-            SelectedVehicle = model;
+            SelectedVehicle = vehicle;
 
             Label = _selectedVehicle.Make + " " + _selectedVehicle.Model;
             GetSelectedVehiclePetrolExpenses();
@@ -105,7 +98,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             if (_selectedVehicle == null)
                 return;
 
-            var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
+            var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Id);
 
             if (expenses?.Result == null)
                 return;
