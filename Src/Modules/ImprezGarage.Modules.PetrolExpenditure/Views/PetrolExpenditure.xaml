@@ -30,7 +30,7 @@
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Amount, StringFormat='c'}" 
+                        <TextBlock Text="{Binding Amount, StringFormat='{}{0:C}', ConverterCulture='en-GB'}" 
                                Margin="5" VerticalAlignment="Center" Width="45"/>
                     <TextBlock  Text="{Binding DateEntered, StringFormat=D}" 
                                 Margin="5" VerticalAlignment="Center" Width="160"/>
@@ -54,7 +54,7 @@
                    FontSize="14"
                    Margin="0,5,0,5">
             <Run Text="Total:"/>
-            <Run Text="{Binding ExpenseTotal}"/>
+            <Run Text="{Binding ExpenseTotal, StringFormat='{}{0:C}', ConverterCulture='en-GB'}"/>
         </TextBlock>
     </Grid>
 </UserControl>

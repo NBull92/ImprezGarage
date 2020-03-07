@@ -39,8 +39,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _filteredExpenses, value);
         }
 
-        private string _expenseTotal;
-        public string ExpenseTotal
+        private double _expenseTotal;
+        public double ExpenseTotal
         {
             get => _expenseTotal;
             set => SetProperty(ref _expenseTotal, value);
@@ -71,7 +71,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _expenses = new ObservableCollection<PetrolExpenseViewModel>();
             FilteredExpenses = new ObservableCollection<PetrolExpenseViewModel>();
-            ExpenseTotal = "£0.00";
+            ExpenseTotal = 0.00;
             _fromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             _toDate = DateTime.Now;
         }
@@ -123,7 +123,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         private void FilterExpenses()
         {
             FilteredExpenses.Clear();
-            ExpenseTotal = "£0.00";
+            ExpenseTotal = 0.00;
 
             if (_expenses == null)
                 return;
@@ -132,7 +132,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                                                                                         && Convert.ToDateTime(o.DateEntered).Date <= _toDate)
                                                                                         .OrderBy(o => Convert.ToDateTime(o.DateEntered).Date));
 
-            ExpenseTotal = $"£{FilteredExpenses.Select(o => o.Amount).Sum()}";
+            ExpenseTotal = FilteredExpenses.Select(o => o.Amount).Sum();
         }
         #endregion
 
