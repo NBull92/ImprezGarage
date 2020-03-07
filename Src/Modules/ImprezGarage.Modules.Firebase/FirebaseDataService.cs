@@ -1,15 +1,14 @@
 ﻿
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.Firebase
 {
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    class FirebaseDataService : IDataService
+    internal class FirebaseDataService : IDataService
     {
         #region Attributes
         /// <summary>

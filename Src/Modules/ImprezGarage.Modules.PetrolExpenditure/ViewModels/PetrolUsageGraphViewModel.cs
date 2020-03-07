@@ -5,22 +5,24 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure;
-    using Infrastructure.Services;
     using ImprezGarage.Infrastructure.ViewModels;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
     using LiveCharts;
     using LiveCharts.Defaults;
     using LiveCharts.Wpf;
+    using Microsoft.Practices.ServiceLocation;
     using Prism.Events;
     using Prism.Mvvm;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    public class PetrolUsageGraphViewModel : BindableBase
+    public class PetrolUsageGraphViewModel : BindableBase, IDisposable
     {
         #region Attributes
         private readonly IDataService _dataService;
+        private readonly IVehicleService _vehicleService;
         private ObservableCollection<ChartData> _expenses;
         private VehicleViewModel _selectedVehicle;
         private DateTime _fromDate;
@@ -34,14 +36,16 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #endregion
 
         #region Methods
-        public PetrolUsageGraphViewModel(IDataService dataService, IEventAggregator eventAggregator)
+        public PetrolUsageGraphViewModel(IDataService dataService, IEventAggregator eventAggregator, IVehicleService vehicleService)
         {
             SeriesCollection = new SeriesCollection();
             _dataService = dataService;
-            
+            _vehicleService = vehicleService;
+
             ResetParameters();
 
-            eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
         }
 
@@ -59,10 +63,19 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _toDate = DateTime.Now;
         }
 
-        private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
             ResetParameters();
-            _selectedVehicle = vehicleViewModel;
+
+            if (vehicle == null)
+            {
+                _selectedVehicle = null;
+                return;
+            }
+
+            var model = new VehicleViewModel(_dataService, ServiceLocator.Current.GetInstance<INotificationsService>());
+            model.LoadInstance(vehicle);
+            _selectedVehicle = model;
             GetSelectedVehiclePetrolExpenses();
         }
 
@@ -109,5 +122,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             }
         }
         #endregion
+
+        public void Dispose()
+        {
+            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+        }
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

@@ -7,7 +7,7 @@ namespace ImprezGarage.Infrastructure
 {
     using Prism.Events;
     using System;
-    using ViewModels;
+    //using ViewModels;
 
     /// <summary>
     /// Events that are published and subscribe to through the different modules.
@@ -18,7 +18,7 @@ namespace ImprezGarage.Infrastructure
         /// <summary>
         /// Event for when a vehicle is selected by the user.
         /// </summary>
-        public class SelectVehicleEvent : PubSubEvent<VehicleViewModel> { }
+        //public class SelectVehicleEvent : PubSubEvent<VehicleViewModel> { }
 
         /// <summary>
         /// Event for when the status has been updated for the status bar.
@@ -28,7 +28,7 @@ namespace ImprezGarage.Infrastructure
         /// <summary>
         /// Event for when a vehicle is being edited.
         /// </summary>
-        public class EditVehicleEvent : PubSubEvent<VehicleViewModel> { }
+        //public class EditVehicleEvent : PubSubEvent<VehicleViewModel> { }
 
         /// <summary>
         /// Event for when the user requests to refresh all of the current data.

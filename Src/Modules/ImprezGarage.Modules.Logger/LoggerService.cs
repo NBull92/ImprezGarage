@@ -18,7 +18,7 @@ namespace ImprezGarage.Modules.Logger
     /// A class that implements the concrete functions of the logger interface.
     /// This is where all of the functionality will be implemented.
     /// </summary>
-    public class LoggerService : ILoggerService
+    internal class LoggerService : ILoggerService
     {
         #region Attributes
         /// <summary>

@@ -3,6 +3,9 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Services;
+using ImprezGarage.Modules.MyGarage;
+
 namespace ImprezGarage
 {
     using Microsoft.Practices.Unity;
@@ -35,7 +38,7 @@ namespace ImprezGarage
         protected override void ConfigureContainer()
         {
             //register the interface to the container
-            //Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IVehicleService, VehicleService>(new ContainerControlledLifetimeManager());
 
             base.ConfigureContainer();
         }

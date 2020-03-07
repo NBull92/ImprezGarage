@@ -246,6 +246,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj">
+      <Project>{6db36d85-2a15-4003-a52e-33cd08171c34}</Project>
+      <Name>ImprezGarage.Infrastructure.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure\ImprezGarage.Infrastructure.csproj">
       <Project>{4703d4d1-0c8c-4ab2-9058-f8dc87d60c61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>

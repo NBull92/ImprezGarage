@@ -1,17 +1,19 @@
 ﻿
-using System;
-using ImprezGarage.Infrastructure.Model;
-using ImprezGarage.Infrastructure.Services;
-
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using Infrastructure;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
     using Infrastructure.ViewModels;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
+    using Prism.Regions;
+    using System;
+    using Views;
 
-    public class VehicleHeaderViewModel : BindableBase
+
+    public class VehicleHeaderViewModel : BindableBase, IDisposable
     {    /// <summary>
         /// Store the injected event aggregator.
         /// </summary>
@@ -31,6 +33,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// Store the injected logger service.
         /// </summary>
         private readonly ILoggerService _loggerService;
+
+        private readonly IRegionManager _regionManager;
+        private readonly IVehicleService _vehicleService;
 
         /// <summary>
         /// Store the constant header for a notification alert.
@@ -58,32 +63,42 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Command for editing this vehicle.
         /// </summary>
-        public DelegateCommand EditVehicleCommand { get; set; }
+        public DelegateCommand EditVehicle { get; set; }
 
         /// <summary>
         /// Command for deleting this vehicle.
         /// </summary>
-        public DelegateCommand DeleteVehicleCommand { get; set; }
+        public DelegateCommand DeleteVehicle { get; set; }
         public DelegateCommand Repairs { get; }
         #endregion
 
         public VehicleHeaderViewModel(IDataService dataService, INotificationsService notificationsService,
-            IEventAggregator eventAggregator, ILoggerService loggerService)
+            IEventAggregator eventAggregator, ILoggerService loggerService, IRegionManager regionManager, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
             _eventAggregator = eventAggregator;
             _loggerService = loggerService;
+            _regionManager = regionManager;
+            _vehicleService = vehicleService;
 
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
-
-            EditVehicleCommand = new DelegateCommand(EditVehicleExecute);
-            DeleteVehicleCommand = new DelegateCommand(DeleteVehicleExecute);
+            //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
+            EditVehicle = new DelegateCommand(EditVehicleExecute);
+            DeleteVehicle = new DelegateCommand(DeleteVehicleExecute);
             Repairs = new DelegateCommand(OnRepairs);
         }
 
-        private void OnSelectedVehicleChanged(VehicleViewModel model)
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
+            if (vehicle == null)
+            {
+                SelectedVehicle = null;
+                return;
+            }
+
+            var model = new VehicleViewModel(_dataService, _notificationsService);
+            model.LoadInstance(vehicle);
             SelectedVehicle = model;
         }
 
@@ -101,7 +116,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 _dataService.DeleteVehicle(SelectedVehicle.Vehicle);
                 _notificationsService.Alert(VehicleDeleted, NotificationHeader);
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
-                _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(null);
+                //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(null);
+                _vehicleService.ClearSelectedVehicle();
+
             }
             catch (Exception e)
             {
@@ -114,7 +131,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         public void EditVehicleExecute()
         {
-            _eventAggregator.GetEvent<Events.EditVehicleEvent>().Publish(SelectedVehicle);
+            //_eventAggregator.GetEvent<Events.EditVehicleEvent>().Publish(SelectedVehicle);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(ManageVehicleView).FullName);
         }
 
         private void OnRepairs()
@@ -128,5 +146,9 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
         #endregion
 
+        public void Dispose()
+        {
+            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+        }
     }
 }

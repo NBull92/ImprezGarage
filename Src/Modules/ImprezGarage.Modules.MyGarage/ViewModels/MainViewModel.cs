@@ -30,6 +30,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
+        private readonly IVehicleService _vehicleService;
         private ObservableCollection<VehicleViewModel> _vehicles = new ObservableCollection<VehicleViewModel>();
         private VehicleViewModel _selectedVehicle;
         private string _userId;
@@ -57,26 +58,35 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         
         #region Methods
         public MainViewModel(IDataService dataService, IRegionManager regionManager, IEventAggregator eventAggregator, 
-            INotificationsService notificationsService, ILoggerService loggerService)
+            INotificationsService notificationsService, ILoggerService loggerService, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _notificationsService = notificationsService;
             _loggerService = loggerService;
+            _vehicleService = vehicleService;
 
             AddNewVehicleCommand = new DelegateCommand(AddNewVehicleExecute);
             SelectedVehicleChanged = new DelegateCommand<SelectionChangedEventArgs>(SelectedVehicleChangedExecute);
 
             _eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
-            _eventAggregator.GetEvent<Events.EditVehicleEvent>().Subscribe(OnEditVehicle);
+            //_eventAggregator.GetEvent<Events.EditVehicleEvent>().Subscribe(OnEditVehicle);
             _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
         }
 
         #region Command Handlers
         private void SelectedVehicleChangedExecute(SelectionChangedEventArgs obj)
         {
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
+            //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
+            if (SelectedVehicle != null)
+            {
+                _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle.Vehicle);
+            }
+            else
+            {
+                _vehicleService.ClearSelectedVehicle();
+            }
             RequestNavigationToPetrolExpenditureMainView();
         }
 
@@ -123,7 +133,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 SelectedVehicle = Vehicles.First(o => o.Vehicle.Id == currentlySelectedVehicle.Vehicle.Id);
             }
 
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
+            //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
+            if (SelectedVehicle != null)
+            {
+                _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle.Vehicle);
+            }
+            else
+            {
+                _vehicleService.ClearSelectedVehicle();
+            }
         }
 
         private void OnEditVehicle(VehicleViewModel vehicle)

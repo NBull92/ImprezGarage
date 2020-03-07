@@ -9,7 +9,7 @@
     using System;
     using System.Threading.Tasks;
 
-    public class FirebaseAuthenticationService : IAuthenticationService
+    internal class FirebaseAuthenticationService : IAuthenticationService
     {
         private string _userId;
 

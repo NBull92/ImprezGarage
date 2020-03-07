@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using ImprezGarage.Infrastructure.ViewModels;
@@ -18,13 +20,14 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using System.Linq;
     using Views;
 
-    public class MainViewModel : BindableBase, INavigationAware
+    public class MainViewModel : BindableBase, INavigationAware, IDisposable
     {
         #region Attributes
         private readonly IDataService _dataService;
         private readonly INotificationsService _notificationsService;
         private readonly IRegionManager _regionManager;
         private readonly IUnityContainer _container;
+        private readonly IVehicleService _vehicleService;
 
         private const string StartMaintenanceCheckError = "An error occured when attempting to start a maintenance check.";
         private const string NotificationHeader = "Alert!";
@@ -53,17 +56,19 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #endregion
 
         #region Methods
-        public MainViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService , IEventAggregator eventAggregator,
-            IUnityContainer container)
+        public MainViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService, 
+            IEventAggregator eventAggregator, IUnityContainer container, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _regionManager = regionManager;
             _notificationsService = notificationsService;
             _container = container;
+            _vehicleService = vehicleService;
 
             PerformNewCheckCommand = new DelegateCommand(PerformNewCheckExecute);
 
-            eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
         }
 
         private void GetSelectedVehicleMaintenanceChecks()
@@ -87,9 +92,17 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         }
 
         #region Event Handlers
-        private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
-            SelectedVehicle = vehicleViewModel;
+            if (vehicle == null)
+            {
+                SelectedVehicle = null;
+                return;
+            }
+
+            var model = new VehicleViewModel(_dataService, _notificationsService);
+            model.LoadInstance(vehicle);
+            SelectedVehicle = model;
             GetSelectedVehicleMaintenanceChecks();
         }
         #endregion
@@ -146,5 +159,11 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         }
         #endregion
         #endregion
+
+        public void Dispose()
+        {
+            _container?.Dispose();
+            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+        }
     }
 }   //ImprezGarage.Modules.PerformChecks.ViewModels namespace 

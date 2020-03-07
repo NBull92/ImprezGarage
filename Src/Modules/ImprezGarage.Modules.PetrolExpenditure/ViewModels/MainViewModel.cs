@@ -3,6 +3,10 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+using ImprezGarage.Infrastructure.Services;
+using Microsoft.Practices.ServiceLocation;
+
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
     using ImprezGarage.Infrastructure.ViewModels;
@@ -14,9 +18,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     using Views;
 
 
-    public class MainViewModel : BindableBase
+    public class MainViewModel : BindableBase, IDisposable
     {
         private readonly IEventAggregator _eventAggregator;
+        private readonly IVehicleService _vehicleService;
 
         #region Attributes
         private VehicleViewModel _selectedVehicle;
@@ -55,10 +60,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #endregion
 
         #region Methods
-        public MainViewModel(IEventAggregator eventAggregator)
+        public MainViewModel(IEventAggregator eventAggregator, IVehicleService vehicleService)
         {
             _eventAggregator = eventAggregator;
-            eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            _vehicleService = vehicleService;
+
+            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
             FromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             ToDate = DateTime.Now;
@@ -81,10 +89,23 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 .Publish(new Tuple<DateTime, DateTime>(FromDate, ToDate));
         }
 
-        private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
-            SelectedVehicle = vehicleViewModel;
+            if (vehicle == null)
+            {
+                SelectedVehicle = null;
+                return;
+            }
+
+            var model = new VehicleViewModel(ServiceLocator.Current.GetInstance<IDataService>(), ServiceLocator.Current.GetInstance<INotificationsService>());
+            model.LoadInstance(vehicle);
+            SelectedVehicle = model;
         }
         #endregion
+
+        public void Dispose()
+        {
+            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+        }
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

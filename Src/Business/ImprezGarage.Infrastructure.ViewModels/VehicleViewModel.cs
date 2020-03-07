@@ -242,7 +242,7 @@ namespace ImprezGarage.Infrastructure.ViewModels
             // Go through all of the reminders and create toast notifications to inform the user.
             foreach (var reminder in _reminders)
             {
-                Application.Current.Dispatcher.Invoke(() => { _notificationsService.Toast(reminder); });
+                Application.Current.Dispatcher?.Invoke(() => { _notificationsService.Toast(reminder); });
             }
         }
 

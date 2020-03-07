@@ -86,11 +86,14 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="VehicleService.cs" />
     <Compile Include="ViewModels\AddVehicleViewModel.cs" />
     <Compile Include="ViewModels\BicycleCreationViewModel.cs" />
     <Compile Include="ViewModels\CarCreationViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ManageVehicleViewModel.cs" />
     <Compile Include="ViewModels\MotorbikeCreationViewModel.cs" />
+    <Compile Include="ViewModels\ReportRepairViewModel.cs" />
     <Compile Include="ViewModels\VehicleCreationViewModel.cs" />
     <Compile Include="ViewModels\VehicleHeaderViewModel.cs" />
     <Compile Include="Views\AddVehicle.xaml.cs">
@@ -105,8 +108,14 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ManageVehicleView.xaml.cs">
+      <DependentUpon>ManageVehicleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MotorbikeCreation.xaml.cs">
       <DependentUpon>MotorbikeCreation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportRepair.xaml.cs">
+      <DependentUpon>ReportRepair.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VehicleHeader.xaml.cs">
       <DependentUpon>VehicleHeader.xaml</DependentUpon>
@@ -138,9 +147,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ManageVehicleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MotorbikeCreation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportRepair.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\VehicleHeader.xaml">
       <SubType>Designer</SubType>
@@ -163,6 +180,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj">
+      <Project>{6db36d85-2a15-4003-a52e-33cd08171c34}</Project>
+      <Name>ImprezGarage.Infrastructure.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.ViewModels\ImprezGarage.Infrastructure.ViewModels.csproj">
+      <Project>{f720b783-cca5-4365-83b5-928351f025e8}</Project>
+      <Name>ImprezGarage.Infrastructure.ViewModels</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure\ImprezGarage.Infrastructure.csproj">
       <Project>{4703D4D1-0C8C-4AB2-9058-F8DC87D60C61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>

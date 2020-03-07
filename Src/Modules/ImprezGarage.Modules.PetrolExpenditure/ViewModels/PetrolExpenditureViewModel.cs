@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using ImprezGarage.Infrastructure.Model;
+
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
     using Infrastructure;
@@ -15,10 +17,11 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    public class PetrolExpenditureViewModel : BindableBase
+    public class PetrolExpenditureViewModel : BindableBase, IDisposable
     {
         #region Attributes
         private readonly IDataService _dataService;
+        private readonly IVehicleService _vehicleService;
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
         private VehicleViewModel _selectedVehicle;
         private string _label;
@@ -57,10 +60,13 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #endregion
 
         #region Methods
-        public PetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator)
+        public PetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, IVehicleService vehicleService)
         {
             _dataService = dataService;
-            eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            _vehicleService = vehicleService;
+
+            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
 
             _expenses = new ObservableCollection<PetrolExpenseViewModel>();
@@ -68,16 +74,19 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             ExpenseTotal = "£0.00";
         }
 
-        private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
-            if (vehicleViewModel == null)
+            if (vehicle == null)
             {
                 FilteredExpenses.Clear();
                 SelectedVehicle = null;
                 return;
             }
 
-            SelectedVehicle = vehicleViewModel;
+
+            var model = new VehicleViewModel(_dataService, ServiceLocator.Current.GetInstance<INotificationsService>());
+            model.LoadInstance(vehicle);
+            SelectedVehicle = model;
 
             Label = _selectedVehicle.Make + " " + _selectedVehicle.Model;
             GetSelectedVehiclePetrolExpenses();
@@ -126,5 +135,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             ExpenseTotal = $"£{FilteredExpenses.Select(o => o.Amount).Sum()}";
         }
         #endregion
+
+        public void Dispose()
+        {
+            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+        }
     }
 }   // ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 
