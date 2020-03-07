@@ -27,7 +27,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #region Attributes
         private readonly IDataService _dataService;
         private readonly IRegionManager _regionManager;
-        private readonly IEventAggregator _eventAggregator;
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
         private readonly IVehicleService _vehicleService;
@@ -62,7 +61,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             _dataService = dataService;
             _regionManager = regionManager;
-            _eventAggregator = eventAggregator;
             _notificationsService = notificationsService;
             _loggerService = loggerService;
             _vehicleService = vehicleService;
@@ -70,15 +68,13 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             AddNewVehicleCommand = new DelegateCommand(AddNewVehicleExecute);
             SelectedVehicleChanged = new DelegateCommand<SelectionChangedEventArgs>(SelectedVehicleChangedExecute);
 
-            _eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
-            //_eventAggregator.GetEvent<Events.EditVehicleEvent>().Subscribe(OnEditVehicle);
-            _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+            eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
+            eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
         }
 
         #region Command Handlers
         private void SelectedVehicleChangedExecute(SelectionChangedEventArgs obj)
         {
-            //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
             if (SelectedVehicle != null)
             {
                 _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle.Vehicle);
@@ -133,7 +129,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 SelectedVehicle = Vehicles.First(o => o.Vehicle.Id == currentlySelectedVehicle.Vehicle.Id);
             }
 
-            //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
             if (SelectedVehicle != null)
             {
                 _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle.Vehicle);

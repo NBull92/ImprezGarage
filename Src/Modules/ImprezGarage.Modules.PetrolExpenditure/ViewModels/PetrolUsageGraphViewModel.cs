@@ -44,7 +44,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
             ResetParameters();
 
-            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
         }

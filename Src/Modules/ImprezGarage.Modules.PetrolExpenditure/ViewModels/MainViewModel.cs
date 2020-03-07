@@ -3,14 +3,12 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
-using ImprezGarage.Infrastructure.Services;
-using Microsoft.Practices.ServiceLocation;
-
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using ImprezGarage.Infrastructure.ViewModels;
-    using Infrastructure;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
+    using Infrastructure.ViewModels;
+    using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -65,7 +63,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _eventAggregator = eventAggregator;
             _vehicleService = vehicleService;
 
-            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
             FromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);

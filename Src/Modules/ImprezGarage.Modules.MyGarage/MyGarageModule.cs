@@ -13,17 +13,14 @@ namespace ImprezGarage.Modules.MyGarage
     public class MyGarageModule : IModule
     {
         private readonly IRegionManager _regionManager;
-        //private readonly IUnityContainer _container;
 
-        public MyGarageModule(IRegionManager regionManager)//, IUnityContainer container)
+        public MyGarageModule(IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            //_container = container;
         }
 
         public void Initialize()
         {
-            //_container.RegisterType<IVehicleService, VehicleService>(new ContainerControlledLifetimeManager());
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleListRegion, typeof(MainView));
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleHeaderRegion, typeof(VehicleHeader));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ManageVehicleView));

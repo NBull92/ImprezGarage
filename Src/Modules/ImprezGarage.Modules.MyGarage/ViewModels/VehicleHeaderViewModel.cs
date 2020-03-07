@@ -82,7 +82,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             _regionManager = regionManager;
             _vehicleService = vehicleService;
 
-            //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             EditVehicle = new DelegateCommand(EditVehicleExecute);
             DeleteVehicle = new DelegateCommand(DeleteVehicleExecute);
@@ -116,7 +115,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 _dataService.DeleteVehicle(SelectedVehicle.Vehicle);
                 _notificationsService.Alert(VehicleDeleted, NotificationHeader);
                 _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
-                //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(null);
                 _vehicleService.ClearSelectedVehicle();
 
             }

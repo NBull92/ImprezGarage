@@ -3,15 +3,14 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
-    using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
@@ -24,7 +23,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly IDataService _dataService;
         private readonly IRegionManager _regionManager;
         private readonly INotificationsService _notificationsService;
-        private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerService _loggerService;
         private readonly IVehicleService _vehicleService;
 
@@ -71,12 +69,11 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         
         #region Methods
         public MaintenanceCheckViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService,
-            IEventAggregator eventAggregator, ILoggerService loggerService, IVehicleService vehicleService)
+            ILoggerService loggerService, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _regionManager = regionManager;
             _notificationsService = notificationsService;
-            _eventAggregator = eventAggregator;
             _loggerService = loggerService;
             _vehicleService = vehicleService;
 
@@ -96,7 +93,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             {
                 _dataService.DeleteMaintenanceCheck(Id);
                 _notificationsService.Alert(DeletedSuccessfully);
-                //_eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
                 if (SelectedVehicle != null)
                 {
                     _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle.Vehicle);

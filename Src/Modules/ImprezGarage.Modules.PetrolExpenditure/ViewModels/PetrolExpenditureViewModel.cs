@@ -65,7 +65,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _dataService = dataService;
             _vehicleService = vehicleService;
 
-            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
 

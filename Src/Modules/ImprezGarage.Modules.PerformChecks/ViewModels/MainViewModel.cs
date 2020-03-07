@@ -3,16 +3,14 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
+    using Infrastructure.ViewModels;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
-    using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
@@ -57,7 +55,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
         #region Methods
         public MainViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService, 
-            IEventAggregator eventAggregator, IUnityContainer container, IVehicleService vehicleService)
+            IUnityContainer container, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _regionManager = regionManager;
@@ -67,7 +65,6 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
             PerformNewCheckCommand = new DelegateCommand(PerformNewCheckExecute);
 
-            //eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
         }
 
