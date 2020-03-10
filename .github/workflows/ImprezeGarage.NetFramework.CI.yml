@@ -9,11 +9,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 2.2.108
-    - name: Build with dotnet
-      run: dotnet build --configuration Release
-    - name: And then we test
-      run: dotnet test --verbosity normal
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1      
+    - name: Restore Packages
+      run: nuget restore ImprezGarage.sln  
+    - name: Setup MSBuild
+      uses: warrenbuckley/Setup-MSBuild@v1     
+    - name: Build With MSBuild
+      run: msbuild ImprezGarage.sln -p:Configuration=Release
+      
