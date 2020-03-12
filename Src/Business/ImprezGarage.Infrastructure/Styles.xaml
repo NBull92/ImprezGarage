@@ -461,12 +461,12 @@
                                     <StackPanel Orientation="Horizontal"
                                                         HorizontalAlignment="Left" 
                                                         VerticalAlignment="Top" 
-                                                        Height="16"
+                                                        Height="18"
                                                         Width="127"
                                                         Margin="17, 0, 0, 18">
                                         <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-car-24.png"/>
                                         <TextBlock x:Name="regText" Text="{Binding Registration}"
-                                                           FontSize="8" TextAlignment="Center" 
+                                                           FontSize="12" TextAlignment="Center" 
                                                            Padding="0,1.5,0,0" Margin="10,0,0,0"/>
                                     </StackPanel>
                                 </DataTemplate>

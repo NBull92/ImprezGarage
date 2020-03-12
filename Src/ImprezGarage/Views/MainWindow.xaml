@@ -5,13 +5,12 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
                      xmlns:baseClasses="clr-namespace:ImprezGarage.Infrastructure.BaseClasses;assembly=ImprezGarage.Infrastructure"
-                     xmlns:mah="http://metro.mahapps.com/winfx/xaml/shared" 
                      x:Class="ImprezGarage.Views.MainWindow"
                      WindowStartupLocation="CenterScreen"
                      ShowIconOnTitleBar="False"
                      prism:ViewModelLocator.AutoWireViewModel="True"
                      Icon="{Binding Icon}"
-                     Title="{Binding Title}"  Height="659" Width="858">
+                     Title="{Binding Title}" Height="659" Width="858">
     <baseClasses:DialogViewBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -152,19 +151,13 @@
             <!-- Nav Bar -->
             <Grid Grid.Row="0" Grid.Column="1">
                 <DockPanel>
-                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,29,0">
-                        <Button DockPanel.Dock="Right"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Width="15"
-                            Height="15"
-                            Style="{StaticResource CircleButtonStyle}"/>
+                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,27,0">
                         <Button DockPanel.Dock="Right"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Width="72"
-                            Height="26"
-                            Margin="0,0,37,0"
+                            Height="30"
+                            Margin="0,0,0,0"
                             Padding="0"
                             FontSize="8"
                             Foreground="{StaticResource ImprezGarage.Grey}"
@@ -177,7 +170,8 @@
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Center"
                                        Margin="0,0,0,0"/>
-                                <Image DockPanel.Dock="Left" Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-Initial.png" HorizontalAlignment="Right"/>
+                                <Image DockPanel.Dock="Left" Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-Initial.png" 
+                                       HorizontalAlignment="Right"/>
                             </DockPanel>
                         </Button>
                     </DockPanel>
@@ -185,31 +179,37 @@
                         <Button DockPanel.Dock="Right"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Width="16"
-                            Height="15"
+                            Height="30"
+                            Width="30"
+                            Command="{Binding OpenSettings}"
                             Style="{StaticResource CircleButtonStyle}">
-                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-Settings.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-settings-24.png"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
                         <Button DockPanel.Dock="Right"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Width="16"
-                            Height="15"
+                            Height="30"
+                            Width="30"
                             Margin="0,0,15,0"
+                            Command="{Binding OpenHelp}"
                             Style="{StaticResource CircleButtonStyle}">
-                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-Help.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-help-24.png"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
                         <Button DockPanel.Dock="Right"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            Width="16"
-                            Height="15"
+                            Height="30"
+                            Width="30"
                             Margin="0,0,15,0"
+                            Command="{Binding OpenNotifications}"
                             Style="{StaticResource CircleButtonStyle}">
-                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-Bell.png" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-notification-24.png"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
                     </DockPanel>
-                    <TextBox Style="{DynamicResource GreyTextBoxStyle}"/>
+                    <!--<TextBox x:Name="SearchBox" Style="{DynamicResource GreyTextBoxStyle}"/>-->
                 </DockPanel>
             </Grid>
 
