@@ -116,10 +116,6 @@
       <Project>{6db36d85-2a15-4003-a52e-33cd08171c34}</Project>
       <Name>ImprezGarage.Infrastructure.Services</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.ViewModels\ImprezGarage.Infrastructure.ViewModels.csproj">
-      <Project>{F720B783-CCA5-4365-83B5-928351F025E8}</Project>
-      <Name>ImprezGarage.Infrastructure.ViewModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure\ImprezGarage.Infrastructure.csproj">
       <Project>{4703D4D1-0C8C-4AB2-9058-F8DC87D60C61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>

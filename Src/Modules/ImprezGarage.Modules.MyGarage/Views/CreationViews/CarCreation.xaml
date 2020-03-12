@@ -8,7 +8,12 @@
              d:DataContext="{d:DesignInstance Type=creationViewModels:CarCreationViewModel}">
 
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        </ResourceDictionary>
     </UserControl.Resources>
     
     <Grid Margin="0,5,0,0">
@@ -17,7 +22,7 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0" BorderBrush="Black" BorderThickness="1" Width="295">            
+        <Border Grid.Column="0" BorderBrush="{StaticResource ImprezGarage.Grey}" BorderThickness="1" Width="295">            
             <Grid Margin="5">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -67,7 +72,7 @@
             </Grid>
         </Border>
 
-        <Border Grid.Column="1" BorderBrush="Black" BorderThickness="1" Margin="10,0,0,0" Width="295"
+        <Border Grid.Column="1" BorderBrush="{StaticResource ImprezGarage.Grey}" BorderThickness="1" Margin="10,0,0,0" Width="295"
                 Visibility="{Binding ShowEditView, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid Margin="5">
                 <Grid.RowDefinitions>
