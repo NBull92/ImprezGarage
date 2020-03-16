@@ -28,7 +28,6 @@
     <baseClasses:DialogViewBase.RightWindowCommands>
         <mahApps:WindowCommands>
             <Button Content="{Binding SignInOut}" Command="{Binding SignOut}"/>
-            <Button Content="Refresh" Command="{Binding RefreshCommand}" ToolTip="Refresh the current data."/>
             <Button Content="Settings" Command="{Binding OpenSettings}" ToolTip="Open settings panel."/>
         </mahApps:WindowCommands>
     </baseClasses:DialogViewBase.RightWindowCommands>
@@ -200,6 +199,17 @@
                             Command="{Binding OpenHelp}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-help-24.png"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Button>
+                        <Button DockPanel.Dock="Right"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Height="30"
+                                Width="30"
+                                Margin="0,0,15,0"
+                                Command="{Binding RefreshCommand}"
+                                Style="{StaticResource CircleButtonStyle}">
+                            <Image Source="pack://application:,,,/ImprezGarage;component/Resources/refresh.png"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
                         <Button DockPanel.Dock="Right"
