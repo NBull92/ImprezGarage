@@ -257,6 +257,9 @@
   <ItemGroup>
     <Resource Include="Resources\refresh.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\upgrade-account.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterCompile" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Exec Command="&quot;C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A\Bin\signtool.exe&quot; sign /f &quot;C:\temp\myPFX.pfx&quot; /p &quot;admin&quot; /v &quot;$(ProjectDir)obj\$(ConfigurationName)\$(TargetFileName)&quot;" />

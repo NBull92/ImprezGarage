@@ -25,13 +25,6 @@
         </ResourceDictionary>
     </baseClasses:DialogViewBase.Resources>
 
-    <baseClasses:DialogViewBase.RightWindowCommands>
-        <mahApps:WindowCommands>
-            <Button Content="{Binding SignInOut}" Command="{Binding SignOut}"/>
-            <Button Content="Settings" Command="{Binding OpenSettings}" ToolTip="Open settings panel."/>
-        </mahApps:WindowCommands>
-    </baseClasses:DialogViewBase.RightWindowCommands>
-
     <Grid>
         <!-- New UI -->
         <Grid>
@@ -69,17 +62,17 @@
 
                     <Grid Grid.Column="0" Grid.Row="1" Margin="17, 0, 0, 0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="16"/>
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <TextBlock Text="ACCOUNT DETAILS"
                                    FontWeight="Bold"
-                                   FontSize="7"
+                                   FontSize="12"
                                    Foreground="{StaticResource ImprezGarage.Grey}"
                                    VerticalAlignment="Top"/>
                             <Rectangle Margin="12.5,1,0,0" 
-                                   Height="1" 
+                                   Height="2" 
                                    Width="90"
                                    Fill="{StaticResource ImprezGarage.Grey}"
                                    VerticalAlignment="Center"/>
@@ -87,66 +80,55 @@
 
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition />
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
-                                        VerticalAlignment="Top"
-                                        Margin="0,16,0,0"
-                                        Height="16">
-                                    <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-MyDrive.jpg"/>
-                                    <TextBlock Text="Storage" 
-                                           Margin="10,0,0,0" 
-                                           FontSize="7"
-                                           VerticalAlignment="Center"
-                                           Foreground="{StaticResource ImprezGarage.Foreground}"/>
-                                </StackPanel>
-
-                                <Rectangle Margin="0,7,0,0"
-                                       Height="3" 
-                                       Width="127"
-                                       Fill="{StaticResource ImprezGarage.Grey}"
-                                       HorizontalAlignment="Left"/>
-
-                                <TextBlock FontSize="6"
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock FontSize="12"
                                        Margin="0,6,0,0"
-                                       Text="60.8 GB of 1 TB used"
+                                       Text="Type: "
                                        Foreground="{StaticResource ImprezGarage.Accent}"/>
+                                <TextBlock FontSize="12"
+                                           Margin="0,6,0,0"
+                                           Text="Demo"
+                                           Foreground="{StaticResource ImprezGarage.Accent}"/>
                             </StackPanel>
 
                             <StackPanel Grid.Row="1">
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
-                                        VerticalAlignment="Top"
-                                        Margin="0,16,0,0"
-                                        Height="16">
+                                            VerticalAlignment="Top"
+                                            Margin="0,17,0,0"
+                                            Height="16">
                                     <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-MyDrive.jpg"/>
-                                    <TextBlock Text="Photos" 
-                                           Margin="10,0,0,0" 
-                                           FontSize="7"
-                                           VerticalAlignment="Center"
-                                           Foreground="{StaticResource ImprezGarage.Foreground}"/>
+                                    <TextBlock Text="Vehicles" 
+                                               Margin="10,0,0,0" 
+                                               FontSize="12"
+                                               VerticalAlignment="Center"
+                                               Foreground="{StaticResource ImprezGarage.Foreground}"/>
                                 </StackPanel>
 
                                 <Rectangle Margin="0,7,0,0"
-                                       Height="3" 
-                                       Width="127"
-                                       Fill="{StaticResource ImprezGarage.Grey}"
-                                       HorizontalAlignment="Left"/>
+                                           Height="3" 
+                                           Width="127"
+                                           Fill="{StaticResource ImprezGarage.Grey}"
+                                           HorizontalAlignment="Left"/>
 
-                                <TextBlock FontSize="6"
-                                       Margin="0,6,0,0"
-                                       Text="10.3 GB of 1 TB used"
-                                       Foreground="{StaticResource ImprezGarage.Accent}"/>
+                                <TextBlock FontSize="12"
+                                           Margin="0,6,0,0"
+                                           Text="1 of 1 "
+                                           Foreground="{StaticResource ImprezGarage.Accent}"/>
                             </StackPanel>
 
-                            <TextBlock Grid.Row="2" Text="Upgrade Storage"
-                                   FontWeight="Bold"
-                                   FontSize="7"
-                                   Margin="0,16,0,0"
-                                   Foreground="{StaticResource ImprezGarage.Grey}"
-                                   VerticalAlignment="Top"/>
+                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,17,0,0">
+                                <TextBlock Text="Upgrade Account"
+                                           FontWeight="Bold"
+                                           FontSize="12"
+                                           Margin="0,0,0,0"
+                                           Foreground="{StaticResource ImprezGarage.Grey}"
+                                           VerticalAlignment="Center"/>
+                                <Image Source="../Resources/upgrade-account.png" Height="20" Margin="5,0,0,0"/>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -164,8 +146,10 @@
                             Margin="0,0,0,0"
                             Padding="0"
                             FontSize="8"
+                            ToolTip="Account"
                             Foreground="{StaticResource ImprezGarage.Grey}"
                             FontWeight="Normal"
+                            Click="ButtonBase_OnClick"
                             Style="{StaticResource RoundedRectangleButtonStyle}">
                             <DockPanel HorizontalAlignment="Stretch" Width="67">
                                 <TextBlock DockPanel.Dock="Left"
@@ -177,6 +161,11 @@
                                 <Image DockPanel.Dock="Left" Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-Initial.png" 
                                        HorizontalAlignment="Right"/>
                             </DockPanel>
+                            <Button.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Sign Out" Command="{Binding SignOut}"/>
+                                </ContextMenu>
+                            </Button.ContextMenu>
                         </Button>
                     </DockPanel>
                     <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,38,0">
@@ -185,6 +174,7 @@
                             VerticalAlignment="Center"
                             Height="30"
                             Width="30"
+                            ToolTip="Settings"
                             Command="{Binding OpenSettings}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-settings-24.png"
@@ -196,6 +186,7 @@
                             Height="30"
                             Width="30"
                             Margin="0,0,15,0"
+                            ToolTip="Help"
                             Command="{Binding OpenHelp}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-help-24.png"
@@ -207,6 +198,7 @@
                                 Height="30"
                                 Width="30"
                                 Margin="0,0,15,0"
+                                ToolTip="Refresh"
                                 Command="{Binding RefreshCommand}"
                                 Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/refresh.png"
@@ -218,6 +210,7 @@
                             Height="30"
                             Width="30"
                             Margin="0,0,15,0"
+                            ToolTip="Notifications"
                             Command="{Binding OpenNotifications}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-notification-24.png"
