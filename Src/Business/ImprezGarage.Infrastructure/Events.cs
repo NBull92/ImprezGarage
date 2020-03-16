@@ -20,11 +20,6 @@ namespace ImprezGarage.Infrastructure
         public class StatusUpdateEvent : PubSubEvent<string> { }
 
         /// <summary>
-        /// Event for when a vehicle is being edited.
-        /// </summary>
-        //public class EditVehicleEvent : PubSubEvent<VehicleViewModel> { }
-
-        /// <summary>
         /// Event for when the user requests to refresh all of the current data.
         /// </summary>
         public class RefreshDataEvent : PubSubEvent { }
