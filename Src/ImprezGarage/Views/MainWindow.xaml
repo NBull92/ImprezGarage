@@ -5,12 +5,18 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
                      xmlns:baseClasses="clr-namespace:ImprezGarage.Infrastructure.BaseClasses;assembly=ImprezGarage.Infrastructure"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:viewModels="clr-namespace:ImprezGarage.ViewModels"
                      x:Class="ImprezGarage.Views.MainWindow"
                      WindowStartupLocation="CenterScreen"
                      ShowIconOnTitleBar="False"
                      prism:ViewModelLocator.AutoWireViewModel="True"
-                     Icon="{Binding Icon}"
-                     Title="{Binding Title}" Height="659" Width="858">
+                     Title="{Binding Title}" 
+                     Height="659" 
+                     Width="858"
+                     mc:Ignorable="d"
+                     d:DataContext="{d:DesignInstance Type=viewModels:MainWindowViewModel}">
     <baseClasses:DialogViewBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -23,7 +29,7 @@
         <mahApps:WindowCommands>
             <Button Content="{Binding SignInOut}" Command="{Binding SignOut}"/>
             <Button Content="Refresh" Command="{Binding RefreshCommand}" ToolTip="Refresh the current data."/>
-            <Button Content="Settings" Command="{Binding Settings}" ToolTip="Open settings panel."/>
+            <Button Content="Settings" Command="{Binding OpenSettings}" ToolTip="Open settings panel."/>
             <Button Content="." FontSize="25" Command="{Binding MinimizeToTray}" ToolTip="Minimize to system tray." Margin="0,-10,0,0"/>
         </mahApps:WindowCommands>
     </baseClasses:DialogViewBase.RightWindowCommands>
@@ -45,7 +51,7 @@
                         Orientation="Horizontal" 
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center">
-                <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD.jpg"
+                <Image Source="pack://application:,,,/ImprezGarage;component/Resources/iconv3.png"
                        Height="18"
                        Margin="0,0,5,0"/>
                 <TextBlock Foreground="{StaticResource ImprezGarage.Main}" 

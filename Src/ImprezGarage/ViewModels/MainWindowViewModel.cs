@@ -5,9 +5,9 @@
 
 namespace ImprezGarage.ViewModels
 {
-    using Infrastructure.Services;
     using Infrastructure;
     using Infrastructure.BaseClasses;
+    using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
@@ -47,8 +47,6 @@ namespace ImprezGarage.ViewModels
             set => SetProperty(ref _isSettingsOpen, value);
         }
 
-        public string Icon { get; } = "pack://application:,,,/ImprezGarage;component/Resources/icon_v2.png";
-
         private string _signInOut;
         public string SignInOut
         {
@@ -72,7 +70,7 @@ namespace ImprezGarage.ViewModels
         /// <summary>
         /// Command for showing and closing the settings view.
         /// </summary>
-        public DelegateCommand Settings { get; set; }
+        public DelegateCommand OpenSettings { get; set; }
         public DelegateCommand MinimizeToTray { get; set; }
         public DelegateCommand SignOut { get; set; }
         #endregion
@@ -87,7 +85,7 @@ namespace ImprezGarage.ViewModels
             _eventAggregator = eventAggregator;
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
-            Settings = new DelegateCommand(OnSettingsClicked);
+            OpenSettings = new DelegateCommand(OnOpenSettings);
             MinimizeToTray = new DelegateCommand(Hide);
             SignOut = new DelegateCommand(OnSignOut);
 
@@ -149,7 +147,7 @@ namespace ImprezGarage.ViewModels
         /// An called when the system tray icon is double clicked.
         /// This reactivates the window and forces to the front.
         /// </summary>
-        private void OnNotifyIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void OnNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ShowWindow();
         }
@@ -167,13 +165,13 @@ namespace ImprezGarage.ViewModels
             encoder.Save(ms);
             ms.Seek(0, SeekOrigin.Begin);
             var bmp = new Bitmap(ms);
-            return System.Drawing.Icon.FromHandle(bmp.GetHicon());
+            return Icon.FromHandle(bmp.GetHicon());
         }
         
         /// <summary>
         /// When the settings command is clicked, set IsSettingsOpen to it's opposite.
         /// </summary>
-        private void OnSettingsClicked()
+        private void OnOpenSettings()
         {
             IsSettingsOpen = !IsSettingsOpen;
         }
