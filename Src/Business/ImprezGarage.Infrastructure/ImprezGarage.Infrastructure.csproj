@@ -180,7 +180,6 @@
   <ItemGroup>
     <Resource Include="Temp Resources\GD-Initial.png" />
     <Resource Include="Temp Resources\GD-MyDrive.jpg" />
-    <Resource Include="Temp Resources\GD.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
