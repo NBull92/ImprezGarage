@@ -247,50 +247,6 @@
                             Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse}"
                             prism:RegionManager.RegionName="{x:Static inf:RegionNames.AuthenticateRegion}" />
         </Grid>
-
-        <!-- Old UI To be removed after -->
-        <Grid Visibility="Collapsed">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition MaxWidth="425"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Column="0">
-                    <!--<ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleListRegion}" VerticalAlignment="Top"/>-->
-                </Border>
-
-                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1">
-                    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolRegion}"/>
-                </Border>
-
-                <Border BorderBrush="Black" BorderThickness="1" Margin="5" Grid.Row="1" Grid.Column="0">
-                    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.ChecksRegion}" VerticalAlignment="Top"/>
-                </Border>
-            </Grid>
-
-            <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.StatusBarRegion}" Grid.Row="2" />
-
-            <mahApps:FlyoutsControl Grid.Row="0" Grid.RowSpan="2">
-                <mahApps:Flyout Header="Settings" Position="Right" Width="300" IsOpen="{Binding IsSettingsOpen}">
-                    <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.SettingsRegion}"/>
-                </mahApps:Flyout>
-            </mahApps:FlyoutsControl>
-
-
-            <!--<ContentControl Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Inverse}" 
-                        prism:RegionManager.RegionName="{x:Static inf:RegionNames.AuthenticateRegion}" />-->
-
-        </Grid>
     </Grid>
 
 
