@@ -5,6 +5,7 @@
 
 namespace ImprezGarage.Infrastructure
 {
+    using Model;
     using Prism.Events;
     using System;
 
@@ -29,6 +30,6 @@ namespace ImprezGarage.Infrastructure
         /// <param name="Item1">bool for if the user is logged in or not.</param>
         /// <param name="Item2">string to store the user Id, for when a user logs in.</param>
         /// </summary>
-        public class UserAccountChange : PubSubEvent<Tuple<bool,string>> { }
+        public class UserAccountChange : PubSubEvent<Tuple<bool, Account>> { }
     }
 }   //ImprezGarage.Infrastructure namespace 

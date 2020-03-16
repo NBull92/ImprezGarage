@@ -1,4 +1,6 @@
-﻿namespace ImprezGarage.Modules.Firebase
+﻿using System.Windows.Navigation;
+
+namespace ImprezGarage.Modules.Firebase
 {
     using Infrastructure.Model;
     using Infrastructure.Services;
@@ -161,8 +163,7 @@
         {
             _connection.Delete<PetrolExpense>(expenseId);
         }
-        #endregion
-
+        
         public void AddPetrolExpenditure(PetrolExpense expense)
         {
             expense.Id = _connection.Get<PetrolExpense>().Count;
@@ -194,5 +195,17 @@
             repair.Id = _connection.Get<PartsReplacementRecord>().Count;
             _connection.Submit(repair, repair.Id);
         }
+
+        public void SubmitNewUser(Account account)
+        {
+            account.Id = _connection.Get<Account>().Count;
+            _connection.Submit(account, account.Id);
+        }
+
+        public Account GetUser(string userLocalId)
+        {
+            return _connection.Get<Account>().FirstOrDefault(O => O.UserId == userLocalId);
+        }
+        #endregion
     }
 }

@@ -201,9 +201,6 @@
     <Resource Include="Resources\icons8-edit-property-24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-delete-24.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\icons8-gas-station-24.png" />
   </ItemGroup>
   <ItemGroup>

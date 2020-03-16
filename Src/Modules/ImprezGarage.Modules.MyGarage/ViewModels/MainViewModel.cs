@@ -6,8 +6,8 @@
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
-    using Infrastructure.ViewModels;
     using MahApps.Metro.Controls;
     using Prism.Commands;
     using Prism.Events;
@@ -109,11 +109,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         #region Event Handlers
-        private void OnUserAccountChange(Tuple<bool,string> loginData)
+        private void OnUserAccountChange(Tuple<bool, Account> loginData)
         {
             if (loginData.Item1)
             {
-                _userId = loginData.Item2;
+                _userId = loginData.Item2.UserId;
                 OnRefresh();
             }
             else

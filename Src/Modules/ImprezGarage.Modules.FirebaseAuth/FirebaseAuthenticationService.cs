@@ -1,32 +1,41 @@
-﻿namespace ImprezGarage.Modules.FirebaseAuth
+﻿
+namespace ImprezGarage.Modules.FirebaseAuth
 {
     using Firebase.Auth;
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Regions;
-    using Views;
     using System;
     using System.Threading.Tasks;
+    using Views;
 
     internal class FirebaseAuthenticationService : IAuthenticationService
     {
-        private string _userId;
+        private readonly IDataService _dataService;
 
-        public async Task<string> CreateAccountAsync(string email, string password)
+        private Account _currentUser;
+
+        public FirebaseAuthenticationService(IDataService dataService)
+        {
+            _dataService = dataService;
+        }
+
+        public async Task<Account> CreateAccountAsync(string email, string password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.CreateUserWithEmailAndPasswordAsync(email, password);
-            _userId = response.User.LocalId;
-            return _userId;
+            _currentUser = _dataService.CreateUser(response.User.LocalId);
+            return _currentUser;
         }
 
-        public async Task<string> LoginAsync(string email, string password)
+        public async Task<Account> LoginAsync(string email, string password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.SignInWithEmailAndPasswordAsync(email, password);
-            _userId = response.User.LocalId;
-            return _userId;
+            _currentUser = _dataService.GetUser(response.User.LocalId);
+            return _currentUser;
         }
 
         public void SignIn()
@@ -35,12 +44,12 @@
             regionManager.RequestNavigate(RegionNames.AuthenticateRegion, typeof(SignIn).FullName);
         }
 
-        public string CurrentUser()
+        public Account CurrentUser()
         {
-            if(string.IsNullOrEmpty(_userId))
+            if(_currentUser == null)
                 throw new NullReferenceException("No user is currently signed in.");
 
-            return _userId;
+            return _currentUser;
         }
     }
 }

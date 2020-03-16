@@ -185,6 +185,10 @@
       <Project>{4703d4d1-0c8c-4ab2-9058-f8dc87d60c61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\ImprezGarage.Modules.Account\ImprezGarage.Modules.Account.csproj">
+      <Project>{a92a32ba-4a5d-4bad-a68a-1d479d2fb7f4}</Project>
+      <Name>ImprezGarage.Modules.Account</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Modules\ImprezGarage.Modules.FirebaseAuth\ImprezGarage.Modules.FirebaseAuth.csproj">
       <Project>{efe76be9-a5ca-4e99-976f-e34c03e941b1}</Project>
       <Name>ImprezGarage.Modules.FirebaseAuth</Name>
@@ -252,9 +256,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\upgrade-account.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterCompile" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">

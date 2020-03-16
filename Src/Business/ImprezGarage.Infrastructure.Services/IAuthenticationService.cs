@@ -1,12 +1,14 @@
-﻿namespace ImprezGarage.Infrastructure.Services
+﻿
+namespace ImprezGarage.Infrastructure.Services
 {
+    using Model;
     using System.Threading.Tasks;
 
     public interface IAuthenticationService
     {
-        Task<string> CreateAccountAsync(string email, string password);
-        Task<string> LoginAsync(string email, string password);
+        Task<Account> CreateAccountAsync(string email, string password);
+        Task<Account> LoginAsync(string email, string password);
         void SignIn();
-        string CurrentUser();
+        Account CurrentUser();
     }
 }

@@ -2,6 +2,7 @@
 namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 {
     using Infrastructure;
+    using Infrastructure.Model;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
@@ -48,7 +49,7 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 
         private void OnCancel()
         {
-            _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, string>(false, string.Empty));
+            _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, Account>(false, null));
             Application.Current.Shutdown();
         }
 

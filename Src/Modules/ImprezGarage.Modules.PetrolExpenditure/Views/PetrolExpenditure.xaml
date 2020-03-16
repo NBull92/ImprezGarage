@@ -29,22 +29,24 @@
          VerticalAlignment="Stretch">
         <ListBox.ItemTemplate>
             <DataTemplate>
-                <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Amount, StringFormat='{}{0:C}', ConverterCulture='en-GB'}" 
+                <DockPanel>
+                        <TextBlock DockPanel.Dock="Left" Text="{Binding Amount, StringFormat='{}{0:C}', ConverterCulture='en-GB'}" 
                                Margin="5" VerticalAlignment="Center" Width="45"/>
-                    <TextBlock  Text="{Binding DateEntered, StringFormat=D}" 
+                        <TextBlock DockPanel.Dock="Left"  Text="{Binding DateEntered, StringFormat=D}" 
                                 Margin="5" VerticalAlignment="Center" Width="160"/>
-
-                    <Button ToolTip="Delete" 
-                            Command="{Binding DeleteExpenseCommand}"
-                            Background="{x:Null}" 
-                            BorderThickness="0"
-                            Width="48" 
-                            Margin="0">
-                        <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-close-window-24.png"
-                               Width="24" Height="24"/>
-                    </Button>
-                </StackPanel>
+                        <Button DockPanel.Dock="Left" 
+                                ToolTip="Delete" 
+                                Margin="5"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Command="{Binding DeleteExpenseCommand}"
+                                Background="{StaticResource ImprezGarage.Grey}"
+                                Foreground="{StaticResource ImprezGarage.Grey2}"
+                                Style="{DynamicResource RoundedSquareButtonStyle}">
+                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-delete-24.png" 
+                                   Width="20"/>
+                        </Button>
+                </DockPanel>
             </DataTemplate>
         </ListBox.ItemTemplate>
     </ListBox>

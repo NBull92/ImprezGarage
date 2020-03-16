@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="ImprezGarage.Modules.Account.Views.AccountDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:converters="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Margin="17, 0, 0, 0"
+          Visibility="{Binding IsSignedIn, Converter={StaticResource BoolToVisibilityConverter}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="16"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="ACCOUNT DETAILS"
+                       FontWeight="Bold"
+                       FontSize="12"
+                       Foreground="{StaticResource ImprezGarage.Grey}"
+                       VerticalAlignment="Top"/>
+            <Rectangle Margin="12.5,1,0,0" 
+                       Height="2" 
+                       Width="90"
+                       Fill="{StaticResource ImprezGarage.Grey}"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock FontSize="12"
+                           Margin="0,6,0,0"
+                           Text="Type: "
+                           Foreground="{StaticResource ImprezGarage.Accent}"/>
+                <TextBlock FontSize="12"
+                           Margin="0,6,0,0"
+                           Text="Demo"
+                           Foreground="{StaticResource ImprezGarage.Accent}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
+                            VerticalAlignment="Top"
+                            Margin="0,17,0,0"
+                            Height="16">
+                    <Image Source="pack://application:,,,/ImprezGarage.Modules.Account;component/Resources/garage-door.png"/>
+                    <TextBlock Text="Vehicles" 
+                               Margin="10,0,0,0" 
+                               FontSize="12"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource ImprezGarage.Foreground}"/>
+                </StackPanel>
+
+                <Rectangle Margin="0,7,0,0"
+                           Height="3" 
+                           Width="127"
+                           Fill="{StaticResource ImprezGarage.Grey}"
+                           HorizontalAlignment="Left"/>
+
+                <TextBlock FontSize="12"
+                           Margin="0,6,0,0"
+                           Text="1 of 1 "
+                           Foreground="{StaticResource ImprezGarage.Accent}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,17,0,0">
+                <TextBlock Text="Upgrade Account"
+                            FontWeight="Bold"
+                            FontSize="12"
+                            Margin="0,0,0,0"
+                            Foreground="{StaticResource ImprezGarage.Grey}"
+                            VerticalAlignment="Center"/>
+                <Button Height="20" 
+                        Margin="5,0,0,0" 
+                        Background="Transparent"
+                        Style="{StaticResource CircleButtonStyle}">
+                        <Image Source="pack://application:,,,/ImprezGarage.Modules.Account;component/Resources/upgrade-account.png" />
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

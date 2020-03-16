@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Modules.Fireba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Infrastructure.Services", "Src\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj", "{6DB36D85-2A15-4003-A52E-33CD08171C34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Modules.Account", "Src\Modules\ImprezGarage.Modules.Account\ImprezGarage.Modules.Account.csproj", "{A92A32BA-4A5D-4BAD-A68A-1D479D2FB7F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{6DB36D85-2A15-4003-A52E-33CD08171C34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6DB36D85-2A15-4003-A52E-33CD08171C34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6DB36D85-2A15-4003-A52E-33CD08171C34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A92A32BA-4A5D-4BAD-A68A-1D479D2FB7F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A92A32BA-4A5D-4BAD-A68A-1D479D2FB7F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A92A32BA-4A5D-4BAD-A68A-1D479D2FB7F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A92A32BA-4A5D-4BAD-A68A-1D479D2FB7F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{F94645C3-A792-418B-9004-B3507A3FF95D} = {0112AA5B-F663-428B-8991-18CF085F755C}
 		{EFE76BE9-A5CA-4E99-976F-E34C03E941B1} = {0112AA5B-F663-428B-8991-18CF085F755C}
 		{6DB36D85-2A15-4003-A52E-33CD08171C34} = {292AAB90-F2F0-4F78-8F5F-8C106DCED9C2}
+		{A92A32BA-4A5D-4BAD-A68A-1D479D2FB7F4} = {0112AA5B-F663-428B-8991-18CF085F755C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {654855BA-1C13-4216-9E13-C9095F6C4831}

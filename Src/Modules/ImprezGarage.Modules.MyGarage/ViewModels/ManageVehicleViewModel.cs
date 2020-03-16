@@ -3,8 +3,6 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using Prism.Events;
-
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
     using CreationViewModels;
@@ -15,6 +13,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
+    using Prism.Events;
     using Prism.Regions;
     using System;
     using System.Collections.ObjectModel;
@@ -303,7 +302,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 Make = VehicleCreationViewModel.Make,
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now,
-                UserId = authentication.CurrentUser()
+                UserId = authentication.CurrentUser().UserId
             };
 
             VehicleCreationViewModel.SaveNew(newVehicle);

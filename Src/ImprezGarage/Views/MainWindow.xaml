@@ -8,6 +8,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:viewModels="clr-namespace:ImprezGarage.ViewModels"
+                     xmlns:account="clr-namespace:ImprezGarage.Modules.Account.Views;assembly=ImprezGarage.Modules.Account"
                      x:Class="ImprezGarage.Views.MainWindow"
                      WindowStartupLocation="CenterScreen"
                      ShowIconOnTitleBar="False"
@@ -59,125 +60,14 @@
                         <RowDefinition Height="174"/>
                     </Grid.RowDefinitions>
                     <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleListRegion}" VerticalAlignment="Top"/>
-
-                    <Grid Grid.Column="0" Grid.Row="1" Margin="17, 0, 0, 0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="16"/>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="ACCOUNT DETAILS"
-                                   FontWeight="Bold"
-                                   FontSize="12"
-                                   Foreground="{StaticResource ImprezGarage.Grey}"
-                                   VerticalAlignment="Top"/>
-                            <Rectangle Margin="12.5,1,0,0" 
-                                   Height="2" 
-                                   Width="90"
-                                   Fill="{StaticResource ImprezGarage.Grey}"
-                                   VerticalAlignment="Center"/>
-                        </StackPanel>
-
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock FontSize="12"
-                                       Margin="0,6,0,0"
-                                       Text="Type: "
-                                       Foreground="{StaticResource ImprezGarage.Accent}"/>
-                                <TextBlock FontSize="12"
-                                           Margin="0,6,0,0"
-                                           Text="Demo"
-                                           Foreground="{StaticResource ImprezGarage.Accent}"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="1">
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" 
-                                            VerticalAlignment="Top"
-                                            Margin="0,17,0,0"
-                                            Height="16">
-                                    <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-MyDrive.jpg"/>
-                                    <TextBlock Text="Vehicles" 
-                                               Margin="10,0,0,0" 
-                                               FontSize="12"
-                                               VerticalAlignment="Center"
-                                               Foreground="{StaticResource ImprezGarage.Foreground}"/>
-                                </StackPanel>
-
-                                <Rectangle Margin="0,7,0,0"
-                                           Height="3" 
-                                           Width="127"
-                                           Fill="{StaticResource ImprezGarage.Grey}"
-                                           HorizontalAlignment="Left"/>
-
-                                <TextBlock FontSize="12"
-                                           Margin="0,6,0,0"
-                                           Text="1 of 1 "
-                                           Foreground="{StaticResource ImprezGarage.Accent}"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,17,0,0">
-                                <TextBlock Text="Upgrade Account"
-                                           FontWeight="Bold"
-                                           FontSize="12"
-                                           Margin="0,0,0,0"
-                                           Foreground="{StaticResource ImprezGarage.Grey}"
-                                           VerticalAlignment="Center"/>
-                                <Image Source="../Resources/upgrade-account.png" Height="20" Margin="5,0,0,0"/>
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
+                    <account:AccountDetails Grid.Column="0" Grid.Row="1"/>
                 </Grid>
             </Border>
 
             <!-- Nav Bar -->
             <Grid Grid.Row="0" Grid.Column="1">
                 <DockPanel>
-                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,27,0">
-                        <Button x:Name="BtnAccount"
-                                DockPanel.Dock="Right"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                MinWidth="72"
-                                Height="30"
-                                Margin="0,0,0,0"
-                                FontSize="8"
-                                ToolTip="Account"
-                                Foreground="White"
-                                FontWeight="Normal"
-                                Background="{StaticResource ImprezGarage.Grey}"
-                                Click="BtnAccountOnClick"
-                                ContextMenuOpening="BtnAccountOnContextMenuOpening"
-                                Style="{StaticResource RoundedRectangleButtonStyle}">
-                                <DockPanel HorizontalAlignment="Stretch">
-                                    <TextBlock DockPanel.Dock="Left"
-                                               FontSize="12"
-                                               Text="Nicholas"
-                                               TextAlignment="Center"
-                                               HorizontalAlignment="Stretch"
-                                               VerticalAlignment="Center"
-                                               Margin="1,0,5,0"/>
-                                    <Grid>
-                                        <Ellipse Width="28"
-                                                 Height="28" Fill="{StaticResource ImprezGarage.Main}">
-                                        </Ellipse>
-                                        <TextBlock Text="N"
-                                                   FontSize="12"
-                                                   VerticalAlignment="Center"
-                                                   HorizontalAlignment="Center" />
-                                    </Grid>
-                                </DockPanel>
-                                <Button.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="Sign Out" Command="{Binding SignOut}"/>
-                                    </ContextMenu>
-                                </Button.ContextMenu>
-                        </Button>
-                    </DockPanel>
+                    <account:AccountControlButton DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,27,0"/>
                     <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,38,0">
                         <Button DockPanel.Dock="Right"
                             HorizontalAlignment="Center"

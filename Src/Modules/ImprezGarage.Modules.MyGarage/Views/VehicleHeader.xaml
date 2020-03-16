@@ -35,7 +35,7 @@
                         Background="{StaticResource ImprezGarage.Grey}"
                         Foreground="{StaticResource ImprezGarage.Grey2}"
                         Style="{DynamicResource RoundedSquareButtonStyle}">
-            <Image Source="pack://application:,,,/ImprezGarage.Modules.MyGarage;component/Resources/icons8-delete-24.png" 
+            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-delete-24.png" 
                    Width="20"/>
         </Button>
 

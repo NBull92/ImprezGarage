@@ -7,15 +7,12 @@ namespace ImprezGarage.ViewModels
 {
     using Infrastructure;
     using Infrastructure.BaseClasses;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using System;
-    using System.Drawing;
-    using System.IO;
-    using System.Windows.Forms;
-    using System.Windows.Media.Imaging;
 
     public class MainWindowViewModel : DialogViewModelBase
     {
@@ -30,7 +27,7 @@ namespace ImprezGarage.ViewModels
         /// <summary>
         /// Store the title of the main window.
         /// </summary>
-        private string _title = "Imprez Garage";
+        private string _title = "ImprezGarage";
         public string Title
         {
             get => _title; 
@@ -64,7 +61,6 @@ namespace ImprezGarage.ViewModels
         /// Command for showing and closing the settings view.
         /// </summary>
         public DelegateCommand OpenSettings { get; set; }
-        public DelegateCommand SignOut { get; set; }
         #endregion
         #endregion
 
@@ -78,12 +74,11 @@ namespace ImprezGarage.ViewModels
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
             OpenSettings = new DelegateCommand(OnOpenSettings);
-            SignOut = new DelegateCommand(OnSignOut);
 
             _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
         }
         
-        private void OnUserAccountChange(Tuple<bool, string> loginData)
+        private void OnUserAccountChange(Tuple<bool, Account> loginData)
         {
             IsBusy = !loginData.Item1;
             if (IsBusy)
@@ -92,11 +87,6 @@ namespace ImprezGarage.ViewModels
             }
         }
 
-        private void OnSignOut()
-        {
-            _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, string>(false, string.Empty));
-        }
-        
         /// <summary>
         /// When the settings command is clicked, set IsSettingsOpen to it's opposite.
         /// </summary>

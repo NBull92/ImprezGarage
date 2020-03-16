@@ -161,6 +161,24 @@ namespace ImprezGarage.Modules.Firebase
         {
             _dataStorage.UpdateVehicle(vehicle);
         }
+
+        public Account CreateUser(string userLocalId)
+        {
+            var newUser = new Account
+            {
+                UserId = userLocalId,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now
+            };
+            _dataStorage.SubmitNewUser(newUser);
+            return newUser;
+        }
+
+        public Account GetUser(string userLocalId)
+        {
+            return _dataStorage.GetUser(userLocalId);
+        }
+
         #endregion
     }
 }

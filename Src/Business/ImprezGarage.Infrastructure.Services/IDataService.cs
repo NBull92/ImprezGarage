@@ -122,5 +122,8 @@ namespace ImprezGarage.Infrastructure.Services
         /// <param name="vehicle"></param>
         void UpdateVehicle(Vehicle vehicle);
         #endregion
+
+        Account CreateUser(string userLocalId);
+        Account GetUser(string userLocalId);
     }
 }   //ImprezGarage.Infrastructure.Model namespace 
