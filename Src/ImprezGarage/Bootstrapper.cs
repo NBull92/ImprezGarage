@@ -3,12 +3,11 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Services;
-using ImprezGarage.Modules.MyGarage;
-
 namespace ImprezGarage
 {
+    using Infrastructure.Services;
     using Microsoft.Practices.Unity;
+    using Modules.MyGarage;
     using Prism.Modularity;
     using Prism.Unity;
     using System.Windows;
@@ -51,7 +50,6 @@ namespace ImprezGarage
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(Modules.FirebaseAuth.AuthModule));
             moduleCatalog.AddModule(typeof(Modules.Firebase.FirebaseModule));
-            moduleCatalog.AddModule(typeof(Modules.StatusBar.StatusBarModule));
             moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
             moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));
             moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
@@ -59,7 +57,7 @@ namespace ImprezGarage
             moduleCatalog.AddModule(typeof(Modules.PetrolExpenditure.PetrolExpenditureModule));
 
             //MyGarage needs to be last as it is the one that loads the vehicles initially.
-            moduleCatalog.AddModule(typeof(Modules.MyGarage.MyGarageModule));
+            moduleCatalog.AddModule(typeof(MyGarageModule));
         }
     }
 }   //ImprezGarage namespace 

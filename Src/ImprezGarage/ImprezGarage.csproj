@@ -217,10 +217,6 @@
       <Project>{0606c09a-7385-4220-8bc2-2a427db11f49}</Project>
       <Name>ImprezGarage.Modules.Settings</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Modules\ImprezGarage.Modules.StatusBar\ImprezGarage.Modules.StatusBar.csproj">
-      <Project>{387ca747-3ccc-4b1b-9351-204d86f80651}</Project>
-      <Name>ImprezGarage.Modules.StatusBar</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
