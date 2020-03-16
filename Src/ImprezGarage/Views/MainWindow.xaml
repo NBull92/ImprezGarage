@@ -30,7 +30,6 @@
             <Button Content="{Binding SignInOut}" Command="{Binding SignOut}"/>
             <Button Content="Refresh" Command="{Binding RefreshCommand}" ToolTip="Refresh the current data."/>
             <Button Content="Settings" Command="{Binding OpenSettings}" ToolTip="Open settings panel."/>
-            <Button Content="." FontSize="25" Command="{Binding MinimizeToTray}" ToolTip="Minimize to system tray." Margin="0,-10,0,0"/>
         </mahApps:WindowCommands>
     </baseClasses:DialogViewBase.RightWindowCommands>
 

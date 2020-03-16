@@ -71,7 +71,6 @@ namespace ImprezGarage.ViewModels
         /// Command for showing and closing the settings view.
         /// </summary>
         public DelegateCommand OpenSettings { get; set; }
-        public DelegateCommand MinimizeToTray { get; set; }
         public DelegateCommand SignOut { get; set; }
         #endregion
         #endregion
@@ -86,7 +85,6 @@ namespace ImprezGarage.ViewModels
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
             OpenSettings = new DelegateCommand(OnOpenSettings);
-            MinimizeToTray = new DelegateCommand(Hide);
             SignOut = new DelegateCommand(OnSignOut);
 
             _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
