@@ -178,7 +178,6 @@
     <Resource Include="Resources\icons8-quad-bike-24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Temp Resources\GD-Initial.png" />
     <Resource Include="Temp Resources\GD-MyDrive.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

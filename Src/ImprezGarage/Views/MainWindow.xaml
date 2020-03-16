@@ -138,34 +138,44 @@
             <Grid Grid.Row="0" Grid.Column="1">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,27,0">
-                        <Button DockPanel.Dock="Right"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Width="72"
-                            Height="30"
-                            Margin="0,0,0,0"
-                            Padding="0"
-                            FontSize="8"
-                            ToolTip="Account"
-                            Foreground="{StaticResource ImprezGarage.Grey}"
-                            FontWeight="Normal"
-                            Click="ButtonBase_OnClick"
-                            Style="{StaticResource RoundedRectangleButtonStyle}">
-                            <DockPanel HorizontalAlignment="Stretch" Width="67">
-                                <TextBlock DockPanel.Dock="Left"
-                                       Text="Jessica"
-                                       TextAlignment="Center"
-                                       HorizontalAlignment="Stretch"
-                                       VerticalAlignment="Center"
-                                       Margin="0,0,0,0"/>
-                                <Image DockPanel.Dock="Left" Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Temp Resources/GD-Initial.png" 
-                                       HorizontalAlignment="Right"/>
-                            </DockPanel>
-                            <Button.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Sign Out" Command="{Binding SignOut}"/>
-                                </ContextMenu>
-                            </Button.ContextMenu>
+                        <Button x:Name="btnAccount"
+                                DockPanel.Dock="Right"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                MinWidth="72"
+                                Height="30"
+                                Margin="0,0,0,0"
+                                FontSize="8"
+                                ToolTip="Account"
+                                Foreground="White"
+                                FontWeight="Normal"
+                                Background="{StaticResource ImprezGarage.Grey}"
+                                Click="ButtonBase_OnClick"
+                                ContextMenuOpening="FrameworkElement_OnContextMenuOpening"
+                                Style="{StaticResource RoundedRectangleButtonStyle}">
+                                <DockPanel HorizontalAlignment="Stretch">
+                                    <TextBlock DockPanel.Dock="Left"
+                                               FontSize="12"
+                                               Text="Nicholas"
+                                               TextAlignment="Center"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Center"
+                                               Margin="1,0,5,0"/>
+                                    <Grid>
+                                        <Ellipse Width="28"
+                                                 Height="28" Fill="{StaticResource ImprezGarage.Main}">
+                                        </Ellipse>
+                                        <TextBlock Text="N"
+                                                   FontSize="12"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DockPanel>
+                                <Button.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Sign Out" Command="{Binding SignOut}"/>
+                                    </ContextMenu>
+                                </Button.ContextMenu>
                         </Button>
                     </DockPanel>
                     <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,38,0">

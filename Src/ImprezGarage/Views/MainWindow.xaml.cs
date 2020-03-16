@@ -9,6 +9,7 @@ namespace ImprezGarage.Views
     using System.Windows;
     using System.Windows.Controls;
     using ViewModels;
+    using System.Windows.Controls.Primitives;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -27,14 +28,20 @@ namespace ImprezGarage.Views
             model.ShowWindowRequest += (sender, e) => Activate();
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private void BtnAccountOnClick(object sender, RoutedEventArgs e)
         {
             var cm = ((Button)sender).ContextMenu;
             if (cm == null)
                 return;
 
             cm.PlacementTarget = (Button) sender;
+            cm.Placement = PlacementMode.Bottom;
             cm.IsOpen = true;
+        }
+        
+        private void BtnAccountOnContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }   //ImprezGarage.Views namespace 
