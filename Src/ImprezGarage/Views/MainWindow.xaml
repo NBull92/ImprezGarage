@@ -138,7 +138,7 @@
             <Grid Grid.Row="0" Grid.Column="1">
                 <DockPanel>
                     <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,27,0">
-                        <Button x:Name="btnAccount"
+                        <Button x:Name="BtnAccount"
                                 DockPanel.Dock="Right"
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
@@ -150,8 +150,8 @@
                                 Foreground="White"
                                 FontWeight="Normal"
                                 Background="{StaticResource ImprezGarage.Grey}"
-                                Click="ButtonBase_OnClick"
-                                ContextMenuOpening="FrameworkElement_OnContextMenuOpening"
+                                Click="BtnAccountOnClick"
+                                ContextMenuOpening="BtnAccountOnContextMenuOpening"
                                 Style="{StaticResource RoundedRectangleButtonStyle}">
                                 <DockPanel HorizontalAlignment="Stretch">
                                     <TextBlock DockPanel.Dock="Left"
