@@ -47,13 +47,6 @@ namespace ImprezGarage.ViewModels
             set => SetProperty(ref _isSettingsOpen, value);
         }
 
-        private string _signInOut;
-        public string SignInOut
-        {
-            get => _signInOut;
-            set => SetProperty(ref _signInOut, value);
-        }
-
         private bool _isBusy = true;
         public bool IsBusy
         {
@@ -88,8 +81,6 @@ namespace ImprezGarage.ViewModels
             SignOut = new DelegateCommand(OnSignOut);
 
             _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
-            SignInOut = "Sign In";
-            CreateSystemTrayIcon();
         }
         
         private void OnUserAccountChange(Tuple<bool, string> loginData)
@@ -97,73 +88,13 @@ namespace ImprezGarage.ViewModels
             IsBusy = !loginData.Item1;
             if (IsBusy)
             {
-                SignInOut = "Sign In";
                 ServiceLocator.Current.GetInstance<IAuthenticationService>().SignIn();
-            }
-            else
-            {
-                SignInOut ="Sign Out";
             }
         }
 
         private void OnSignOut()
         {
             _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, string>(false, string.Empty));
-        }
-
-        private void CreateSystemTrayIcon()
-        {
-            var icon = ConvertFromBitmapFrame("pack://application:,,,/ImprezGarage;component/Resources/icon_v2.png");
-
-            var notifyIcon = new NotifyIcon
-            {
-                Icon = icon,
-                Visible = true,
-                ContextMenu = new ContextMenu(),
-                Text = Title,
-            };
-            notifyIcon.MouseDoubleClick += OnNotifyIcon_MouseDoubleClick;
-
-            var itemOpen = new MenuItem("Open",
-                (o, e) =>
-                {
-                    ShowWindow();
-                });
-
-            var itemQuit = new MenuItem("Exit",
-                (o, e) =>
-                {
-                    Close();
-                });
-
-            notifyIcon.ContextMenu.MenuItems.Add(itemOpen);
-            notifyIcon.ContextMenu.MenuItems.Add("-");
-            notifyIcon.ContextMenu.MenuItems.Add(itemQuit);
-        }
-
-        /// <summary>
-        /// An called when the system tray icon is double clicked.
-        /// This reactivates the window and forces to the front.
-        /// </summary>
-        private void OnNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            ShowWindow();
-        }
-
-        /// <summary>
-        /// Takes in a filename of an image and converts it to an icon.
-        /// </summary>
-        private static Icon ConvertFromBitmapFrame(string fileName)
-        {
-            var uri = new Uri(fileName, UriKind.RelativeOrAbsolute);
-            var source = BitmapFrame.Create(uri);
-            var ms = new MemoryStream();
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(source);
-            encoder.Save(ms);
-            ms.Seek(0, SeekOrigin.Begin);
-            var bmp = new Bitmap(ms);
-            return Icon.FromHandle(bmp.GetHicon());
         }
         
         /// <summary>
