@@ -39,11 +39,11 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             set => SetProperty(ref _selectedVehicle, value);
         }
 
-        private ObservableCollection<MaintenanceCheckViewModel> _maintainanceChecks;
-        public ObservableCollection<MaintenanceCheckViewModel> MaintainanceChecks
+        private ObservableCollection<MaintenanceCheckViewModel> _maintenanceChecks;
+        public ObservableCollection<MaintenanceCheckViewModel> MaintenanceChecks
         {
-            get => _maintainanceChecks;
-            set => SetProperty(ref _maintainanceChecks, value);
+            get => _maintenanceChecks;
+            set => SetProperty(ref _maintenanceChecks, value);
         }
 
         #region Command
@@ -69,7 +69,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
 
         private void GetSelectedVehicleMaintenanceChecks()
         {
-            MaintainanceChecks = new ObservableCollection<MaintenanceCheckViewModel>();
+            MaintenanceChecks = new ObservableCollection<MaintenanceCheckViewModel>();
 
             if (SelectedVehicle == null)
                 return;
@@ -83,7 +83,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             {
                 var checkVm = _container.Resolve<MaintenanceCheckViewModel>();
                 checkVm.LoadInstance(check, SelectedVehicle);
-                MaintainanceChecks.Add(checkVm);
+                MaintenanceChecks.Add(checkVm);
             }
         }
 
@@ -133,13 +133,12 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         #region INavigationAware
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            var refresh = navigationContext.Parameters["Refresh"];
-
-            //check it is not null.
-            if (refresh != null && Convert.ToBoolean(refresh))
+            if (SelectedVehicle == null)
             {
-                GetSelectedVehicleMaintenanceChecks();
+                SelectedVehicle = _vehicleService.GetSelectedVehicle();
             }
+
+            GetSelectedVehicleMaintenanceChecks();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

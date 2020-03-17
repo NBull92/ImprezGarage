@@ -60,8 +60,8 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Margin="12,0,0,0"
-                        ToolTip="Manage Vehicle"
-                        Command="{Binding EditVehicle}"
+                        ToolTip="Perform Maintenance Check"
+                        Command="{Binding MaintenanceCheck}"
                         Background="{StaticResource ImprezGarage.Grey}"
                         Foreground="{StaticResource ImprezGarage.Grey2}"
                         Style="{DynamicResource RoundedSquareButtonStyle}">
@@ -74,12 +74,27 @@
                 Width="30"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
+                Margin="12,0,0,0"
                 ToolTip="View Petrol Expenditure"
                 Command="{Binding ViewPetrolExpenditure}"
                 Background="{StaticResource ImprezGarage.Grey}"
                 Foreground="{StaticResource ImprezGarage.Grey2}"
                 Style="{DynamicResource RoundedSquareButtonStyle}">
             <Image Source="pack://application:,,,/ImprezGarage.Modules.MyGarage;component/Resources/icons8-gas-station-24.png" 
+                   Width="20"/>
+        </Button>
+
+        <Button DockPanel.Dock="Right"
+                Height="30"
+                Width="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                ToolTip="Manage Vehicle"
+                Command="{Binding EditVehicle}"
+                Background="{StaticResource ImprezGarage.Grey}"
+                Foreground="{StaticResource ImprezGarage.Grey2}"
+                Style="{DynamicResource RoundedSquareButtonStyle}">
+            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-edit-24.png" 
                    Width="20"/>
         </Button>
     </DockPanel>

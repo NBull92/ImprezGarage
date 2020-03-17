@@ -71,6 +71,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         public DelegateCommand DeleteVehicle { get; set; }
         public DelegateCommand Repairs { get; }
         public DelegateCommand ViewPetrolExpenditure { get; }
+        public DelegateCommand MaintenanceCheck { get; }
+
         #endregion
 
         public VehicleHeaderViewModel(IDataService dataService, INotificationsService notificationsService,
@@ -88,6 +90,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             DeleteVehicle = new DelegateCommand(DeleteVehicleExecute);
             Repairs = new DelegateCommand(OnRepairs);
             ViewPetrolExpenditure = new DelegateCommand(OnViewPetrolExpenditure);
+            MaintenanceCheck = new DelegateCommand(OnMaintenanceCheck);
         }
 
         private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
@@ -104,6 +107,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         }
 
         #region Command Handlers
+        private void OnMaintenanceCheck()
+        {
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PerformChecks.Views.Main).FullName);
+        }
+
         /// <summary>
         /// Deletes this vehicle in the database.
         /// </summary>
