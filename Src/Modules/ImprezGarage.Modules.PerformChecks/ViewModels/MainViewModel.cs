@@ -120,7 +120,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                         { "SelectedTypeId", viewModel.SelectedMaintenanceCheckType.Id },
                     };
 
-                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(PerformNewCheck).FullName + parameters);
+                    _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PerformNewCheck).FullName + parameters);
                 }
                 else
                 {

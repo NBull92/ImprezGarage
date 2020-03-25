@@ -127,7 +127,8 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                     await _dataService.SetOptionsPerformedAsync(performedChecks);
 
                     _notificationsService.Alert(CheckUpdated, NotificationHeader);
-                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+
+                    _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(Main).FullName);
                 }
                 catch (Exception e)
                 {
@@ -157,7 +158,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                     await _dataService.SetOptionsPerformedAsync(performedChecks);
 
                     _notificationsService.Alert(CheckCompleted, NotificationHeader);
-                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+                    _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(Main).FullName);
                 }
                 catch (Exception e)
                 {
@@ -185,7 +186,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private void CancelExecute()
         {
             //puts the Main View in the checksregion of the interface.
-            _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(Main).FullName);
         }
         #endregion
         

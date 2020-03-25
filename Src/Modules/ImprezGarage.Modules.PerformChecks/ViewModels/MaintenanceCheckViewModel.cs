@@ -128,7 +128,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 { "IsEditMode", true }
             };
 
-            _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(PerformNewCheck).FullName + parameters);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PerformNewCheck).FullName + parameters);
         }
 
         internal void LoadInstance(MaintenanceCheck check, Vehicle selectedVehicle)

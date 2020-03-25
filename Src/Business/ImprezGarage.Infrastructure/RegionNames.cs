@@ -24,11 +24,6 @@ namespace ImprezGarage.Infrastructure
         /// The region in which the vehicle list populates.
         /// </summary>
         public static string VehicleListRegion = "VehicleListRegion";
-
-        /// <summary>
-        /// The region in which the maintenance checks populates.
-        /// </summary>
-        public static string ChecksRegion = "ChecksRegion";
         
         /// <summary>
         /// The region in which the petrol entries populates.
