@@ -66,11 +66,19 @@
     </Compile>
     <Compile Include="ViewModels\AccountControlButtonViewModel.cs" />
     <Compile Include="ViewModels\AccountDetailsViewModel.cs" />
+    <Compile Include="ViewModels\ProfileHeaderViewModel.cs" />
+    <Compile Include="ViewModels\ProfilePageViewModel.cs" />
     <Compile Include="Views\AccountControlButton.xaml.cs">
       <DependentUpon>AccountControlButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AccountDetails.xaml.cs">
       <DependentUpon>AccountDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfileHeader.xaml.cs">
+      <DependentUpon>ProfileHeader.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -91,6 +99,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ProfileHeader.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Core">
@@ -101,9 +117,21 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj">
+      <Project>{6DB36D85-2A15-4003-A52E-33CD08171C34}</Project>
+      <Name>ImprezGarage.Infrastructure.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure\ImprezGarage.Infrastructure.csproj">
       <Project>{4703D4D1-0C8C-4AB2-9058-F8DC87D60C61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImprezGarage.Modules.MyGarage\ImprezGarage.Modules.MyGarage.csproj">
+      <Project>{137FBF70-8858-4658-9111-423AD53483E2}</Project>
+      <Name>ImprezGarage.Modules.MyGarage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImprezGarage.Modules.PetrolExpenditure\ImprezGarage.Modules.PetrolExpenditure.csproj">
+      <Project>{AF5AC673-ED77-4B03-BB2B-2C3FAEEF3BD5}</Project>
+      <Name>ImprezGarage.Modules.PetrolExpenditure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

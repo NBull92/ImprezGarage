@@ -26,7 +26,7 @@ namespace ImprezGarage.Modules.FirebaseAuth
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.CreateUserWithEmailAndPasswordAsync(email, password);
-            _currentUser = _dataService.CreateUser(response.User.LocalId);
+            _currentUser = _dataService.CreateUser(response.User.LocalId, email);
             return _currentUser;
         }
 

@@ -54,6 +54,7 @@
         </DockPanel>
         <Button.ContextMenu>
             <ContextMenu>
+                <MenuItem Header="View Profile" Command="{Binding ViewProfile}"/>
                 <MenuItem Header="Sign Out" Command="{Binding SignOut}"/>
             </ContextMenu>
         </Button.ContextMenu>

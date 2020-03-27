@@ -206,6 +206,11 @@ namespace ImprezGarage.Modules.Firebase
         {
             return _connection.Get<Account>().FirstOrDefault(O => O.UserId == userLocalId);
         }
+
+        public void UpdateUser(Account user)
+        {
+            _connection.Update(user, user.Id);
+        }
         #endregion
     }
 }

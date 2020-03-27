@@ -69,6 +69,8 @@ namespace ImprezGarage.Infrastructure.Services
         /// See if the user had previously chosen this maintenance option during a previous check.
         /// </summary>
         Task<IEnumerable<PerformedMaintenanceOption>> GetOptionsPerformedAsync(int maintenanceCheckId);
+
+        Account GetUser(string userLocalId);
         #endregion
 
         #region Adds
@@ -95,6 +97,8 @@ namespace ImprezGarage.Infrastructure.Services
         Task SetOptionsPerformedAsync(IEnumerable<PerformedMaintenanceOption> maintenanceOptionsPerformed);
 
         void AddRepairReport(string partReplaced, string replacedWith, double price, int vehicleId);
+
+        Account CreateUser(string userLocalId, string email);
         #endregion
 
         #region Deletes
@@ -115,15 +119,13 @@ namespace ImprezGarage.Infrastructure.Services
         #endregion
 
         #region Updates
-
         /// <summary>
         /// This function will take the data from the passed through vehicle and update it's entity in the database.
         /// </summary>
         /// <param name="vehicle"></param>
         void UpdateVehicle(Vehicle vehicle);
-        #endregion
 
-        Account CreateUser(string userLocalId);
-        Account GetUser(string userLocalId);
+        void UpdateUser(Account user);
+        #endregion
     }
 }   //ImprezGarage.Infrastructure.Model namespace 

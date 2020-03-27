@@ -53,11 +53,10 @@ namespace ImprezGarage
             moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
             moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));
             moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
-            moduleCatalog.AddModule(typeof(Modules.PerformChecks.PerformChecksModule));
             moduleCatalog.AddModule(typeof(Modules.PetrolExpenditure.PetrolExpenditureModule));
-
-            //MyGarage needs to be last as it is the one that loads the vehicles initially.
+            moduleCatalog.AddModule(typeof(Modules.PerformChecks.PerformChecksModule));
             moduleCatalog.AddModule(typeof(MyGarageModule));
+            moduleCatalog.AddModule(typeof(Modules.Account.AccountModule));
         }
     }
 }   //ImprezGarage namespace 

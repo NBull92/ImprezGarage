@@ -162,14 +162,21 @@ namespace ImprezGarage.Modules.Firebase
             _dataStorage.UpdateVehicle(vehicle);
         }
 
-        public Account CreateUser(string userLocalId)
+        public void UpdateUser(Account user)
+        {
+            _dataStorage.UpdateUser(user);
+        }
+
+        public Account CreateUser(string userLocalId, string email)
         {
             var newUser = new Account
             {
                 UserId = userLocalId,
                 DateCreated = DateTime.Now,
-                DateModified = DateTime.Now
+                DateModified = DateTime.Now,
+                Name = email.Split('@')[0]
             };
+            
             _dataStorage.SubmitNewUser(newUser);
             return newUser;
         }
