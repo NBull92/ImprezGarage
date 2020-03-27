@@ -1,4 +1,4 @@
-name: ImprezeGarage.Dev
+name: ImprezeGarage.NetFramework.CI
 
 on: [push]
 
