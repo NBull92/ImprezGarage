@@ -10,6 +10,8 @@ namespace ImprezGarage
     using Modules.MyGarage;
     using Prism.Modularity;
     using Prism.Unity;
+    using Squirrel;
+    using System.Threading.Tasks;
     using System.Windows;
     using Views;
 

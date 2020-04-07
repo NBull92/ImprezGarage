@@ -27,7 +27,7 @@ namespace ImprezGarage.ViewModels
         /// <summary>
         /// Store the title of the main window.
         /// </summary>
-        private string _title = "ImprezGarage";
+        private string _title = "ImprezGarage v0.0.10";
         public string Title
         {
             get => _title; 
