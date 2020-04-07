@@ -1,177 +1,128 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
-    using ImprezGarage.Infrastructure.ViewModels;
-    using Prism.Commands;
+    using LiveCharts;
+    using LiveCharts.Defaults;
+    using LiveCharts.Wpf;
     using Prism.Events;
     using Prism.Mvvm;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
 
-    public class PetrolUsageGraphViewModel : BindableBase
+    public class PetrolUsageGraphViewModel : BindableBase, IDisposable
     {
         #region Attributes
         private readonly IDataService _dataService;
-        private readonly IEventAggregator _eventAggregator;
-
+        private readonly IVehicleService _vehicleService;
         private ObservableCollection<ChartData> _expenses;
-        private ObservableCollection<ChartData> _filteredExpenses;
-        private string _minDate;
-        private string _maxDate;
-        private double _maxCost;
-        private bool _isLineChart;
-        private string _chartStyleContent;
-        private VehicleViewModel _selectedVehicle;
+        private Vehicle _selectedVehicle;
+        private DateTime _fromDate;
+        private DateTime _toDate;
+
         #endregion
 
         #region Properties
-        public ObservableCollection<ChartData> FilteredExpenses
-        {
-            get => _filteredExpenses;
-            set => SetProperty(ref _filteredExpenses, value);
-        }
-
-        public string MinDate
-        {
-            get => _minDate;
-            set => SetProperty(ref _minDate, value);
-        }
-
-        public string MaxDate
-        {
-            get => _maxDate;
-            set => SetProperty(ref _maxDate, value);
-        }
-        
-        public double MaxCost
-        {
-            get => _maxCost;
-            set => SetProperty(ref _maxCost, value);
-        }
-
-        public bool IsLineChart
-        {
-            get => _isLineChart;
-            set
-            {
-                SetProperty(ref _isLineChart, value);
-                ChartStyleContent = _isLineChart ? "Line" : "Bar";
-            }
-        }
-
-        public string ChartStyleContent
-        {
-            get => _chartStyleContent;
-            set => SetProperty(ref _chartStyleContent, value);
-        }
-
-        #region Commands
-        public DelegateCommand<string> OnChartDisplayChangeCommand { get; set; }
-        #endregion
+       
+        public SeriesCollection SeriesCollection { get; set; }
         #endregion
 
         #region Methods
-        public PetrolUsageGraphViewModel(IDataService dataService, IEventAggregator eventAggregator)
+        public PetrolUsageGraphViewModel(IDataService dataService, IEventAggregator eventAggregator, IVehicleService vehicleService)
         {
+            SeriesCollection = new SeriesCollection();
             _dataService = dataService;
-            _eventAggregator = eventAggregator;
-            
-            OnChartDisplayChangeCommand = new DelegateCommand<string>(OnChartDisplayChangeExecute);
+            _vehicleService = vehicleService;
 
             ResetParameters();
 
-            _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Subscribe(OnSelectedVehicleChanged);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
+            eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
         }
 
         private void ResetParameters()
         {
             _expenses = new ObservableCollection<ChartData>();
-            MaxCost = 0;
-            IsLineChart = true;
-            ChartStyleContent = "Line";
-            MinDate = DateTime.Now.AddDays(-7).ToShortDateString();
-            MaxDate = DateTime.Now.AddDays(1).ToShortDateString();
+            _fromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            _toDate = DateTime.Now;
         }
 
-        private void OnSelectedVehicleChanged(VehicleViewModel vehicleViewModel)
+        private void OnFilteredDatesChanged(Tuple<DateTime, DateTime> updatedDates)
+        {
+            _fromDate = updatedDates.Item1;
+            _toDate = updatedDates.Item2;
+            FilterExpenses();
+        }
+
+
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
             ResetParameters();
-            _selectedVehicle = vehicleViewModel;
+
+            if (vehicle == null)
+            {
+                _selectedVehicle = null;
+                return;
+            }
+
+            _selectedVehicle = vehicle;
             GetSelectedVehiclePetrolExpenses();
+            FilterExpenses();
         }
 
         private void GetSelectedVehiclePetrolExpenses()
         {
+            _expenses.Clear();
+
             if (_selectedVehicle == null)
+                return;
+
+            var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Id);
+
+            if (expenses?.Result == null)
+                return;
+
+            foreach (var expense in expenses.Result)
             {
-                _expenses = null;
-                FilteredExpenses = null;
-            }
-            else
-            {
-                _expenses = new ObservableCollection<ChartData>();
-                FilteredExpenses = new ObservableCollection<ChartData>();
-
-                var expenses = _dataService.GetPetrolExpensesByVehicleId(_selectedVehicle.Vehicle.Id);
-
-                if (expenses?.Result == null)
-                    return;
-
-                foreach (var expense in expenses.Result)
+                _expenses.Add(new ChartData
                 {
-                    MaxCost = MaxCost < expense.Amount ? Convert.ToDouble(expense.Amount) : MaxCost;
-                    _expenses.Add(new ChartData
-                    {
-                        Cost = Convert.ToDouble(expense.Amount),
-                        Date = expense.DateEntered.Value.ToShortDateString()
-                    });
-                }
-
-                FilterExpenses();
+                    Cost = Convert.ToDouble(expense.Amount),
+                    Date = expense.DateEntered.Value.ToShortDateString()
+                });
             }
         }
 
         private void FilterExpenses()
         {
-            if (_expenses == null)
+            SeriesCollection.Clear();
+
+            if (_expenses == null) 
                 return;
 
-            FilteredExpenses = new ObservableCollection<ChartData>(_expenses.Where(o => Convert.ToDateTime(o.Date).Date >= Convert.ToDateTime(MinDate).Date
-                                                    && Convert.ToDateTime(o.Date).Date <= Convert.ToDateTime(MaxDate).Date).OrderBy(o => Convert.ToDateTime(o.Date).Date));
-        }
-
-        #region Command Handlers
-        private void OnChartDisplayChangeExecute(string chartDisplay)
-        {
-            switch (chartDisplay)
+            foreach (var chartData in _expenses.Where(o => Convert.ToDateTime(o.Date).Date >= _fromDate
+                                                           && Convert.ToDateTime(o.Date).Date <= _toDate)
+                                                           .OrderBy(o => Convert.ToDateTime(o.Date).Date))
             {
-                case "Week":
-                    MinDate = DateTime.Now.AddDays(-7).ToShortDateString();
-                    break;
-                case "Month":
-                    MinDate = DateTime.Now.AddMonths(-1).ToShortDateString();
-                    break;
-                case "Six Months":
-                    MinDate = DateTime.Now.AddMonths(-6).ToShortDateString();
-                    break;
-                case "Year":
-                    MinDate = DateTime.Now.AddYears(-1).ToShortDateString();
-                    break;
-                default:
-                    MinDate = "01/01/01";
-                    break;
+                var series = new PieSeries
+                {
+                    Title = string.Empty,
+                    Values = new ChartValues<ObservableValue> {new ObservableValue(chartData.Cost)},
+                    DataLabels = true,
+                };
+                SeriesCollection.Add(series);
             }
-
-            FilterExpenses();
         }
         #endregion
-        #endregion
+
+        public void Dispose()
+        {
+            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+        }
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

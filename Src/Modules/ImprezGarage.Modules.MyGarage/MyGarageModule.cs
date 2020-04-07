@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
@@ -22,6 +22,8 @@ namespace ImprezGarage.Modules.MyGarage
         public void Initialize()
         {
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleListRegion, typeof(MainView));
+            _regionManager.RegisterViewWithRegion(RegionNames.VehicleHeaderRegion, typeof(VehicleHeader));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ManageVehicle));
         }
     }
 }   //ImprezGarage.Modules.MyGarage namespace 

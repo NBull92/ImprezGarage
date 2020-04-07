@@ -1,36 +1,55 @@
-﻿namespace ImprezGarage.Modules.FirebaseAuth
+﻿
+namespace ImprezGarage.Modules.FirebaseAuth
 {
     using Firebase.Auth;
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Regions;
+    using System;
+    using System.Threading.Tasks;
     using Views;
 
-    public class FirebaseAuthenticationService : IAuthenticationService
+    internal class FirebaseAuthenticationService : IAuthenticationService
     {
-        private string _userId;
+        private readonly IDataService _dataService;
 
-        public string CreateAccount(string email, string password)
+        private Account _currentUser;
+
+        public FirebaseAuthenticationService(IDataService dataService)
         {
-            var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
-            var response = auth.CreateUserWithEmailAndPasswordAsync(email, password);
-            _userId = response.Result.User.LocalId;
-            return _userId;
+            _dataService = dataService;
         }
 
-        public string Login(string email, string password)
+        public async Task<Account> CreateAccountAsync(string email, string password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
-            var response = auth.SignInWithEmailAndPasswordAsync(email, password);
-            _userId = response.Result.User.LocalId;
-            return _userId;
+            var response = await auth.CreateUserWithEmailAndPasswordAsync(email, password);
+            _currentUser = _dataService.CreateUser(response.User.LocalId, email);
+            return _currentUser;
+        }
+
+        public async Task<Account> LoginAsync(string email, string password)
+        {
+            var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
+            var response = await auth.SignInWithEmailAndPasswordAsync(email, password);
+            _currentUser = _dataService.GetUser(response.User.LocalId);
+            return _currentUser;
         }
 
         public void SignIn()
         {
             var regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
             regionManager.RequestNavigate(RegionNames.AuthenticateRegion, typeof(SignIn).FullName);
+        }
+
+        public Account CurrentUser()
+        {
+            if(_currentUser == null)
+                throw new NullReferenceException("No user is currently signed in.");
+
+            return _currentUser;
         }
     }
 }

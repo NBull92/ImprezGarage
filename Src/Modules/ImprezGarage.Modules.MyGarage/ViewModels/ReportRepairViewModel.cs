@@ -1,18 +1,16 @@
 ﻿
-namespace ImprezGarage.Modules.MyGarage.ViewModels
+namespace ImprezGarage.Infrastructure.ViewModels
 {
-    using Infrastructure;
-    using Infrastructure.Services;
-    using Infrastructure.BaseClasses;
+    using BaseClasses;
     using Prism.Commands;
-    using Prism.Events;
+    using Services;
     using System;
+    using System.Globalization;
     using System.Windows.Input;
 
     public class ReportRepairViewModel : DialogViewModelBase
     {
         private readonly IDataService _dataService;
-        private readonly IEventAggregator _eventAggregator;
         private readonly INotificationsService _notificationService;
         private readonly ILoggerService _loggerService;
 
@@ -26,28 +24,66 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             set => SetProperty(ref _addEnabled, value);
         }
 
-        private string _partReplaced;
-        public string PartReplaced
+        private string _part;
+        public string Part
         {
-            get => _partReplaced;
-            set => SetProperty(ref _partReplaced, value);
+            get => _part;
+            set
+            {
+                SetProperty(ref _part, value);
+                AllowAdd();
+            }
         }
 
-        private string _replacedWith;
-        public string ReplacedWith
+        private void AllowAdd()
         {
-            get => _replacedWith;
-            set => SetProperty(ref _replacedWith, value);
+            if (string.IsNullOrWhiteSpace(Part))
+            {
+                AddEnabled = false;
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(Replacement))
+            {
+                AddEnabled = false;
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(Price.ToString(CultureInfo.InvariantCulture)))
+            {
+                AddEnabled = false;
+                return;
+            }
+            if (Math.Abs(Price) < 0.01)
+            {
+                AddEnabled = false;
+                return;
+            }
+
+            AddEnabled = true;
+        }
+
+        private string _replacement;
+        public string Replacement
+        {
+            get => _replacement;
+            set
+            {
+                SetProperty(ref _replacement, value);
+                AllowAdd();
+            }
         }
 
         private double _price;
         public double Price
         {
             get => _price;
-            set => SetProperty(ref _price, value);
+            set
+            {
+                SetProperty(ref _price, value);
+                AllowAdd();
+            }
         }
 
-        public int VehicleId { get; internal set; }
+        public int VehicleId { get; set; }
 
         #region Commands
         public DelegateCommand Add { get; }
@@ -55,8 +91,12 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         public DelegateCommand<KeyEventArgs> OnKeyDownCommand { get; }
         #endregion
 
-        public ReportRepairViewModel()
+        public ReportRepairViewModel(IDataService dataService, INotificationsService notificationService, ILoggerService loggerService)
         {
+            _dataService = dataService;
+            _notificationService = notificationService;
+            _loggerService = loggerService;
+
             Add = new DelegateCommand(OnAdd).ObservesCanExecute(() => AddEnabled);
             Cancel = new DelegateCommand(Close);
             OnKeyDownCommand = new DelegateCommand<KeyEventArgs>(OnKeyDownExecute);
@@ -70,9 +110,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             try
             {
-                _dataService.AddRepairReport(PartReplaced, ReplacedWith, Price, VehicleId);
+                _dataService.AddRepairReport(Part, Replacement, Price, VehicleId);
                 _notificationService.Alert(ReportComplete);
-                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }
             catch (Exception e)
             {

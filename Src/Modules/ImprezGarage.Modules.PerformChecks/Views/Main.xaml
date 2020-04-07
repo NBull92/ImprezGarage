@@ -9,10 +9,16 @@
              xmlns:vm="clr-namespace:ImprezGarage.Modules.PerformChecks.ViewModels"
              mc:Ignorable="d" 
              prism:ViewModelLocator.AutoWireViewModel="True"
-             Height="300" Width="400"
+             Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
+             Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}">
     <UserControl.Resources>
-        <conv:NullToBoolConverter x:Key="NullToBoolConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <conv:NullToBoolConverter x:Key="NullToBoolConverter"/>
+        </ResourceDictionary>
     </UserControl.Resources>
     
     <Grid VerticalAlignment="Top">
@@ -25,7 +31,7 @@
                 Command="{Binding PerformNewCheckCommand}" 
                 IsEnabled="{Binding SelectedVehicle,Mode=TwoWay, Converter={StaticResource NullToBoolConverter}}"/>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding MaintainanceChecks}">
+        <ListBox Grid.Row="1" ItemsSource="{Binding MaintenanceChecks}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -35,11 +41,11 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock VerticalAlignment="Center" Margin="5" Width="260">
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5" Width="260">
                             <Run Text="{Binding MaintenanceCheckType.Type}"/>
                             <Run Text=" - "/>
                             <Run Text="{Binding DatePerformed, StringFormat=D}"/>
@@ -49,24 +55,28 @@
                             ToolTip="Edit" 
                             Command="{Binding EditMaintenanceCheckCommand}" 
                             d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
-                            Background="{x:Null}" 
-                            BorderThickness="0"
-                            Width="48" 
-                            Margin="0">
-                            <Image Source="pack://application:,,,/ImprezGarage.Modules.PerformChecks;component/Resources/icons8-edit-24.png"
-                                    Width="24" Height="24"/>
+                            Height="30"
+                            Width="30" 
+                            Margin="12,5,0,5"
+                            Background="{StaticResource ImprezGarage.Grey}"
+                            Foreground="{StaticResource ImprezGarage.Grey2}"
+                            Style="{DynamicResource RoundedSquareButtonStyle}">
+                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-edit-24.png" 
+                                   Width="20"/>
                         </Button>
 
                         <Button Grid.Column="2" 
                             Command="{Binding DeleteMaintenanceCheckCommand}" 
                             ToolTip="Delete"
                             d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
-                            Background="{x:Null}" 
-                            BorderThickness="0"
-                            Width="48" 
-                            Margin="0">
-                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-close-window-24.png"
-                                    Width="24" Height="24"/>
+                            Height="30"
+                            Width="30"
+                            Margin="12,5,5,5"
+                            Background="{StaticResource ImprezGarage.Grey}"
+                            Foreground="{StaticResource ImprezGarage.Grey2}"
+                            Style="{DynamicResource RoundedSquareButtonStyle}">
+                            <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-delete-24.png"
+                                   Width="20"/>
                         </Button>
                     </Grid>
                 </DataTemplate>

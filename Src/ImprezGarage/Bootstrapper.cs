@@ -1,13 +1,17 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
 namespace ImprezGarage
 {
+    using Infrastructure.Services;
     using Microsoft.Practices.Unity;
+    using Modules.MyGarage;
     using Prism.Modularity;
     using Prism.Unity;
+    using Squirrel;
+    using System.Threading.Tasks;
     using System.Windows;
     using Views;
 
@@ -35,7 +39,7 @@ namespace ImprezGarage
         protected override void ConfigureContainer()
         {
             //register the interface to the container
-            //Container.RegisterType<IDataService, DataService>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<IVehicleService, VehicleService>(new ContainerControlledLifetimeManager());
 
             base.ConfigureContainer();
         }
@@ -48,15 +52,13 @@ namespace ImprezGarage
             var moduleCatalog = (ModuleCatalog)ModuleCatalog;
             moduleCatalog.AddModule(typeof(Modules.FirebaseAuth.AuthModule));
             moduleCatalog.AddModule(typeof(Modules.Firebase.FirebaseModule));
-            moduleCatalog.AddModule(typeof(Modules.StatusBar.StatusBarModule));
             moduleCatalog.AddModule(typeof(Modules.Logger.LoggerModule));
             moduleCatalog.AddModule(typeof(Modules.Settings.SettingsModule));
             moduleCatalog.AddModule(typeof(Modules.Notifications.NotificationsModule));
-            moduleCatalog.AddModule(typeof(Modules.PerformChecks.PerformChecksModule));
             moduleCatalog.AddModule(typeof(Modules.PetrolExpenditure.PetrolExpenditureModule));
-
-            //MyGarage needs to be last as it is the one that loads the vehicles initially.
-            moduleCatalog.AddModule(typeof(Modules.MyGarage.MyGarageModule));
+            moduleCatalog.AddModule(typeof(Modules.PerformChecks.PerformChecksModule));
+            moduleCatalog.AddModule(typeof(MyGarageModule));
+            moduleCatalog.AddModule(typeof(Modules.Account.AccountModule));
         }
     }
 }   //ImprezGarage namespace 

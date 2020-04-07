@@ -6,16 +6,75 @@
              xmlns:inf="clr-namespace:ImprezGarage.Infrastructure;assembly=ImprezGarage.Infrastructure"
              xmlns:vm="clr-namespace:ImprezGarage.Modules.PetrolExpenditure.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300"
              xmlns:prism="http://prismlibrary.com/"
+             xmlns:converters="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             Height="{Binding ActualHeight, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
+             Width="{Binding ActualWidth, RelativeSource={RelativeSource FindAncestor, AncestorType=ContentControl}}"
              prism:ViewModelLocator.AutoWireViewModel="True" 
              d:DataContext="{d:DesignInstance Type=vm:MainViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converters:NullToBoolConverter x:Key="NullToBoolConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolEntriesRegion}"/>
-        <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolHistoryRegion}"/>        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="292"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="0,5">
+            <TextBlock Foreground="{StaticResource ImprezGarage.Main}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="14"
+                       Text="Petrol Expenditure"/>
+
+            <Button DockPanel.Dock="Left"
+                    Height="30"
+                    Width="30"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right" 
+                    Margin="12,0,0,0"
+                    ToolTip="Add petrol expenditure"
+                    Background="{StaticResource ImprezGarage.Main}"
+                    Foreground="{StaticResource ImprezGarage.Foreground}"
+                    Style="{DynamicResource RoundedSquareButtonStyle}"
+                    IsEnabled="{Binding SelectedVehicle, Converter={StaticResource NullToBoolConverter}}"
+                    Command="{Binding AddExpenditureCommand}">
+                <Button.Content>
+                    <Image Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Resources/icons8-plus-math-24.png"
+                           Width="20" Height="20"/>
+                </Button.Content>
+            </Button>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Date:" VerticalAlignment="Center" Margin="5,0,5,0" 
+                       Foreground="{StaticResource ImprezGarage.Main}"/>
+            <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Center"
+                        DisplayDateEnd="{Binding ToDate}"
+                        Foreground="{StaticResource ImprezGarage.Main}"/>
+            <TextBlock Text="To:" VerticalAlignment="Center" Margin="5,0,5,0"
+                       Foreground="{StaticResource ImprezGarage.Main}"/>
+            <DatePicker SelectedDate="{Binding ToDate, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Center"
+                        DisplayDateEnd="{x:Static sys:DateTime.Today}"
+                        Foreground="{StaticResource ImprezGarage.Main}"/>
+        </StackPanel>
+
+        <ContentControl Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch"
+                        prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolEntriesRegion}"/>
+        <ContentControl Grid.Row="2" Grid.Column="1"  VerticalAlignment="Stretch"
+                        prism:RegionManager.RegionName="{x:Static inf:RegionNames.PetrolHistoryRegion}"/>        
     </Grid>
 </UserControl>

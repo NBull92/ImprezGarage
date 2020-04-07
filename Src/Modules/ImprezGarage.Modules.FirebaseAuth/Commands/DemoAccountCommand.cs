@@ -1,12 +1,14 @@
-﻿using System;
-using System.Windows.Input;
-using Firebase.Auth;
-using ImprezGarage.Infrastructure;
-using Microsoft.Practices.ServiceLocation;
-using Prism.Events;
-
+﻿
 namespace ImprezGarage.Modules.FirebaseAuth.Commands
 {
+    using Infrastructure;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
+    using Microsoft.Practices.ServiceLocation;
+    using Prism.Events;
+    using System;
+    using System.Windows.Input;
+
     public class DemoAccountCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
@@ -18,10 +20,10 @@ namespace ImprezGarage.Modules.FirebaseAuth.Commands
 
         public async void Execute(object parameter)
         {
-            var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
-            var response = await auth.SignInWithEmailAndPasswordAsync(DemoAccountDetails.Email, DemoAccountDetails.Password);
+            var authService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
+            var response = await authService.LoginAsync(DemoAccountDetails.Email, DemoAccountDetails.Password);
             var eventAggregator = ServiceLocator.Current.GetInstance<IEventAggregator>();
-            eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, string>(true, response.User.LocalId));
+            eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, Account>(true, response));
         }
     }
 }

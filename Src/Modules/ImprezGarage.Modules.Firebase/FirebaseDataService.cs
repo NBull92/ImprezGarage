@@ -1,15 +1,14 @@
 ﻿
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.Firebase
 {
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    class FirebaseDataService : IDataService
+    internal class FirebaseDataService : IDataService
     {
         #region Attributes
         /// <summary>
@@ -162,6 +161,31 @@ namespace ImprezGarage.Modules.Firebase
         {
             _dataStorage.UpdateVehicle(vehicle);
         }
+
+        public void UpdateUser(Account user)
+        {
+            _dataStorage.UpdateUser(user);
+        }
+
+        public Account CreateUser(string userLocalId, string email)
+        {
+            var newUser = new Account
+            {
+                UserId = userLocalId,
+                DateCreated = DateTime.Now,
+                DateModified = DateTime.Now,
+                Name = email.Split('@')[0]
+            };
+            
+            _dataStorage.SubmitNewUser(newUser);
+            return newUser;
+        }
+
+        public Account GetUser(string userLocalId)
+        {
+            return _dataStorage.GetUser(userLocalId);
+        }
+
         #endregion
     }
 }

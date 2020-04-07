@@ -17,4 +17,3 @@ jobs:
       uses: warrenbuckley/Setup-MSBuild@v1     
     - name: Build With MSBuild
       run: msbuild ImprezGarage.sln -p:Configuration=Release
-      

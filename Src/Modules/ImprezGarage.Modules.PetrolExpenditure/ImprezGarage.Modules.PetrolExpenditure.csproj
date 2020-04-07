@@ -68,6 +68,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PetrolEvents.cs" />
     <Compile Include="PetrolExpenditureModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -111,6 +112,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj">
+      <Project>{6db36d85-2a15-4003-a52e-33cd08171c34}</Project>
+      <Name>ImprezGarage.Infrastructure.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure\ImprezGarage.Infrastructure.csproj">
       <Project>{4703D4D1-0C8C-4AB2-9058-F8DC87D60C61}</Project>
       <Name>ImprezGarage.Infrastructure</Name>
@@ -139,6 +144,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="LiveCharts">
+      <Version>0.9.7</Version>
+    </PackageReference>
+    <PackageReference Include="LiveCharts.Wpf">
+      <Version>0.9.7</Version>
+    </PackageReference>
     <PackageReference Include="MahApps.Metro">
       <Version>1.6.5</Version>
     </PackageReference>

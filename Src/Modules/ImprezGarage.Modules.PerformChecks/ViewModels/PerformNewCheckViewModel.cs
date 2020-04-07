@@ -1,20 +1,19 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
-
-using System.Collections.Generic;
-using ImprezGarage.Infrastructure.Model;
 
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using Views;
@@ -27,6 +26,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly INotificationsService _notificationsService;
         private readonly ILoggerService _loggerService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IVehicleService _vehicleService;
         private static int _selectedVehicleId;
         private MaintenanceCheck _maintenanceCheck;
         private const string CheckCompleted = "Maintenance check completed!";
@@ -71,13 +71,14 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         
         #region Methods
         public PerformNewCheckViewModel(IDataService dataService, INotificationsService notificationsService, IRegionManager regionManager,
-            ILoggerService loggerService, IEventAggregator eventAggregator)
+            ILoggerService loggerService, IEventAggregator eventAggregator, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
             _regionManager = regionManager;
             _loggerService = loggerService;
             _eventAggregator = eventAggregator;
+            _vehicleService = vehicleService;
 
             SubmitText = "Submit";
             SubmitCommand = new DelegateCommand(SubmitExecute);
@@ -126,7 +127,8 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                     await _dataService.SetOptionsPerformedAsync(performedChecks);
 
                     _notificationsService.Alert(CheckUpdated, NotificationHeader);
-                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+
+                    _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(Main).FullName);
                 }
                 catch (Exception e)
                 {
@@ -156,7 +158,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                     await _dataService.SetOptionsPerformedAsync(performedChecks);
 
                     _notificationsService.Alert(CheckCompleted, NotificationHeader);
-                    _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName, new NavigationParameters { { "Refresh", true } });
+                    _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(Main).FullName);
                 }
                 catch (Exception e)
                 {
@@ -184,7 +186,7 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private void CancelExecute()
         {
             //puts the Main View in the checksregion of the interface.
-            _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(Main).FullName);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(Main).FullName);
         }
         #endregion
         
@@ -279,13 +281,10 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
                 }
             }
 
-            //store the passed through vehicle Id.
-            var selectedVehicleId = navigationContext.Parameters["SelectedVehicleId"];
-
-            //check it is not null.
-            if (selectedVehicleId != null)
+            var vehicle = _vehicleService.GetSelectedVehicle();
+            if (vehicle != null)
             {
-                _selectedVehicleId = Convert.ToInt32(selectedVehicleId);
+                _selectedVehicleId = vehicle.Id;
             }
         }
 

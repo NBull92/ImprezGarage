@@ -124,10 +124,8 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\VehicleTypeToVisibilityConverter.cs" />
     <Compile Include="Events.cs" />
-    <Compile Include="ReportRepair.xaml.cs">
-      <DependentUpon>ReportRepair.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Services\IRepository.cs" />
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\IDbEntity.cs" />
     <Compile Include="Model\LogDataModel\Log.cs" />
     <Compile Include="Model\LogDataModel\LogEntry.cs" />
     <Compile Include="Model\SettingsDataModel\Configuration.cs" />
@@ -140,13 +138,6 @@
     <Compile Include="Model\Vehicle.cs" />
     <Compile Include="Model\VehicleType.cs" />
     <Compile Include="RegionNames.cs" />
-    <Compile Include="Services\IAuthenticationService.cs" />
-    <Compile Include="Services\ILoggerService.cs" />
-    <Compile Include="Services\INotificationsService.cs" />
-    <Compile Include="Services\ISettingsService.cs" />
-    <Compile Include="ViewModels\ReportRepairViewModel.cs" />
-    <Compile Include="ViewModels\VehicleViewModel.cs" />
-    <Compile Include="Services\IDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -175,14 +166,23 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-close-window-24.png" />
     <Resource Include="Resources\icons8-plus-math-24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ReportRepair.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Styles.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-car-24.png" />
+    <Resource Include="Resources\icons8-quad-bike-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-delete-24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-edit-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

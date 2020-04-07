@@ -1,21 +1,18 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
 namespace ImprezGarage.ViewModels
 {
-    using Infrastructure.Services;
     using Infrastructure;
     using Infrastructure.BaseClasses;
+    using Infrastructure.Model;
+    using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using System;
-    using System.Drawing;
-    using System.IO;
-    using System.Windows.Forms;
-    using System.Windows.Media.Imaging;
 
     public class MainWindowViewModel : DialogViewModelBase
     {
@@ -30,7 +27,7 @@ namespace ImprezGarage.ViewModels
         /// <summary>
         /// Store the title of the main window.
         /// </summary>
-        private string _title = "Imprez Garage";
+        private string _title = "ImprezGarage v0.0.10";
         public string Title
         {
             get => _title; 
@@ -45,15 +42,6 @@ namespace ImprezGarage.ViewModels
         {
             get => _isSettingsOpen;
             set => SetProperty(ref _isSettingsOpen, value);
-        }
-
-        public string Icon { get; } = "pack://application:,,,/ImprezGarage;component/Resources/icon_v2.png";
-
-        private string _signInOut;
-        public string SignInOut
-        {
-            get => _signInOut;
-            set => SetProperty(ref _signInOut, value);
         }
 
         private bool _isBusy = true;
@@ -72,9 +60,7 @@ namespace ImprezGarage.ViewModels
         /// <summary>
         /// Command for showing and closing the settings view.
         /// </summary>
-        public DelegateCommand Settings { get; set; }
-        public DelegateCommand MinimizeToTray { get; set; }
-        public DelegateCommand SignOut { get; set; }
+        public DelegateCommand OpenSettings { get; set; }
         #endregion
         #endregion
 
@@ -87,93 +73,24 @@ namespace ImprezGarage.ViewModels
             _eventAggregator = eventAggregator;
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
-            Settings = new DelegateCommand(OnSettingsClicked);
-            MinimizeToTray = new DelegateCommand(Hide);
-            SignOut = new DelegateCommand(OnSignOut);
+            OpenSettings = new DelegateCommand(OnOpenSettings);
 
             _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
-            SignInOut = "Sign In";
-            CreateSystemTrayIcon();
         }
         
-        private void OnUserAccountChange(Tuple<bool, string> loginData)
+        private void OnUserAccountChange(Tuple<bool, Account> loginData)
         {
             IsBusy = !loginData.Item1;
             if (IsBusy)
             {
-                SignInOut = "Sign In";
                 ServiceLocator.Current.GetInstance<IAuthenticationService>().SignIn();
             }
-            else
-            {
-                SignInOut ="Sign Out";
-            }
         }
 
-        private void OnSignOut()
-        {
-            _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, string>(false, string.Empty));
-        }
-
-        private void CreateSystemTrayIcon()
-        {
-            var icon = ConvertFromBitmapFrame("pack://application:,,,/ImprezGarage;component/Resources/icon_v2.png");
-
-            var notifyIcon = new NotifyIcon
-            {
-                Icon = icon,
-                Visible = true,
-                ContextMenu = new ContextMenu(),
-                Text = Title,
-            };
-            notifyIcon.MouseDoubleClick += OnNotifyIcon_MouseDoubleClick;
-
-            var itemOpen = new MenuItem("Open",
-                (o, e) =>
-                {
-                    ShowWindow();
-                });
-
-            var itemQuit = new MenuItem("Exit",
-                (o, e) =>
-                {
-                    Close();
-                });
-
-            notifyIcon.ContextMenu.MenuItems.Add(itemOpen);
-            notifyIcon.ContextMenu.MenuItems.Add("-");
-            notifyIcon.ContextMenu.MenuItems.Add(itemQuit);
-        }
-
-        /// <summary>
-        /// An called when the system tray icon is double clicked.
-        /// This reactivates the window and forces to the front.
-        /// </summary>
-        private void OnNotifyIcon_MouseDoubleClick(object sender, System.Windows.Forms.MouseEventArgs e)
-        {
-            ShowWindow();
-        }
-
-        /// <summary>
-        /// Takes in a filename of an image and converts it to an icon.
-        /// </summary>
-        private static Icon ConvertFromBitmapFrame(string fileName)
-        {
-            var uri = new Uri(fileName, UriKind.RelativeOrAbsolute);
-            var source = BitmapFrame.Create(uri);
-            var ms = new MemoryStream();
-            var encoder = new PngBitmapEncoder();
-            encoder.Frames.Add(source);
-            encoder.Save(ms);
-            ms.Seek(0, SeekOrigin.Begin);
-            var bmp = new Bitmap(ms);
-            return System.Drawing.Icon.FromHandle(bmp.GetHicon());
-        }
-        
         /// <summary>
         /// When the settings command is clicked, set IsSettingsOpen to it's opposite.
         /// </summary>
-        private void OnSettingsClicked()
+        private void OnOpenSettings()
         {
             IsSettingsOpen = !IsSettingsOpen;
         }

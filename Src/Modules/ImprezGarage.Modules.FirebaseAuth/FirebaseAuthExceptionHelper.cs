@@ -1,9 +1,10 @@
-﻿using Firebase.Auth;
-using ImprezGarage.Infrastructure.Services;
-using Microsoft.Practices.ServiceLocation;
-
+﻿
 namespace ImprezGarage.Modules.FirebaseAuth
 {
+    using Firebase.Auth;
+    using Infrastructure.Services;
+    using Microsoft.Practices.ServiceLocation;
+
     public static class FirebaseAuthExceptionHelper
     {
         public static string GetErrorReason(FirebaseAuthException exception)

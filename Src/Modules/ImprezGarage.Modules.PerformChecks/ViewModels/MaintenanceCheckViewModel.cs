@@ -1,17 +1,14 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using ImprezGarage.Infrastructure.Model;
-
 namespace ImprezGarage.Modules.PerformChecks.ViewModels
 {
-    using ImprezGarage.Infrastructure.ViewModels;
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
-    using Prism.Events;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
@@ -24,37 +21,36 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         private readonly IDataService _dataService;
         private readonly IRegionManager _regionManager;
         private readonly INotificationsService _notificationsService;
-        private readonly IEventAggregator _eventAggregator;
         private readonly ILoggerService _loggerService;
+        private readonly IVehicleService _vehicleService;
 
         private const string DeleteMaintenanceCheck = "Are you sure you wish to delete this maintenance check?";
         private const string DeletedSuccessfully = "Maintenance check deleted successfuly!";
-
-        private int _id;
-        private VehicleViewModel _selectedVehicle;
-        private MaintenanceCheckType _maintenanceCheckType;
-        private DateTime _datePerformed;
         #endregion
 
         #region Properties
+        private int _id;
         public int Id
         {
             get => _id;
             set => SetProperty(ref _id, value);
         }
 
-        public VehicleViewModel SelectedVehicle
+        private Vehicle _selectedVehicle;
+        public Vehicle SelectedVehicle
         {
             get => _selectedVehicle;
             set => SetProperty(ref _selectedVehicle, value);
         }
 
+        private MaintenanceCheckType _maintenanceCheckType;
         public MaintenanceCheckType MaintenanceCheckType
         {
             get => _maintenanceCheckType;
             set => SetProperty(ref _maintenanceCheckType, value);
         }
 
+        private DateTime _datePerformed;
         public DateTime DatePerformed
         {
             get => _datePerformed;
@@ -70,13 +66,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
         
         #region Methods
         public MaintenanceCheckViewModel(IDataService dataService, IRegionManager regionManager, INotificationsService notificationsService,
-            IEventAggregator eventAggregator, ILoggerService loggerService)
+            ILoggerService loggerService, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _regionManager = regionManager;
             _notificationsService = notificationsService;
-            _eventAggregator = eventAggregator;
             _loggerService = loggerService;
+            _vehicleService = vehicleService;
 
             OpenMaintenanceCheck = new DelegateCommand<MouseButtonEventArgs>(OpenMaintenanceCheckExecute);
             EditMaintenanceCheckCommand = new DelegateCommand(EditMaintenanceCheckExecute);
@@ -94,7 +90,15 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             {
                 _dataService.DeleteMaintenanceCheck(Id);
                 _notificationsService.Alert(DeletedSuccessfully);
-                _eventAggregator.GetEvent<Events.SelectVehicleEvent>().Publish(SelectedVehicle);
+                if (SelectedVehicle != null)
+                {
+                    _vehicleService.RaiseSelectedVehicleChanged(SelectedVehicle);
+                }
+                else
+                {
+                    _vehicleService.ClearSelectedVehicle();
+                }
+
             }
             catch (Exception e)
             {
@@ -121,14 +125,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             var parameters = new NavigationParameters
             {
                 { "MaintenanceCheckId", Id },
-                { "SelectedVehicleId", SelectedVehicle.Vehicle.Id},
                 { "IsEditMode", true }
             };
 
-            _regionManager.RequestNavigate(RegionNames.ChecksRegion, typeof(PerformNewCheck).FullName + parameters);
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(PerformNewCheck).FullName + parameters);
         }
 
-        internal void LoadInstance(MaintenanceCheck check, VehicleViewModel selectedVehicle)
+        internal void LoadInstance(MaintenanceCheck check, Vehicle selectedVehicle)
         {
             Id = check.Id;
 

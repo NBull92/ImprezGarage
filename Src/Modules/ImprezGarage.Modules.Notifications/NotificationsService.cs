@@ -1,16 +1,16 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
 namespace ImprezGarage.Modules.Notifications
 {
+    using DataModel;
     using Infrastructure.Services;
-    using ViewModels;
-    using Views;
     using System;
     using System.Linq;
-    using ImprezGarage.Modules.Notifications.DataModel;
+    using ViewModels;
+    using Views;
 
     internal class NotificationsService : INotificationsService
     {

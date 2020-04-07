@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
@@ -64,7 +64,7 @@ namespace ImprezGarage.Modules.Logger.ViewModels
             LogLifeCollection = new ListCollectionView(new ObservableCollection<int> { 7, 14, 21, 28 });
 
             // Retrieve the data model of the logger stored in the region context.
-            _loggerDataModel = (LogModel)regionManager.Regions[RegionNames.StatusBarRegion].Context;
+            _loggerDataModel = (LogModel)regionManager.Regions[RegionNames.ContentRegion].Context;
             
             // Get the currently selected settings.
             SelectedDetail = _loggerDataModel.GetSelectedLogDetail();

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ namespace ImprezGarage.Modules.Logger
     /// A class that implements the concrete functions of the logger interface.
     /// This is where all of the functionality will be implemented.
     /// </summary>
-    public class LoggerService : ILoggerService
+    internal class LoggerService : ILoggerService
     {
         #region Attributes
         /// <summary>

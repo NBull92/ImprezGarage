@@ -1,13 +1,13 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
 namespace ImprezGarage.Infrastructure
 {
+    using Model;
     using Prism.Events;
     using System;
-    using ViewModels;
 
     /// <summary>
     /// Events that are published and subscribe to through the different modules.
@@ -16,19 +16,9 @@ namespace ImprezGarage.Infrastructure
     public class Events
     {
         /// <summary>
-        /// Event for when a vehicle is selected by the user.
-        /// </summary>
-        public class SelectVehicleEvent : PubSubEvent<VehicleViewModel> { }
-
-        /// <summary>
         /// Event for when the status has been updated for the status bar.
         /// </summary>
         public class StatusUpdateEvent : PubSubEvent<string> { }
-
-        /// <summary>
-        /// Event for when a vehicle is being edited.
-        /// </summary>
-        public class EditVehicleEvent : PubSubEvent<VehicleViewModel> { }
 
         /// <summary>
         /// Event for when the user requests to refresh all of the current data.
@@ -40,6 +30,6 @@ namespace ImprezGarage.Infrastructure
         /// <param name="Item1">bool for if the user is logged in or not.</param>
         /// <param name="Item2">string to store the user Id, for when a user logs in.</param>
         /// </summary>
-        public class UserAccountChange : PubSubEvent<Tuple<bool,string>> { }
+        public class UserAccountChange : PubSubEvent<Tuple<bool, Account>> { }
     }
 }   //ImprezGarage.Infrastructure namespace 

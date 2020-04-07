@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
@@ -19,31 +19,11 @@ namespace ImprezGarage.Infrastructure
         /// The region in which the content populates.
         /// </summary>
         public static string ContentRegion = "ContentRegion";
-
-        /// <summary>
-        /// The region in which the status bar populates.
-        /// </summary>
-        public static string StatusBarRegion = "StatusBarRegion";
-
+        
         /// <summary>
         /// The region in which the vehicle list populates.
         /// </summary>
         public static string VehicleListRegion = "VehicleListRegion";
-
-        /// <summary>
-        /// The region in which the maintenance checks populates.
-        /// </summary>
-        public static string ChecksRegion = "ChecksRegion";
-
-        /// <summary>
-        /// The region in which the petrol expenses populates.
-        /// </summary>
-        public static string PetrolRegion = "PetrolRegion";
-        
-        /// <summary>
-        /// The region in which the perform a maintenance checks populates.
-        /// </summary>
-        public static string ChecksPerformedRegion = "ChecksPerformedRegion";
         
         /// <summary>
         /// The region in which the petrol entries populates.
@@ -69,5 +49,7 @@ namespace ImprezGarage.Infrastructure
         /// The region for displaying the sign in and create account views.
         /// </summary>
         public static string AuthenticateRegion = "AuthenticateRegion";
+
+        public static string VehicleHeaderRegion = "VehicleHeaderRegion";
     }
 }   //ImprezGarage.Infrastructure namespace 

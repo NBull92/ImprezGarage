@@ -10,8 +10,15 @@
              Background="#BF4F514E"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:CreateAccountViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-    <Border Background="White" Width="371" Height="400" BorderThickness="1" BorderBrush="#FF53CAFD">
+    <Border Background="White" Width="371" Height="400" BorderThickness="1" BorderBrush="{StaticResource ImprezGarage.Main}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="208*" />
@@ -19,8 +26,8 @@
             </Grid.RowDefinitions>
 
             <DockPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,19,0,1">
-                <Image DockPanel.Dock="Top" Source="pack://application:,,,/ImprezGarage;component/Resources/icon_v2.png"
-                   HorizontalAlignment="Center" Width="70" Height="70"/>
+                <Image DockPanel.Dock="Top" Source="pack://application:,,,/ImprezGarage;component/Resources/iconv3.png"
+                   HorizontalAlignment="Center" Width="52" Height="52"/>
 
                 <Label DockPanel.Dock="Top" Content="Create Account" HorizontalAlignment="Center" FontSize="24" FontWeight="Bold"/>
 
@@ -46,7 +53,7 @@
 
                 <DockPanel DockPanel.Dock="Top" Width="234">
                     <Button HorizontalAlignment="Right" Content="Register" Command="{Binding Register}" Margin="0,0,0,5" Width="115"
-                            Background="#FF53CAFD" Foreground="White" FontSize="14" VerticalAlignment="Top"/>
+                            Background="{StaticResource ImprezGarage.Main}" Foreground="White" FontSize="14" VerticalAlignment="Top"/>
 
                     <Button DockPanel.Dock="Left" Content="Cancel" Command="{Binding Cancel}" Margin="0,0,0,5" Width="115"
                             FontSize="14" VerticalAlignment="Top"  />
@@ -58,7 +65,7 @@
                 <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="212">
                     <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Width="212">
                         <TextBlock Text="Already have an account?" Height="20" VerticalAlignment="Center"/>
-                        <TextBlock Text="Sign In" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="#FF53CAFD">
+                        <TextBlock Text="Sign In" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource ImprezGarage.Main}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
                             <prism:InvokeCommandAction Command="{Binding SignIn}"/>
@@ -70,7 +77,7 @@
                     <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="212" Margin="0,4,0,0">
                         <TextBlock Text="Sign in with a " Height="20" VerticalAlignment="Center"/>
                         <TextBlock Text="Demo" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right"  
-                                   Foreground="#FF53CAFD">
+                                   Foreground="{StaticResource ImprezGarage.Main}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown">
                                     <prism:InvokeCommandAction Command="{Binding DemoAccountCommand}"/>

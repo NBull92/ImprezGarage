@@ -1,14 +1,12 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
-
-
-using ImprezGarage.Infrastructure.Model;
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;

@@ -1,10 +1,10 @@
 ﻿
-using ImprezGarage.Modules.FirebaseAuth.Commands;
-
 namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 {
+    using Commands;
     using Firebase.Auth;
     using Infrastructure;
+    using Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
@@ -12,7 +12,7 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
     using Prism.Regions;
     using System;
     using Views;
-    
+
     public class CreateAccountViewModel : AuthenticateViewModel
     {
         private readonly IEventAggregator _eventAggregator;
@@ -58,9 +58,9 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 
             try
             {
-                var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
-                var response = await auth.CreateUserWithEmailAndPasswordAsync(Email, Password);
-                _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, string>(true, response.User.LocalId));
+                var authService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
+                var response = await authService.CreateAccountAsync(Email, Password);
+                _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, Account>(true, response));
             }
             catch (FirebaseAuthException fae)
             {

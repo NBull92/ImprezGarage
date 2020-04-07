@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ namespace ImprezGarage.Modules.PerformChecks
             _container.RegisterType<object, Main>(typeof(Main).FullName);
             _container.RegisterType<object, PerformNewCheck>(typeof(PerformNewCheck).FullName);
 
-            _regionManager.RegisterViewWithRegion(RegionNames.ChecksRegion, typeof(Main));
+            _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(Main));
         }
         #endregion
     }

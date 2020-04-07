@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// Copyright of Nicholas Andrew Bull 2018
+// Copyright of Nicholas Andrew Bull 2020
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
@@ -45,7 +45,7 @@ namespace ImprezGarage.Modules.Logger
             _container.RegisterType<ILoggerService, LoggerService>(new ContainerControlledLifetimeManager());
 
             var loggerDataModel = new LogModel();
-            _regionManager.Regions[RegionNames.StatusBarRegion].Context = loggerDataModel;
+            _regionManager.Regions[RegionNames.ContentRegion].Context = loggerDataModel;
 
             var loggerService = (LoggerService)_container.Resolve<ILoggerService>();
             loggerService.SetDataModel(loggerDataModel);
