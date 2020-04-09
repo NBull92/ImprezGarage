@@ -30,6 +30,22 @@ namespace ImprezGarage
         /// </summary>
         protected override void InitializeShell()
         {
+
+#if !DEBUG
+            Task.Run(async () =>
+            {
+                //using (var manager = new UpdateManager(@"D:\Documents\Nick\GitHub\ImprezGarage\Releases"))
+                //{
+                //    await manager.UpdateApp();
+                //}
+
+                using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/NBull92/ImprezGarage"))
+                {
+                    await mgr.Result.UpdateApp();
+                }
+            });
+#endif
+
             Application.Current.MainWindow?.Show();
         }
 

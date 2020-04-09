@@ -8,12 +8,10 @@ echo File version: %fileVersion%
 rem Saved in %file%
 @echo off
 
-SET tempVersion=5.0.0
-
 echo ^<package^> > %file%
 echo 	^<metadata^> >> %file%
 echo 		^<id^>ImprezGarage^</id^> >> %file%
-echo 		^<version^>%fileVersion%^</version^> >> %file%
+echo 		^<version^>1.0.2^</version^> >> %file%
 echo 		^<title^>ImprezGarage^</title^> >> %file%
 echo 		^<authors^>Nicholas Bull^</authors^> >> %file%
 echo 		^<owners^>Nicholas Bull^</owners^> >> %file%
@@ -21,7 +19,7 @@ echo 		^<requireLicenseAcceptance^>false^</requireLicenseAcceptance^> >> %file%
 echo 		^<copyright^>NickBull-Computing 2020^</copyright^> >> %file%
 echo 		^<tags^> ^</tags^> >> %file%
 echo		^<projectUrl^>https://github.com/NBull92/ImprezGarage^</projectUrl^> >> %file%
-echo		^<iconUrl^>https://github.com/NBull92/ImprezGarage/blob/Dev/Src/ImprezGarage/iconv3.ico^</iconUrl^> >> %file%
+echo		^<iconUrl^>https://github.com/NBull92/ImprezGarage/Src/ImprezGarage/iconv3.ico^</iconUrl^> >> %file%
 echo		^<description^>An application that is used to help guide you in the maintenance of you vehicles.^</description^> >> %file%
 echo 	^</metadata^> >> %file%
 echo		^<files^> >> %file%
