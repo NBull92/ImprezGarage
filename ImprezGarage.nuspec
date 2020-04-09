@@ -1,7 +1,7 @@
 <package> 
 	<metadata> 
 		<id>ImprezGarage</id> 
-		<version>1.0.0.0</version> 
+		<version>1.0.2</version> 
 		<title>ImprezGarage</title> 
 		<authors>Nicholas Bull</authors> 
 		<owners>Nicholas Bull</owners> 
@@ -9,7 +9,7 @@
 		<copyright>NickBull-Computing 2020</copyright> 
 		<tags> </tags> 
 	<projectUrl>https://github.com/NBull92/ImprezGarage</projectUrl> 
-	<iconUrl>https://github.com/NBull92/ImprezGarage/blob/Dev/Src/ImprezGarage/iconv3.ico</iconUrl> 
+	<iconUrl>https://github.com/NBull92/ImprezGarage/Src/ImprezGarage/iconv3.ico</iconUrl> 
 	<description>An application that is used to help guide you in the maintenance of you vehicles.</description> 
 	</metadata> 
 	<files> 
