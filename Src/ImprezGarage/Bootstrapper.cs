@@ -3,6 +3,10 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+
 namespace ImprezGarage
 {
     using Infrastructure.Services;
@@ -34,19 +38,35 @@ namespace ImprezGarage
 #if !DEBUG
             Task.Run(async () =>
             {
-                //using (var manager = new UpdateManager(@"D:\Documents\Nick\GitHub\ImprezGarage\Releases"))
+                // Keep in for testing locally.
+                //using (var mgr = new UpdateManager(@"D:\Documents\Nick\GitHub\ImprezGarage\Releases"))
                 //{
-                //    await manager.UpdateApp();
+                //    var updateInfo = await mgr.CheckForUpdate();
+                //    if (updateInfo.ReleasesToApply.Any())
+                //    {
+                //        await mgr.UpdateApp();
+                //        UpdateManager.RestartApp();
+                //    }
                 //}
 
                 using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/NBull92/ImprezGarage"))
                 {
-                    await mgr.Result.UpdateApp();
+                    var updateInfo = await mgr.Result.CheckForUpdate();
+                    if (updateInfo.ReleasesToApply.Any())
+                    {
+                        await mgr.Result.UpdateApp();
+                        UpdateManager.RestartApp();
+                    }
                 }
-            });
-#endif
 
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    Application.Current.MainWindow?.Show();
+                });
+            });
+#else
             Application.Current.MainWindow?.Show();
+#endif
         }
 
         /// <summary>
