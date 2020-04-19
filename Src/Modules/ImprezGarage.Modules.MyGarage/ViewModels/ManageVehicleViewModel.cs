@@ -166,8 +166,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
         }
 
-        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
+        private async void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
+            await GetVehicleTypes();
+
             if (IsEdit)
             {
                 Edit(vehicle);
