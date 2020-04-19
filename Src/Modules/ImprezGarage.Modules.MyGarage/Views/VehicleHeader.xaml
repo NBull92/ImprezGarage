@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -31,6 +32,7 @@
                         VerticalAlignment="Center"
                         Margin="12,0,0,0"
                         ToolTip="Delete Vehicle"
+                        IsEnabled="{Binding SelectedVehicle.IsReadonly, Converter={StaticResource InverseBoolConverter}}"
                         Command="{Binding DeleteVehicle}"
                         Background="{StaticResource ImprezGarage.Grey}"
                         Foreground="{StaticResource ImprezGarage.Grey2}"

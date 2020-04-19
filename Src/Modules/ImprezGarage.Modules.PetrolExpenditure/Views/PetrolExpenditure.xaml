@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:ImprezGarage.Modules.PetrolExpenditure.ViewModels"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converters="clr-namespace:ImprezGarage.Infrastructure.Converters;assembly=ImprezGarage.Infrastructure"
              mc:Ignorable="d"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Stretch"
@@ -17,6 +18,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
  
@@ -35,6 +37,10 @@
                         <TextBlock DockPanel.Dock="Left"  Text="{Binding DateEntered, StringFormat=D}" 
                                 Margin="5" VerticalAlignment="Center" Width="160"/>
                         <Button DockPanel.Dock="Left" 
+                                IsEnabled="{Binding Path=DataContext.SelectedVehicle.IsReadonly, 
+                                        Converter={StaticResource InverseBoolConverter}, 
+                                        RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type ListBox}}}"
                                 ToolTip="Delete" 
                                 Margin="5"
                                 HorizontalAlignment="Right"

@@ -120,6 +120,14 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             get => _insuranceRenewalDate;
             set => SetProperty(ref _insuranceRenewalDate, value);
         }
+
+        private bool _isReadonly;
+        public bool IsReadonly
+        {
+            get => _isReadonly;
+            set => SetProperty(ref _isReadonly, value);
+        }
+
         #endregion
 
         #region Methods
@@ -149,6 +157,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             DateModified = Vehicle.DateModified;
             Make = Vehicle.Make;
             Model = Vehicle.Model;
+            IsReadonly = Vehicle.IsReadonly;
 
             var type = await _dataService.GetVehicleTypeAsync(Vehicle.VehicleType);
 
@@ -175,9 +184,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
 
             CheckForVehicleReminders();
-
-
-
         }
 
         /// <summary>
@@ -206,8 +212,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 Application.Current.Dispatcher?.Invoke(() => { _notificationsService.Toast(reminder); });
             }
         }
-
-
 
         /// <summary>
         /// Check the tax expiry date of the passed through vehicle and if it runs out in less than 30 days, inform the user.

@@ -1,4 +1,6 @@
 ﻿
+using System.Configuration;
+
 namespace ImprezGarage.Modules.Account.ViewModels
 {
     using Infrastructure;
@@ -45,6 +47,13 @@ namespace ImprezGarage.Modules.Account.ViewModels
             }
         }
 
+        private bool _isReadonly;
+        public bool IsReadonly
+        {
+            get => _isReadonly;
+            set => SetProperty(ref _isReadonly, value);
+        }
+
         public DelegateCommand SaveCommand { get; set; }
         public DelegateCommand BackCommand { get; set; }
 
@@ -84,6 +93,7 @@ namespace ImprezGarage.Modules.Account.ViewModels
         {
             _currentUser = _authenticationService.CurrentUser();
             Name = _currentUser.Name;
+            IsReadonly = _currentUser.IsReadonly;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -22,5 +22,6 @@ namespace ImprezGarage.Infrastructure.Model
         public int CurrentMileage { get; set; }
         public int MileageOnPurchase { get; set; }
         public string UserId { get; set; }
+        public bool IsReadonly { get; set; }
     }
 }

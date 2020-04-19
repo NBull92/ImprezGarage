@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="pack://application:,,,/ImprezGarage.Infrastructure;component/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <conv:NullToBoolConverter x:Key="NullToBoolConverter"/>
+            <conv:InverseBoolConverter x:Key="InverseBoolConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
     
@@ -66,6 +67,7 @@
                         </Button>
 
                         <Button Grid.Column="2" 
+                            IsEnabled="{Binding SelectedVehicle.IsReadonly, Converter={StaticResource InverseBoolConverter}}"
                             Command="{Binding DeleteMaintenanceCheckCommand}" 
                             ToolTip="Delete"
                             d:DataContext="{d:DesignInstance Type=vm:MaintenanceCheckViewModel}"
