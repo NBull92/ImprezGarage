@@ -67,14 +67,17 @@
             <!-- Nav Bar -->
             <Grid Grid.Row="0" Grid.Column="1">
                 <DockPanel>
-                    <account:AccountControlButton DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,27,0"/>
-                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,38,0">
+                    <account:AccountControlButton DockPanel.Dock="Right" 
+                                                  HorizontalAlignment="Right" 
+                                                  Margin="0,0,27,0"/>
+                    <DockPanel DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,15,0">
                         <Button DockPanel.Dock="Right"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Height="30"
                             Width="30"
                             ToolTip="Settings"
+                            Visibility="Collapsed"
                             Command="{Binding OpenSettings}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-settings-24.png"
@@ -87,6 +90,7 @@
                             Width="30"
                             Margin="0,0,15,0"
                             ToolTip="Help"
+                            Visibility="Collapsed"
                             Command="{Binding OpenHelp}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-help-24.png"
@@ -97,7 +101,6 @@
                                 VerticalAlignment="Center"
                                 Height="30"
                                 Width="30"
-                                Margin="0,0,15,0"
                                 ToolTip="Refresh"
                                 Command="{Binding RefreshCommand}"
                                 Style="{StaticResource CircleButtonStyle}">
@@ -111,6 +114,7 @@
                             Width="30"
                             Margin="0,0,15,0"
                             ToolTip="Notifications"
+                            Visibility="Collapsed"
                             Command="{Binding OpenNotifications}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-notification-24.png"
