@@ -49,14 +49,14 @@
 
                 <TextBlock Grid.Column="1" Text="{Binding SelectedVehicleType.Name}" 
                            Margin="5,0,0,0"
-                           VerticalAlignment="Center"
-                           Visibility="{Binding IsEdit, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                           VerticalAlignment="Center" />
+                <!--Visibility="{Binding IsEdit, Converter={StaticResource BoolToVisibilityConverter}}" -->
 
-                <ComboBox Grid.Column="1"  HorizontalAlignment="Stretch" Margin="5,0,0,0"
+                <!--<ComboBox Grid.Column="1"  HorizontalAlignment="Stretch" Margin="5,0,0,0"
                           SelectedItem="{Binding SelectedVehicleType, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                           ItemsSource="{Binding VehicleTypes}" 
                           DisplayMemberPath="Name" 
-                          Visibility="{Binding IsEdit, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"/>
+                          Visibility="{Binding IsEdit, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Inverse}"/>-->
             </Grid>
         </Border>
 

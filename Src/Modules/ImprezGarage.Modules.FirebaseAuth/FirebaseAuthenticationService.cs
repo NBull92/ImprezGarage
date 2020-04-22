@@ -8,6 +8,7 @@ namespace ImprezGarage.Modules.FirebaseAuth
     using Microsoft.Practices.ServiceLocation;
     using Prism.Regions;
     using System;
+    using System.Security;
     using System.Threading.Tasks;
     using Views;
 
@@ -30,10 +31,26 @@ namespace ImprezGarage.Modules.FirebaseAuth
             return _currentUser;
         }
 
+        public async Task<Account> CreateAccountAsync(string email, SecureString password)
+        {
+            var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
+            var response = await auth.CreateUserWithEmailAndPasswordAsync(email, SecureHelper.SecureStringToString(password));
+            _currentUser = _dataService.CreateUser(response.User.LocalId, email);
+            return _currentUser;
+        }
+
         public async Task<Account> LoginAsync(string email, string password)
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.SignInWithEmailAndPasswordAsync(email, password);
+            _currentUser = _dataService.GetUser(response.User.LocalId);
+            return _currentUser;
+        }
+
+        public async Task<Account> LoginAsync(string email, SecureString password)
+        {
+            var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
+            var response = await auth.SignInWithEmailAndPasswordAsync(email, SecureHelper.SecureStringToString(password));
             _currentUser = _dataService.GetUser(response.User.LocalId);
             return _currentUser;
         }

@@ -39,8 +39,13 @@
 
                 <Grid DockPanel.Dock="Top" Margin="0">
                     <Label x:Name="PasswordLabel" Content="Password" VerticalAlignment="Center"/>
-                    <TextBox x:Name="Password" DockPanel.Dock="Top" Text="{Binding Password}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="234" Height="36"
-                             VerticalContentAlignment="Center" Background="Transparent" KeyUp="Password_OnKeyUp"/>
+                    <!--Text="{Binding Password}" -->
+                    <PasswordBox x:Name="Password" DockPanel.Dock="Top"
+                                 PasswordChanged="Password_OnPasswordChanged"
+                                 HorizontalAlignment="Center" VerticalAlignment="Top" 
+                                 Width="234" Height="36"
+                                 VerticalContentAlignment="Center" Background="Transparent"
+                                 KeyUp="Password_OnKeyUp"/>
                 </Grid>
 
                 <Label DockPanel.Dock="Top" Foreground="Red" Content="{Binding Error}"/>

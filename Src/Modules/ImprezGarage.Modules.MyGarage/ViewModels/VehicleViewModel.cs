@@ -183,7 +183,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             }
 
 
-            CheckForVehicleReminders();
+            //TODO: Need to rethink these notifications.
+            //CheckForVehicleReminders();
         }
 
         /// <summary>

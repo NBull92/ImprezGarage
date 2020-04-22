@@ -1,1 +1,0 @@
-firebase-import --database_url https://imprezgarage.firebaseio.com/ --path PerformedMaintenanceOptions/ --json D:\Documents\Nick\GitHub\ImprezGarage\DatabaseExports\JSON\PerformedMaintenanceOption.json --service_account D:\Documents\Nick\GitHub\ImprezGarage\imprezgarage-firebase-adminsdk-0whvv-a68ac5b72d.json

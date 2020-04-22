@@ -21,12 +21,22 @@ namespace ImprezGarage.Modules.FirebaseAuth.Views
 
         private void Password_OnKeyUp(object sender, KeyEventArgs e)
         {
-            PasswordLabel.Visibility = string.IsNullOrEmpty(((TextBox)sender).Text) ? Visibility.Visible : Visibility.Collapsed;
+            PasswordLabel.Visibility = ((PasswordBox)sender).SecurePassword.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void RePassword_OnKeyUp(object sender, KeyEventArgs e)
         {
-            RePasswordLabel.Visibility = string.IsNullOrEmpty(((TextBox)sender).Text) ? Visibility.Visible : Visibility.Collapsed;
+            RePasswordLabel.Visibility = ((PasswordBox)sender).SecurePassword.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void OnRePasswordChanged(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

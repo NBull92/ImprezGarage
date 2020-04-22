@@ -166,8 +166,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
         }
 
-        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
+        private async void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
         {
+            await GetVehicleTypes();
+
             if (IsEdit)
             {
                 Edit(vehicle);
@@ -329,6 +331,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             VehicleTypes = types == null ? VehicleTypes = new ObservableCollection<VehicleType>() 
                 : VehicleTypes = new ObservableCollection<VehicleType>(types);
+
+            SelectedVehicleType = VehicleTypes.FirstOrDefault();
         }
 
         /// <summary>

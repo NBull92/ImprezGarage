@@ -219,6 +219,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="SecureHelper.cs" />
     <Compile Include="ViewModels\AuthenticateViewModel.cs" />
     <Compile Include="ViewModels\AuthenticationDialogViewModel.cs" />
     <Compile Include="ViewModels\CreateAccountViewModel.cs" />

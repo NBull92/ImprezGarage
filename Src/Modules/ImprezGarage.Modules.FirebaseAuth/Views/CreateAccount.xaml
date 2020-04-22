@@ -39,13 +39,17 @@
 
                 <Grid DockPanel.Dock="Top" Margin="0,0,0,7">
                     <Label x:Name="PasswordLabel" Content="Password" VerticalAlignment="Center"/>
-                    <TextBox x:Name="Password" DockPanel.Dock="Top" Text="{Binding Password}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="234" Height="36"
+                    <PasswordBox x:Name="Password" DockPanel.Dock="Top" 
+                             PasswordChanged="OnPasswordChanged"
+                             HorizontalAlignment="Center" VerticalAlignment="Top" Width="234" Height="36"
                              VerticalContentAlignment="Center" Background="Transparent" KeyUp="Password_OnKeyUp"/>
                 </Grid>
 
                 <Grid DockPanel.Dock="Top" Margin="0,7,0,0">
                     <Label x:Name="RePasswordLabel" Content="Re-Type Password" VerticalAlignment="Center"/>
-                    <TextBox x:Name="RePassword" DockPanel.Dock="Top" Text="{Binding RePassword}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="234" Height="36"
+                    <PasswordBox x:Name="RePassword" DockPanel.Dock="Top" 
+                                 PasswordChanged="OnRePasswordChanged"
+                                 HorizontalAlignment="Center" VerticalAlignment="Top" Width="234" Height="36"
                              VerticalContentAlignment="Center" Background="Transparent" KeyUp="RePassword_OnKeyUp"/>
                 </Grid>
 
