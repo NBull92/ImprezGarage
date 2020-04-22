@@ -1,4 +1,6 @@
 ﻿
+using System.Security;
+
 namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 {
     using Commands;
@@ -18,8 +20,8 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
 
-        private string _rePassword;
-        public string RePassword
+        private SecureString _rePassword;
+        public SecureString RePassword
         {
             get => _rePassword;
             set => SetProperty(ref _rePassword, value);
@@ -47,10 +49,10 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 
         private async void OnRegisterAsync()
         {
-            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password) || string.IsNullOrWhiteSpace(RePassword))
+            if (string.IsNullOrWhiteSpace(Email) || SecurePassword.Length == 0 || RePassword.Length == 0)
                 return;
 
-            if (Password != RePassword)
+            if (SecureHelper.SecureStringEqual(SecurePassword, RePassword))
             {
                 Error = "The passwords do not match.";
                 return;
@@ -59,7 +61,7 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
             try
             {
                 var authService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
-                var response = await authService.CreateAccountAsync(Email, Password);
+                var response = await authService.CreateAccountAsync(Email, SecurePassword);
                 _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, Account>(true, response));
             }
             catch (FirebaseAuthException fae)

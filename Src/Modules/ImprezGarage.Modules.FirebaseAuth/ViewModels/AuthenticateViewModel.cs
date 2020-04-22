@@ -1,4 +1,6 @@
 ﻿
+using System.Security;
+
 namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 {
     using Infrastructure;
@@ -21,6 +23,13 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
         {
             get => _email;
             set => SetProperty(ref _email, value);
+        }
+
+        private SecureString _securePassword;
+        public SecureString SecurePassword
+        {
+            get => _securePassword;
+            set => SetProperty(ref _securePassword, value);
         }
 
         private string _password;

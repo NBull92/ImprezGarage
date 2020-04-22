@@ -52,13 +52,13 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 
         private async void OnSignIn()
         {
-            if (string.IsNullOrWhiteSpace(Email) || string.IsNullOrWhiteSpace(Password))
+            if (string.IsNullOrWhiteSpace(Email) || SecurePassword.Length == 0)
                 return;
             
             try
             {
                 var authService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
-                var response = await authService.LoginAsync(Email, Password);
+                var response = await authService.LoginAsync(Email, SecurePassword);
                 _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, Account>(true, response));
             }
             catch (FirebaseAuthException fae)
