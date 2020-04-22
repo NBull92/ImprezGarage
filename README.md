@@ -18,5 +18,6 @@ For more information please contact me via: http://www.nickbull-computing.biz/Ab
 
 View the final thing on Youtube: https://youtu.be/3UlAXmtliM4
 
-![alt text](https://github.com/NBull92/ImprezGarage/blob/master/Images/OhFonlOFoJ.png)
+![alt text](https://github.com/NBull92/ImprezGarage/blob/master/Images/New%20UI/ImprezGarage_t8PGjxkB8Y_v2.png)
+
 There are more screenshots of the project here: https://github.com/NBull92/ImprezGarage/tree/master/Images
