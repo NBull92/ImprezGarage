@@ -331,6 +331,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             VehicleTypes = types == null ? VehicleTypes = new ObservableCollection<VehicleType>() 
                 : VehicleTypes = new ObservableCollection<VehicleType>(types);
+
+            SelectedVehicleType = VehicleTypes.FirstOrDefault();
         }
 
         /// <summary>
