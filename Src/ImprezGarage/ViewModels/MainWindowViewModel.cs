@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using System.Diagnostics;
+
 namespace ImprezGarage.ViewModels
 {
     using Infrastructure;
@@ -64,6 +66,8 @@ namespace ImprezGarage.ViewModels
         /// Command for showing and closing the settings view.
         /// </summary>
         public DelegateCommand OpenSettings { get; set; }
+
+        public DelegateCommand OpenHelp { get; set; }
         #endregion
         #endregion
 
@@ -77,10 +81,16 @@ namespace ImprezGarage.ViewModels
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
             OpenSettings = new DelegateCommand(OnOpenSettings);
+            OpenHelp = new DelegateCommand(OnOpenHelp);
 
             _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
 
             GetVersion();
+        }
+
+        private void OnOpenHelp()
+        {
+            Process.Start("http://imprezgarage.com/contact");
         }
 
         /// <summary>
