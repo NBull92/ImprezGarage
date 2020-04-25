@@ -61,6 +61,7 @@
                     </Grid.RowDefinitions>
                     <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleListRegion}" VerticalAlignment="Top"/>
                     <account:AccountDetails Grid.Column="0" Grid.Row="1"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Version}" VerticalAlignment="Bottom" Foreground="{StaticResource ImprezGarage.Third}" Margin="5"/>
                 </Grid>
             </Border>
 
