@@ -3,6 +3,8 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using System.Diagnostics;
+
 namespace ImprezGarage.ViewModels
 {
     using Infrastructure;
@@ -13,6 +15,7 @@ namespace ImprezGarage.ViewModels
     using Prism.Commands;
     using Prism.Events;
     using System;
+    using System.Reflection;
 
     public class MainWindowViewModel : DialogViewModelBase
     {
@@ -51,6 +54,8 @@ namespace ImprezGarage.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
         
+        public string Version { get; set; }
+
         #region Commands
         /// <summary>
         /// Command for refreshing the current data.
@@ -61,6 +66,8 @@ namespace ImprezGarage.ViewModels
         /// Command for showing and closing the settings view.
         /// </summary>
         public DelegateCommand OpenSettings { get; set; }
+
+        public DelegateCommand OpenHelp { get; set; }
         #endregion
         #endregion
 
@@ -74,10 +81,31 @@ namespace ImprezGarage.ViewModels
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
             OpenSettings = new DelegateCommand(OnOpenSettings);
+            OpenHelp = new DelegateCommand(OnOpenHelp);
 
             _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+
+            GetVersion();
         }
-        
+
+        private void OnOpenHelp()
+        {
+            Process.Start("http://imprezgarage.com/contact");
+        }
+
+        /// <summary>
+        /// Get the current version number of the app, for showing in the UI.
+        /// No need for revision being listed for now.
+        /// </summary>
+        private void GetVersion()
+        {
+            var version = Assembly.GetExecutingAssembly().GetName().Version;
+            var major = version.Major;
+            var minor = version.Minor;
+            var build = version.Build;
+            Version = $"v{major}.{minor}.{build}";
+        }
+
         private void OnUserAccountChange(Tuple<bool, Account> loginData)
         {
             IsBusy = !loginData.Item1;

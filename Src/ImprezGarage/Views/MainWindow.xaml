@@ -61,6 +61,7 @@
                     </Grid.RowDefinitions>
                     <ContentControl prism:RegionManager.RegionName="{x:Static inf:RegionNames.VehicleListRegion}" VerticalAlignment="Top"/>
                     <account:AccountDetails Grid.Column="0" Grid.Row="1"/>
+                    <TextBlock Grid.Row="1" Text="{Binding Version}" VerticalAlignment="Bottom" Foreground="{StaticResource ImprezGarage.Third}" Margin="5"/>
                 </Grid>
             </Border>
 
@@ -88,9 +89,7 @@
                             VerticalAlignment="Center"
                             Height="30"
                             Width="30"
-                            Margin="0,0,15,0"
                             ToolTip="Help"
-                            Visibility="Collapsed"
                             Command="{Binding OpenHelp}"
                             Style="{StaticResource CircleButtonStyle}">
                             <Image Source="pack://application:,,,/ImprezGarage;component/Resources/icons8-help-24.png"
@@ -101,6 +100,7 @@
                                 VerticalAlignment="Center"
                                 Height="30"
                                 Width="30"
+                                Margin="0,0,15,0"
                                 ToolTip="Refresh"
                                 Command="{Binding RefreshCommand}"
                                 Style="{StaticResource CircleButtonStyle}">
