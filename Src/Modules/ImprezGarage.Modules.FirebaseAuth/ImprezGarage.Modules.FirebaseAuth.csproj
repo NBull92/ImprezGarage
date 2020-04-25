@@ -202,6 +202,7 @@
   <ItemGroup>
     <Compile Include="AuthModule.cs" />
     <Compile Include="Commands\DemoAccountCommand.cs" />
+    <Compile Include="DemoAccountDetails.cs" />
     <Compile Include="FirebaseAuthenticationService.cs" />
     <Compile Include="FirebaseAuthExceptionHelper.cs" />
     <Compile Include="FirebaseProjectConfig.cs" />
