@@ -11,7 +11,7 @@ rem Saved in %file%
 echo ^<package^> > %file%
 echo 	^<metadata^> >> %file%
 echo 		^<id^>ImprezGarage^</id^> >> %file%
-echo 		^<version^>1.0.2^</version^> >> %file%
+echo 		^<version^>%fileVersion%^</version^> >> %file%
 echo 		^<title^>ImprezGarage^</title^> >> %file%
 echo 		^<authors^>Nicholas Bull^</authors^> >> %file%
 echo 		^<owners^>Nicholas Bull^</owners^> >> %file%
