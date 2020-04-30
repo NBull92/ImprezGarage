@@ -27,7 +27,6 @@
     </baseClasses:DialogViewBase.Resources>
 
     <Grid>
-        <!-- New UI -->
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="179"/>

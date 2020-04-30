@@ -3,6 +3,7 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -38,31 +39,38 @@ namespace ImprezGarage
 #if !DEBUG
             Task.Run(async () =>
             {
-                // Keep in for testing locally.
-                //using (var mgr = new UpdateManager(@"D:\Documents\Nick\GitHub\ImprezGarage\Releases"))
-                //{
-                //    var updateInfo = await mgr.CheckForUpdate();
-                //    if (updateInfo.ReleasesToApply.Any())
-                //    {
-                //        await mgr.UpdateApp();
-                //        UpdateManager.RestartApp();
-                //    }
-                //}
-
-                using (var mgr = UpdateManager.GitHubUpdateManager("https://github.com/NBull92/ImprezGarage"))
+                try
                 {
-                    var updateInfo = await mgr.Result.CheckForUpdate();
-                    if (updateInfo.ReleasesToApply.Any())
+                    // Keep in for testing locally.
+                    //using (var mgr = new UpdateManager(@"D:\Documents\Nick\GitHub\ImprezGarage\Releases"))
+                    //{
+                    //    var updateInfo = await mgr.CheckForUpdate();
+                    //    if (updateInfo.ReleasesToApply.Any())
+                    //    {
+                    //        await mgr.UpdateApp();
+                    //        UpdateManager.RestartApp();
+                    //    }
+                    //}
+
+                    using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/NBull92/ImprezGarage"))
                     {
-                        await mgr.Result.UpdateApp();
-                        UpdateManager.RestartApp();
+                        var updateInfo = await mgr.CheckForUpdate();
+                        if (updateInfo.ReleasesToApply.Any())
+                        {
+                            await mgr.UpdateApp();
+                            UpdateManager.RestartApp();
+                        }
                     }
-                }
 
-                Application.Current.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        Application.Current.MainWindow?.Show();
+                    });
+                }
+                catch (Exception e)
                 {
-                    Application.Current.MainWindow?.Show();
-                });
+
+                }
             });
 #else
             Application.Current.MainWindow?.Show();
