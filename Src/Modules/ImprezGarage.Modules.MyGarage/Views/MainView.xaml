@@ -33,7 +33,7 @@
                             Command="{Binding AddNewVehicleCommand}" 
                             CommandParameter="{x:Type views:ManageVehicle}"/>
 
-            <ListBox Grid.Row="1" Margin="0,8,0,0" 
+            <ListBox Grid.Row="1" Margin="0,8,5,0" 
                      ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}"
                      ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
                      Background="Transparent"
