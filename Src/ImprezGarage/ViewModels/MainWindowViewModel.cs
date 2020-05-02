@@ -90,7 +90,7 @@ namespace ImprezGarage.ViewModels
 
         private void OnOpenHelp()
         {
-            Process.Start("http://imprezgarage.com/contact");
+            Process.Start("http://www.imprezgarage.com/contact");
         }
 
         /// <summary>
