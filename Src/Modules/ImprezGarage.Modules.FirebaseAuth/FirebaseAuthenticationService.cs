@@ -27,7 +27,7 @@ namespace ImprezGarage.Modules.FirebaseAuth
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.CreateUserWithEmailAndPasswordAsync(email, password);
-            _currentUser = _dataService.CreateUser(response.User.LocalId, email);
+            UpdateCurrentUserWithCreated(email, response);
             return _currentUser;
         }
 
@@ -35,7 +35,7 @@ namespace ImprezGarage.Modules.FirebaseAuth
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.CreateUserWithEmailAndPasswordAsync(email, SecureHelper.SecureStringToString(password));
-            _currentUser = _dataService.CreateUser(response.User.LocalId, email);
+            UpdateCurrentUserWithCreated(email, response);
             return _currentUser;
         }
 
@@ -43,7 +43,7 @@ namespace ImprezGarage.Modules.FirebaseAuth
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.SignInWithEmailAndPasswordAsync(email, password);
-            _currentUser = _dataService.GetUser(response.User.LocalId);
+            UpdateCurrentUserWithSignIn(response);
             return _currentUser;
         }
 
@@ -51,7 +51,8 @@ namespace ImprezGarage.Modules.FirebaseAuth
         {
             var auth = new FirebaseAuthProvider(new FirebaseConfig(FirebaseProjectConfig.ApiKey));
             var response = await auth.SignInWithEmailAndPasswordAsync(email, SecureHelper.SecureStringToString(password));
-            _currentUser = _dataService.GetUser(response.User.LocalId);
+            UpdateCurrentUserWithSignIn(response);
+
             return _currentUser;
         }
 
@@ -68,5 +69,20 @@ namespace ImprezGarage.Modules.FirebaseAuth
 
             return _currentUser;
         }
+
+        private void UpdateCurrentUserWithCreated(string email, FirebaseAuthLink response)
+        {
+            _currentUser = _dataService.CreateUser(response.User.LocalId, email);
+            _currentUser.LastLogin = DateTime.Now;
+            _dataService.UpdateUser(_currentUser);
+        }
+
+        private void UpdateCurrentUserWithSignIn(FirebaseAuthLink response)
+        {
+            _currentUser = _dataService.GetUser(response.User.LocalId);
+            _currentUser.LastLogin = DateTime.Now;
+            _dataService.UpdateUser(_currentUser);
+        }
+
     }
 }

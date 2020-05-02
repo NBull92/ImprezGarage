@@ -1,83 +1,83 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-  <metadata>
-    <id>ImprezGarage</id>
-    <version>1.0.26</version>
-    <title>ImprezGarage</title>
-    <authors>Nicholas Bull</authors>
-    <owners>Nicholas Bull</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <projectUrl>https://github.com/NBull92/ImprezGarage</projectUrl>
-    <iconUrl>https://github.com/NBull92/ImprezGarage/Src/ImprezGarage/iconv3.ico</iconUrl>
-    <description>An application that is used to help guide you in the maintenance of you vehicles.</description>
-    <copyright>NickBull-Computing 2020</copyright>
-  </metadata>
-  <files>
-    <file src="lib\net461\CommonServiceLocator.dll" target="lib\net461\CommonServiceLocator.dll" />
-    <file src="lib\net461\ControlzEx.dll" target="lib\net461\ControlzEx.dll" />
-    <file src="lib\net461\DeltaCompressionDotNet.dll" target="lib\net461\DeltaCompressionDotNet.dll" />
-    <file src="lib\net461\DeltaCompressionDotNet.MsDelta.dll" target="lib\net461\DeltaCompressionDotNet.MsDelta.dll" />
-    <file src="lib\net461\DeltaCompressionDotNet.PatchApi.dll" target="lib\net461\DeltaCompressionDotNet.PatchApi.dll" />
-    <file src="lib\net461\EntityFramework.dll" target="lib\net461\EntityFramework.dll" />
-    <file src="lib\net461\EntityFramework.SqlServer.dll" target="lib\net461\EntityFramework.SqlServer.dll" />
-    <file src="lib\net461\Firebase.Auth.dll" target="lib\net461\Firebase.Auth.dll" />
-    <file src="lib\net461\FireSharp.dll" target="lib\net461\FireSharp.dll" />
-    <file src="lib\net461\ImprezGarage.exe" target="lib\net461\ImprezGarage.exe" />
-    <file src="lib\net461\ImprezGarage.exe.config" target="lib\net461\ImprezGarage.exe.config" />
-    <file src="lib\net461\ImprezGarage.exe.manifest" target="lib\net461\ImprezGarage.exe.manifest" />
-    <file src="lib\net461\ImprezGarage.Infrastructure.dll" target="lib\net461\ImprezGarage.Infrastructure.dll" />
-    <file src="lib\net461\ImprezGarage.Infrastructure.Services.dll" target="lib\net461\ImprezGarage.Infrastructure.Services.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.Account.dll" target="lib\net461\ImprezGarage.Modules.Account.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.Firebase.dll" target="lib\net461\ImprezGarage.Modules.Firebase.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.FirebaseAuth.dll" target="lib\net461\ImprezGarage.Modules.FirebaseAuth.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.Logger.dll" target="lib\net461\ImprezGarage.Modules.Logger.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.MyGarage.dll" target="lib\net461\ImprezGarage.Modules.MyGarage.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.Notifications.dll" target="lib\net461\ImprezGarage.Modules.Notifications.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.PerformChecks.dll" target="lib\net461\ImprezGarage.Modules.PerformChecks.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.PetrolExpenditure.dll" target="lib\net461\ImprezGarage.Modules.PetrolExpenditure.dll" />
-    <file src="lib\net461\ImprezGarage.Modules.Settings.dll" target="lib\net461\ImprezGarage.Modules.Settings.dll" />
-    <file src="lib\net461\LiveCharts.dll" target="lib\net461\LiveCharts.dll" />
-    <file src="lib\net461\LiveCharts.Wpf.dll" target="lib\net461\LiveCharts.Wpf.dll" />
-    <file src="lib\net461\MahApps.Metro.dll" target="lib\net461\MahApps.Metro.dll" />
-    <file src="lib\net461\Microsoft.Expression.Controls.dll" target="lib\net461\Microsoft.Expression.Controls.dll" />
-    <file src="lib\net461\Microsoft.Expression.Drawing.dll" target="lib\net461\Microsoft.Expression.Drawing.dll" />
-    <file src="lib\net461\Microsoft.Expression.Effects.dll" target="lib\net461\Microsoft.Expression.Effects.dll" />
-    <file src="lib\net461\Microsoft.Expression.Interactions.dll" target="lib\net461\Microsoft.Expression.Interactions.dll" />
-    <file src="lib\net461\Microsoft.Expression.Prototyping.Interactivity.dll" target="lib\net461\Microsoft.Expression.Prototyping.Interactivity.dll" />
-    <file src="lib\net461\Microsoft.Expression.Prototyping.SketchControls.dll" target="lib\net461\Microsoft.Expression.Prototyping.SketchControls.dll" />
-    <file src="lib\net461\Microsoft.Practices.ServiceLocation.dll" target="lib\net461\Microsoft.Practices.ServiceLocation.dll" />
-    <file src="lib\net461\Microsoft.Practices.Unity.dll" target="lib\net461\Microsoft.Practices.Unity.dll" />
-    <file src="lib\net461\Microsoft.SDK.Expression.Blend.dll" target="lib\net461\Microsoft.SDK.Expression.Blend.dll" />
-    <file src="lib\net461\Mono.Cecil.dll" target="lib\net461\Mono.Cecil.dll" />
-    <file src="lib\net461\Mono.Cecil.Mdb.dll" target="lib\net461\Mono.Cecil.Mdb.dll" />
-    <file src="lib\net461\Mono.Cecil.Pdb.dll" target="lib\net461\Mono.Cecil.Pdb.dll" />
-    <file src="lib\net461\Mono.Cecil.Rocks.dll" target="lib\net461\Mono.Cecil.Rocks.dll" />
-    <file src="lib\net461\Newtonsoft.Json.dll" target="lib\net461\Newtonsoft.Json.dll" />
-    <file src="lib\net461\NuGet.Squirrel.dll" target="lib\net461\NuGet.Squirrel.dll" />
-    <file src="lib\net461\Prism.dll" target="lib\net461\Prism.dll" />
-    <file src="lib\net461\Prism.Unity.Wpf.dll" target="lib\net461\Prism.Unity.Wpf.dll" />
-    <file src="lib\net461\Prism.Wpf.dll" target="lib\net461\Prism.Wpf.dll" />
-    <file src="lib\net461\RestSharp.dll" target="lib\net461\RestSharp.dll" />
-    <file src="lib\net461\SharpCompress.dll" target="lib\net461\SharpCompress.dll" />
-    <file src="lib\net461\Splat.dll" target="lib\net461\Splat.dll" />
-    <file src="lib\net461\Squirrel.dll" target="lib\net461\Squirrel.dll" />
-    <file src="lib\net461\System.Diagnostics.DiagnosticSource.dll" target="lib\net461\System.Diagnostics.DiagnosticSource.dll" />
-    <file src="lib\net461\System.Windows.Controls.DataVisualization.Toolkit.dll" target="lib\net461\System.Windows.Controls.DataVisualization.Toolkit.dll" />
-    <file src="lib\net461\System.Windows.Controls.Input.Toolkit.dll" target="lib\net461\System.Windows.Controls.Input.Toolkit.dll" />
-    <file src="lib\net461\System.Windows.Controls.Layout.Toolkit.dll" target="lib\net461\System.Windows.Controls.Layout.Toolkit.dll" />
-    <file src="lib\net461\System.Windows.Interactivity.dll" target="lib\net461\System.Windows.Interactivity.dll" />
-    <file src="lib\net461\Unity.Abstractions.dll" target="lib\net461\Unity.Abstractions.dll" />
-    <file src="lib\net461\Unity.Configuration.dll" target="lib\net461\Unity.Configuration.dll" />
-    <file src="lib\net461\Unity.Container.dll" target="lib\net461\Unity.Container.dll" />
-    <file src="lib\net461\Unity.Interception.Configuration.dll" target="lib\net461\Unity.Interception.Configuration.dll" />
-    <file src="lib\net461\Unity.Interception.dll" target="lib\net461\Unity.Interception.dll" />
-    <file src="lib\net461\Unity.RegistrationByConvention.dll" target="lib\net461\Unity.RegistrationByConvention.dll" />
-    <file src="lib\net461\Unity.ServiceLocation.dll" target="lib\net461\Unity.ServiceLocation.dll" />
-    <file src="lib\net461\WPFToolkit.dll" target="lib\net461\WPFToolkit.dll" />
-    <file src="lib\net461\Xceed.Wpf.AvalonDock.dll" target="lib\net461\Xceed.Wpf.AvalonDock.dll" />
-    <file src="lib\net461\Xceed.Wpf.AvalonDock.Themes.Aero.dll" target="lib\net461\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
-    <file src="lib\net461\Xceed.Wpf.AvalonDock.Themes.Metro.dll" target="lib\net461\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
-    <file src="lib\net461\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" target="lib\net461\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
-    <file src="lib\net461\Xceed.Wpf.Toolkit.dll" target="lib\net461\Xceed.Wpf.Toolkit.dll" />
-  </files>
-</package>
+<package> 
+	<metadata> 
+		<id>ImprezGarage</id> 
+		<version>1.0.27</version> 
+		<title>ImprezGarage</title> 
+		<authors>Nicholas Bull</authors> 
+		<owners>Nicholas Bull</owners> 
+		<requireLicenseAcceptance>false</requireLicenseAcceptance> 
+		<copyright>NickBull-Computing 2020</copyright> 
+		<tags> </tags> 
+	<projectUrl>https://github.com/NBull92/ImprezGarage</projectUrl> 
+	<iconUrl>https://github.com/NBull92/ImprezGarage/Src/ImprezGarage/iconv3.ico</iconUrl> 
+	<description>An application that is used to help guide you in the maintenance of you vehicles.</description> 
+	</metadata> 
+	<files> 
+		<file src="lib\net461\CommonServiceLocator.dll" target="lib\net461\CommonServiceLocator.dll" />  
+		<file src="lib\net461\ControlzEx.dll" target="lib\net461\ControlzEx.dll" />  
+		<file src="lib\net461\DeltaCompressionDotNet.dll" target="lib\net461\DeltaCompressionDotNet.dll" />  
+		<file src="lib\net461\DeltaCompressionDotNet.MsDelta.dll" target="lib\net461\DeltaCompressionDotNet.MsDelta.dll" />  
+		<file src="lib\net461\DeltaCompressionDotNet.PatchApi.dll" target="lib\net461\DeltaCompressionDotNet.PatchApi.dll" />  
+		<file src="lib\net461\EntityFramework.dll" target="lib\net461\EntityFramework.dll" />  
+		<file src="lib\net461\EntityFramework.SqlServer.dll" target="lib\net461\EntityFramework.SqlServer.dll" />  
+		<file src="lib\net461\Firebase.Auth.dll" target="lib\net461\Firebase.Auth.dll" />  
+		<file src="lib\net461\FireSharp.dll" target="lib\net461\FireSharp.dll" />  
+		<file src="lib\net461\ImprezGarage.exe" target="lib\net461\ImprezGarage.exe" />  
+		<file src="lib\net461\ImprezGarage.exe.config" target="lib\net461\ImprezGarage.exe.config" />  
+		<file src="lib\net461\ImprezGarage.exe.manifest" target="lib\net461\ImprezGarage.exe.manifest" />  
+		<file src="lib\net461\ImprezGarage.Infrastructure.dll" target="lib\net461\ImprezGarage.Infrastructure.dll" />  
+		<file src="lib\net461\ImprezGarage.Infrastructure.Services.dll" target="lib\net461\ImprezGarage.Infrastructure.Services.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.Account.dll" target="lib\net461\ImprezGarage.Modules.Account.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.Firebase.dll" target="lib\net461\ImprezGarage.Modules.Firebase.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.FirebaseAuth.dll" target="lib\net461\ImprezGarage.Modules.FirebaseAuth.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.Logger.dll" target="lib\net461\ImprezGarage.Modules.Logger.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.MyGarage.dll" target="lib\net461\ImprezGarage.Modules.MyGarage.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.Notifications.dll" target="lib\net461\ImprezGarage.Modules.Notifications.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.PerformChecks.dll" target="lib\net461\ImprezGarage.Modules.PerformChecks.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.PetrolExpenditure.dll" target="lib\net461\ImprezGarage.Modules.PetrolExpenditure.dll" />  
+		<file src="lib\net461\ImprezGarage.Modules.Settings.dll" target="lib\net461\ImprezGarage.Modules.Settings.dll" />  
+		<file src="lib\net461\LiveCharts.dll" target="lib\net461\LiveCharts.dll" />  
+		<file src="lib\net461\LiveCharts.Wpf.dll" target="lib\net461\LiveCharts.Wpf.dll" />  
+		<file src="lib\net461\MahApps.Metro.dll" target="lib\net461\MahApps.Metro.dll" />  
+		<file src="lib\net461\Microsoft.Expression.Controls.dll" target="lib\net461\Microsoft.Expression.Controls.dll" />  
+		<file src="lib\net461\Microsoft.Expression.Drawing.dll" target="lib\net461\Microsoft.Expression.Drawing.dll" />  
+		<file src="lib\net461\Microsoft.Expression.Effects.dll" target="lib\net461\Microsoft.Expression.Effects.dll" />  
+		<file src="lib\net461\Microsoft.Expression.Interactions.dll" target="lib\net461\Microsoft.Expression.Interactions.dll" />  
+		<file src="lib\net461\Microsoft.Expression.Prototyping.Interactivity.dll" target="lib\net461\Microsoft.Expression.Prototyping.Interactivity.dll" />  
+		<file src="lib\net461\Microsoft.Expression.Prototyping.SketchControls.dll" target="lib\net461\Microsoft.Expression.Prototyping.SketchControls.dll" />  
+		<file src="lib\net461\Microsoft.Practices.ServiceLocation.dll" target="lib\net461\Microsoft.Practices.ServiceLocation.dll" />  
+		<file src="lib\net461\Microsoft.Practices.Unity.dll" target="lib\net461\Microsoft.Practices.Unity.dll" />  
+		<file src="lib\net461\Microsoft.SDK.Expression.Blend.dll" target="lib\net461\Microsoft.SDK.Expression.Blend.dll" />  
+		<file src="lib\net461\Mono.Cecil.dll" target="lib\net461\Mono.Cecil.dll" />  
+		<file src="lib\net461\Mono.Cecil.Mdb.dll" target="lib\net461\Mono.Cecil.Mdb.dll" />  
+		<file src="lib\net461\Mono.Cecil.Pdb.dll" target="lib\net461\Mono.Cecil.Pdb.dll" />  
+		<file src="lib\net461\Mono.Cecil.Rocks.dll" target="lib\net461\Mono.Cecil.Rocks.dll" />  
+		<file src="lib\net461\Newtonsoft.Json.dll" target="lib\net461\Newtonsoft.Json.dll" />  
+		<file src="lib\net461\NuGet.Squirrel.dll" target="lib\net461\NuGet.Squirrel.dll" />  
+		<file src="lib\net461\Prism.dll" target="lib\net461\Prism.dll" />  
+		<file src="lib\net461\Prism.Unity.Wpf.dll" target="lib\net461\Prism.Unity.Wpf.dll" />  
+		<file src="lib\net461\Prism.Wpf.dll" target="lib\net461\Prism.Wpf.dll" />  
+		<file src="lib\net461\RestSharp.dll" target="lib\net461\RestSharp.dll" />  
+		<file src="lib\net461\SharpCompress.dll" target="lib\net461\SharpCompress.dll" />  
+		<file src="lib\net461\Splat.dll" target="lib\net461\Splat.dll" />  
+		<file src="lib\net461\Squirrel.dll" target="lib\net461\Squirrel.dll" />  
+		<file src="lib\net461\System.Diagnostics.DiagnosticSource.dll" target="lib\net461\System.Diagnostics.DiagnosticSource.dll" />  
+		<file src="lib\net461\System.Windows.Controls.DataVisualization.Toolkit.dll" target="lib\net461\System.Windows.Controls.DataVisualization.Toolkit.dll" />  
+		<file src="lib\net461\System.Windows.Controls.Input.Toolkit.dll" target="lib\net461\System.Windows.Controls.Input.Toolkit.dll" />  
+		<file src="lib\net461\System.Windows.Controls.Layout.Toolkit.dll" target="lib\net461\System.Windows.Controls.Layout.Toolkit.dll" />  
+		<file src="lib\net461\System.Windows.Interactivity.dll" target="lib\net461\System.Windows.Interactivity.dll" />  
+		<file src="lib\net461\Unity.Abstractions.dll" target="lib\net461\Unity.Abstractions.dll" />  
+		<file src="lib\net461\Unity.Configuration.dll" target="lib\net461\Unity.Configuration.dll" />  
+		<file src="lib\net461\Unity.Container.dll" target="lib\net461\Unity.Container.dll" />  
+		<file src="lib\net461\Unity.Interception.Configuration.dll" target="lib\net461\Unity.Interception.Configuration.dll" />  
+		<file src="lib\net461\Unity.Interception.dll" target="lib\net461\Unity.Interception.dll" />  
+		<file src="lib\net461\Unity.RegistrationByConvention.dll" target="lib\net461\Unity.RegistrationByConvention.dll" />  
+		<file src="lib\net461\Unity.ServiceLocation.dll" target="lib\net461\Unity.ServiceLocation.dll" />  
+		<file src="lib\net461\WPFToolkit.dll" target="lib\net461\WPFToolkit.dll" />  
+		<file src="lib\net461\Xceed.Wpf.AvalonDock.dll" target="lib\net461\Xceed.Wpf.AvalonDock.dll" />  
+		<file src="lib\net461\Xceed.Wpf.AvalonDock.Themes.Aero.dll" target="lib\net461\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />  
+		<file src="lib\net461\Xceed.Wpf.AvalonDock.Themes.Metro.dll" target="lib\net461\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />  
+		<file src="lib\net461\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" target="lib\net461\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />  
+		<file src="lib\net461\Xceed.Wpf.Toolkit.dll" target="lib\net461\Xceed.Wpf.Toolkit.dll" />  
+	</files> 
+</package> 
