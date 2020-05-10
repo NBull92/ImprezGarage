@@ -5,6 +5,8 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
+    using CountriesWrapper;
+    using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
@@ -18,7 +20,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     {
         #region Attributes
         private readonly IDataService _dataService;
+        private readonly IEventAggregator _eventAggregator;
         private readonly IVehicleService _vehicleService;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly ICountryManager _countryManager;
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
         private DateTime _fromDate;
         private DateTime _toDate;
@@ -53,18 +58,31 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _selectedVehicle, value);
         }
 
+        private string _currencyLabel;
+        public string CurrencyLabel
+        {
+            get => _currencyLabel;
+            set => SetProperty(ref _currencyLabel, value);
+        }
+
+
         #endregion
 
         #region Methods
-        public PetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, IVehicleService vehicleService)
+        public PetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, IVehicleService vehicleService, 
+            IAuthenticationService authenticationService, ICountryManager countryManager)
         {
             _dataService = dataService;
+            _eventAggregator = eventAggregator;
             _vehicleService = vehicleService;
+            _authenticationService = authenticationService;
+            _countryManager = countryManager;
 
             ResetParameters();
 
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
+            eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
         }
 
         private void ResetParameters()
@@ -97,7 +115,18 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _fromDate = updatedDates.Item1;
             _toDate = updatedDates.Item2;
+
             FilterExpenses();
+
+            var currentUser = _authenticationService.CurrentUser();
+            if (currentUser != null)
+            {
+                GetCurrentUsersCurrencySymbol(currentUser.Country);
+            }
+            else
+            {
+                CurrencyLabel = string.Empty;
+            }
         }
 
         private void GetSelectedVehiclePetrolExpenses()
@@ -134,11 +163,41 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
             ExpenseTotal = FilteredExpenses.Select(o => o.Amount).Sum();
         }
-        #endregion
+
+        private void OnUserAccountChange(Tuple<bool, Account> loginData)
+        {
+            var isSignedIn = loginData.Item1;
+            if (isSignedIn)
+            {
+                GetCurrentUsersCurrencySymbol(loginData.Item2.Country);
+            }
+            else
+            {
+                CurrencyLabel = string.Empty;
+            }
+        }
+
+        private void GetCurrentUsersCurrencySymbol(string countryName)
+        {
+            var country = _countryManager.GetCountry(countryName);
+            if (country != null)
+            {
+                var currency = country.Currencies.FirstOrDefault();
+                if (currency != null)
+                    CurrencyLabel = currency.Symbol;
+            }
+            else
+            {
+                CurrencyLabel = string.Empty;
+            }
+        }
 
         public void Dispose()
         {
             _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+            _eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Unsubscribe(OnFilteredDatesChanged);
+            _eventAggregator.GetEvent<Events.UserAccountChange>().Unsubscribe(OnUserAccountChange);
         }
+        #endregion
     }
 }   // ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 
