@@ -20,12 +20,12 @@ namespace ImprezGarage.Modules.Account
             _container = container;
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
             _container.RegisterType<ICountryManager, CountryManager>(new ContainerControlledLifetimeManager());
-            _container.Resolve<ICountryManager>().Initialise();
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleHeaderRegion, typeof(ProfileHeader));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ProfilePage));
+            await _container.Resolve<ICountryManager>().InitialiseAsync();
         }
     }
 }
