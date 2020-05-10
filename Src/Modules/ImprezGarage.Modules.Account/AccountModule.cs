@@ -1,22 +1,29 @@
-﻿
+﻿using CommonServiceLocator;
+
 namespace ImprezGarage.Modules.Account
 {
+    using CountriesWrapper;
     using Infrastructure;
     using Prism.Modularity;
     using Prism.Regions;
     using Views;
+    using Microsoft.Practices.Unity;
 
     public class AccountModule : IModule
     {
         private readonly IRegionManager _regionManager;
+        private readonly IUnityContainer _container;
 
-        public AccountModule(IRegionManager regionManager)
+        public AccountModule(IRegionManager regionManager, IUnityContainer container)
         {
             _regionManager = regionManager;
+            _container = container;
         }
 
         public void Initialize()
         {
+            _container.RegisterType<ICountryManager, CountryManager>(new ContainerControlledLifetimeManager());
+            _container.Resolve<ICountryManager>().Initialise();
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleHeaderRegion, typeof(ProfileHeader));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ProfilePage));
         }

@@ -1,8 +1,7 @@
 ﻿
-using System.Configuration;
-
 namespace ImprezGarage.Modules.Account.ViewModels
 {
+    using CountriesWrapper;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
@@ -12,6 +11,9 @@ namespace ImprezGarage.Modules.Account.ViewModels
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+
 
     public class ProfilePageViewModel : BindableBase, INavigationAware
     {
@@ -19,7 +21,10 @@ namespace ImprezGarage.Modules.Account.ViewModels
         private readonly IAuthenticationService _authenticationService;
         private readonly IDataService _dataService;
         private readonly ILoggerService _loggerService;
+        private readonly ICountryManager _countryManager;
 
+        private bool _nameAllowSave;
+        private bool _countryAllowSave;
         private Account _currentUser;
 
         private bool _canSave;
@@ -36,18 +41,32 @@ namespace ImprezGarage.Modules.Account.ViewModels
             set
             {
                 SetProperty(ref _name, value);
-                if (string.IsNullOrWhiteSpace(_name) || _name.Equals(_currentUser.Name))
-                {
-                    CanSave = false;
-                }
-                else
-                {
-                    CanSave = true;
-                }
+                _nameAllowSave = !string.IsNullOrWhiteSpace(_name) && !_name.Equals(_currentUser.Name);
+                Validate();
             }
         }
 
+        private Country _country;
+        public Country Country
+        {
+            get => _country;
+            set
+            {
+                SetProperty(ref _country, value);
+                _countryAllowSave = Country != null && !_country.Name.Equals(_currentUser.Country);
+                Validate();
+            }
+        }
+
+        private ObservableCollection<Country> _countries;
+        public ObservableCollection<Country> Countries
+        {
+            get => _countries;
+            set => SetProperty(ref _countries, value);
+        }
+
         private bool _isReadonly;
+
         public bool IsReadonly
         {
             get => _isReadonly;
@@ -58,12 +77,13 @@ namespace ImprezGarage.Modules.Account.ViewModels
         public DelegateCommand BackCommand { get; set; }
 
         public ProfilePageViewModel(IRegionManager regionManager, IAuthenticationService authenticationService, 
-            IDataService dataService, ILoggerService loggerService)
+            IDataService dataService, ILoggerService loggerService, ICountryManager countryManager)
         {
             _regionManager = regionManager;
             _authenticationService = authenticationService;
             _dataService = dataService;
             _loggerService = loggerService;
+            _countryManager = countryManager;
 
             SaveCommand = new DelegateCommand(OnSave).ObservesCanExecute(() => CanSave);
             BackCommand = new DelegateCommand(OnBack);
@@ -80,7 +100,10 @@ namespace ImprezGarage.Modules.Account.ViewModels
             try
             {
                 _currentUser.Name = Name;
+                _currentUser.Country = Country.Name;
                 _dataService.UpdateUser(_currentUser);
+                _nameAllowSave = false;
+                _countryAllowSave = false;
                 CanSave = false;
             }
             catch (Exception e)
@@ -89,11 +112,36 @@ namespace ImprezGarage.Modules.Account.ViewModels
             }
         }
 
+        private void Validate()
+        {
+            if (_countryAllowSave || _nameAllowSave)
+            {
+                CanSave = true;
+            }
+            else
+            {
+                CanSave = false;
+            }
+        }
+
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            _currentUser = _authenticationService.CurrentUser();
-            Name = _currentUser.Name;
-            IsReadonly = _currentUser.IsReadonly;
+            try
+            {
+                _currentUser = _authenticationService.CurrentUser();
+                Name = _currentUser.Name;
+                IsReadonly = _currentUser.IsReadonly;
+                var countries = _countryManager.GetCountries();
+                if (countries == null)
+                    return;
+
+                Countries = new ObservableCollection<Country>(countries);
+                Country = Countries.FirstOrDefault(o => o.Name.Equals(_currentUser.Country));
+            }
+            catch (Exception e)
+            {
+                _loggerService.LogException(e);
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
