@@ -95,7 +95,7 @@
 
         public IEnumerable<PetrolExpense> GetVehiclePetrolExpenses(int vehicleId)
         {
-            return _connection.Get<PetrolExpense>().Where(o => o.VehicleId == vehicleId);
+            return _connection.Get<PetrolExpense>().Where(o => o.VehicleId != null && o.VehicleId == vehicleId);
         }
 
         public IEnumerable<MaintenanceCheck> GetVehicleMaintenanceChecks(int vehicleId)

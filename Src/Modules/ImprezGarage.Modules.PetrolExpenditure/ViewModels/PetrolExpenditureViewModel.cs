@@ -116,6 +116,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             _fromDate = updatedDates.Item1;
             _toDate = updatedDates.Item2;
 
+            GetSelectedVehiclePetrolExpenses();
             FilterExpenses();
 
             var currentUser = _authenticationService.CurrentUser();
@@ -131,7 +132,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
         private void GetSelectedVehiclePetrolExpenses()
         {
-            FilteredExpenses.Clear();
+            _expenses.Clear();
 
             if (_selectedVehicle == null)
                 return;

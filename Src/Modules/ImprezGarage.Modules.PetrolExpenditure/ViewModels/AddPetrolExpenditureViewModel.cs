@@ -97,7 +97,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             {
                 _dataService.AddPetrolExpenditure(Amount, Convert.ToDateTime(Date), VehicleId);
                 _notificationService.Alert(ExpenseAdded);
-                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
+               // _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
 
             }
             catch (Exception e)

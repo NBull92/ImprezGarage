@@ -90,6 +90,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             if (addExpense.DataContext is AddPetrolExpenditureViewModel vm)
                 vm.VehicleId = _selectedVehicle.Id;
             addExpense.ShowDialog();
+            RaiseFilteredDatesChanged();
         }
         #endregion
 

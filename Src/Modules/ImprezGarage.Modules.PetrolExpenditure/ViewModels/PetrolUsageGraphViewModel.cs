@@ -57,6 +57,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _fromDate = updatedDates.Item1;
             _toDate = updatedDates.Item2;
+            GetSelectedVehiclePetrolExpenses();
             FilterExpenses();
         }
 
