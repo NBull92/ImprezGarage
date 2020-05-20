@@ -38,6 +38,11 @@ namespace ImprezGarage.Modules.Firebase
             return await Task.Run(() => _dataStorage.GetUserVehiclesAsync(userId, refresh));
         }
 
+        public Vehicle GetLatestUserVehicle(string userId)
+        {
+            return _dataStorage.GetLatestUserVehicle(userId);
+        }
+
         public async Task<IEnumerable<VehicleType>> GetVehicleTypesAsync(bool refresh = false)
         {
             return await Task.Run(() => _dataStorage.GetVehicleTypesAsync());

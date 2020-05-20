@@ -1,6 +1,4 @@
-﻿using System.Windows.Navigation;
-
-namespace ImprezGarage.Modules.Firebase
+﻿namespace ImprezGarage.Modules.Firebase
 {
     using Infrastructure.Model;
     using Infrastructure.Services;
@@ -16,16 +14,16 @@ namespace ImprezGarage.Modules.Firebase
         /// <summary>
         /// Store all of the vehicles
         /// </summary>
-        private IEnumerable<Vehicle> _vehicles;
+        private List<Vehicle> _vehicles;
         /// <summary>
         /// Store all of the vehicle types
         /// </summary>
-        private IEnumerable<VehicleType> _vehicleTypes;
+        private List<VehicleType> _vehicleTypes;
 
         /// <summary>
         /// Store all of the maintenance types
         /// </summary>
-        private IEnumerable<MaintenanceCheckType> _maintenanceTypes;
+        private List<MaintenanceCheckType> _maintenanceTypes;
         #endregion
 
         #region Methods
@@ -74,6 +72,12 @@ namespace ImprezGarage.Modules.Firebase
             }
 
             return _vehicles.Where(o => o.UserId == userId).OrderByDescending(o => o.DateCreated);
+        }
+
+
+        public Vehicle GetLatestUserVehicle(string userId)
+        {
+            return _vehicles.LastOrDefault(o => o.UserId == userId);
         }
 
         public async Task<IEnumerable<VehicleType>> GetVehicleTypesAsync()
@@ -159,6 +163,7 @@ namespace ImprezGarage.Modules.Firebase
         public void AddNewVehicle(Vehicle vehicle)
         {
             vehicle.Id = _vehicles.Count();
+            _vehicles.Add(vehicle);
             _connection.Submit(vehicle, vehicle.Id);
         }
 

@@ -100,8 +100,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 model.CloseRequest += (sender, e) => window.Close();
                 window.Closed += (s, a) =>
                 {
-                    if (model.DialogResult)
-                        LoadVehicles();
+                    if (!model.DialogResult)
+                        return;
+
+                    var newVehicle = _dataService.GetLatestUserVehicle(_userId);
+                    var viewModel = new VehicleViewModel(_dataService, _notificationsService);
+                    viewModel.LoadInstance(newVehicle);
+                    Vehicles.Add(viewModel);
+                    Vehicles = new ObservableCollection<VehicleViewModel>(Vehicles.OrderByDescending(o => o.DateCreated));
+                    SelectedVehicle = viewModel;
                 };
             }
             window.ShowDialog();
@@ -128,7 +135,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             var currentlySelectedVehicle = SelectedVehicle;
             SelectedVehicle = null;
-            LoadVehicles();
+            LoadVehicles(true);
 
             if (currentlySelectedVehicle != null && Vehicles.Any(o => o.Vehicle.Id == currentlySelectedVehicle.Vehicle.Id))
             {
@@ -149,11 +156,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Retrieves all of the vehicles saved to the database and create a view model for each one.
         /// </summary>
-        public async void LoadVehicles()
+        public async void LoadVehicles(bool refreshData = false)
         {
             Vehicles.Clear();
 
-            var vehicles = await _dataService.GetUserVehicles(_userId, true);
+            var vehicles = await _dataService.GetUserVehicles(_userId, refreshData);
 
             if (vehicles == null)
                 return;

@@ -293,7 +293,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Take all the data the user has set and adds it to a new vehicle. This vehicle is then added to the database.
         /// </summary>
-        private void SaveNewVehicle()
+        private async void SaveNewVehicle()
         {
             var authentication = ServiceLocator.Current.GetInstance<IAuthenticationService>();
 
