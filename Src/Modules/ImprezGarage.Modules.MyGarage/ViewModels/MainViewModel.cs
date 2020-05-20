@@ -153,7 +153,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             Vehicles.Clear();
 
-            var vehicles = await _dataService.GetVehicles(true);
+            var vehicles = await _dataService.GetUserVehicles(_userId, true);
 
             if (vehicles == null)
                 return;
@@ -162,7 +162,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 await _dataService.GetVehicleTypesAsync().ContinueWith(task =>
                 {
-                    foreach (var vehicle in vehicles.Where(o => o.UserId == _userId))
+                    foreach (var vehicle in vehicles)
                     {
                         var viewModel = new VehicleViewModel(_dataService, _notificationsService);
                         viewModel.LoadInstance(vehicle);

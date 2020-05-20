@@ -62,6 +62,19 @@ namespace ImprezGarage.Modules.Firebase
 
             return _vehicles;
         }
+        
+        public async Task<IEnumerable<Vehicle>> GetUserVehiclesAsync(string userId, bool refresh)
+        {
+            if (_vehicles.Count().Equals(0) || refresh)
+            {
+                await Task.Run(() =>
+                {
+                    _vehicles = _connection.GetAsync<Vehicle>().Result;
+                });
+            }
+
+            return _vehicles.Where(o => o.UserId == userId).OrderByDescending(o => o.DateCreated);
+        }
 
         public async Task<IEnumerable<VehicleType>> GetVehicleTypesAsync()
         {

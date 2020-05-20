@@ -18,6 +18,12 @@ namespace ImprezGarage.Infrastructure.Services
         /// </summary>
         /// <returns>An observable collection of all vehicles</returns>
         Task<IEnumerable<Vehicle>> GetVehicles(bool refresh = false);
+
+        /// <summary>
+        /// Retrieve all of the saved vehicles for a specific user
+        /// </summary>
+        /// <returns>An observable collection of all vehicles</returns>
+        Task<IEnumerable<Vehicle>> GetUserVehicles(string userId, bool b);
         
         /// <summary>
         /// This function returns a collection of all the vehicle types from teh database.
