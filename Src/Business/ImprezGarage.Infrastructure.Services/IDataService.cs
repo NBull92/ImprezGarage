@@ -25,6 +25,9 @@ namespace ImprezGarage.Infrastructure.Services
         /// <returns>An observable collection of all vehicles</returns>
         Task<IEnumerable<Vehicle>> GetUserVehicles(string userId, bool b);
 
+        /// <summary>
+        /// Retrieves the last vehicle the user added.
+        /// </summary>
         Vehicle GetLatestUserVehicle(string userId);
 
         /// <summary>
