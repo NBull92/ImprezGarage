@@ -174,6 +174,7 @@
 
         public void DeleteVehicle(Vehicle vehicle)
         {
+            _vehicles.Remove(vehicle);
             _connection.Delete<Vehicle>(vehicle.Id);
         }
 
@@ -228,6 +229,11 @@
         public void UpdateUser(Account user)
         {
             _connection.Update(user, user.Id);
+        }
+
+        public bool GetUserVehicle(int vehicleId, string userId)
+        {
+           return _vehicles.Any(o => o.Id.Equals(vehicleId) && o.UserId.Equals(userId));
         }
         #endregion
     }

@@ -119,6 +119,12 @@ namespace ImprezGarage.Modules.Firebase
                 });
         }
 
+        ///<inheritdoc/>
+        public bool IsValidVehicle(int vehicleId, string userId)
+        {
+            return _dataStorage.GetUserVehicle(vehicleId, userId);
+        }
+
         #endregion
 
         #region Adds

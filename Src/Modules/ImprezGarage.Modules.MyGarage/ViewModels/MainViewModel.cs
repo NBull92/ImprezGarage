@@ -65,6 +65,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
             eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
+
         }
 
         #region Command Handlers
@@ -77,6 +79,23 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             else
             {
                 _vehicleService.ClearSelectedVehicle();
+            }
+        }
+        /// <summary>
+        /// RaiseSelectedVehicleChanged of the vehicle service maybe called from elsewhere, so we need to check here if the vehicle wasn't deleted. 
+        /// </summary>
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
+        {
+            if (SelectedVehicle != null && !_dataService.IsValidVehicle(SelectedVehicle.Vehicle.Id, _userId))
+            {
+                Vehicles.Remove(SelectedVehicle);
+                SelectedVehicle = Vehicles.FirstOrDefault();
+            }
+            else  if (vehicle != null && !_dataService.IsValidVehicle(vehicle.Id, _userId) && Vehicles.Any(o => o.Vehicle.Id.Equals(vehicle.Id)))
+            {
+                var toDelete = Vehicles.FirstOrDefault(o => o.Vehicle.Id.Equals(vehicle.Id));
+                Vehicles.Remove(toDelete);
+                SelectedVehicle = Vehicles.FirstOrDefault();
             }
         }
 

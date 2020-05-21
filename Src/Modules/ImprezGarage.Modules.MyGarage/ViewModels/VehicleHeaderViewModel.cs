@@ -124,7 +124,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _dataService.DeleteVehicle(SelectedVehicle.Vehicle);
                 _notificationsService.Alert(VehicleDeleted, NotificationHeader);
-                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
                 _vehicleService.ClearSelectedVehicle();
 
             }

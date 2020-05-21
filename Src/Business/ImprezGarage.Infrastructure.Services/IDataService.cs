@@ -138,5 +138,14 @@ namespace ImprezGarage.Infrastructure.Services
 
         void UpdateUser(Account user);
         #endregion
+
+        /// <summary>
+        /// Gets whether the vehicle, whose Id has been passed through, actually exists.
+        /// This is because the vehicle may have recently been deleted.
+        /// </summary>
+        /// <param name="vehicleId">Id of the vehicle we need to check.</param>
+        /// <param name="userId"></param>
+        /// <returns>True/False</returns>
+        bool IsValidVehicle(int vehicleId, string userId);
     }
 }   //ImprezGarage.Infrastructure.Model namespace 
