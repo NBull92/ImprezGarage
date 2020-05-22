@@ -279,7 +279,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _dataService.UpdateVehicle(EditVehicle);
                 _notificationsService.Alert(VehicleUpdated, NotificationHeader);
-                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }
             catch (Exception e)
             {
@@ -293,7 +292,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Take all the data the user has set and adds it to a new vehicle. This vehicle is then added to the database.
         /// </summary>
-        private async void SaveNewVehicle()
+        private void SaveNewVehicle()
         {
             var authentication = ServiceLocator.Current.GetInstance<IAuthenticationService>();
 
@@ -313,8 +312,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _dataService.AddNewVehicle(newVehicle);
                 _notificationsService.Alert(VehicleAdded, NotificationHeader);
-                DialogResult = true;
-                Close();
             }
             catch (Exception e)
             {
