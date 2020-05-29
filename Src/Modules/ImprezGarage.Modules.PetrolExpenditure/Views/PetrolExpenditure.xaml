@@ -45,7 +45,10 @@
                                 Margin="5"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
-                                Command="{Binding DeleteExpenseCommand}"
+                                Command="{Binding Path=DataContext.DeleteExpenseCommand, 
+                                        RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type ListBox}}}"
+                                CommandParameter="{Binding}"
                                 Background="{StaticResource ImprezGarage.Grey}"
                                 Foreground="{StaticResource ImprezGarage.Grey2}"
                                 Style="{DynamicResource RoundedSquareButtonStyle}">

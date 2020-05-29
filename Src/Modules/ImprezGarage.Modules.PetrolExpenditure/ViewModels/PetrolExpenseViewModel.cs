@@ -5,7 +5,6 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
@@ -65,7 +64,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
-            _eventAggregator = eventAggregator;
             _loggerService = loggerService;
 
             DeleteExpenseCommand = new DelegateCommand(OnExpenseDeleted);
@@ -80,7 +78,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         }
 
         #region Command Handler
-        private void OnExpenseDeleted()
+        public void OnExpenseDeleted()
         {
             if (!_notificationsService.Confirm(ConfirmExpenseDelete))
                 return;
@@ -88,7 +86,6 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             try
             {
                 _dataService.DeletePetrolExpense(Id);
-                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }
             catch (Exception e)
             {
@@ -97,5 +94,22 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         }
         #endregion
         #endregion
+
+        public bool Delete()
+        {
+            if (!_notificationsService.Confirm(ConfirmExpenseDelete))
+                return false;
+
+            try
+            {
+                _dataService.DeletePetrolExpense(Id);
+                return true;
+            }
+            catch (Exception e)
+            {
+                _loggerService.LogException(e);
+                return false;
+            }
+        }
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

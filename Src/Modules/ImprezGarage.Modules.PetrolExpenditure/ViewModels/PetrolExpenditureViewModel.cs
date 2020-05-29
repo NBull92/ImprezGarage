@@ -10,6 +10,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
     using System;
@@ -65,7 +66,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _currencyLabel, value);
         }
 
-
+        public DelegateCommand<PetrolExpenseViewModel> DeleteExpenseCommand { get; set; }
         #endregion
 
         #region Methods
@@ -83,6 +84,18 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
             eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+
+            DeleteExpenseCommand = new DelegateCommand<PetrolExpenseViewModel>(OnExpenseDeleted);
+        }
+
+        private void OnExpenseDeleted(PetrolExpenseViewModel expense)
+        {
+            if (!expense.Delete())
+                return;
+
+            _expenses.Remove(_expenses.FirstOrDefault(o => o.Id.Equals(expense.Id)));
+            FilterExpenses();
+            _eventAggregator.GetEvent<PetrolEvents.ExpenseDeleted>().Publish(expense.Id);
         }
 
         private void ResetParameters()

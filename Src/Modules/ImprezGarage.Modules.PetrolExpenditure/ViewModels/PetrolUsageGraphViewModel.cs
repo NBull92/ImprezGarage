@@ -44,6 +44,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
+            eventAggregator.GetEvent<PetrolEvents.ExpenseDeleted>().Subscribe(OnExpenseDeleted);
         }
 
         private void ResetParameters()
@@ -93,6 +94,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             {
                 _expenses.Add(new ChartData
                 {
+                    Id = expense.Id,
                     Cost = Convert.ToDouble(expense.Amount),
                     Date = expense.DateEntered.Value.ToShortDateString()
                 });
@@ -119,11 +121,17 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 SeriesCollection.Add(series);
             }
         }
-        #endregion
 
         public void Dispose()
         {
             _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
         }
+
+        public void OnExpenseDeleted(int id)
+        {
+            _expenses.Remove(_expenses.FirstOrDefault(o => o.Id.Equals(id)));
+            FilterExpenses();
+        }
+        #endregion
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 
