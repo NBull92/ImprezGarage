@@ -112,6 +112,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libraries\CountriesWrapper\CountriesWrapper\CountriesWrapper.csproj">
+      <Project>{CE6774AA-95C8-4F52-89F9-3094DF7080EC}</Project>
+      <Name>CountriesWrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj">
       <Project>{6db36d85-2a15-4003-a52e-33cd08171c34}</Project>
       <Name>ImprezGarage.Infrastructure.Services</Name>

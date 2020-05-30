@@ -45,7 +45,10 @@
                                 Margin="5"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
-                                Command="{Binding DeleteExpenseCommand}"
+                                Command="{Binding Path=DataContext.DeleteExpenseCommand, 
+                                        RelativeSource={RelativeSource FindAncestor, 
+                                        AncestorType={x:Type ListBox}}}"
+                                CommandParameter="{Binding}"
                                 Background="{StaticResource ImprezGarage.Grey}"
                                 Foreground="{StaticResource ImprezGarage.Grey2}"
                                 Style="{DynamicResource RoundedSquareButtonStyle}">
@@ -62,7 +65,8 @@
                    FontSize="14"
                    Margin="0,5,0,5">
             <Run Text="Total:"/>
-            <Run Text="{Binding ExpenseTotal, StringFormat='{}{0:C}', ConverterCulture='en-GB'}"/>
+            <Run Text="{Binding CurrencyLabel}"/>
+            <Run Text="{Binding ExpenseTotal, StringFormat=N2}"/>
         </TextBlock>
     </Grid>
 </UserControl>

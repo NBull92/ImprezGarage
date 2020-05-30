@@ -5,9 +5,12 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
+    using CountriesWrapper;
+    using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Microsoft.Practices.ServiceLocation;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;
     using System;
@@ -18,7 +21,10 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     {
         #region Attributes
         private readonly IDataService _dataService;
+        private readonly IEventAggregator _eventAggregator;
         private readonly IVehicleService _vehicleService;
+        private readonly IAuthenticationService _authenticationService;
+        private readonly ICountryManager _countryManager;
         private ObservableCollection<PetrolExpenseViewModel> _expenses;
         private DateTime _fromDate;
         private DateTime _toDate;
@@ -53,18 +59,43 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             set => SetProperty(ref _selectedVehicle, value);
         }
 
+        private string _currencyLabel;
+        public string CurrencyLabel
+        {
+            get => _currencyLabel;
+            set => SetProperty(ref _currencyLabel, value);
+        }
+
+        public DelegateCommand<PetrolExpenseViewModel> DeleteExpenseCommand { get; set; }
         #endregion
 
         #region Methods
-        public PetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, IVehicleService vehicleService)
+        public PetrolExpenditureViewModel(IDataService dataService, IEventAggregator eventAggregator, IVehicleService vehicleService, 
+            IAuthenticationService authenticationService, ICountryManager countryManager)
         {
             _dataService = dataService;
+            _eventAggregator = eventAggregator;
             _vehicleService = vehicleService;
+            _authenticationService = authenticationService;
+            _countryManager = countryManager;
 
             ResetParameters();
 
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
             eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Subscribe(OnFilteredDatesChanged);
+            eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+
+            DeleteExpenseCommand = new DelegateCommand<PetrolExpenseViewModel>(OnExpenseDeleted);
+        }
+
+        private void OnExpenseDeleted(PetrolExpenseViewModel expense)
+        {
+            if (!expense.Delete())
+                return;
+
+            _expenses.Remove(_expenses.FirstOrDefault(o => o.Id.Equals(expense.Id)));
+            FilterExpenses();
+            _eventAggregator.GetEvent<PetrolEvents.ExpenseDeleted>().Publish(expense.Id);
         }
 
         private void ResetParameters()
@@ -97,12 +128,24 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         {
             _fromDate = updatedDates.Item1;
             _toDate = updatedDates.Item2;
+
+            GetSelectedVehiclePetrolExpenses();
             FilterExpenses();
+
+            var currentUser = _authenticationService.CurrentUser();
+            if (currentUser != null)
+            {
+                GetCurrentUsersCurrencySymbol(currentUser.Country);
+            }
+            else
+            {
+                CurrencyLabel = string.Empty;
+            }
         }
 
         private void GetSelectedVehiclePetrolExpenses()
         {
-            FilteredExpenses.Clear();
+            _expenses.Clear();
 
             if (_selectedVehicle == null)
                 return;
@@ -134,11 +177,41 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 
             ExpenseTotal = FilteredExpenses.Select(o => o.Amount).Sum();
         }
-        #endregion
+
+        private void OnUserAccountChange(Tuple<bool, Account> loginData)
+        {
+            var isSignedIn = loginData.Item1;
+            if (isSignedIn)
+            {
+                GetCurrentUsersCurrencySymbol(loginData.Item2.Country);
+            }
+            else
+            {
+                CurrencyLabel = string.Empty;
+            }
+        }
+
+        private void GetCurrentUsersCurrencySymbol(string countryName)
+        {
+            var country = _countryManager.GetCountry(countryName);
+            if (country != null)
+            {
+                var currency = country.Currencies.FirstOrDefault();
+                if (currency != null)
+                    CurrencyLabel = currency.Symbol;
+            }
+            else
+            {
+                CurrencyLabel = string.Empty;
+            }
+        }
 
         public void Dispose()
         {
             _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+            _eventAggregator.GetEvent<PetrolEvents.FilteredDatesChanged>().Unsubscribe(OnFilteredDatesChanged);
+            _eventAggregator.GetEvent<Events.UserAccountChange>().Unsubscribe(OnUserAccountChange);
         }
+        #endregion
     }
 }   // ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

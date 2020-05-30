@@ -18,7 +18,18 @@ namespace ImprezGarage.Infrastructure.Services
         /// </summary>
         /// <returns>An observable collection of all vehicles</returns>
         Task<IEnumerable<Vehicle>> GetVehicles(bool refresh = false);
-        
+
+        /// <summary>
+        /// Retrieve all of the saved vehicles for a specific user
+        /// </summary>
+        /// <returns>An observable collection of all vehicles</returns>
+        Task<IEnumerable<Vehicle>> GetUserVehicles(string userId, bool b);
+
+        /// <summary>
+        /// Retrieves the last vehicle the user added.
+        /// </summary>
+        Vehicle GetLatestUserVehicle(string userId);
+
         /// <summary>
         /// This function returns a collection of all the vehicle types from teh database.
         /// </summary>
@@ -127,5 +138,14 @@ namespace ImprezGarage.Infrastructure.Services
 
         void UpdateUser(Account user);
         #endregion
+
+        /// <summary>
+        /// Gets whether the vehicle, whose Id has been passed through, actually exists.
+        /// This is because the vehicle may have recently been deleted.
+        /// </summary>
+        /// <param name="vehicleId">Id of the vehicle we need to check.</param>
+        /// <param name="userId"></param>
+        /// <returns>True/False</returns>
+        bool IsValidVehicle(int vehicleId, string userId);
     }
 }   //ImprezGarage.Infrastructure.Model namespace 

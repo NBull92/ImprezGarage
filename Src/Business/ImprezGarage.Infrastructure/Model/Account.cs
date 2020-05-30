@@ -12,5 +12,6 @@ namespace ImprezGarage.Infrastructure.Model
         public string Name { get; set; }
         public bool IsReadonly { get; set; }
         public DateTime LastLogin { get; set; }
+        public string Country { get; set; }
     }
 }

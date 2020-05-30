@@ -1,6 +1,4 @@
-﻿using System.Windows.Navigation;
-
-namespace ImprezGarage.Modules.Firebase
+﻿namespace ImprezGarage.Modules.Firebase
 {
     using Infrastructure.Model;
     using Infrastructure.Services;
@@ -16,16 +14,16 @@ namespace ImprezGarage.Modules.Firebase
         /// <summary>
         /// Store all of the vehicles
         /// </summary>
-        private IEnumerable<Vehicle> _vehicles;
+        private List<Vehicle> _vehicles;
         /// <summary>
         /// Store all of the vehicle types
         /// </summary>
-        private IEnumerable<VehicleType> _vehicleTypes;
+        private List<VehicleType> _vehicleTypes;
 
         /// <summary>
         /// Store all of the maintenance types
         /// </summary>
-        private IEnumerable<MaintenanceCheckType> _maintenanceTypes;
+        private List<MaintenanceCheckType> _maintenanceTypes;
         #endregion
 
         #region Methods
@@ -62,6 +60,25 @@ namespace ImprezGarage.Modules.Firebase
 
             return _vehicles;
         }
+        
+        public async Task<IEnumerable<Vehicle>> GetUserVehiclesAsync(string userId, bool refresh)
+        {
+            if (_vehicles.Count().Equals(0) || refresh)
+            {
+                await Task.Run(() =>
+                {
+                    _vehicles = _connection.GetAsync<Vehicle>().Result;
+                });
+            }
+
+            return _vehicles.Where(o => o.UserId == userId).OrderByDescending(o => o.DateCreated);
+        }
+
+
+        public Vehicle GetLatestUserVehicle(string userId)
+        {
+            return _vehicles.LastOrDefault(o => o.UserId == userId);
+        }
 
         public async Task<IEnumerable<VehicleType>> GetVehicleTypesAsync()
         {
@@ -78,7 +95,7 @@ namespace ImprezGarage.Modules.Firebase
 
         public IEnumerable<PetrolExpense> GetVehiclePetrolExpenses(int vehicleId)
         {
-            return _connection.Get<PetrolExpense>().Where(o => o.VehicleId == vehicleId);
+            return _connection.Get<PetrolExpense>().Where(o => o.VehicleId != null && o.VehicleId == vehicleId);
         }
 
         public IEnumerable<MaintenanceCheck> GetVehicleMaintenanceChecks(int vehicleId)
@@ -146,6 +163,7 @@ namespace ImprezGarage.Modules.Firebase
         public void AddNewVehicle(Vehicle vehicle)
         {
             vehicle.Id = _vehicles.Count();
+            _vehicles.Add(vehicle);
             _connection.Submit(vehicle, vehicle.Id);
         }
 
@@ -156,6 +174,7 @@ namespace ImprezGarage.Modules.Firebase
 
         public void DeleteVehicle(Vehicle vehicle)
         {
+            _vehicles.Remove(vehicle);
             _connection.Delete<Vehicle>(vehicle.Id);
         }
 
@@ -210,6 +229,11 @@ namespace ImprezGarage.Modules.Firebase
         public void UpdateUser(Account user)
         {
             _connection.Update(user, user.Id);
+        }
+
+        public bool GetUserVehicle(int vehicleId, string userId)
+        {
+           return _vehicles.Any(o => o.Id.Equals(vehicleId) && o.UserId.Equals(userId));
         }
         #endregion
     }

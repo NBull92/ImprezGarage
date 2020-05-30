@@ -279,7 +279,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _dataService.UpdateVehicle(EditVehicle);
                 _notificationsService.Alert(VehicleUpdated, NotificationHeader);
-                _eventAggregator.GetEvent<Events.RefreshDataEvent>().Publish();
             }
             catch (Exception e)
             {
@@ -313,8 +312,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _dataService.AddNewVehicle(newVehicle);
                 _notificationsService.Alert(VehicleAdded, NotificationHeader);
-                DialogResult = true;
-                Close();
             }
             catch (Exception e)
             {

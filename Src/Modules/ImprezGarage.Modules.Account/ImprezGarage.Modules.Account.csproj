@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\..\Libs\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -112,11 +115,15 @@
     <PackageReference Include="Prism.Core">
       <Version>7.0.0.396</Version>
     </PackageReference>
-    <PackageReference Include="Prism.Wpf">
+    <PackageReference Include="Prism.Unity">
       <Version>6.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Libraries\CountriesWrapper\CountriesWrapper\CountriesWrapper.csproj">
+      <Project>{ce6774aa-95c8-4f52-89f9-3094df7080ec}</Project>
+      <Name>CountriesWrapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj">
       <Project>{6DB36D85-2A15-4003-A52E-33CD08171C34}</Project>
       <Name>ImprezGarage.Infrastructure.Services</Name>

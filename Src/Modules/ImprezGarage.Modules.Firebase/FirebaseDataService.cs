@@ -27,16 +27,32 @@ namespace ImprezGarage.Modules.Firebase
         }
 
         #region Gets
+        ///<inheritdoc/>
         public async Task<IEnumerable<Vehicle>> GetVehicles(bool refresh = false)
         {
             return await Task.Run(() => _dataStorage.GetVehiclesAsync(refresh));
         }
+
         
+        ///<inheritdoc/>
+        public async Task<IEnumerable<Vehicle>> GetUserVehicles(string userId, bool refresh = false)
+        {
+            return await Task.Run(() => _dataStorage.GetUserVehiclesAsync(userId, refresh));
+        }
+
+        ///<inheritdoc/>
+        public Vehicle GetLatestUserVehicle(string userId)
+        {
+            return _dataStorage.GetLatestUserVehicle(userId);
+        }
+
+        ///<inheritdoc/>
         public async Task<IEnumerable<VehicleType>> GetVehicleTypesAsync(bool refresh = false)
         {
             return await Task.Run(() => _dataStorage.GetVehicleTypesAsync());
         }
 
+        ///<inheritdoc/>
         public async Task<VehicleType> GetVehicleTypeAsync(int typeId)
         {
             return await Task.Run(() =>
@@ -46,21 +62,25 @@ namespace ImprezGarage.Modules.Firebase
             });
         }
 
+        ///<inheritdoc/>
         public MaintenanceCheckType GetMaintenanceCheckTypeById(int typeId)
         {
             return _dataStorage.GetMaintenanceTypes(typeId);
         }
 
+        ///<inheritdoc/>
         public IEnumerable<MaintenanceCheck> GetVehicleMaintenanceChecks(int vehicleId)
         {
             return _dataStorage.GetVehicleMaintenanceChecks(vehicleId);
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<PetrolExpense>> GetPetrolExpensesByVehicleId(int vehicleId)
         {
             return Task.Run(() => _dataStorage.GetVehiclePetrolExpenses(vehicleId));
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<MaintenanceCheckType>> GetMaintenanceCheckTypesAsync()
         {
             return await Task.Run(() =>
@@ -70,22 +90,26 @@ namespace ImprezGarage.Modules.Firebase
             });
         }
 
+        ///<inheritdoc/>
         public Task<IEnumerable<MaintenanceCheckOption>> GetMaintenanceCheckOptionsForType(int typeId)
         {
             return Task.Run(() => _dataStorage.GetMaintenanceCheckOptions(typeId));
         }
 
+        ///<inheritdoc/>
         public async Task<MaintenanceCheck> GetMaintenanceChecksByIdAsync(int maintenanceCheckId)
         {
             return await Task.Run(() => _dataStorage.GetMaintenanceChecksByIdAsync(maintenanceCheckId));
         }
 
+        ///<inheritdoc/>
         public DateTime? LastMaintenanceCheckDateForVehicle(int vehicleId)
         {
             var last = _dataStorage.LastVehicleCheck(vehicleId);
             return last?.DatePerformed;
         }
 
+        ///<inheritdoc/>
         public async Task<IEnumerable<PerformedMaintenanceOption>> GetOptionsPerformedAsync(int maintenanceCheckId)
         {
             return await Task.Run(() =>
@@ -95,19 +119,28 @@ namespace ImprezGarage.Modules.Firebase
                 });
         }
 
+        ///<inheritdoc/>
+        public bool IsValidVehicle(int vehicleId, string userId)
+        {
+            return _dataStorage.GetUserVehicle(vehicleId, userId);
+        }
+
         #endregion
 
         #region Adds
+        ///<inheritdoc/>
         public void AddNewVehicle(Vehicle vehicle)
         {
             _dataStorage.AddNewVehicle(vehicle);
         }
 
+        ///<inheritdoc/>
         public async Task<int> SetMaintenanceCheckAsync(MaintenanceCheck maintenanceCheck)
         {
             return await Task.Run(() => _dataStorage.SubmitMaintenanceCheckAsync(maintenanceCheck));
         }
 
+        ///<inheritdoc/>
         public void AddPetrolExpenditure(double amount, DateTime date, int vehicleId)
         {
             var expense = new PetrolExpense {Amount = amount, VehicleId = vehicleId, DateEntered = date};
@@ -116,11 +149,13 @@ namespace ImprezGarage.Modules.Firebase
         }
 
 
+        ///<inheritdoc/>
         public async Task SetOptionsPerformedAsync(IEnumerable<PerformedMaintenanceOption> maintenanceOptionsPerformed)
         {
             await _dataStorage.SetOptionsPerformedAsync(maintenanceOptionsPerformed);
         }
 
+        ///<inheritdoc/>
         public void AddRepairReport(string partReplaced, string replacedWith, double price, int vehicleId)
         {
             var repair = new PartsReplacementRecord
@@ -139,17 +174,20 @@ namespace ImprezGarage.Modules.Firebase
         #endregion
 
         #region Deletes
+        ///<inheritdoc/>
         public void DeleteVehicle(Vehicle vehicle)
         {
             _dataStorage.DeleteVehicle(vehicle);
         }
 
+        ///<inheritdoc/>
         public void DeleteMaintenanceCheck(int maintenanceCheckId)
         {
             _dataStorage.DeletePerformedMaintenanceOptions(maintenanceCheckId);
             _dataStorage.DeleteMaintenanceCheck(maintenanceCheckId);
         }
 
+        ///<inheritdoc/>
         public void DeletePetrolExpense(int petrolExpenseId)
         {
             _dataStorage.DeletePetrolExpenditure(petrolExpenseId);
@@ -157,16 +195,19 @@ namespace ImprezGarage.Modules.Firebase
         #endregion
 
         #region Updates
+        ///<inheritdoc/>
         public void UpdateVehicle(Vehicle vehicle)
         {
             _dataStorage.UpdateVehicle(vehicle);
         }
 
+        ///<inheritdoc/>
         public void UpdateUser(Account user)
         {
             _dataStorage.UpdateUser(user);
         }
 
+        ///<inheritdoc/>
         public Account CreateUser(string userLocalId, string email)
         {
             var newUser = new Account
@@ -181,11 +222,11 @@ namespace ImprezGarage.Modules.Firebase
             return newUser;
         }
 
+        ///<inheritdoc/>
         public Account GetUser(string userLocalId)
         {
             return _dataStorage.GetUser(userLocalId);
         }
-
         #endregion
     }
 }

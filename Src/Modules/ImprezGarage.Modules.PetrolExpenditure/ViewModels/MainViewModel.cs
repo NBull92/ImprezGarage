@@ -5,7 +5,6 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
@@ -15,7 +14,7 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
     using System;
     using Views;
 
-    public class MainViewModel : BindableBase, IDisposable
+    public class MainViewModel : BindableBase, IDisposable, INavigationAware
     {
         #region Attributes
         private readonly IEventAggregator _eventAggregator;
@@ -67,14 +66,31 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             ToDate = DateTime.Now;
         }
 
-        #region Command Handlers
+        public void Dispose()
+        {
+            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
+        }
 
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            RaiseFilteredDatesChanged();
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext) { }
+
+        #region Command Handlers
         private void AddExpenditureExecute()
         {
             var addExpense = new AddPetrolExpenditure();
             if (addExpense.DataContext is AddPetrolExpenditureViewModel vm)
                 vm.VehicleId = _selectedVehicle.Id;
             addExpense.ShowDialog();
+            RaiseFilteredDatesChanged();
         }
         #endregion
 
@@ -95,10 +111,5 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
             SelectedVehicle = vehicle;
         }
         #endregion
-
-        public void Dispose()
-        {
-            _vehicleService.SelectedVehicleChanged -= OnSelectedVehicleChanged;
-        }
     }
 }   //ImprezGarage.Modules.PetrolExpenditure.ViewModels namespace 

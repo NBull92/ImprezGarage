@@ -65,6 +65,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
             eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
             eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+            vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
+
         }
 
         #region Command Handlers
@@ -77,6 +79,23 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             else
             {
                 _vehicleService.ClearSelectedVehicle();
+            }
+        }
+        /// <summary>
+        /// RaiseSelectedVehicleChanged of the vehicle service maybe called from elsewhere, so we need to check here if the vehicle wasn't deleted. 
+        /// </summary>
+        private void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
+        {
+            if (SelectedVehicle != null && !_dataService.IsValidVehicle(SelectedVehicle.Vehicle.Id, _userId))
+            {
+                Vehicles.Remove(SelectedVehicle);
+                SelectedVehicle = Vehicles.FirstOrDefault();
+            }
+            else  if (vehicle != null && !_dataService.IsValidVehicle(vehicle.Id, _userId) && Vehicles.Any(o => o.Vehicle.Id.Equals(vehicle.Id)))
+            {
+                var toDelete = Vehicles.FirstOrDefault(o => o.Vehicle.Id.Equals(vehicle.Id));
+                Vehicles.Remove(toDelete);
+                SelectedVehicle = Vehicles.FirstOrDefault();
             }
         }
 
@@ -100,8 +119,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 model.CloseRequest += (sender, e) => window.Close();
                 window.Closed += (s, a) =>
                 {
-                    if (model.DialogResult)
-                        LoadVehicles();
+                    if (!model.DialogResult)
+                        return;
+
+                    var newVehicle = _dataService.GetLatestUserVehicle(_userId);
+                    var viewModel = new VehicleViewModel(_dataService, _notificationsService);
+                    viewModel.LoadInstance(newVehicle);
+                    Vehicles.Add(viewModel);
+                    Vehicles = new ObservableCollection<VehicleViewModel>(Vehicles.OrderByDescending(o => o.DateCreated));
+                    SelectedVehicle = viewModel;
                 };
             }
             window.ShowDialog();
@@ -128,7 +154,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         {
             var currentlySelectedVehicle = SelectedVehicle;
             SelectedVehicle = null;
-            LoadVehicles();
+            LoadVehicles(true);
 
             if (currentlySelectedVehicle != null && Vehicles.Any(o => o.Vehicle.Id == currentlySelectedVehicle.Vehicle.Id))
             {
@@ -149,11 +175,11 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// <summary>
         /// Retrieves all of the vehicles saved to the database and create a view model for each one.
         /// </summary>
-        public async void LoadVehicles()
+        public async void LoadVehicles(bool refreshData = false)
         {
             Vehicles.Clear();
 
-            var vehicles = await _dataService.GetVehicles(true);
+            var vehicles = await _dataService.GetUserVehicles(_userId, refreshData);
 
             if (vehicles == null)
                 return;
@@ -162,7 +188,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 await _dataService.GetVehicleTypesAsync().ContinueWith(task =>
                 {
-                    foreach (var vehicle in vehicles.Where(o => o.UserId == _userId))
+                    foreach (var vehicle in vehicles)
                     {
                         var viewModel = new VehicleViewModel(_dataService, _notificationsService);
                         viewModel.LoadInstance(vehicle);
