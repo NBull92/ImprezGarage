@@ -25,6 +25,7 @@ echo 	^</metadata^> >> %file%
 echo		^<files^> >> %file%
 echo			^<file src="lib\net461\CommonServiceLocator.dll" target="lib\net461\CommonServiceLocator.dll" /^>  >> %file%
 echo			^<file src="lib\net461\ControlzEx.dll" target="lib\net461\ControlzEx.dll" /^>  >> %file%
+echo			^<file src="lib\net461\CountriesWrapper.dll" target="lib\net461\CountriesWrapper.dll" /^>  >> %file%
 echo			^<file src="lib\net461\DeltaCompressionDotNet.dll" target="lib\net461\DeltaCompressionDotNet.dll" /^>  >> %file%
 echo			^<file src="lib\net461\DeltaCompressionDotNet.MsDelta.dll" target="lib\net461\DeltaCompressionDotNet.MsDelta.dll" /^>  >> %file%
 echo			^<file src="lib\net461\DeltaCompressionDotNet.PatchApi.dll" target="lib\net461\DeltaCompressionDotNet.PatchApi.dll" /^>  >> %file%
@@ -49,6 +50,7 @@ echo			^<file src="lib\net461\ImprezGarage.Modules.Settings.dll" target="lib\net
 echo			^<file src="lib\net461\LiveCharts.dll" target="lib\net461\LiveCharts.dll" /^>  >> %file%
 echo			^<file src="lib\net461\LiveCharts.Wpf.dll" target="lib\net461\LiveCharts.Wpf.dll" /^>  >> %file%
 echo			^<file src="lib\net461\MahApps.Metro.dll" target="lib\net461\MahApps.Metro.dll" /^>  >> %file%
+echo			^<file src="lib\net461\Microsoft.Bcl.AsyncInterfaces.dll" target="lib\net461\Microsoft.Bcl.AsyncInterfaces.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Microsoft.Expression.Controls.dll" target="lib\net461\Microsoft.Expression.Controls.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Microsoft.Expression.Drawing.dll" target="lib\net461\Microsoft.Expression.Drawing.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Microsoft.Expression.Effects.dll" target="lib\net461\Microsoft.Expression.Effects.dll" /^>  >> %file%
@@ -58,10 +60,12 @@ echo			^<file src="lib\net461\Microsoft.Expression.Prototyping.SketchControls.dl
 echo			^<file src="lib\net461\Microsoft.Practices.ServiceLocation.dll" target="lib\net461\Microsoft.Practices.ServiceLocation.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Microsoft.Practices.Unity.dll" target="lib\net461\Microsoft.Practices.Unity.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Microsoft.SDK.Expression.Blend.dll" target="lib\net461\Microsoft.SDK.Expression.Blend.dll" /^>  >> %file%
+echo			^<file src="lib\net461\Microsoft.Win32.Primitives.dll" target="lib\net461\Microsoft.Win32.Primitives.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Mono.Cecil.dll" target="lib\net461\Mono.Cecil.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Mono.Cecil.Mdb.dll" target="lib\net461\Mono.Cecil.Mdb.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Mono.Cecil.Pdb.dll" target="lib\net461\Mono.Cecil.Pdb.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Mono.Cecil.Rocks.dll" target="lib\net461\Mono.Cecil.Rocks.dll" /^>  >> %file%
+echo			^<file src="lib\net461\netstandard.dll" target="lib\net461\netstandard.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Newtonsoft.Json.dll" target="lib\net461\Newtonsoft.Json.dll" /^>  >> %file%
 echo			^<file src="lib\net461\NuGet.Squirrel.dll" target="lib\net461\NuGet.Squirrel.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Prism.dll" target="lib\net461\Prism.dll" /^>  >> %file%
@@ -71,11 +75,10 @@ echo			^<file src="lib\net461\RestSharp.dll" target="lib\net461\RestSharp.dll" /
 echo			^<file src="lib\net461\SharpCompress.dll" target="lib\net461\SharpCompress.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Splat.dll" target="lib\net461\Splat.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Squirrel.dll" target="lib\net461\Squirrel.dll" /^>  >> %file%
-echo			^<file src="lib\net461\System.Diagnostics.DiagnosticSource.dll" target="lib\net461\System.Diagnostics.DiagnosticSource.dll" /^>  >> %file%
-echo			^<file src="lib\net461\System.Windows.Controls.DataVisualization.Toolkit.dll" target="lib\net461\System.Windows.Controls.DataVisualization.Toolkit.dll" /^>  >> %file%
-echo			^<file src="lib\net461\System.Windows.Controls.Input.Toolkit.dll" target="lib\net461\System.Windows.Controls.Input.Toolkit.dll" /^>  >> %file%
-echo			^<file src="lib\net461\System.Windows.Controls.Layout.Toolkit.dll" target="lib\net461\System.Windows.Controls.Layout.Toolkit.dll" /^>  >> %file%
-echo			^<file src="lib\net461\System.Windows.Interactivity.dll" target="lib\net461\System.Windows.Interactivity.dll" /^>  >> %file%
+
+echo			^<file src="lib\net461\Squirrel.dll" target="lib\net461\Squirrel.dll" /^>  >> %file%
+
+
 echo			^<file src="lib\net461\Unity.Abstractions.dll" target="lib\net461\Unity.Abstractions.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Unity.Configuration.dll" target="lib\net461\Unity.Configuration.dll" /^>  >> %file%
 echo			^<file src="lib\net461\Unity.Container.dll" target="lib\net461\Unity.Container.dll" /^>  >> %file%
