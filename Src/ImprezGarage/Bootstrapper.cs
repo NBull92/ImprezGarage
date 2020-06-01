@@ -39,38 +39,31 @@ namespace ImprezGarage
 #if !DEBUG
             Task.Run(async () =>
             {
-                try
-                {
-                    // Keep in for testing locally.
-                    //using (var mgr = new UpdateManager(@"D:\Documents\Nick\GitHub\ImprezGarage\Releases"))
-                    //{
-                    //    var updateInfo = await mgr.CheckForUpdate();
-                    //    if (updateInfo.ReleasesToApply.Any())
-                    //    {
-                    //        await mgr.UpdateApp();
-                    //        UpdateManager.RestartApp();
-                    //    }
-                    //}
+                // Keep in for testing locally.
+                //using (var mgr = new UpdateManager(@"D:\Documents\Nick\GitHub\ImprezGarage\Releases"))
+                //{
+                //    var updateInfo = await mgr.CheckForUpdate();
+                //    if (updateInfo.ReleasesToApply.Any())
+                //    {
+                //        await mgr.UpdateApp();
+                //        UpdateManager.RestartApp();
+                //    }
+                //}
 
-                    using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/NBull92/ImprezGarage"))
+                using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/NBull92/ImprezGarage"))
+                {
+                    var updateInfo = await mgr.CheckForUpdate();
+                    if (updateInfo.ReleasesToApply.Any())
                     {
-                        var updateInfo = await mgr.CheckForUpdate();
-                        if (updateInfo.ReleasesToApply.Any())
-                        {
-                            await mgr.UpdateApp();
-                            UpdateManager.RestartApp();
-                        }
+                        await mgr.UpdateApp();
+                        UpdateManager.RestartApp();
                     }
-
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        Application.Current.MainWindow?.Show();
-                    });
                 }
-                catch (Exception e)
+
+                Application.Current.Dispatcher.Invoke(() =>
                 {
-
-                }
+                    Application.Current.MainWindow?.Show();
+                });
             });
 #else
             Application.Current.MainWindow?.Show();
