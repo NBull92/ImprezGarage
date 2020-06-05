@@ -1,24 +1,29 @@
-﻿
+﻿//------------------------------------------------------------------------------
+// Copyright of Nicholas Andrew Bull 2020
+// This code is for portfolio use only.
+//------------------------------------------------------------------------------
+
 namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 {
     using Commands;
+    using CommonServiceLocator;
     using Firebase.Auth;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Regions;
     using System;
     using Views;
 
-
     public class SignInViewModel : AuthenticateViewModel
     {
         #region Attributes
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
+        private readonly IAuthenticationService _authenticationService;
+
         #endregion
 
         #region Commands
@@ -29,15 +34,16 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
         #endregion
 
         #region Methods
-        public SignInViewModel(IEventAggregator eventAggregator, IRegionManager regionManager) : base(eventAggregator, regionManager)
+        public SignInViewModel(IEventAggregator eventAggregator, IRegionManager regionManager, IAuthenticationService authenticationService) : base(eventAggregator, regionManager)
         {
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
+            _authenticationService = authenticationService;
 
             SignIn = new DelegateCommand(OnSignIn);
             ForgotPassword = new DelegateCommand(OnForgotPassword);
             CreateAccount = new DelegateCommand(OnCreateAccount);
-            DemoAccountCommand = new DemoAccountCommand();
+            DemoAccountCommand = new DemoAccountCommand(authenticationService);
         }
 
         private void OnCreateAccount()
@@ -57,8 +63,7 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
             
             try
             {
-                var authService = ServiceLocator.Current.GetInstance<IAuthenticationService>();
-                var response = await authService.LoginAsync(Email, SecurePassword);
+                var response = await _authenticationService.LoginAsync(Email, SecurePassword);
                 _eventAggregator.GetEvent<Events.UserAccountChange>().Publish(new Tuple<bool, Account>(true, response));
             }
             catch (FirebaseAuthException fae)
@@ -72,4 +77,4 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
         }
         #endregion
     }
-}
+}   // ImprezGarage.Modules.FirebaseAuth.ViewModels namespace 

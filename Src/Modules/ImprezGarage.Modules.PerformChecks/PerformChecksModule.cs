@@ -5,45 +5,38 @@
 
 namespace ImprezGarage.Modules.PerformChecks
 {
-    using Microsoft.Practices.Unity;
-    using Prism.Regions;
-    using Prism.Modularity;
-    using Views;
     using Infrastructure;
+    using Prism.Ioc;
+    using Prism.Modularity;
+    using Prism.Regions;
+    using Views;
 
     public class PerformChecksModule : IModule
     {
-        #region Attributes
-        /// <summary>
-        /// Store the container manager.
-        /// </summary>
-        private readonly IUnityContainer _container;
-
         /// <summary>
         /// Store the region manager.
         /// </summary>
         private readonly IRegionManager _regionManager;
-        #endregion
 
         #region Methods
         /// <summary>
         /// Construct the module and inject the container and region manager.
         /// </summary>
-        public PerformChecksModule(IUnityContainer container, IRegionManager regionManager)
+        public PerformChecksModule(IRegionManager regionManager)
         {
-            _container = container;
             _regionManager = regionManager;
         }
 
-        /// <summary>
-        /// Initialize the module and register any types, whether it be an interface and it's implementation, or it be a view.
-        /// </summary>
-        public void Initialize()
-        {   
-            _container.RegisterType<object, Main>(typeof(Main).FullName);
-            _container.RegisterType<object, PerformNewCheck>(typeof(PerformNewCheck).FullName);
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.Register<object, Main>(typeof(Main).FullName);
+            containerRegistry.Register<object, PerformNewCheck>(typeof(PerformNewCheck).FullName);
 
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(Main));
+        }
+
+        public void OnInitialized(IContainerProvider containerProvider)
+        {
         }
         #endregion
     }

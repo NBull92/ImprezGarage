@@ -3,14 +3,15 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+using Prism.Ioc;
+
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
+    using CommonServiceLocator;
     using CreationViewModels;
-    using Infrastructure;
     using Infrastructure.BaseClasses;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Microsoft.Practices.ServiceLocation;
     using Microsoft.Practices.Unity;
     using Prism.Commands;
     using Prism.Events;
@@ -28,12 +29,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// Store the injected Data Service
         /// </summary>
         private readonly IDataService _dataService;
-
-        /// <summary>
-        /// Store the injected unity container
-        /// </summary>
-        private readonly IUnityContainer _container;
-
+        
         /// <summary>
         /// Store the injected notification service
         /// </summary>
@@ -44,7 +40,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private readonly ILoggerService _loggerService;
 
-        private readonly IEventAggregator _eventAggregator;
+        private readonly IAuthenticationService _authenticationService;
 
         private const string InsuranceDateWarning = "You have selected to add the vehicles insurance date, however the data entered is in the past. \n\nIs this intended?";
         private const string TaxRenewalDateWarning = "You have selected to add the vehicles tax renewal date, however the data entered is in the past. \n\nIs this intended?";
@@ -82,15 +78,15 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     switch (_selectedVehicleType.Name)
                     {
                         case "Car":
-                            VehicleCreationViewModel = _container.Resolve<CarCreationViewModel>();
+                            VehicleCreationViewModel = ServiceLocator.Current.GetInstance<CarCreationViewModel>();
                             ((CarCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Car"));
                             break;
                         case "Bicycle":
-                            VehicleCreationViewModel = _container.Resolve<BicycleCreationViewModel>();
+                            VehicleCreationViewModel = ServiceLocator.Current.GetInstance<BicycleCreationViewModel>();
                             ((BicycleCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Bicycle"));
                             break;
                         case "Motorbike":
-                            VehicleCreationViewModel = _container.Resolve<MotorbikeCreationViewModel>();
+                            VehicleCreationViewModel = ServiceLocator.Current.GetInstance<MotorbikeCreationViewModel>();
                             ((MotorbikeCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Motorbike"));
                             break;
                     }
@@ -147,14 +143,13 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// Constructor, with injected interfaces.
         /// Instantiate the commands and get the vehicle types.
         /// </summary> 
-        public ManageVehicleViewModel(IDataService dataService, IUnityContainer container, INotificationsService notificationsService,
-            ILoggerService loggerService, IEventAggregator eventAggregator, IVehicleService vehicleService, VehicleViewModel vehicle = null)
+        public ManageVehicleViewModel(IDataService dataService, INotificationsService notificationsService,
+            ILoggerService loggerService, IAuthenticationService authenticationService, IVehicleService vehicleService, VehicleViewModel vehicle = null)
         {
             _dataService = dataService;
-            _container = container;
             _notificationsService = notificationsService;
             _loggerService = loggerService;
-            _eventAggregator = eventAggregator;
+            _authenticationService = authenticationService;
 
             SaveCommand = new DelegateCommand(SaveExecute, CanSave);
             CancelCommand = new DelegateCommand(Close);
@@ -163,7 +158,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             InitialiseAsync(vehicle);
 
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
-
         }
 
         private async void OnSelectedVehicleChanged(object sender, Vehicle vehicle)
@@ -294,8 +288,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         /// </summary>
         private void SaveNewVehicle()
         {
-            var authentication = ServiceLocator.Current.GetInstance<IAuthenticationService>();
-
             var newVehicle = new Vehicle
             {
                 VehicleType = VehicleCreationViewModel.VehicleType.Id,
@@ -303,7 +295,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                 Make = VehicleCreationViewModel.Make,
                 DateCreated = DateTime.Now,
                 DateModified = DateTime.Now,
-                UserId = authentication.CurrentUser().UserId
+                UserId = _authenticationService.CurrentUser().UserId
             };
 
             VehicleCreationViewModel.SaveNew(newVehicle);
@@ -312,6 +304,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             {
                 _dataService.AddNewVehicle(newVehicle);
                 _notificationsService.Alert(VehicleAdded, NotificationHeader);
+
+                // As adding a new vehicle opens a pop up, we need to make sure we set the DialogResult to true and close the window.
+                DialogResult = true;
+                Close();
             }
             catch (Exception e)
             {

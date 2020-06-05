@@ -1,29 +1,18 @@
-﻿
-namespace ImprezGarage.Modules.Firebase
+﻿namespace ImprezGarage.Modules.Firebase
 {
     using Infrastructure.Services;
-    using Microsoft.Practices.Unity;
     using Prism.Modularity;
+    using Prism.Ioc;
 
     public class FirebaseModule : IModule
     {
-        #region Attributes
-        /// <summary>
-        /// Store the container manager.
-        /// </summary>
-        private readonly IUnityContainer _container;
-        #endregion
-
-        #region Methods
-        public FirebaseModule(IUnityContainer container)
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            _container = container;
+            containerRegistry.RegisterSingleton<IDataService, FirebaseDataService>();
         }
 
-        public void Initialize()
+        public void OnInitialized(IContainerProvider containerProvider)
         {
-            _container.RegisterType<IDataService, FirebaseDataService>(new ContainerControlledLifetimeManager());
         }
-        #endregion
     }
 }

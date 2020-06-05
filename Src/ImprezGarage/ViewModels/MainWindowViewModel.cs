@@ -3,18 +3,20 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using System.Diagnostics;
+using Prism.Regions;
+using Unity;
 
 namespace ImprezGarage.ViewModels
 {
+    using CommonServiceLocator;
     using Infrastructure;
     using Infrastructure.BaseClasses;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using System;
+    using System.Diagnostics;
     using System.Reflection;
 
     public class MainWindowViewModel : DialogViewModelBase
@@ -24,6 +26,9 @@ namespace ImprezGarage.ViewModels
         /// Store the injected event aggregator.
         /// </summary>
         private readonly IEventAggregator _eventAggregator;
+
+        private readonly IUnityContainer _unityContainer;
+
         #endregion
 
         #region Properties
@@ -75,9 +80,10 @@ namespace ImprezGarage.ViewModels
         /// <summary>
         /// Construct this view model and inject the event aggregator.
         /// </summary>
-        public MainWindowViewModel(IEventAggregator eventAggregator)
+        public MainWindowViewModel(IEventAggregator eventAggregator, IUnityContainer unityContainer, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
+            _unityContainer = unityContainer;
 
             RefreshCommand = new DelegateCommand(RefreshExecute);
             OpenSettings = new DelegateCommand(OnOpenSettings);
@@ -111,7 +117,8 @@ namespace ImprezGarage.ViewModels
             IsBusy = !loginData.Item1;
             if (IsBusy)
             {
-                ServiceLocator.Current.GetInstance<IAuthenticationService>().SignIn();
+                _unityContainer.Resolve<IAuthenticationService>().SignIn();
+                //ServiceLocator.Current.GetInstance<IAuthenticationService>().SignIn();
             }
         }
 

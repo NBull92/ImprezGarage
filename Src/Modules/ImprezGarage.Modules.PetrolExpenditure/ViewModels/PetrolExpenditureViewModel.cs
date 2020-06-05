@@ -5,11 +5,11 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
+    using CommonServiceLocator;
     using CountriesWrapper;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Microsoft.Practices.ServiceLocation;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Mvvm;

@@ -12,7 +12,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using System;
     using Views;
 
-
     public class VehicleHeaderViewModel : BindableBase, IDisposable
     {    /// <summary>
         /// Store the injected event aggregator.

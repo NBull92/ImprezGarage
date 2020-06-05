@@ -1,11 +1,15 @@
-﻿
+﻿//------------------------------------------------------------------------------
+// Copyright of Nicholas Andrew Bull 2020
+// This code is for portfolio use only.
+//------------------------------------------------------------------------------
+
 namespace ImprezGarage.Modules.FirebaseAuth
 {
+    using CommonServiceLocator;
     using Firebase.Auth;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Microsoft.Practices.ServiceLocation;
     using Prism.Regions;
     using System;
     using System.Security;
@@ -85,4 +89,4 @@ namespace ImprezGarage.Modules.FirebaseAuth
         }
 
     }
-}
+}   // ImprezGarage.Modules.FirebaseAuth namespace 
