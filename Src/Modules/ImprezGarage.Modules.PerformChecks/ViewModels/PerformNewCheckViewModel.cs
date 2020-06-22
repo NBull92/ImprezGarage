@@ -107,11 +107,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
             {
                 try
                 {
+                    _dataService.DeleteMaintenanceCheck(_maintenanceCheck.Id);
+                   
                     _dataService.SetMaintenanceCheckAsync(_maintenanceCheck);
-                    
+
                     var performedChecks = new List<PerformedMaintenanceOption>();
 
-                    foreach (var option in MaintenanceOptionsPerformed)
+                    foreach (var option in MaintenanceOptionsPerformed.Where(o => o.IsChecked == true))
                     {
                         var performedOption = new PerformedMaintenanceOption
                         {
