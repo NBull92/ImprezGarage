@@ -177,13 +177,14 @@ namespace ImprezGarage.Modules.Firebase
         ///<inheritdoc/>
         public void DeleteVehicle(Vehicle vehicle)
         {
+            _dataStorage.DeleteVehicleMaintenanceChecks(vehicle);
+            _dataStorage.DeleteVehiclePetrolExpenditure(vehicle);
             _dataStorage.DeleteVehicle(vehicle);
         }
 
         ///<inheritdoc/>
         public void DeleteMaintenanceCheck(int maintenanceCheckId)
         {
-            _dataStorage.DeletePerformedMaintenanceOptions(maintenanceCheckId);
             _dataStorage.DeleteMaintenanceCheck(maintenanceCheckId);
         }
 

@@ -178,6 +178,12 @@
             _connection.Delete<Vehicle>(vehicle.Id);
         }
 
+        public void DeleteVehiclePetrolExpenditure(Vehicle vehicle)
+        {
+            var expenses = GetVehiclePetrolExpenses(vehicle.Id).ToList();
+            expenses.ForEach(o => DeletePetrolExpenditure(o.Id));
+        }
+
         public void DeletePetrolExpenditure(int expenseId)
         {
             _connection.Delete<PetrolExpense>(expenseId);
@@ -204,8 +210,16 @@
             }
         }
 
+        public void DeleteVehicleMaintenanceChecks(Vehicle vehicle)
+        {
+            var checks = GetVehicleMaintenanceChecks(vehicle.Id).ToList();
+            checks.ForEach(o => DeleteMaintenanceCheck(o.Id));
+        }
+
         public void DeleteMaintenanceCheck(int maintenanceCheckId)
         {
+            DeletePerformedMaintenanceOptions(maintenanceCheckId);
+            
             _connection.Delete<MaintenanceCheck>(maintenanceCheckId);
         }
 

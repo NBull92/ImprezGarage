@@ -13,11 +13,7 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
     using Views;
 
     public class VehicleHeaderViewModel : BindableBase, IDisposable
-    {    /// <summary>
-        /// Store the injected event aggregator.
-        /// </summary>
-        private readonly IEventAggregator _eventAggregator;
-
+    {    
         /// <summary>
         /// Store the injected data service.
         /// </summary>
@@ -75,11 +71,10 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
         #endregion
 
         public VehicleHeaderViewModel(IDataService dataService, INotificationsService notificationsService,
-            IEventAggregator eventAggregator, ILoggerService loggerService, IRegionManager regionManager, IVehicleService vehicleService)
+            ILoggerService loggerService, IRegionManager regionManager, IVehicleService vehicleService)
         {
             _dataService = dataService;
             _notificationsService = notificationsService;
-            _eventAggregator = eventAggregator;
             _loggerService = loggerService;
             _regionManager = regionManager;
             _vehicleService = vehicleService;
