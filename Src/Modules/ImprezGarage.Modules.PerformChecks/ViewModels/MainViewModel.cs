@@ -8,13 +8,13 @@ namespace ImprezGarage.Modules.PerformChecks.ViewModels
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Microsoft.Practices.Unity;
     using Prism.Commands;
     using Prism.Mvvm;
     using Prism.Regions;
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using Unity;
     using Views;
 
     public class MainViewModel : BindableBase, INavigationAware, IDisposable

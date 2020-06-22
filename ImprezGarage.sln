@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage", "Src\ImprezGarage\ImprezGarage.csproj", "{8DECCE66-5309-4F56-AA54-1B7FA7D9F2CE}"
 EndProject
@@ -28,6 +28,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Modules.Firebase", "Src\Modules\ImprezGarage.Modules.Firebase\ImprezGarage.Modules.Firebase.csproj", "{F94645C3-A792-418B-9004-B3507A3FF95D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Modules.FirebaseAuth", "Src\Modules\ImprezGarage.Modules.FirebaseAuth\ImprezGarage.Modules.FirebaseAuth.csproj", "{EFE76BE9-A5CA-4E99-976F-E34C03E941B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F94645C3-A792-418B-9004-B3507A3FF95D} = {F94645C3-A792-418B-9004-B3507A3FF95D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImprezGarage.Infrastructure.Services", "Src\Business\ImprezGarage.Infrastructure.Services\ImprezGarage.Infrastructure.Services.csproj", "{6DB36D85-2A15-4003-A52E-33CD08171C34}"
 EndProject

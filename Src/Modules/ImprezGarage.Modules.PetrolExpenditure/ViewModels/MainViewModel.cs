@@ -5,6 +5,7 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
+    using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
@@ -19,6 +20,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #region Attributes
         private readonly IEventAggregator _eventAggregator;
         private readonly IVehicleService _vehicleService;
+        private readonly IRegionManager _regionManager;
+
         #endregion
 
         #region Properties
@@ -55,15 +58,24 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         #endregion
 
         #region Methods
-        public MainViewModel(IEventAggregator eventAggregator, IVehicleService vehicleService)
+        public MainViewModel(IEventAggregator eventAggregator, IVehicleService vehicleService, IRegionManager regionManager)
         {
             _eventAggregator = eventAggregator;
             _vehicleService = vehicleService;
+            _regionManager = regionManager;
 
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
+            _eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
+
             AddExpenditureCommand = new DelegateCommand(AddExpenditureExecute);
             FromDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             ToDate = DateTime.Now;
+        }
+
+        private void OnUserAccountChange(Tuple<bool, Account> obj)
+        {
+            _regionManager.RequestNavigate(RegionNames.ContentRegion, typeof(Main).FullName);
+
         }
 
         public void Dispose()

@@ -9,6 +9,7 @@ namespace ImprezGarage.Modules.MyGarage
 
     public class VehicleService : IVehicleService
     {
+        private Guid _Id = Guid.NewGuid();
         private Vehicle _currentVehicle;
         
         public event EventHandler<Vehicle> SelectedVehicleChanged = delegate { };
@@ -34,7 +35,7 @@ namespace ImprezGarage.Modules.MyGarage
         {
             //Create list of exception
             var exceptions = new List<Exception>();
-
+            var test = SelectedVehicleChanged.GetInvocationList();
             //Invoke OnSelectedVehicleChanged Action by iterating on all subscribers event handlers
             foreach (var handler in SelectedVehicleChanged.GetInvocationList())
             {

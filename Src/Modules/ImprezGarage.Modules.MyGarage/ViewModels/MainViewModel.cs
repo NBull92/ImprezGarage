@@ -66,7 +66,6 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
             eventAggregator.GetEvent<Events.RefreshDataEvent>().Subscribe(OnRefresh);
             eventAggregator.GetEvent<Events.UserAccountChange>().Subscribe(OnUserAccountChange);
             vehicleService.SelectedVehicleChanged += OnSelectedVehicleChanged;
-
         }
 
         #region Command Handlers

@@ -6,6 +6,8 @@
 namespace ImprezGarage.Modules.MyGarage
 {
     using Infrastructure;
+    using Infrastructure.Services;
+    using Prism.Ioc;
     using Prism.Modularity;
     using Prism.Regions;
     using Views;
@@ -19,11 +21,15 @@ namespace ImprezGarage.Modules.MyGarage
             _regionManager = regionManager;
         }
 
-        public void Initialize()
+        public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleListRegion, typeof(MainView));
             _regionManager.RegisterViewWithRegion(RegionNames.VehicleHeaderRegion, typeof(VehicleHeader));
             _regionManager.RegisterViewWithRegion(RegionNames.ContentRegion, typeof(ManageVehicle));
+        }
+
+        public void OnInitialized(IContainerProvider containerProvider)
+        {
         }
     }
 }   //ImprezGarage.Modules.MyGarage namespace 

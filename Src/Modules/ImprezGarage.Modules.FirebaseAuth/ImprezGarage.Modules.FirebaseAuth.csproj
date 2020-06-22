@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ImprezGarage.Modules.FirebaseAuth</RootNamespace>
     <AssemblyName>ImprezGarage.Modules.FirebaseAuth</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -258,9 +258,9 @@
       <Version>1.6.5</Version>
     </PackageReference>
     <PackageReference Include="Prism.Core">
-      <Version>7.0.0.396</Version>
+      <Version>7.2.0.1422</Version>
     </PackageReference>
-    <PackageReference Include="Prism.Wpf" Version="6.3.0" />
+    <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AuthenticationDialog.xaml">

@@ -14,7 +14,6 @@ namespace ImprezGarage.Modules.Account.ViewModels
     using System.Collections.ObjectModel;
     using System.Linq;
 
-
     public class ProfilePageViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
@@ -66,7 +65,6 @@ namespace ImprezGarage.Modules.Account.ViewModels
         }
 
         private bool _isReadonly;
-
         public bool IsReadonly
         {
             get => _isReadonly;

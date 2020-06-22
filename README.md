@@ -1,5 +1,4 @@
 # ImprezGarage
-[![Actions Status](https://github.com/NBull92/ImprezGarage/workflows/ImprezeGarage.NetFramework.CI/badge.svg)](https://github.com/NBull92/ImprezGarage/actions)
 
 Copyright of Nicholas Andrew Bull 2020
 
