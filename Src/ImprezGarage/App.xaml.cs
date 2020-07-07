@@ -6,7 +6,6 @@
 namespace ImprezGarage
 {
     using CommonServiceLocator;
-    using Infrastructure;
     using Infrastructure.Services;
     using Microsoft.Win32;
     using Modules.MyGarage;
@@ -15,6 +14,10 @@ namespace ImprezGarage
     using System;
     using System.Windows;
     using Views;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Squirrel;
+
 
     /// <summary>
     /// Interaction logic for App.xaml

@@ -263,11 +263,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if not exist $(SolutionDir)lib mkdir$(SolutionDir) lib
-if not exist $(SolutionDir)lib\net461 mkdir $(SolutionDir)lib\net461
-copy *.dll $(SolutionDir)lib\net461
-copy $(ProjectName).exe $(SolutionDir)lib\net461
-copy $(ProjectName).exe.config $(SolutionDir)lib\net461
-copy $(ProjectName).exe.manifest $(SolutionDir)lib\net461</PostBuildEvent>
+if not exist $(SolutionDir)lib\net48 mkdir $(SolutionDir)lib\net48
+copy *.dll $(SolutionDir)lib\net48
+copy $(ProjectName).exe $(SolutionDir)lib\net48
+copy $(ProjectName).exe.config $(SolutionDir)lib\net48
+copy $(ProjectName).exe.manifest $(SolutionDir)lib\net48</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
