@@ -130,6 +130,9 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
         /// </summary>
         private void OnKeyDownExecute(KeyEventArgs args)
         {
+            if (args == null)
+                return;
+
             var strKey = new KeyConverter().ConvertToString(args.Key);
             strKey = strKey.Replace("NumPad", "");
             if (!int.TryParse(strKey, out int n) && strKey != "OemPeriod" && strKey != "Decimal")

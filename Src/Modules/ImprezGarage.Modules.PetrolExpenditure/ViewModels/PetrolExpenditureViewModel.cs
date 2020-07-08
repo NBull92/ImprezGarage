@@ -5,13 +5,13 @@
 
 namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
 {
-    using CommonServiceLocator;
     using CountriesWrapper;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
+    using Prism.Ioc;
     using Prism.Mvvm;
     using System;
     using System.Collections.ObjectModel;
@@ -157,7 +157,8 @@ namespace ImprezGarage.Modules.PetrolExpenditure.ViewModels
                 
             foreach (var expense in expenses.Result)
             {
-                var viewModel = ServiceLocator.Current.GetInstance<PetrolExpenseViewModel>();
+                var viewModel = new PetrolExpenseViewModel(_dataService, ContainerLocator.Container.Resolve<INotificationsService>(),
+                                        _eventAggregator, ContainerLocator.Container.Resolve<ILoggerService>());
                 viewModel.LoadInstance(expense);
                 _expenses.Add(viewModel);
             }

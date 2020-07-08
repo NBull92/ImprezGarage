@@ -10,13 +10,13 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using CommonServiceLocator;
     using Prism.Commands;
     using Prism.Events;
+    using Prism.Ioc;
     using Prism.Regions;
     using System;
-    using Views;
     using System.Security;
+    using Views;
 
     public class CreateAccountViewModel : AuthenticateViewModel
     {
@@ -74,7 +74,8 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
             }
             catch (Exception e)
             {
-                ServiceLocator.Current.GetInstance<ILoggerService>().LogException(e, "Error occured while attempting to sign in.");
+                var logger = ContainerLocator.Current.Resolve(typeof(ILoggerService)) as ILoggerService;
+                logger?.LogException(e, "Error occured while attempting to sign in.");
             }
         }
     }

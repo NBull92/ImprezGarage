@@ -258,9 +258,9 @@
       <Version>1.6.5</Version>
     </PackageReference>
     <PackageReference Include="Prism.Core">
-      <Version>7.2.0.1422</Version>
+      <Version>8.0.0.1740-pre</Version>
     </PackageReference>
-    <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+    <PackageReference Include="Prism.Wpf" Version="8.0.0.1740-pre" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AuthenticationDialog.xaml">

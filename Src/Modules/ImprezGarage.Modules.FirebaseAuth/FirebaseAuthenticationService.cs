@@ -5,11 +5,11 @@
 
 namespace ImprezGarage.Modules.FirebaseAuth
 {
-    using CommonServiceLocator;
     using Firebase.Auth;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
+    using Prism.Ioc;
     using Prism.Regions;
     using System;
     using System.Security;
@@ -62,8 +62,8 @@ namespace ImprezGarage.Modules.FirebaseAuth
 
         public void SignIn()
         {
-            var regionManager = ServiceLocator.Current.GetInstance<IRegionManager>();
-            regionManager.RequestNavigate(RegionNames.AuthenticateRegion, typeof(SignIn).FullName);
+            var regionManager = ContainerLocator.Current.Resolve(typeof(IRegionManager)) as IRegionManager;
+            regionManager?.RequestNavigate(RegionNames.AuthenticateRegion, typeof(SignIn).FullName);
         }
 
         public Account CurrentUser()

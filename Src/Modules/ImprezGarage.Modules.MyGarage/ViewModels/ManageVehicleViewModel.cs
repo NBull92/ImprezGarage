@@ -3,18 +3,14 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
-using Prism.Ioc;
-
 namespace ImprezGarage.Modules.MyGarage.ViewModels
 {
-    using CommonServiceLocator;
     using CreationViewModels;
     using Infrastructure.BaseClasses;
     using Infrastructure.Model;
     using Infrastructure.Services;
-    using Microsoft.Practices.Unity;
     using Prism.Commands;
-    using Prism.Events;
+    using Prism.Ioc;
     using Prism.Regions;
     using System;
     using System.Collections.ObjectModel;
@@ -78,16 +74,16 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
                     switch (_selectedVehicleType.Name)
                     {
                         case "Car":
-                            VehicleCreationViewModel = ServiceLocator.Current.GetInstance<CarCreationViewModel>();
-                            ((CarCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Car"));
+                            VehicleCreationViewModel = new CarCreationViewModel();
+                            VehicleCreationViewModel.Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Car"));
                             break;
                         case "Bicycle":
-                            VehicleCreationViewModel = ServiceLocator.Current.GetInstance<BicycleCreationViewModel>();
-                            ((BicycleCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Bicycle"));
+                            VehicleCreationViewModel = new BicycleCreationViewModel();
+                            VehicleCreationViewModel.Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Bicycle"));
                             break;
                         case "Motorbike":
-                            VehicleCreationViewModel = ServiceLocator.Current.GetInstance<MotorbikeCreationViewModel>();
-                            ((MotorbikeCreationViewModel)VehicleCreationViewModel).Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Motorbike"));
+                            VehicleCreationViewModel = new MotorbikeCreationViewModel();
+                            VehicleCreationViewModel.Setup(VehicleTypes.FirstOrDefault(o => o.Name == "Motorbike"));
                             break;
                     }
                     VehicleCreationViewModel.PropertyChanged += VehicleCreationViewModel_PropertyChanged;
@@ -377,8 +373,8 @@ namespace ImprezGarage.Modules.MyGarage.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            var vehicleService = ServiceLocator.Current.GetInstance<IVehicleService>();
-            var vehicle = vehicleService.GetSelectedVehicle();
+            var vehicleService = ContainerLocator.Current.Resolve(typeof(IVehicleService)) as IVehicleService;
+            var vehicle = vehicleService?.GetSelectedVehicle();
 
             if (vehicle == null)
                 return;

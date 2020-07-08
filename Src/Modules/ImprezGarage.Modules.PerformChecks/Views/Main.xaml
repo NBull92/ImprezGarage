@@ -38,7 +38,7 @@
                     <Grid>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseDown">
-                                <prism:InvokeCommandAction Command="{Binding OpenMaintenanceCheck}" />
+                                <i:InvokeCommandAction Command="{Binding OpenMaintenanceCheck}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <Grid.ColumnDefinitions>

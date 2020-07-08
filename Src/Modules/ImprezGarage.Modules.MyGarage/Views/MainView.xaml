@@ -42,7 +42,7 @@
                      ItemContainerStyle="{DynamicResource VehicleListBoxItemStyle}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
-                        <prism:InvokeCommandAction Command="{Binding SelectedVehicleChanged}" />
+                        <i:InvokeCommandAction Command="{Binding SelectedVehicleChanged}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ListBox>

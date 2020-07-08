@@ -64,7 +64,8 @@
                            Foreground="{StaticResource ImprezGarage.Main}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
-                            <prism:InvokeCommandAction Command="{Binding ForgotPassword}"/>
+                            <i:InvokeCommandAction Command="{Binding ForgotPassword}" />
+                            <!--<i:InvokeCommandAction Command="{Binding ForgotPassword}"/>-->
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                     </TextBlock>
@@ -79,7 +80,7 @@
                            Foreground="{StaticResource ImprezGarage.Main}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
-                            <prism:InvokeCommandAction Command="{Binding CreateAccount}"/>
+                            <i:InvokeCommandAction Command="{Binding CreateAccount}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                         </TextBlock>
@@ -91,7 +92,7 @@
                                    Foreground="{StaticResource ImprezGarage.Main}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown">
-                                    <prism:InvokeCommandAction Command="{Binding DemoAccountCommand}"/>
+                                    <i:InvokeCommandAction Command="{Binding DemoAccountCommand}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBlock>

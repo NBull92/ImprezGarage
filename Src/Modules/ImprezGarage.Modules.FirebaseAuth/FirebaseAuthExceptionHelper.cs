@@ -3,11 +3,12 @@
 // This code is for portfolio use only.
 //------------------------------------------------------------------------------
 
+
 namespace ImprezGarage.Modules.FirebaseAuth
 {
-    using CommonServiceLocator;
     using Firebase.Auth;
     using Infrastructure.Services;
+    using Prism.Ioc;
 
     public static class FirebaseAuthExceptionHelper
     {
@@ -23,7 +24,8 @@ namespace ImprezGarage.Modules.FirebaseAuth
                     return "Wrong Password";
                 default:
                     var error = "An undefined error occured while attempting to sign in.";
-                    ServiceLocator.Current.GetInstance<ILoggerService>().LogException(exception, error);
+                    var logger = ContainerLocator.Current.Resolve(typeof(ILoggerService)) as ILoggerService;
+                    logger?.LogException(exception, error);
                     return error;
             }
         }

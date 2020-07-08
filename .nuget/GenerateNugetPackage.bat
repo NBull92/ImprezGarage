@@ -23,7 +23,6 @@ echo		^<iconUrl^>https://github.com/NBull92/ImprezGarage/Src/ImprezGarage/iconv3
 echo		^<description^>An application that is used to help guide you in the maintenance of you vehicles.^</description^> >> %file%
 echo 	^</metadata^> >> %file%
 echo		^<files^> >> %file%
-echo			^<file src="lib\net48\CommonServiceLocator.dll" target="lib\net48\CommonServiceLocator.dll" /^>  >> %file%
 echo			^<file src="lib\net48\ControlzEx.dll" target="lib\net48\ControlzEx.dll" /^>  >> %file%
 echo			^<file src="lib\net48\CountriesWrapper.dll" target="lib\net48\CountriesWrapper.dll" /^>  >> %file%
 echo			^<file src="lib\net48\DeltaCompressionDotNet.dll" target="lib\net48\DeltaCompressionDotNet.dll" /^>  >> %file%

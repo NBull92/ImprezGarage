@@ -6,13 +6,13 @@
 namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
 {
     using Commands;
-    using CommonServiceLocator;
     using Firebase.Auth;
     using Infrastructure;
     using Infrastructure.Model;
     using Infrastructure.Services;
     using Prism.Commands;
     using Prism.Events;
+    using Prism.Ioc;
     using Prism.Regions;
     using System;
     using Views;
@@ -72,7 +72,8 @@ namespace ImprezGarage.Modules.FirebaseAuth.ViewModels
             }
             catch (Exception e)
             {
-                ServiceLocator.Current.GetInstance<ILoggerService>().LogException(e, "Error occured while attempting to sign in.");
+                var logger = ContainerLocator.Current.Resolve(typeof(ILoggerService)) as ILoggerService;
+                logger?.LogException(e, "Error occured while attempting to sign in.");
             }
         }
         #endregion

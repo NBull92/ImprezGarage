@@ -5,18 +5,17 @@
 
 namespace ImprezGarage
 {
-    using CommonServiceLocator;
     using Infrastructure.Services;
     using Microsoft.Win32;
     using Modules.MyGarage;
     using Prism.Ioc;
     using Prism.Modularity;
+    using Squirrel;
     using System;
-    using System.Windows;
-    using Views;
     using System.Linq;
     using System.Threading.Tasks;
-    using Squirrel;
+    using System.Windows;
+    using Views;
 
 
     /// <summary>
@@ -110,8 +109,8 @@ namespace ImprezGarage
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            var loggerService = ServiceLocator.Current.GetInstance<ILoggerService>();
-            loggerService.LogException((e.ExceptionObject as Exception));
+            var loggerService = ContainerLocator.Current.Resolve(typeof(ILoggerService)) as ILoggerService;
+            loggerService?.LogException((e.ExceptionObject as Exception));
             PrintFiles();
         }
 
@@ -125,10 +124,10 @@ namespace ImprezGarage
         /// </summary>
         private static void PrintFiles()
         {
-            var settingsService = ServiceLocator.Current.GetInstance<ISettingsService>();
-            settingsService.SaveConfigurationFile();
+            var settingsService = ContainerLocator.Current.Resolve(typeof(ISettingsService)) as ISettingsService;
+            settingsService?.SaveConfigurationFile();
 
-            var loggerService = ServiceLocator.Current.GetInstance<ILoggerService>();
+            var loggerService = ContainerLocator.Current.Resolve(typeof(ILoggerService)) as ILoggerService;
             loggerService.PrintLogFile();
             loggerService.PrintConfigurationFile();
         }

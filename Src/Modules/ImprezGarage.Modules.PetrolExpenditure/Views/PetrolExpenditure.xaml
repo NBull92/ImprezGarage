@@ -32,8 +32,11 @@
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding Amount, StringFormat='{}{0:C}', ConverterCulture='en-GB'}" 
-                               Margin="5" VerticalAlignment="Center" Width="45"/>
+                        <TextBlock DockPanel.Dock="Left" 
+                               Margin="5" VerticalAlignment="Center" Width="45">
+                            <Run Text="{Binding Path=DataContext.CurrencyLabel, RelativeSource={RelativeSource FindAncestor, AncestorType=ListBox}}"/>
+                            <Run Text="{Binding Amount, StringFormat=N2}"/>
+                        </TextBlock>
                         <TextBlock DockPanel.Dock="Left"  Text="{Binding DateEntered, StringFormat=D}" 
                                 Margin="5" VerticalAlignment="Center" Width="160"/>
                         <Button DockPanel.Dock="Left" 

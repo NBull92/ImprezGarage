@@ -35,7 +35,7 @@
            ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture},Mode=TwoWay}" Margin="5" Width="224" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="KeyDown">
-                    <prism:InvokeCommandAction Command="{Binding OnKeyDownCommand}" />
+                    <i:InvokeCommandAction Command="{Binding OnKeyDownCommand}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </TextBox>

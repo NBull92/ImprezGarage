@@ -72,7 +72,7 @@
                         <TextBlock Text="Sign In" Height="20" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource ImprezGarage.Main}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseDown">
-                            <prism:InvokeCommandAction Command="{Binding SignIn}"/>
+                            <i:InvokeCommandAction Command="{Binding SignIn}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                         </TextBlock>
@@ -84,7 +84,7 @@
                                    Foreground="{StaticResource ImprezGarage.Main}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown">
-                                    <prism:InvokeCommandAction Command="{Binding DemoAccountCommand}"/>
+                                    <i:InvokeCommandAction Command="{Binding DemoAccountCommand}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBlock>
