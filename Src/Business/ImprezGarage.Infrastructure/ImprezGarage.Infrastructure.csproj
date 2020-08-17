@@ -132,6 +132,7 @@
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
     <Compile Include="Converters\VehicleTypeToVisibilityConverter.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="Helpers\EnumBindingSourceExtension.cs" />
     <Compile Include="Model\Account.cs" />
     <Compile Include="Model\IDbEntity.cs" />
     <Compile Include="Model\LogDataModel\Log.cs" />
@@ -192,5 +193,6 @@
   <ItemGroup>
     <Resource Include="Resources\icons8-edit-24.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

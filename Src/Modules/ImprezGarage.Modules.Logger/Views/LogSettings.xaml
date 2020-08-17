@@ -7,27 +7,11 @@
              xmlns:viewModels="clr-namespace:ImprezGarage.Modules.Logger.ViewModels"
              xmlns:model="clr-namespace:ImprezGarage.Modules.Logger.DataModels"
              xmlns:converters="clr-namespace:ImprezGarage.Modules.Logger.Converters"
-             xmlns:helpers="clr-namespace:ImprezGarage.Modules.Logger.Helpers"
+             xmlns:helpers="clr-namespace:ImprezGarage.Modules.Logger.Helpers;assembly=ImprezGarage.Infrastructure"
              mc:Ignorable="d"
              prism:ViewModelLocator.AutoWireViewModel="True"
              d:DataContext="{d:DesignInstance Type=viewModels:LogSettingsViewModel}">
     <UserControl.Resources>
-        <ObjectDataProvider x:Key="LogDetailValues"
-                            MethodName="GetValues"
-                            ObjectType="{x:Type helpers:EnumAttributeGetValues}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="model:LogDetail" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-
-        <ObjectDataProvider x:Key="LogFileTypeValues"
-                            MethodName="GetValues"
-                            ObjectType="{x:Type helpers:EnumAttributeGetValues}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="model:LogFileType" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-
         <converters:EnumValueDescriptionConverter x:Key="EnumValueDescriptionConverter"/>
     </UserControl.Resources>
 
@@ -40,7 +24,7 @@
                     Margin="5">
             <TextBlock Text="File Type Of Logs" VerticalAlignment="Center"
                        Width="150"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource LogFileTypeValues}}" 
+            <ComboBox ItemsSource="{helpers:EnumBindingSource {x:Type model:LogFileType}}"
                       SelectedItem="{Binding SelectedFileType, Converter={StaticResource EnumValueDescriptionConverter}}"
                       HorizontalAlignment="Right"
                       Width="75"/>
@@ -51,7 +35,7 @@
                     Margin="5">
             <TextBlock Text="Log File Level Of Detail" VerticalAlignment="Center"
                        Width="150"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource LogDetailValues}}" 
+            <ComboBox ItemsSource="{helpers:EnumBindingSource {x:Type model:LogDetail}}"
                       SelectedItem="{Binding SelectedDetail, Converter={StaticResource EnumValueDescriptionConverter}}"
                       HorizontalAlignment="Right"
                       Width="75"/>
