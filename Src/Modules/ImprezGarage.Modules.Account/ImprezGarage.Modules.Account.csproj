@@ -113,10 +113,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Core">
-      <Version>8.0.0.1740-pre</Version>
+      <Version>8.0.0.1850-pre</Version>
     </PackageReference>
     <PackageReference Include="Prism.Unity">
-      <Version>8.0.0.1740-pre</Version>
+      <Version>8.0.0.1850-pre</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
