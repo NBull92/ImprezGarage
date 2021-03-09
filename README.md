@@ -1,6 +1,6 @@
 # ImprezGarage
 
-Copyright of Nicholas Andrew Bull 2020
+Copyright of Nicholas Andrew Bull 2021
 
 I wanted to build a tool that would showcase the skills I have developed over time through my work building tools at Rockstar and Ubisoft. I am also very into cars and really like to take care of mine, this is where ImprezGarage comes in as it meets both of my needs.
 
